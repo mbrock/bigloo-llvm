@@ -1,0 +1,51 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/packrat.scm,989
+(module __packrat40,2198
+(define (top-parse-position135,4702
+(define (update-parse-position138,4779
+(define (parse-position->string150,5219
+(define (empty-results157,5446
+(define (make-results160,5513
+(define (make-error-expected163,5613
+(define (make-error-message166,5693
+(define (make-result169,5772
+(define (make-expected-result172,5864
+(define (make-message-result175,5966
+(define (prepend-base178,6066
+(define (prepend-semantic-value181,6146
+(define (base-generator->results185,6286
+(define (parse-results-next194,6573
+(define (results->result202,6783
+(define (parse-position>?210,7049
+(define (parse-error-empty?219,7304
+(define (merge-parse-errors223,7418
+(define (merge-result-errors239,7935
+(define (parse-results-token-kind247,8252
+(define (parse-results-token-value251,8369
+(define (packrat-check-base255,8487
+(define (packrat-check265,8837
+(define (packrat-or274,9123
+(define (packrat-unless282,9338
+(define (object->external-representation292,9657
+
+Llib/json.scm,280
+(module __packrat_json45,2389
+(define (void57,2589
+(define (void?58,2614
+(define (json-hashtable->vector60,2649
+(define (json-vector->hashtable64,2733
+(define hashtable->vector70,2909
+(define vector->hashtable71,2959
+(define json-write73,3010
+  (define json-read120,4335

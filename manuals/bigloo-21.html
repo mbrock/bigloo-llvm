@@ -1,0 +1,1143 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>20. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Mail</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center33465'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33455" align="center" colspan="1"><font color="#ffffff"><strong id='bold33453'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33462" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc33458" align="left" valign="top" colspan="1"><strong id='bold33457'
+>top:</strong></td><td id="tc33459" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33475'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33469" align="center" colspan="1"><font color="#ffffff"><strong id='bold33467'
+>Mail</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33472" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">20.1</td><td colspan="4" width="100%"><a href="bigloo-21.html#RFC-2045----MIME-Part-one">RFC 2045 -- MIME, Part one</a></td></tr>
+ <tr><td valign="top" align="left">20.2</td><td colspan="4" width="100%"><a href="bigloo-21.html#RFC-2047----MIME-Part-three">RFC 2047 -- MIME, Part three</a></td></tr>
+ <tr><td valign="top" align="left">20.3</td><td colspan="4" width="100%"><a href="bigloo-21.html#RFC-2426----MIME-Part-three">RFC 2426 -- MIME, Part three</a></td></tr>
+ <tr><td valign="top" align="left">20.4</td><td colspan="4" width="100%"><a href="bigloo-21.html#RFC-2822----Internet-Message-Format">RFC 2822 -- Internet Message Format</a></td></tr>
+ <tr><td valign="top" align="left">20.5</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail-servers----imap-and-maildir">Mail servers -- imap and maildir</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.5.1</td><td colspan="3" width="100%"><a href="bigloo-21.html#Mailboxes">Mailboxes</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.5.2</td><td colspan="3" width="100%"><a href="bigloo-21.html#IMAP-(RFC-3501)">IMAP (RFC 3501)</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.5.3</td><td colspan="3" width="100%"><a href="bigloo-21.html#Maildir">Maildir</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33485'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33479" align="center" colspan="1"><font color="#ffffff"><strong id='bold33477'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33482" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Mail" class="mark"></a><a name="g23858" class="mark"></a><a name="g23860" class="mark"></a>
+Bigloo provides various facilities for handling mails. It provides
+facilities for parsing many formats commonly used in composing mails
+(quoted printable, vcard, mime types). It also provides facilities for
+dealing with mail servers. For that it proposes an abstracted view of
+mail servers with two implementations: <code id='code23862'
+>imap</code> and <code id='code23863'
+>maildir</code>.<br/><br/>
+<!-- RFC 2045 -- MIME, Part one -->
+<a name="RFC-2045----MIME-Part-one"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">20.1 RFC 2045 -- MIME, Part one</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="RFC-2045" class="mark"></a><a name="g23865" class="mark"></a><a name="g23867" class="mark"></a><a name="g23869" class="mark"></a><a name="g23871" class="mark"></a><a name="g23873" class="mark"></a>
+This section described the functions offered by Bigloo to encode
+and decode some of the formats specified in the RFC 2045
+<a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23877" class="mark"></a><a name="quoted-printable-encode" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23881" align="left" colspan="1"><strong id='bold23879'
+>quoted-printable-encode</strong><em id='it23880'
+> string</em></td><td id="tc23882" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g23886" class="mark"></a><a name="quoted-printable-decode" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23890" align="left" colspan="1"><strong id='bold23888'
+>quoted-printable-decode</strong><em id='it23889'
+> string</em></td><td id="tc23891" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+These functions encode/decode a string into and from the 
+<code id='code23894'
+>quoted-printable</code> format.<br/><br/>Examples:<br/><br/><center id='center23903'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23901'
+>(quoted-printable-encode <font color="red">&quot;foo bar&quot;</font>) =&gt; <font color="red">&quot;foobar=20&quot;</font>
+(quoted-printable-decode <font color="red">&quot;foobar=20&quot;</font>) =&gt; <font color="red">&quot;foo bar&quot;</font>
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/><br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23908" class="mark"></a><a name="quoted-printable-encode-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23912" align="left" colspan="1"><strong id='bold23910'
+>quoted-printable-encode-port</strong><em id='it23911'
+> ip op</em></td><td id="tc23913" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g23917" class="mark"></a><a name="quoted-printable-decode-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23921" align="left" colspan="1"><strong id='bold23919'
+>quoted-printable-decode-port</strong><em id='it23920'
+> ip op [rfc2047]</em></td><td id="tc23922" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+These functions are similar to <code id='code23925'
+>quoted-printable-encode</code> and 
+<code id='code23926'
+>quoted-printable-decode</code> except that they operate on
+<code id='code23927'
+>input-port</code>s and <code id='code23928'
+>output-port</code>s. <br/><br/>The function <code id='code23930'
+>quoted-printable-decode-port</code> accepts an optional
+argument: <code id='code23932'
+><em id='it23931'
+>rfc2047</em></code>. If this argument is <code id='code23933'
+>#t</code>, then the parsing
+stops on the prefix <code id='code23934'
+>?=</code>, which is a marker in the mail subject
+as specified by the RFC 2047, (see <a href="http://tools.ietf.org/html/rfc2047">http://tools.ietf.org/html/rfc2047</a>)
+is found.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23938" class="mark"></a><a name="mime-content-decode" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23942" align="left" colspan="1"><strong id='bold23940'
+>mime-content-decode</strong><em id='it23941'
+> string </em></td><td id="tc23943" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g23947" class="mark"></a><a name="mime-content-decode-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23951" align="left" colspan="1"><strong id='bold23949'
+>mime-content-decode-port</strong><em id='it23950'
+> input-port</em></td><td id="tc23952" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+These two functions parse respectively a <code id='code23955'
+>string</code> and an 
+<code id='code23956'
+>input-port</code> and return a list of three elements:<br/><br/><ul class="itemize" id='itemize23961'
+><li>a content type,
+</li>
+<li>a content subtype,
+</li>
+<li>options.
+</li>
+</ul>
+Example:<br/><br/><center id='center23966'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23964'
+>(mime-content-type-decode <font color="red">&quot;text/plain; boundary=Apple-Mail-11&quot;</font>) 
+  =&gt; (text plain ((boundary . Apple-Mail-11)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23970" class="mark"></a><a name="mime-content-disposition-decode" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23974" align="left" colspan="1"><strong id='bold23972'
+>mime-content-disposition-decode</strong><em id='it23973'
+> string</em></td><td id="tc23975" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g23979" class="mark"></a><a name="mime-content-disposition-decode-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23983" align="left" colspan="1"><strong id='bold23981'
+>mime-content-disposition-decode-port</strong><em id='it23982'
+> input-port</em></td><td id="tc23984" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+These two functions parse respectively a <code id='code23987'
+>string</code> and an 
+<code id='code23988'
+>input-port</code> and return a list describing the content disposition.<br/><br/>Example:<br/><br/><center id='center23994'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23992'
+>(mime-content-disposition-decode <font color="red">&quot;attachment; filename=\&quot;smine.p7s\&quot;&quot;</font>)
+  =&gt; (attachment ((filename . smine.p7s)))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23998" class="mark"></a><a name="mime-multipart-decode" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24002" align="left" colspan="1"><strong id='bold24000'
+>mime-multipart-decode</strong><em id='it24001'
+> string boundary [recursive]</em></td><td id="tc24003" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g24007" class="mark"></a><a name="mime-multipart-decode-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24011" align="left" colspan="1"><strong id='bold24009'
+>mime-multipart-decode-port</strong><em id='it24010'
+> input-port boundary [recursive]</em></td><td id="tc24012" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+These two functions parse respectively a <code id='code24015'
+>string</code> and an 
+<code id='code24016'
+>input-port</code> and return a list of mime sections.<br/><br/>If the optional argument <code id='code24019'
+><em id='it24018'
+>recursive</em></code> controls whether subparts of
+a multipart section must be decoded are not. If the <code id='code24021'
+><em id='it24020'
+>recursive</em></code> is 
+<code id='code24022'
+>#t</code> then all subparts of the multipart content are decoded. The result
+is a fully decoded multipart section. If <code id='code24024'
+><em id='it24023'
+>recursive</em></code> is <code id='code24025'
+>#f</code> subparts
+are not decoded and included in the result as plain strings.
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- RFC 2047 -- MIME, Part three -->
+<a name="RFC-2047----MIME-Part-three"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">20.2 RFC 2047 -- MIME, Part three</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="RFC-2047" class="mark"></a><a name="g24028" class="mark"></a>
+This section described the function offered by Bigloo to decode
+the RFC 2047 encoding used in mail headers 
+(see <a href="http://tools.ietf.org/html/rfc2047">http://tools.ietf.org/html/rfc2047</a>).<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24032" class="mark"></a><a name="rfc2047-decode-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24036" align="left" colspan="1"><strong id='bold24034'
+>rfc2047-decode-port</strong><em id='it24035'
+> ip op [:charset iso-latin-1]</em></td><td id="tc24037" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g24041" class="mark"></a><a name="rfc2047-decode" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24045" align="left" colspan="1"><strong id='bold24043'
+>rfc2047-decode</strong><em id='it24044'
+> string [:charset iso-latin-1]</em></td><td id="tc24046" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+
+These functions decode mail header fields encoded using the RFC 2047 
+specification. The optional argument <code id='code24050'
+><em id='it24049'
+>charset</em></code> specified in which charset
+the result should be encoded. The allowed values are:<br/><br/><ul class="itemize" id='itemize24058'
+><li><code id='code24052'
+>utf-8</code>
+</li>
+<li><code id='code24054'
+>iso-latin-1</code>
+</li>
+<li><code id='code24056'
+>cp-1252</code>
+</li>
+</ul>
+Example:<br/><br/><center id='center24067'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24065'
+>(rfc2047-decode <font color="red">&quot;Poste =?ISO-8859-1?Q?t=E9l=E9phonique?=&quot;</font>)
+  =&gt; <font color="red">&quot;Poste téléphonique&quot;</font>
+(string-for-read (rfc2047-decode <font color="red">&quot;Poste =?ISO-8859-1?Q?t=E9l=E9phonique?=&quot;</font> <strong id='bold33495'
+>:charset</strong> 'utf8))
+  =&gt; <font color="red">&quot;Poste t\303\251l\303\251phonique&quot;</font>
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- RFC 2426 -- MIME, Part three -->
+<a name="RFC-2426----MIME-Part-three"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">20.3 RFC 2426 -- MIME, Part three</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="RFC-2426" class="mark"></a><a name="g24070" class="mark"></a><a name="g24072" class="mark"></a>
+This section presents the facilities supported by Bigloo for dealing
+with <code id='code24074'
+>vcard</code>s.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24077" class="mark"></a><a name="vcard" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24081" align="left" colspan="1"><strong id='bold24079'
+>vcard</strong><em id='it24080'
+></em></td><td id="tc24082" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24093'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24091'
+>(<strong id='bold33498'
+>class</strong> vcard
+  (version<font color="#00cf00"><strong id='bold33499'
+>::bstring</strong></font> (default <font color="red">&quot;2.1&quot;</font>))
+  (fn (default #f))
+  (familyname (default #f))
+  (firstname (default #f))
+  (face (default #f))
+  (url (default #f))
+  (org (default #f))
+  (emails<font color="#00cf00"><strong id='bold33502'
+>::pair-nil</strong></font> (default '()))
+  (phones<font color="#00cf00"><strong id='bold33504'
+>::pair-nil</strong></font> (default '()))
+  (addresses<font color="#00cf00"><strong id='bold33506'
+>::pair-nil</strong></font> (default '())))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The class <code id='code24094'
+>vard</code> is used to reify in memory a vcard as parsed by
+the function <code id='code24095'
+>port-&gt;vcard</code> and <code id='code24096'
+>string-&gt;vcard</code>.<br/><br/>Except <code id='code24098'
+>emails</code>, <code id='code24099'
+>phones</code>, and <code id='code24100'
+>addresses</code>, all fields
+are optional. They should be either <code id='code24101'
+>#f</code> or a string.<br/><br/><ul class="itemize" id='itemize24116'
+><li><code id='code24103'
+>face</code> is a flat list of strings.
+</li>
+<li><code id='code24105'
+>phones</code> is an alist whose elements are pairs of two strings.
+</li>
+<li><code id='code24107'
+>addresses</code> is a list composed of:
+  <ul class="itemize" id='itemize24114'
+><li>the postoffice, a string, 
+  </li>
+<li>a list of strings denoting the street address,
+  </li>
+<li>a string denoting the city,
+  </li>
+<li>a string denoting the region,
+  </li>
+<li>a string denoting the zip code,
+  </li>
+<li>a string denoting the zip country.
+</li>
+</ul>
+All street values are required and must be provided. The empty string
+should be used to denote empty values.
+</li>
+</ul></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24120" class="mark"></a><a name="port->vcard::vcard" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24124" align="left" colspan="1"><strong id='bold24122'
+>port-&gt;vcard::vcard</strong><em id='it24123'
+> ip [:charset-encoder]</em></td><td id="tc24125" align="right" colspan="1">Bigloo Mail function</td></tr>
+</tbody></table>
+<a name="g24129" class="mark"></a><a name="string->vcard::vcard" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24133" align="left" colspan="1"><strong id='bold24131'
+>string-&gt;vcard::vcard</strong><em id='it24132'
+> str [:charset-encoder]</em></td><td id="tc24134" align="right" colspan="1">Bigloo Mail function</td></tr>
+</tbody></table>
+These two functions parse a <em id='emph24137'
+>vcard</em> to produce a <code id='code24138'
+>vcard</code>
+instance.  The optional argument <code id='code24140'
+><em id='it24139'
+>charset-encoder</em></code>, when provided,
+must be a function of argument: a string to be decoded. Vcard strings
+are UTF-8 encoded. The <code id='code24142'
+><em id='it24141'
+>charset-encoder</em></code> can be used to encode
+on-the-fly the strings found in the vcard in a difference encoding.
+</td></tr>
+</tbody></table><br/><br/><br/></div><br>
+<!-- RFC 2822 -- Internet Message Format -->
+<a name="RFC-2822----Internet-Message-Format"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">20.4 RFC 2822 -- Internet Message Format</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="RFC-2822" class="mark"></a><a name="g24146" class="mark"></a>
+This section described the functions offered by Bigloo to encode
+and decode some of the formats specified in the RFC 2822
+(<a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>). It mainly supports functions
+for parsing email headers and for decoding email addresses.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24150" class="mark"></a><a name="mail-header->list" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24154" align="left" colspan="1"><strong id='bold24152'
+>mail-header-&gt;list</strong><em id='it24153'
+> obj</em></td><td id="tc24155" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+The function <code id='code24158'
+>mail-header-&gt;list</code> parses a mail header that can either
+be implemented as a string or an input port. It returns a list of fields.<br/><br/>Example:<br/><br/><center id='center24164'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24162'
+>(mail-header-&gt;list &quot;Return-Path: &lt;foo.bar&#x40;inria.fr&gt;
+Received: from eurus.inria.fr ([unix socket])&quot;)
+  =&gt;
+  ((return-path . &quot;&lt;foo.bar&#x40;inria.fr&gt;<font color="red">&quot;) (received . &quot;</font>from eurus.inria.fr ([unix socket])&quot;))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24168" class="mark"></a><a name="email-normalize" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24172" align="left" colspan="1"><strong id='bold24170'
+>email-normalize</strong><em id='it24171'
+> string</em></td><td id="tc24173" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+
+The function <code id='code24176'
+>email-normalize</code> extracts the actual email address
+from an email representation.<br/><br/>Example:
+<center id='center24180'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24178'
+>(email-normalize &quot;foo bar &lt;foo.bar&#x40;inria.fr&gt;&quot;) =&gt; &quot;foo.bar&#x40;inria.fr&quot;
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24184" class="mark"></a><a name="rfc2822-address-display-name" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24188" align="left" colspan="1"><strong id='bold24186'
+>rfc2822-address-display-name</strong><em id='it24187'
+> string</em></td><td id="tc24189" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Extract the name component of an email.<br/><br/>Example:
+<center id='center24197'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24195'
+>(rfc2822-address-display-name &quot;Foo Bar &lt;foo.bar&#x40;inria.fr&gt;&quot;) =&gt; <font color="red">&quot;Foo Bar&quot;</font>
+(rfc2822-address-display-name &quot;&lt;foo.bar&#x40;inria.fr&gt;&quot;) =&gt; <font color="red">&quot;foo bar&quot;</font>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- Mail servers -- imap and maildir -->
+<a name="Mail-servers----imap-and-maildir"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">20.5 Mail servers -- imap and maildir</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Mail-servers" class="mark"></a><a name="g24200" class="mark"></a><a name="g24202" class="mark"></a><a name="g24204" class="mark"></a>
+Bigloo implements the <code id='code24206'
+>imap</code> protocol
+(<a href="http://tools.ietf.org/html/rfc3501">http://tools.ietf.org/html/rfc3501</a>) and the <code id='code24207'
+>maildir</code>
+format. This section presents the API for manipulating them both.<br/><br/>
+<!-- Mailboxes -->
+<a name="Mailboxes"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">20.5.1 Mailboxes</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="mailbox" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24210" class="mark"></a><a name="mailbox" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24214" align="left" colspan="1"><strong id='bold24212'
+>mailbox</strong><em id='it24213'
+></em></td><td id="tc24215" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24222'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24220'
+>(abstract-class mailbox
+  (label<font color="#00cf00"><strong id='bold33511'
+>::bstring</strong></font> (default <font color="red">&quot;&quot;</font>)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The abstract class <code id='code24223'
+>mailbox</code> is the common ancestors to all the
+mailbox implementations. It allows the definitions of various generic
+functions that deal with mail messages and mail folders.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24227" class="mark"></a><a name="&mailbox-error" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24231" align="left" colspan="1"><strong id='bold24229'
+>&amp;mailbox-error</strong><em id='it24230'
+></em></td><td id="tc24232" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24238'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24236'
+>(abstract-class &amp;mailbox-error<font color="#00cf00"><strong id='bold33514'
+>::&amp;error</strong></font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The <code id='code24239'
+>&amp;mailbox-error</code> is the super class of all the errors that
+can be raised when accessing mail servers, except the parsing errors
+that inherit from the <code id='code24240'
+>&amp;parse-error</code> super class.
+</td></tr>
+</tbody></table><br/><br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24245" class="mark"></a><a name="mailbox-close" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24249" align="left" colspan="1"><strong id='bold24247'
+>mailbox-close</strong><em id='it24248'
+> mailbox</em></td><td id="tc24250" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Close the mailbox connection.<br/><br/>Example:
+<center id='center24262'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24260'
+>(<strong id='bold33516'
+>let</strong> ((mbox (<strong id='bold33517'
+>if</strong> (network-up?)
+                (<strong id='bold33518'
+>instantiate</strong><font color="#00cf00"><strong id='bold33519'
+>::imap</strong></font> (socket ...))
+                (<strong id='bold33521'
+>instantiate</strong><font color="#00cf00"><strong id='bold33522'
+>::maildir</strong></font> (path my-local-cache)))))
+   (mailbox-close mbox))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24266" class="mark"></a><a name="mailbox-separator" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24270" align="left" colspan="1"><strong id='bold24268'
+>mailbox-separator</strong><em id='it24269'
+> mailbox</em></td><td id="tc24271" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns a string denoting the separator (commonly <code id='code24274'
+>&quot;</code> or <code id='code24275'
+>.</code>)
+used by the <code id='code24277'
+><em id='it24276'
+>mailbox</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24281" class="mark"></a><a name="mailbox-prefix" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24285" align="left" colspan="1"><strong id='bold24283'
+>mailbox-prefix</strong><em id='it24284'
+> mailbox</em></td><td id="tc24286" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the prefix of the <code id='code24290'
+><em id='it24289'
+>mailbox</em></code>, a string or <code id='code24291'
+>#f</code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24295" class="mark"></a><a name="mailbox-hostname" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24299" align="left" colspan="1"><strong id='bold24297'
+>mailbox-hostname</strong><em id='it24298'
+> mailbox</em></td><td id="tc24300" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the hostname of the <code id='code24304'
+><em id='it24303'
+>mailbox</em></code>, a string or <code id='code24305'
+>#f</code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24309" class="mark"></a><a name="mailbox-folders" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24313" align="left" colspan="1"><strong id='bold24311'
+>mailbox-folders</strong><em id='it24312'
+> mailbox</em></td><td id="tc24314" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns a list of strings denoting the folder names of the <code id='code24318'
+><em id='it24317'
+>mailbox</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24322" class="mark"></a><a name="mailbox-folder-select!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24326" align="left" colspan="1"><strong id='bold24324'
+>mailbox-folder-select!</strong><em id='it24325'
+> mailbox string</em></td><td id="tc24327" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Selects one folder of the <code id='code24331'
+><em id='it24330'
+>mailbox</em></code>. This function is central to 
+mailboxes because all messages are referenced relatively to the 
+folder selection. All the functions that operates on <code id='code24332'
+>uid</code> 
+implicitly access the current folder selection.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24336" class="mark"></a><a name="mailbox-folder-unselect!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24340" align="left" colspan="1"><strong id='bold24338'
+>mailbox-folder-unselect!</strong><em id='it24339'
+> mailbox</em></td><td id="tc24341" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Unselects the <code id='code24345'
+><em id='it24344'
+>mailbox</em></code> current selected folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24349" class="mark"></a><a name="mailbox-folder-create!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24353" align="left" colspan="1"><strong id='bold24351'
+>mailbox-folder-create!</strong><em id='it24352'
+> mailbox folder</em></td><td id="tc24354" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Creates a new <code id='code24358'
+><em id='it24357'
+>folder</em></code> denotes by a fully qualified name.<br/><br/>Example
+<center id='center24363'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24361'
+>(mailbox-create! mbox <font color="red">&quot;INBOX.scheme.bigloo&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24367" class="mark"></a><a name="mailbox-folder-delete!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24371" align="left" colspan="1"><strong id='bold24369'
+>mailbox-folder-delete!</strong><em id='it24370'
+> mailbox folder</em></td><td id="tc24372" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Deletes an empty <code id='code24376'
+><em id='it24375'
+>folder</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24380" class="mark"></a><a name="mailbox-folder-rename!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24384" align="left" colspan="1"><strong id='bold24382'
+>mailbox-folder-rename!</strong><em id='it24383'
+> mailbox old new</em></td><td id="tc24385" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Renames a folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24391" class="mark"></a><a name="mailbox-folder-move!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24395" align="left" colspan="1"><strong id='bold24393'
+>mailbox-folder-move!</strong><em id='it24394'
+> mailbox folder dest</em></td><td id="tc24396" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Moves the <code id='code24400'
+><em id='it24399'
+>folder</em></code> into the destination folder <code id='code24402'
+><em id='it24401'
+>dest</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24406" class="mark"></a><a name="mailbox-subscribe!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24410" align="left" colspan="1"><strong id='bold24408'
+>mailbox-subscribe!</strong><em id='it24409'
+> mailbox folder</em></td><td id="tc24411" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g24415" class="mark"></a><a name="mailbox-unsubscribe!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24419" align="left" colspan="1"><strong id='bold24417'
+>mailbox-unsubscribe!</strong><em id='it24418'
+> mailbox folder</em></td><td id="tc24420" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Subscribe/unsubscribe to a folder. This allows <code id='code24423'
+>imap</code> servers not
+to present the entire list of folders. Only subscribed folders are returned
+by <code id='code24424'
+>mailbox-folders</code>. These functions have no effect on <code id='code24425'
+>maildir</code>
+servers.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24429" class="mark"></a><a name="mailbox-folder-exists?" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24433" align="left" colspan="1"><strong id='bold24431'
+>mailbox-folder-exists?</strong><em id='it24432'
+> mailbox folder</em></td><td id="tc24434" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns <code id='code24437'
+>#t</code> if and only if <code id='code24439'
+><em id='it24438'
+>folder</em></code> exists in <code id='code24441'
+><em id='it24440'
+>mailbox</em></code>. Returns
+<code id='code24442'
+>#f</code> otherwise.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24446" class="mark"></a><a name="mailbox-folder-status" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24450" align="left" colspan="1"><strong id='bold24448'
+>mailbox-folder-status</strong><em id='it24449'
+> mailbox folder</em></td><td id="tc24451" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the status of the <code id='code24455'
+><em id='it24454'
+>folder</em></code>. A status is an alist made of
+the number of unseen mail, the uid validity information, the uid next
+value, the number of recent messages, and the overall number of messages.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24459" class="mark"></a><a name="mailbox-folder-uids" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24463" align="left" colspan="1"><strong id='bold24461'
+>mailbox-folder-uids</strong><em id='it24462'
+> mailbox</em></td><td id="tc24464" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the list of UIDs (a list of integers) of the messages contained
+in the currently selected folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24470" class="mark"></a><a name="mailbox-folder-dates" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24474" align="left" colspan="1"><strong id='bold24472'
+>mailbox-folder-dates</strong><em id='it24473'
+> mailbox</em></td><td id="tc24475" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the list of dates of the messages contained
+in the currently selected folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24481" class="mark"></a><a name="mailbox-folder-delete-messages!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24485" align="left" colspan="1"><strong id='bold24483'
+>mailbox-folder-delete-messages!</strong><em id='it24484'
+> mailbox</em></td><td id="tc24486" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Deletes the messages marked as <em id='emph24489'
+>deleted</em> of the currently selected
+folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24493" class="mark"></a><a name="mailbox-folder-header-fields" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24497" align="left" colspan="1"><strong id='bold24495'
+>mailbox-folder-header-fields</strong><em id='it24496'
+> mailbox field</em></td><td id="tc24498" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the list of headers <code id='code24502'
+><em id='it24501'
+>fields</em></code> of the message of the current
+folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24506" class="mark"></a><a name="mailbox-message" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24510" align="left" colspan="1"><strong id='bold24508'
+>mailbox-message</strong><em id='it24509'
+> mailbox uid</em></td><td id="tc24511" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the message <code id='code24515'
+><em id='it24514'
+>uid</em></code> in the current folder.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24519" class="mark"></a><a name="mailbox-message-path" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24523" align="left" colspan="1"><strong id='bold24521'
+>mailbox-message-path</strong><em id='it24522'
+> mailbox uid</em></td><td id="tc24524" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the full path name of the message <code id='code24528'
+><em id='it24527'
+>uid</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24532" class="mark"></a><a name="mailbox-message-body" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24536" align="left" colspan="1"><strong id='bold24534'
+>mailbox-message-body</strong><em id='it24535'
+> mailbox uid [len]</em></td><td id="tc24537" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the body of the message <code id='code24541'
+><em id='it24540'
+>uid</em></code>. If <code id='code24543'
+><em id='it24542'
+>len</em></code> is provided, only
+returns the first <code id='code24545'
+><em id='it24544'
+>len</em></code> characters of the body.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24549" class="mark"></a><a name="mailbox-message-header" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24553" align="left" colspan="1"><strong id='bold24551'
+>mailbox-message-header</strong><em id='it24552'
+> mailbox uid</em></td><td id="tc24554" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the header as a string of the message <code id='code24558'
+><em id='it24557'
+>uid</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24562" class="mark"></a><a name="mailbox-message-header-list" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24566" align="left" colspan="1"><strong id='bold24564'
+>mailbox-message-header-list</strong><em id='it24565'
+> mailbox uid</em></td><td id="tc24567" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the header as an alist of the message <code id='code24571'
+><em id='it24570'
+>uid</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24575" class="mark"></a><a name="mailbox-message-header-field" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24579" align="left" colspan="1"><strong id='bold24577'
+>mailbox-message-header-field</strong><em id='it24578'
+> mailbox uid field</em></td><td id="tc24580" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Extracts one field from the message header.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24586" class="mark"></a><a name="mailbox-message-size" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24590" align="left" colspan="1"><strong id='bold24588'
+>mailbox-message-size</strong><em id='it24589'
+> mailbox uid</em></td><td id="tc24591" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the size of the message.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24597" class="mark"></a><a name="mailbox-message-info" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24601" align="left" colspan="1"><strong id='bold24599'
+>mailbox-message-info</strong><em id='it24600'
+> mailbox uid</em></td><td id="tc24602" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the information relative to the message <code id='code24606'
+><em id='it24605'
+>uid</em></code>. This a list
+containing the message identifier, its uid, the message date, the message
+size, and the message flags.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24610" class="mark"></a><a name="mailbox-message-flags" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24614" align="left" colspan="1"><strong id='bold24612'
+>mailbox-message-flags</strong><em id='it24613'
+> mailbox uid</em></td><td id="tc24615" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+<a name="g24619" class="mark"></a><a name="mailbox-message-flags-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24623" align="left" colspan="1"><strong id='bold24621'
+>mailbox-message-flags-set!</strong><em id='it24622'
+> mailbox uid lst</em></td><td id="tc24624" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Sets/Gets the flags of the message <code id='code24628'
+><em id='it24627'
+>uid</em></code>. This is a list of strings.
+Typical flags are: <br/><br/><ul class="itemize" id='itemize24638'
+><li><code id='code24630'
+>\Flagged</code>
+</li>
+<li><code id='code24632'
+>\Answered</code>
+</li>
+<li><code id='code24634'
+>\Deleted</code>
+</li>
+<li><code id='code24636'
+>\Seen</code>
+</li>
+</ul></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24642" class="mark"></a><a name="mailbox-message-delete!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24646" align="left" colspan="1"><strong id='bold24644'
+>mailbox-message-delete!</strong><em id='it24645'
+> mailbox uid</em></td><td id="tc24647" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Deletes the message <code id='code24651'
+><em id='it24650'
+>uid</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24655" class="mark"></a><a name="mailbox-message-move!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24659" align="left" colspan="1"><strong id='bold24657'
+>mailbox-message-move!</strong><em id='it24658'
+> mailbox uid folder</em></td><td id="tc24660" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Moves the message <code id='code24664'
+><em id='it24663'
+>uid</em></code> into the new <code id='code24666'
+><em id='it24665'
+>folder</em></code> (denoted by 
+a string).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24670" class="mark"></a><a name="mailbox-message-create!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24674" align="left" colspan="1"><strong id='bold24672'
+>mailbox-message-create!</strong><em id='it24673'
+> mailbox folder content</em></td><td id="tc24675" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Creates a new message in the <code id='code24679'
+><em id='it24678'
+>folder</em></code> whose content is given the
+string <code id='code24681'
+><em id='it24680'
+>content</em></code>.
+</td></tr>
+</tbody></table><br/><br/><br/></div>
+<!-- IMAP (RFC 3501) -->
+<a name="IMAP-(RFC-3501)"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">20.5.2 IMAP (RFC 3501)</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="imap" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24686" class="mark"></a><a name="imap" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24690" align="left" colspan="1"><strong id='bold24688'
+>imap</strong><em id='it24689'
+></em></td><td id="tc24691" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24699'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24697'
+>(<strong id='bold33525'
+>class</strong> imap<font color="#00cf00"><strong id='bold33526'
+>::mailbox</strong></font>
+  (socket<font color="#00cf00"><strong id='bold33528'
+>::socket</strong></font> read-only))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center24709'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24707'
+>(<font color="#6959cf"><strong id='bold33530'
+>define</strong></font> <font color="#6959cf"><strong id='bold33532'
+>mbox</strong></font>
+  (<strong id='bold33534'
+>instantiate</strong><font color="#00cf00"><strong id='bold33535'
+>::maildir</strong></font>
+    (label <font color="red">&quot;My Remote Mailbox&quot;</font>)
+    (socket (imap-login (make-client-socket <font color="red">&quot;imap.inria.fr&quot;</font> 993)
+                        <font color="red">&quot;serrano&quot;</font> <font color="red">&quot;XXX&quot;</font>))))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24713" class="mark"></a><a name="&imap-parse-error" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24717" align="left" colspan="1"><strong id='bold24715'
+>&amp;imap-parse-error</strong><em id='it24716'
+></em></td><td id="tc24718" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24725'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24723'
+>(<strong id='bold33541'
+>class</strong> &amp;imap-parse-error<font color="#00cf00"><strong id='bold33542'
+>::&amp;io-parse-error</strong></font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24729" class="mark"></a><a name="&imap-error" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24733" align="left" colspan="1"><strong id='bold24731'
+>&amp;imap-error</strong><em id='it24732'
+></em></td><td id="tc24734" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24741'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24739'
+>(<strong id='bold33544'
+>class</strong> &amp;imap-error<font color="#00cf00"><strong id='bold33545'
+>::&amp;mailbox-error</strong></font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24745" class="mark"></a><a name="imap-login" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24749" align="left" colspan="1"><strong id='bold24747'
+>imap-login</strong><em id='it24748'
+> socket user password</em></td><td id="tc24750" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Log a user into an imap server. The <code id='code24754'
+><em id='it24753'
+>socket</em></code> must have been created
+first. The argument <code id='code24756'
+><em id='it24755'
+>user</em></code> is a string and denotes the user name.
+The argument <code id='code24758'
+><em id='it24757'
+>password</em></code> is a string too and it contains the user
+password. This function returns as value the <code id='code24760'
+><em id='it24759'
+>socket</em></code> it has received.
+If the operation fails the function raises a <code id='code24761'
+>&amp;imap-error</code>
+exception.<br/><br/>Example:<br/><br/><center id='center24766'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24764'
+>
+</pre>
+</td></tr>
+</tbody></table></center>
+(define mbox
+   (imap-login (make-client-socket &quot;imap.inria.fr&quot; 993 :timeout 200000) 
+               &quot;serrano&quot; &quot;XXX&quot;))<br/><br/>(print (mailbox-folders mbox))
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24771" class="mark"></a><a name="imap-logout" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24775" align="left" colspan="1"><strong id='bold24773'
+>imap-logout</strong><em id='it24774'
+> socket</em></td><td id="tc24776" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Closes an <code id='code24779'
+>imap</code> connection.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24783" class="mark"></a><a name="imap-capability" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24787" align="left" colspan="1"><strong id='bold24785'
+>imap-capability</strong><em id='it24786'
+> socket</em></td><td id="tc24788" align="right" colspan="1">Bigloo Mail procedure</td></tr>
+</tbody></table>
+Returns the list of capabilities supported the <code id='code24791'
+>imap</code> server.
+</td></tr>
+</tbody></table><br/><br/><br/><br/></div>
+<!-- Maildir -->
+<a name="Maildir"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">20.5.3 Maildir</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="maildir" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24796" class="mark"></a><a name="maildir" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24800" align="left" colspan="1"><strong id='bold24798'
+>maildir</strong><em id='it24799'
+></em></td><td id="tc24801" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24811'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24809'
+>(<strong id='bold33547'
+>class</strong> maildir<font color="#00cf00"><strong id='bold33548'
+>::mailbox</strong></font>
+  (prefix<font color="#00cf00"><strong id='bold33550'
+>::bstring</strong></font> read-only (default <font color="red">&quot;INBOX&quot;</font>))
+  (path<font color="#00cf00"><strong id='bold33553'
+>::bstring</strong></font> read-only))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Example:<br/><br/><center id='center24822'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24820'
+>(<font color="#6959cf"><strong id='bold33555'
+>define</strong></font> <font color="#6959cf"><strong id='bold33557'
+>mbox</strong></font>
+  (<strong id='bold33559'
+>instantiate</strong><font color="#00cf00"><strong id='bold33560'
+>::maildir</strong></font>
+    (label <font color="red">&quot;My Mailbox&quot;</font>)
+    (path (make-file-name (getenv <font color="red">&quot;HOME&quot;</font>) <font color="red">&quot;.maildir&quot;</font>))))<br/><br/>(tprint (mailbox-folders mbox))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24826" class="mark"></a><a name="&maildir-error" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24830" align="left" colspan="1"><strong id='bold24828'
+>&amp;maildir-error</strong><em id='it24829'
+></em></td><td id="tc24831" align="right" colspan="1">Bigloo Mail class</td></tr>
+</tbody></table>
+<center id='center24838'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24836'
+>(<strong id='bold33565'
+>class</strong> &amp;maildir-error<font color="#00cf00"><strong id='bold33566'
+>::&amp;mailbox-error</strong></font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/><br/><br/> 
+
+</div>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph33573'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it33571'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/bglpkg
+;; Mon Jan 24 14:32:22 2011
+
+(
+  (bglpkg_action "action.scm")
+  (bglpkg_chicken "chicken.scm")
+  (bglpkg_configure "configure.scm")
+  (bglpkg_extract "extract.scm")
+  (bglpkg_install "install.scm")
+  (bglpkg "main.scm")
+  (bglpkg_man "man.scm")
+  (bglpkg_mzscheme "mzscheme.scm")
+  (bglpkg_package "package.scm")
+  (bglpkg_param "param.scm")
+  (bglpkg_parseargs "parseargs.scm")
+  (bglpkg_snow "snow.scm")
+  (bglpkg_testing "testing.scm")
+  (bglpkg_tuning "tuning.scm")
+  (bglpkg_utils "utils.scm")
+)
+

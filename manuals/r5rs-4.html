@@ -1,0 +1,405 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>1. R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Overview of Scheme</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center7550'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7540" align="center" colspan="1"><font color="#ffffff"><strong id='bold7538'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7547" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc7543" align="left" valign="top" colspan="1"><strong id='bold7542'
+>top:</strong></td><td id="tc7544" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7560'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7554" align="center" colspan="1"><font color="#ffffff"><strong id='bold7552'
+>Overview of Scheme</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7557" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">1.1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Semantics">Semantics</a></td></tr>
+ <tr><td valign="top" align="left">1.2</td><td colspan="4" width="100%"><a href="r5rs-4.html#Syntax">Syntax</a></td></tr>
+ <tr><td valign="top" align="left">1.3</td><td colspan="4" width="100%"><a href="r5rs-4.html#Notation-and-terminology">Notation and terminology</a></td></tr>
+ <tr><td></td><td valign="top" align="left">1.3.1</td><td colspan="3" width="100%"><a href="r5rs-4.html#Primitive;-library;-and-optional-features">Primitive; library; and optional features</a></td></tr>
+ <tr><td></td><td valign="top" align="left">1.3.2</td><td colspan="3" width="100%"><a href="r5rs-4.html#Error-situations-and-unspecified-behavior">Error situations and unspecified behavior</a></td></tr>
+ <tr><td></td><td valign="top" align="left">1.3.3</td><td colspan="3" width="100%"><a href="r5rs-4.html#Entry-format">Entry format</a></td></tr>
+ <tr><td></td><td valign="top" align="left">1.3.4</td><td colspan="3" width="100%"><a href="r5rs-4.html#Evaluation-examples">Evaluation examples</a></td></tr>
+ <tr><td></td><td valign="top" align="left">1.3.5</td><td colspan="3" width="100%"><a href="r5rs-4.html#Naming-conventions">Naming conventions</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7570'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7564" align="center" colspan="1"><font color="#ffffff"><strong id='bold7562'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7567" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Overview-of-Scheme" class="mark"></a>
+<br/><br/><!-- Semantics -->
+<a name="Semantics"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">1.1 Semantics</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Semantics" class="mark"></a>
+This section gives an overview of Scheme's semantics.  A
+detailed informal semantics is the subject of
+chapters <a href="r5rs-6.html#Basic-concepts" class="inbound">Basic concepts</a> through <a href="r5rs-9.html#Standard-procedures" class="inbound">Standard procedures</a>.  For reference
+purposes, section <a href="r5rs-10.html#Formal-semantics" class="inbound">Formal semantics</a> provides a formal
+semantics of Scheme.<br/><br/>Following Algol, Scheme is a statically scoped programming
+language.  Each use of a variable is associated with a lexically
+apparent binding of that variable.<br/><br/>Scheme has latent as opposed to manifest types.  Types
+are associated with values (also called objects) rather than
+<a name="g1162" class="mark"></a>with variables.  (Some authors refer to languages with latent types as
+weakly typed or dynamically typed languages.)  Other languages with
+latent types are APL, Snobol, and other dialects of Lisp.  Languages
+with manifest types (sometimes referred to as strongly typed or
+statically typed languages) include Algol 60, Pascal, and C.<br/><br/>All objects created in the course of a Scheme computation, including
+procedures and continuations, have unlimited extent.
+No Scheme object is ever destroyed.  The reason that
+implementations of Scheme do not (usually!) run out of storage is that
+they are permitted to reclaim the storage occupied by an object if
+they can prove that the object cannot possibly matter to any future
+computation.  Other languages in which most objects have unlimited
+extent include APL and other Lisp dialects.<br/><br/>Implementations of Scheme are required to be properly tail-recursive.
+This allows the execution of an iterative computation in constant space,
+even if the iterative computation is described by a syntactically
+recursive procedure.  Thus with a properly tail-recursive implementation,
+iteration can be expressed using the ordinary procedure-call
+mechanics, so that special iteration constructs are useful only as
+syntactic sugar.  See section <a href="r5rs-6.html#Proper-tail-recursion" class="inbound">Proper tail recursion</a>.<br/><br/>Scheme procedures are objects in their own right.  Procedures can be
+created dynamically, stored in data structures, returned as results of
+procedures, and so on.  Other languages with these properties include
+Common Lisp and ML. 
+
+One distinguishing feature of Scheme is that continuations, which
+in most other languages only operate behind the scenes, also have
+``first-class'' status.  Continuations are useful for implementing a
+wide variety of advanced control constructs, including non-local exits,
+backtracking, and coroutines.  See section <a href="r5rs-9.html#Control-features" class="inbound">Control features</a>.<br/><br/>Arguments to Scheme procedures are always passed by value, which
+means that the actual argument expressions are evaluated before the
+procedure gains control, whether the procedure needs the result of the
+evaluation or not.  ML, C, and APL are three other languages that always
+pass arguments by value.
+This is distinct from the lazy-evaluation semantics of Haskell,
+or the call-by-name semantics of Algol 60, where an argument
+expression is not evaluated unless its value is needed by the
+procedure.<br/><br/>
+Scheme's model of arithmetic is designed to remain as independent as
+possible of the particular ways in which numbers are represented within a
+computer. In Scheme, every integer is a rational number, every rational is a
+real, and every real is a complex number.  Thus the distinction between integer
+and real arithmetic, so important to many programming languages, does not
+appear in Scheme.  In its place is a distinction between exact arithmetic,
+which corresponds to the mathematical ideal, and inexact arithmetic on
+approximations.  As in Common Lisp, exact arithmetic is not limited to
+integers.<br/><br/></div><br>
+<!-- Syntax -->
+<a name="Syntax"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">1.2 Syntax</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Syntax" class="mark"></a>
+Scheme, like most dialects of Lisp, employs a fully parenthesized prefix
+notation for programs and (other) data; the grammar of Scheme generates a
+sublanguage of the language used for data.  An important
+consequence of this simple, uniform representation is the susceptibility of
+Scheme programs and data to uniform treatment by other Scheme programs.
+For example, the <samp id='samp1170'
+>eval</samp> procedure evaluates a Scheme program expressed
+as data.<br/><br/>The <samp id='samp1172'
+>read</samp> procedure performs syntactic as well as lexical decomposition of
+the data it reads.  The <samp id='samp1173'
+>read</samp> procedure parses its input as data
+(section see <a href="r5rs-10.html#External-representation" class="inbound">External representation</a>), not as program.<br/><br/>The formal syntax of Scheme is described in section <a href="r5rs-10.html#Formal-syntax" class="inbound">Formal syntax</a>.<br/><br/></div><br>
+<!-- Notation and terminology -->
+<a name="Notation-and-terminology"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">1.3 Notation and terminology</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Notation-and-terminology" class="mark"></a>
+
+<!-- Primitive; library; and optional features -->
+<a name="Primitive;-library;-and-optional-features"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">1.3.1 Primitive; library; and optional features</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Primitive;-library;-and-optional-features" class="mark"></a>
+It is required that every implementation of Scheme support all
+features that are not marked as being &quot;optional&quot;.  Implementations are
+<a name="g1177" class="mark"></a>free to omit optional features of Scheme or to add extensions,
+provided the extensions are not in conflict with the language reported
+here.  In particular, implementations must support portable code by
+providing a syntactic mode that preempts no lexical conventions of this
+report.<br/><br/>To aid in understanding and implementing Scheme, some features are marked
+as &quot;library&quot;. These can be easily implemented in terms of the other,
+<a name="g1182" class="mark"></a>primitive, features.  They are redundant in the strict sense of
+the word, but they capture common patterns of usage, and are therefore
+provided as convenient abbreviations.<br/><br/></div>
+<!-- Error situations and unspecified behavior -->
+<a name="Error-situations-and-unspecified-behavior"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">1.3.2 Error situations and unspecified behavior</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Error-situations-and-unspecified-behavior" class="mark"></a>
+<a name="g1186" class="mark"></a>When speaking of an error situation, this report uses the phrase ``an
+error is signalled'' to indicate that implementations must detect and
+report the error.  If such wording does not appear in the discussion of
+an error, then implementations are not required to detect or report the
+error, though they are encouraged to do so.  An error situation that
+implementations are not required to detect is usually referred to simply
+as ``an error.''<br/><br/>For example, it is an error for a procedure to be passed an argument that
+the procedure is not explicitly specified to handle, even though such
+domain errors are seldom mentioned in this report.  Implementations may
+extend a procedure's domain of definition to include such arguments.<br/><br/>This report uses the phrase ``may report a violation of an
+implementation restriction'' to indicate circumstances under which an
+implementation is permitted to report that it is unable to continue
+execution of a correct program because of some restriction imposed by the
+implementation.  Implementation restrictions are of course discouraged,
+but implementations are encouraged to report violations of implementation
+restrictions.
+<a name="g1191" class="mark"></a>
+For example, an implementation may report a violation of an
+implementation restriction if it does not have enough storage to run a
+program.<br/><br/>If the value of an expression is said to be ``unspecified,'' then
+the expression must evaluate to some object without signalling an error,
+but the value depends on the implementation; this report explicitly does
+not say what value should be returned. 
+<a name="g1195" class="mark"></a>
+
+
+</div>
+<!-- Entry format -->
+<a name="Entry-format"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">1.3.3 Entry format</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Entry-format" class="mark"></a>
+Chapters <a href="r5rs-7.html#Expressions" class="inbound">Expressions</a> and <a href="r5rs-9.html#Standard-procedures" class="inbound">Standard procedures</a> are organized
+into entries.  Each entry describes one language feature or a group of
+related features, where a feature is either a syntactic construct or a
+built-in procedure.  An entry begins with one or more header lines of the form<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1201" align="left" colspan="1"><em id='it1200'
+><code id='code1199'
+><em id='it1198'
+>template</em></code></em></td><td id="tc1204" align="right" colspan="1"><code id='code1203'
+><em id='it1202'
+>category</em></code></td></tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table><br/>
+for required, primitive features, or<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1213" align="left" colspan="1"><em id='it1212'
+><code id='code1211'
+><em id='it1210'
+>template</em></code></em></td><td id="tc1218" align="right" colspan="1"><code id='code1215'
+><em id='it1214'
+>qualifier</em></code> <code id='code1217'
+><em id='it1216'
+>category</em></code></td></tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table><br/>
+where <code id='code1224'
+><em id='it1223'
+>qualifier</em></code> is either ``library'' or ``optional'' as defined
+ in section <a href="r5rs-4.html#Primitive;-library;-and-optional-features" class="inbound">Primitive; library; and optional features</a>.<br/><br/>If <code id='code1227'
+><em id='it1226'
+>category</em></code> is ``syntax'', the entry describes an expression
+type, and the template gives the syntax of the expression type.
+Components of expressions are designated by syntactic variables, which
+are written using angle brackets, for example, &lt;expression&gt;,
+&lt;variable&gt;.  Syntactic variables should be understood to denote segments of
+program text; for example, &lt;expression&gt; stands for any string of
+characters which is a syntactically valid expression.  The notation<br/><br/><center id='center1231'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1229'
+> &lt;thing1&gt; ...
+</pre>
+</td></tr>
+</tbody></table></center>
+
+indicates zero or more occurrences of a &lt;thing&gt;, and<br/><br/><center id='center1235'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1233'
+> &lt;thing1&gt; &lt;thing2&gt; ...
+</pre>
+</td></tr>
+</tbody></table></center>
+
+indicates one or more occurrences of a &lt;thing&gt;.<br/><br/>If <code id='code1238'
+><em id='it1237'
+>category</em></code> is ``procedure'', then the entry describes a procedure, and
+the header line gives a template for a call to the procedure.  Argument
+names in the template are <code id='code1240'
+><em id='it1239'
+>italicized</em></code>.  Thus the header line<br/><br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1243" class="mark"></a><a name="vector-ref" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1251" align="left" colspan="1"><strong id='bold1245'
+>vector-ref</strong><em id='it1250'
+> <code id='code1247'
+><em id='it1246'
+>vector</em></code> <code id='code1249'
+><em id='it1248'
+>k</em></code></em></td><td id="tc1252" align="right" colspan="1">procedure</td></tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table><br/>
+indicates that the built-in procedure <tt id='tt1257'
+>vector-ref</tt> takes
+two arguments, a vector <code id='code1259'
+><em id='it1258'
+>vector</em></code> and an exact non-negative integer
+<code id='code1261'
+><em id='it1260'
+>k</em></code> (see below).  The header lines<br/><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1264" class="mark"></a><a name="make-vector" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1270" align="left" colspan="1"><strong id='bold1266'
+>make-vector</strong><em id='it1269'
+> <code id='code1268'
+><em id='it1267'
+>k</em></code></em></td><td id="tc1271" align="right" colspan="1">procedure</td></tr>
+</tbody></table>
+
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1280" align="left" colspan="1"><strong id='bold1274'
+>make-vector</strong><em id='it1279'
+> <code id='code1276'
+><em id='it1275'
+>k</em></code> <code id='code1278'
+><em id='it1277'
+>fill</em></code></em></td><td id="tc1281" align="right" colspan="1">procedure</td></tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table><br/>
+indicate that the <tt id='tt1286'
+>make-vector</tt> procedure must be defined to take
+either one or two arguments.<br/><br/>It is an error for an operation to be presented with an argument that it
+is not specified to handle.  For succinctness, we follow the convention
+that if an argument name is also the name of a type listed in
+section <a href="r5rs-6.html#Disjointness-of-types" class="inbound">Disjointness of types</a>, then that argument must be of the named type.
+For example, the header line for <tt id='tt1288'
+>vector-ref</tt> given above dictates that the
+first argument to <tt id='tt1289'
+>vector-ref</tt> must be a vector.  The following naming
+conventions also imply type restrictions:
+<br/><br/></div>
+<!-- Evaluation examples -->
+<a name="Evaluation-examples"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">1.3.4 Evaluation examples</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Evaluation-examples" class="mark"></a>
+The symbol ``=&gt;'' used in program examples should be read
+``evaluates to.''  For example,<br/><br/><center id='center1294'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1292'
+>(* 5 8)                                =&gt;  40
+</pre>
+</td></tr>
+</tbody></table></center>
+
+means that the expression <tt id='tt1295'
+>(* 5 8)</tt> evaluates to the object <tt id='tt1296'
+>40</tt>.
+Or, more precisely:  the expression given by the sequence of characters
+``<tt id='tt1297'
+>(* 5 8)</tt>'' evaluates, in the initial environment, to an object
+that may be represented externally by the sequence of characters ``<tt id='tt1298'
+>40</tt>''.  See section <a href="r5rs-6.html#External-representations" class="inbound">External representations</a> for a discussion of external
+representations of objects.<br/><br/></div>
+<!-- Naming conventions -->
+<a name="Naming-conventions"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">1.3.5 Naming conventions</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Naming-conventions" class="mark"></a>
+By convention, the names of procedures that always return a boolean
+value usually end
+in ``<code id='code1300'
+>?</code>''.  Such procedures are called predicates.
+<a name="g1302" class="mark"></a>
+By convention, the names of procedures that store values into previously
+allocated locations (see section see <a href="r5rs-6.html#Storage-model" class="inbound">Storage model</a>) usually end in
+``<code id='code1304'
+>!</code>''.
+<a name="g1306" class="mark"></a>Such procedures are called mutation procedures.
+By convention, the value returned by a mutation procedure is unspecified.<br/><br/>By convention, ``<code id='code1309'
+>-&gt;</code>'' appears within the names of procedures that
+<a name="g1311" class="mark"></a>take an object of one type and return an analogous object of another type.
+For example, <samp id='samp1313'
+>list-&gt;vector</samp> takes a list and returns a vector whose
+elements are the same as those of the list.<br/><br/>
+
+</div>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph7576'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it7574'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

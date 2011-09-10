@@ -1,0 +1,614 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/block_ciphers.scm,6797
+(module __crypto-block-ciphers1,0
+(define (Block-Cipher?6,120
+(define (make-Block-Cipher6,120
+(define (fill-Block-Cipher!6,120
+    (final-class Block-Cipher6,120
+(define (Block-Cipher-name::bstring7,150
+(define (Block-Cipher-block-size::long8,183
+(define (Block-Cipher-preferred-key-length::long9,231
+(define (Block-Cipher-encrypt!::procedure10,277
+(define (Block-Cipher-decrypt!::procedure11,316
+(define (Block-Cipher-key->encrypt-param::procedure12,355
+(define (Block-Cipher-key->decrypt-param::procedure13,404
+(define (ECB-Encrypt?81,3095
+(define (make-ECB-Encrypt81,3095
+(define (fill-ECB-Encrypt!81,3095
+	   (final-class ECB-Encrypt81,3095
+(define (ECB-Decrypt?82,3139
+(define (make-ECB-Decrypt82,3139
+(define (fill-ECB-Decrypt!82,3139
+	   (final-class ECB-Decrypt82,3139
+(define (CBC-Encrypt?83,3183
+(define (make-CBC-Encrypt83,3183
+(define (fill-CBC-Encrypt!83,3183
+	   (final-class CBC-Encrypt83,3183
+(define (CBC-Encrypt-buffer::bstring84,3226
+(define (CBC-Encrypt-chain::bstring85,3261
+(define (CBC-Decrypt?86,3296
+(define (make-CBC-Decrypt86,3296
+(define (fill-CBC-Decrypt!86,3296
+	   (final-class CBC-Decrypt86,3296
+(define (CBC-Decrypt-buffer::bstring-set!87,3339
+(define (CBC-Decrypt-buffer::bstring87,3339
+(define (CBC-Decrypt-chain::bstring-set!88,3362
+(define (CBC-Decrypt-chain::bstring88,3362
+(define (PCBC-Encrypt?89,3385
+(define (make-PCBC-Encrypt89,3385
+(define (fill-PCBC-Encrypt!89,3385
+	   (final-class PCBC-Encrypt89,3385
+(define (PCBC-Encrypt-buffer::bstring90,3429
+(define (PCBC-Encrypt-chain::bstring91,3464
+(define (PCBC-Decrypt?92,3499
+(define (make-PCBC-Decrypt92,3499
+(define (fill-PCBC-Decrypt!92,3499
+	   (final-class PCBC-Decrypt92,3499
+(define (PCBC-Decrypt-buffer::bstring93,3543
+(define (PCBC-Decrypt-chain::bstring94,3578
+(define (CFB-Encrypt?97,3669
+(define (make-CFB-Encrypt97,3669
+(define (fill-CFB-Encrypt!97,3669
+	   (final-class CFB-Encrypt97,3669
+(define (CFB-Encrypt-chain::bstring98,3719
+(define (CFB-Decrypt?99,3754
+(define (make-CFB-Decrypt99,3754
+(define (fill-CFB-Decrypt!99,3754
+	   (final-class CFB-Decrypt99,3754
+(define (CFB-Decrypt-buffer::bstring100,3804
+(define (CFB-Decrypt-chain::bstring101,3839
+(define (OFB?102,3874
+(define (make-OFB102,3874
+(define (fill-OFB!102,3874
+	   (final-class OFB102,3874
+(define (OFB-chain::bstring103,3944
+(define (CTR?104,3979
+(define (make-CTR104,3979
+(define (fill-CTR!104,3979
+	   (final-class CTR104,3979
+(define (CTR-nonce-set!105,4049
+(define (CTR-nonce105,4049
+(define (CTR-nonce-str::bstring106,4062
+(define (CTR-block-counter::long-set!107,4100
+(define (CTR-block-counter::long107,4100
+(define (CTR-nonce-init!::procedure108,4128
+(define (CTR-nonce-update!::procedure109,4170
+(define (Cipher-Mode-State?111,4216
+(define (make-Cipher-Mode-State111,4216
+(define (fill-Cipher-Mode-State!111,4216
+	   (final-class Cipher-Mode-State111,4216
+(define (Cipher-Mode-State-encrypt?::bool112,4251
+(define (Cipher-Mode-State-block-size::long113,4285
+(define (Cipher-Mode-State-cipher-state::Cipher-State114,4321
+(define (Cipher-Mode-State-IV-action::symbol-set!116,4413
+(define (Cipher-Mode-State-IV-action::symbol116,4413
+(define (Cipher-Mode-State-IV-set!117,4463
+(define (Cipher-Mode-State-IV117,4463
+(define (Cipher-Mode-State-pad/unpad118,4488
+(define (Cipher-Mode-State-loop-buffer::bstring119,4517
+(define (Cipher-Mode-State-pos::long-set!122,4640
+(define (Cipher-Mode-State-pos::long122,4640
+(define (substring-xor-buffer!126,4710
+(define (read-string-at!142,5291
+(define (read-mmap-at!151,5634
+(define (read-port-at!165,6047
+(define (write-port-at!168,6142
+(define (current-seconds-nonce174,6315
+(define (default-nonce-init!186,6641
+(define (default-nonce-update!189,6784
+(define-generic (do-cipher-IV-init!199,7096
+(define-generic (do-cipher-block!203,7246
+(define-generic (do-cipher-partial-block!209,7459
+(define (create-ECB-state220,7813
+(define-method (do-cipher-block! state::ECB-Encrypt from from-pos to to-pos230,8114
+(define-method (do-cipher-block! state::ECB-Decrypt from from-pos to to-pos233,8288
+(define (create-CBC-encryption-state239,8516
+(define-method (do-cipher-IV-init! state::CBC-Encrypt IV246,8779
+(define-method (do-cipher-block! state::CBC-Encrypt from from-pos to to-pos249,8941
+(define (create-CBC-decryption-state256,9273
+(define-method (do-cipher-IV-init! state::CBC-Decrypt IV263,9536
+(define-method (do-cipher-block! state::CBC-Decrypt from from-pos to to-pos266,9698
+(define (create-PCBC-encryption-state277,10138
+(define-method (do-cipher-IV-init! state::PCBC-Encrypt IV284,10403
+(define-method (do-cipher-block! state::PCBC-Encrypt from from-pos to to-pos287,10567
+(define (create-PCBC-decryption-state295,10972
+(define-method (do-cipher-IV-init! state::PCBC-Decrypt IV302,11237
+(define-method (do-cipher-block! state::PCBC-Decrypt from from-pos to to-pos305,11401
+(define (create-CFB-encryption-state315,11842
+(define-method (do-cipher-IV-init! state::CFB-Encrypt IV321,12065
+(define-method (do-cipher-block! state::CFB-Encrypt from from-pos to to-pos324,12227
+(define-method (do-cipher-partial-block! state::CFB-Encrypt329,12531
+(define (create-CFB-decryption-state338,12894
+(define-method (do-cipher-IV-init! state::CFB-Decrypt IV345,13157
+(define-method (do-cipher-block! state::CFB-Decrypt from from-pos to to-pos348,13319
+(define-method (do-cipher-partial-block! state::CFB-Decrypt353,13638
+(define (create-OFB-state366,14097
+(define-method (do-cipher-IV-init! state::OFB IV372,14301
+(define-method (do-cipher-block! state::OFB from from-pos to to-pos375,14447
+(define-method (do-cipher-partial-block! state::OFB379,14684
+(define (create-CTR-state391,15059
+(define-method (do-cipher-IV-init! state::CTR IV403,15466
+(define-method (do-cipher-block! state::CTR from from-pos to to-pos407,15633
+(define-method (do-cipher-partial-block! state::CTR414,16027
+(define (encrypt-input!430,16640
+(define (decrypt-input!476,18191
+(define (create-encryption-state591,22128
+(define (create-decryption-state661,24401
+(define (encrypt733,26696
+(define (encrypt-string747,27199
+(define (encrypt-fast-string756,27497
+(define (encrypt-mmap772,28097
+(define (encrypt-fast-mmap780,28408
+(define (encrypt-port797,28989
+(define (encrypt-fast-port805,29304
+(define (encrypt-file817,29702
+(define (encrypt-sendchars832,30172
+(define (decrypt846,30658
+(define (decrypt-string860,31167
+(define (decrypt-fast-string867,31459
+(define (decrypt-mmap879,31916
+(define (decrypt-fast-mmap886,32222
+(define (decrypt-port899,32683
+(define (decrypt-fast-port906,32994
+(define (decrypt-file918,33416
+(define (decrypt-sendchars933,33886
+(define *ciphers*946,34371
+(define (register-cipher!948,34395
+(define (block-cipher-description951,34510
+
+Llib/ciphers.scm,29
+(module __crypto-ciphers1,0
+
+Llib/aes.scm,1432
+(module __crypto-aes1,0
+(define (AES-Param?3,32
+(define (make-AES-Param3,32
+(define (fill-AES-Param!3,32
+    (final-class AES-Param3,32
+(define (AES-Param-state::bstring4,59
+(define (AES-Param-Nr::long5,93
+(define (AES-Param-w::bstring6,121
+(define (key->param10,208
+(define-macro (hex-values->string-macro35,958
+(define *Nb*58,1620
+(define *state-size*60,1637
+(define (make-state63,1703
+(define (state-ref66,1807
+(define (state-set!68,1876
+(define (fill-state!70,1951
+(define (fill-block!73,2131
+(define (aes-encrypt!76,2250
+(define (aes-decrypt!84,2522
+(define *rcon*92,2794
+(define (rcon94,2896
+(define (word-ref97,2964
+(define (word-set!98,3024
+(define (key-expansion101,3119
+(define (s-box133,4291
+(define (inv-s-box136,4353
+(define (sub-bytes!139,4423
+(define (inv-sub-bytes!145,4580
+(define (shift-row!152,4768
+(define (shift-rows!163,5145
+(define (inv-shift-rows!169,5326
+(define-macro (^char^174,5438
+(define (g*2180,5577
+(define (g*3181,5635
+(define (g*9182,5673
+(define (g*b183,5731
+(define (g*d184,5789
+(define (g*e185,5847
+(define (mix-columns!188,5910
+(define (inv-mix-columns!203,6490
+(define (add-round-key!218,7094
+(define (encode-state!230,7659
+(define (decode-state!245,8028
+(define *s-box*267,8755
+(define *s-inv-box*286,10340
+(define *times-2*305,11933
+(define *times-9*327,13611
+(define *times-b*346,15213
+(define *times-d*365,16815
+(define *times-e*385,18418
+
+Llib/cast128.scm,935
+(module __crypto-cast-1281,0
+(define (CAST-Param?6,116
+(define (make-CAST-Param6,116
+(define (fill-CAST-Param!6,116
+    (final-class CAST-Param6,116
+(define (CAST-Param-short-rounds?::bool7,144
+(define (CAST-Param-round-parameters::pair8,183
+(define (key->param11,230
+(define (pad-string31,880
+(define (make-round-parameters37,1071
+(define (make-sub-keys40,1157
+(define-macro (cast-round173,7053
+(define (encrypt-block190,7475
+(define (decrypt-block217,8450
+(define (S-box1244,9425
+(define (S-box2245,9471
+(define (S-box3246,9517
+(define (S-box4247,9563
+(define (S-box5248,9609
+(define (S-box6249,9655
+(define (S-box7250,9701
+(define (S-box8251,9747
+(define-macro (make-sbox-vector-macro253,9794
+(define *S1-box*294,10993
+(define *S2-box*329,13347
+(define *S3-box*364,15700
+(define *S4-box*399,18053
+(define *S5-box*434,20406
+(define *S6-box*469,22759
+(define *S7-box*504,25112
+(define *S8-box*539,27465
+
+Llib/des.scm,2586
+(module __crypto-des1,0
+(define (DES-Param?5,85
+(define (make-DES-Param5,85
+(define (fill-DES-Param!5,85
+    (final-class DES-Param5,85
+(define (DES-Param-buff32a::bstring6,112
+(define (DES-Param-buff32b::bstring7,148
+(define (DES-Param-buff64::bstring8,184
+(define (DES-Param-keys::bstring9,219
+(define (DES-Param-initial-permutation?::bool10,252
+(define (DES3-Param?11,299
+(define (make-DES3-Param11,299
+(define (fill-DES3-Param!11,299
+    (final-class DES3-Param11,299
+(define (DES3-Param-buff32a::bstring12,327
+(define (DES3-Param-buff32b::bstring13,363
+(define (DES3-Param-buff64::bstring14,399
+(define (DES3-Param-keys1::bstring15,434
+(define (DES3-Param-keys2::bstring16,468
+(define (DES3-Param-keys3::bstring17,502
+(define (DES3-Param-initial-permutation?::bool18,536
+(define *des-rounds*20,586
+(define *block-size*21,611
+(define *key-size*22,636
+(define (DES-key->param25,678
+(define (DES-key->encrypt-param43,1265
+(define (DES-key->encrypt-param-no-permutation45,1333
+(define (DES-key->decrypt-param47,1416
+(define (DES-key->decrypt-param-no-permutation49,1484
+(define (DES3-key->param71,2301
+(define (DES3-key->encrypt-param115,3729
+(define (DES3-key->encrypt-param-no-permutation117,3799
+(define (DES3-key->decrypt-param119,3884
+(define (DES3-key->decrypt-param-no-permutation121,3954
+(define (bit-ref144,4916
+(define (bit-set!145,4985
+(define (make-des-buffer147,5068
+(define des-buffer-blit!148,5125
+(define (tt150,5165
+(define (display-des-buffer152,5267
+(define (des-buffer-xor!160,5492
+(define (copy-bits->des-buffer168,5765
+(define (copy-des-buffer->bits185,6356
+(define (permutation-copy207,6987
+(define-macro (make-table235,7871
+(define (table-length242,8036
+(define (table-ref243,8088
+(define *IP-L*249,8348
+(define *IP-R*253,8524
+(define-macro (make-identity-table258,8701
+(define *IP-id*261,8790
+(define *IP-1*266,8992
+(define *E*278,9465
+(define *P*289,9834
+(define *PC1*300,10116
+(define *PC1-56*312,10486
+(define *PC2*321,10863
+(define-macro (create-s-boxes330,11125
+(define *s-boxes*364,12154
+(define (s-box398,13996
+(define *rotations*402,14094
+(define (round-rotation403,14151
+(define (final-permutation405,14207
+(define (pc2408,14286
+(define *subkey-size*411,14364
+(define *round-key-size*412,14390
+(define (key-rotation!414,14420
+(define (key-expansion426,14883
+(define *block-size/2*453,15864
+(define (do-round!455,15910
+(define-inline (do-des-rounds!488,17133
+(define (init!496,17326
+(define (finalize506,17721
+(define (en/decrypt-DES522,18220
+(define (en/decrypt-DES3534,18660
+
+Llib/idea.scm,378
+(module __crypto-idea1,0
+(define *block-size*5,77
+(define (key->decrypt-param7,102
+(define *rounds*20,515
+(define (key24,656
+(define (key-expansion27,736
+(define (inverse-keys69,2081
+(define (idea*121,3914
+(define (idea2*138,4471
+(define (idea+150,4763
+(define (idea^153,4815
+(define (do-half-round156,4854
+(define (do-round167,5177
+(define (encrypt-block194,5821
+
+Llib/pad.scm,334
+(module __crypto-cipher-padding1,0
+(define (no-pad14,538
+(define (no-unpad22,760
+(define (bit-pad25,827
+(define (bit-unpad37,1251
+(define (byte-pad55,1770
+(define (ansi-x.923-pad75,2431
+(define (iso-10126-pad78,2533
+(define (pkcs7-pad81,2631
+(define (byte-unpad85,2818
+(define (zero-pad96,3190
+(define (zero-unpad107,3460
+
+Llib/util.scm,920
+(module __crypto-util1,0
+(define-macro (debug28,1161
+(define-macro (+fx+31,1210
+(define-macro (-fx-36,1303
+(define (bignum-bit-length39,1356
+(define-inline (/ceilingfx59,1899
+(define-inline (bignum->char67,2072
+(define-inline (char->bignum71,2244
+(define (bin-str->bignum73,2329
+(define (bignum->bin-str81,2565
+(define (bignum->bin-str!88,2798
+(define (make-random-string108,3372
+(define (make-random-bignum139,4370
+(define-inline (char-xor161,5082
+(define (string-xor164,5204
+(define-inline (string-xor!179,5650
+(define-inline (string-xor-buffer!181,5743
+(define (read-armored-base64-data192,6067
+(define-inline (str->hex-string201,6314
+(define-inline (hex-str->string204,6398
+(define-inline (hex-str->string!206,6489
+(define (gcd-ext209,6583
+(define (mod-inverse222,6866
+(define (expt-modbx231,7100
+(define (sha1sum-bin244,7356
+(define (md5sum-bin247,7427
+(define (make-random-prime253,7718
+
+Llib/string2key.scm,215
+(module __crypto-string2key1,0
+(define (string->key-zero13,539
+(define (string->key-hash23,875
+(define (string->key-simple37,1309
+(define (string->key-salted52,1824
+(define (string->key-iterated-salted57,2023
+
+Llib/dsa.scm,766
+(module __crypto-dsa9,519
+(define (Dsa-Key?11,566
+(define (make-Dsa-Key11,566
+(define (fill-Dsa-Key!11,566
+   (export (class Dsa-Key11,566
+(define (Dsa-Key-p::bignum-set!12,592
+(define (Dsa-Key-p::bignum12,592
+(define (Dsa-Key-q::bignum-set!12,592
+(define (Dsa-Key-q::bignum12,592
+(define (Dsa-Key-g::bignum-set!12,592
+(define (Dsa-Key-g::bignum12,592
+(define (Dsa-Key-y::bignum-set!12,592
+(define (Dsa-Key-y::bignum12,592
+(define (Complete-Dsa-Key?13,640
+(define (make-Complete-Dsa-Key13,640
+(define (fill-Complete-Dsa-Key!13,640
+	   (class Complete-Dsa-Key13,640
+(define (Complete-Dsa-Key-x::bignum-set!14,677
+(define (Complete-Dsa-Key-x::bignum14,677
+(define (extract-public-dsa-key20,896
+(define (dsa-sign24,1004
+(define (dsa-verify35,1364
+
+Llib/rsa.scm,2757
+(module __crypto-rsa21,1140
+(define (Rsa-Key?25,1189
+(define (make-Rsa-Key25,1189
+(define (fill-Rsa-Key!25,1189
+   (export (class Rsa-Key25,1189
+(define (Rsa-Key-modulus::bignum-set!25,1189
+(define (Rsa-Key-modulus::bignum25,1189
+(define (Rsa-Key-exponent::bignum-set!25,1189
+(define (Rsa-Key-exponent::bignum25,1189
+(define (Complete-Rsa-Key?26,1249
+(define (make-Complete-Rsa-Key26,1249
+(define (fill-Complete-Rsa-Key!26,1249
+	   (final-class Complete-Rsa-Key26,1249
+(define (Complete-Rsa-Key-e::bignum-set!28,1360
+(define (Complete-Rsa-Key-e::bignum28,1360
+(define (Complete-Rsa-Key-p::bignum-set!28,1360
+(define (Complete-Rsa-Key-p::bignum28,1360
+(define (Complete-Rsa-Key-q::bignum-set!28,1360
+(define (Complete-Rsa-Key-q::bignum28,1360
+(define (Complete-Rsa-Key-exp1::bignum-set!29,1397
+(define (Complete-Rsa-Key-exp1::bignum29,1397
+(define (Complete-Rsa-Key-exp2::bignum-set!30,1434
+(define (Complete-Rsa-Key-exp2::bignum30,1434
+(define (Complete-Rsa-Key-coeff::bignum-set!31,1471
+(define (Complete-Rsa-Key-coeff::bignum31,1471
+(define (rsa-key-length76,3515
+(define (rsa-key-bit-length80,3620
+(define (generate-rsa-key87,3960
+(define (extract-public-rsa-key119,5059
+(define (extract-private-rsa-key124,5239
+(define (make-rsa-key129,5434
+(define (rsa-key-modulus133,5576
+(define (rsa-key-exponent135,5649
+(define (rsa-key=?138,5725
+(define (I2OSP148,5997
+(define (I2OSP!151,6066
+(define (OS2IP154,6176
+(define (MGF1158,6270
+(define (EME-OAEP-encode177,6874
+(define (EME-OAEP-decode228,8987
+(define rsa-encrypt266,10476
+(define (RSAEP267,10503
+(define rsa-decrypt280,11016
+(define (RSADP281,11043
+(define rsa-sign291,11394
+(define (RSASP1292,11419
+(define (RSAVP1303,11839
+(define (rsa-verify312,12238
+(define (PKCS1-v1.5-pad315,12322
+(define (PKCS1-v1.5-unpad340,13218
+(define (RSAES-PKCS1-v1.5-encrypt377,14355
+(define (RSAES-PKCS1-v1.5-decrypt384,14629
+(define (RSAES-OAEP-encrypt398,15019
+(define (RSAES-OAEP-decrypt417,15784
+(define (RSASSA-PSS-sign438,16459
+(define (RSASSA-PSS-verify446,16706
+(define *DER-md2*468,17699
+(define *DER-md5*470,17778
+(define *DER-SHA1*472,17857
+(define *DER-SHA256*474,17931
+(define *DER-SHA384*476,18015
+(define *DER-SHA512*478,18099
+(define (hash-algo->procedure481,18184
+(define (hash-algo->DER-prefix489,18449
+(define (DER-prefix->hash-algo504,18998
+(define (EMSA-PKCS1-v1.5-extract-hash-algo526,19637
+(define (EMSA-PKCS1-v1.5-encode529,19746
+(define (RSASSA-PKCS1-v1.5-sign541,20200
+(define (RSASSA-PKCS1-v1.5-sign-bignum545,20410
+(define (RSASSA-PKCS1-v1.5-verify556,20811
+(define (RSASSA-PKCS1-v1.5-verify-bignum565,21174
+(define (left-most-bits-char-mask582,21717
+(define (EMSA-PSS-encode594,22041
+(define (EMSA-PSS-verify653,24663
+
+Llib/elgamal.scm,859
+(module __crypto-elgamal9,519
+(define (ElGamal-Key?11,570
+(define (make-ElGamal-Key11,570
+(define (fill-ElGamal-Key!11,570
+   (export (class ElGamal-Key11,570
+(define (ElGamal-Key-p::bignum-set!12,600
+(define (ElGamal-Key-p::bignum12,600
+(define (ElGamal-Key-g::bignum-set!13,617
+(define (ElGamal-Key-g::bignum13,617
+(define (ElGamal-Key-y::bignum-set!14,634
+(define (ElGamal-Key-y::bignum14,634
+(define (Complete-ElGamal-Key?15,652
+(define (make-Complete-ElGamal-Key15,652
+(define (fill-Complete-ElGamal-Key!15,652
+	   (final-class Complete-ElGamal-Key15,652
+(define (Complete-ElGamal-Key-x::bignum-set!16,703
+(define (Complete-ElGamal-Key-x::bignum16,703
+(define (elgamal-key-length23,1002
+(define (extract-public-elgamal-key27,1118
+(define (find-relatively-prime31,1234
+(define (elgamal-encrypt37,1403
+(define (elgamal-decrypt44,1640
+
+Llib/DER.scm,2259
+(module __crypto-DER1,0
+(define (DER-BitString?4,70
+(define (make-DER-BitString4,70
+(define (fill-DER-BitString!4,70
+   (export (final-class DER-BitString4,70
+(define (DER-BitString-data::bstring5,108
+(define (DER-BitString-unused-bits::long6,141
+(define (DER-Set?7,179
+(define (make-DER-Set7,179
+(define (fill-DER-Set!7,179
+	   (final-class DER-Set7,179
+(define (DER-Set-set::pair-nil8,204
+(define *universal-tags*17,433
+(define *class-tag*49,1143
+(define *prim/constr-tag*56,1285
+(define *universal-inv-tags*61,1386
+(define *class-inv-tag*63,1479
+(define *prim/constr-inv-tag*65,1562
+(define (lookup68,1658
+(define (universal-tag76,1795
+(define (class-tag77,1850
+(define (prim/constr-tag78,1900
+(define (universal-inv-tag79,1962
+(define (class-inv-tag80,2025
+(define (prim/constr-inv-tag81,2083
+(define-macro (+fx+83,2154
+(define (display-octet90,2333
+(define (read-octet104,2729
+(define (encode-short-identifier117,3108
+(define (encode-long-identifier124,3294
+(define (encode-identifier143,3880
+(define (decode-identifier148,4060
+(define (decode-universal-identifier167,4722
+(define (encode-short-definite-length175,5016
+(define (encode-long-definite-length180,5127
+(define (encode-definite-length196,5557
+(define (encode-indefinite-length-start201,5700
+(define (encode-indefinite-length-end205,5787
+(define (decode-length210,5894
+(define (encode-bool231,6492
+(define (decode-bool236,6659
+(define (encode-int/enum-content247,6954
+(define (encode-int261,7285
+(define (encode-enumerated266,7423
+(define (decode-int/enumerated271,7589
+(define (encode-real281,7860
+(define (encode-null288,8034
+(define (decode-null292,8155
+(define (encode-sequence/set-content299,8359
+(define (encode-sequence320,8946
+(define (encode-set327,9186
+(define (decode-sequence/set335,9465
+(define (decode-sequence350,9973
+(define (decode-set353,10030
+(define (oids->symbol356,10111
+(define (symbol->oids365,10341
+(define (decode-object-id387,11039
+(define (encode-object-id429,12510
+(define (decode-octet-string467,13643
+(define (encode-octet-string495,14542
+(define (decode-bitstring507,14884
+(define (encode-bitstring523,15358
+(define (encode-DER533,15685
+(define (skip-unknown548,16187
+(define (decode-DER552,16274
+
+Llib/pem.scm,750
+(module __crypto-pem1,0
+(define (any->bignum15,510
+(define *rsa-oid*24,771
+(define *dsa-oid*25,816
+(define (rsa-read-complete-key-pem29,940
+(define (dsa-read-complete-key-pem44,1528
+(define (rsa-read-public-key-pem55,1919
+(define (dsa-read-public-key-pem72,2473
+(define (read-public-key-pem86,2991
+(define (read-pem-key-port98,3357
+(define (read-pem-key-file111,3883
+(define (read-pem-key-string121,4112
+(define (read-pem-key127,4266
+(define (rsa-write-public-pem138,4574
+(define (rsa-write-private-pem153,5113
+(define (dsa-write-public-pem164,5547
+(define (dsa-write-private-pem180,6092
+(define (write-pem-key-port190,6459
+(define (write-pem-key-file204,6938
+(define (write-pem-key-string214,7221
+(define (write-pem-key219,7400

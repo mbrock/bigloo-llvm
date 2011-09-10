@@ -1,0 +1,21 @@
+;; /tmp/bigloo/api/multimedia/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__multimedia-color "bigloo.multimedia.color")
+  (__multimedia-soundcard "bigloo.multimedia.soundcard")
+  (__multimedia-mixer "bigloo.multimedia.mixer")
+  (__multimedia-mpg123 "bigloo.multimedia.mpg123")
+  (__multimedia-mplayer "bigloo.multimedia.mplayer")
+  (__multimedia-musicproc "bigloo.multimedia.musicproc")
+  (__multimedia-mpc "bigloo.multimedia.mpc")
+  (__multimedia-mpd "bigloo.multimedia.mpd")
+  (__multimedia-music-event-loop "bigloo.multimedia.musicloop")
+  (__multimedia-music "bigloo.multimedia.music")
+  (__multimedia-m3u "bigloo.multimedia.m3u")
+  (__multimedia-mp3 "bigloo.multimedia.mp3")
+  (__multimedia-id3 "bigloo.multimedia.id3")
+  (__multimedia-exif "bigloo.multimedia.exif")
+  (__multimedia-makelib "bigloo.multimedia.make_lib")
+)
+

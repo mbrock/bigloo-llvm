@@ -1,0 +1,73 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/unix                        */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Oct 22 11:07:08 1997                          */
+#*    Last change :  Mon Sep  7 09:13:29 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Setting bigloo.h up for Unix parameters.                         */
+#*=====================================================================*/
+fmt=c
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+#*---------------------------------------------------------------------*/
+#*    Uname parameters                                                 */
+#*---------------------------------------------------------------------*/
+if [ $fmt = "c" ]; then
+  # the kind of OS (Unix|mingw)
+  if [ "$HOSTOS " = "mingw " ]; then
+      echo "#define OS_CLASS \"mingw\""
+  else 
+      echo "#define OS_CLASS \"unix\""
+  fi
+  
+  # The name of the OS
+  echo "#define OS_NAME \"$HOSTOS\""
+  
+  # The architecture
+  echo "#define OS_ARCH \"$HOSTCPU\""
+  
+  # the Os version
+  echo "#define OS_VERSION \"$HOSTOSVERSION\""
+  
+  # the temporary directory
+  echo "#define OS_TMP \"$tmpdir\""
+  
+  # the file separator
+  echo "#define FILE_SEPARATOR '/'"
+  
+  # the path separator
+  if [ "$HOSTOS " = "mingw " ]; then
+      echo "#define PATH_SEPARATOR ';'"
+  else 
+      echo "#define PATH_SEPARATOR ':'"
+  fi
+  
+  # the static library suffixes
+  echo "#define STATIC_LIB_SUFFIX \"a\""
+  
+  # the shard library suffixes
+  if [ "$posixos" = "mingw" ]; then
+      echo "#define SHARED_LIB_SUFFIX \"dll\""
+  else
+      echo "#define SHARED_LIB_SUFFIX \"so\""
+  fi
+  
+  # Is it possible to directly print UCS2 characters
+  echo "#define UCS2_DISPLAYABLE 0"
+fi
+

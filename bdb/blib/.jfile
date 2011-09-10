@@ -1,0 +1,8 @@
+;; /tmp/bigloo/bdb/blib
+;; Mon Jan 24 14:32:18 2011
+
+(
+  (__bdb_env "bigloo.bdb.env")
+  (__bdb "bigloo.bdb.bdb")
+)
+

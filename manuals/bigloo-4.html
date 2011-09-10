@@ -1,0 +1,1296 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>3. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Modules</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center29105'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29095" align="center" colspan="1"><font color="#ffffff"><strong id='bold29093'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29102" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc29098" align="left" valign="top" colspan="1"><strong id='bold29097'
+>top:</strong></td><td id="tc29099" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center29115'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29109" align="center" colspan="1"><font color="#ffffff"><strong id='bold29107'
+>Modules</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29112" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">3.1</td><td colspan="4" width="100%"><a href="bigloo-4.html#Program-Structure">Program Structure</a></td></tr>
+ <tr><td valign="top" align="left">3.2</td><td colspan="4" width="100%"><a href="bigloo-4.html#Module-declaration">Module declaration</a></td></tr>
+ <tr><td valign="top" align="left">3.3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Module-initialization">Module initialization</a></td></tr>
+ <tr><td valign="top" align="left">3.4</td><td colspan="4" width="100%"><a href="bigloo-4.html#Qualified-notation">Qualified notation</a></td></tr>
+ <tr><td valign="top" align="left">3.5</td><td colspan="4" width="100%"><a href="bigloo-4.html#Inline-procedures">Inline procedures</a></td></tr>
+ <tr><td valign="top" align="left">3.6</td><td colspan="4" width="100%"><a href="bigloo-4.html#Module-access-file">Module access file</a></td></tr>
+ <tr><td valign="top" align="left">3.7</td><td colspan="4" width="100%"><a href="bigloo-4.html#Reading-path">Reading path</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center29125'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29119" align="center" colspan="1"><font color="#ffffff"><strong id='bold29117'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29122" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Modules" class="mark"></a><a name="g1199" class="mark"></a>
+A modules is a compiler and interpreter entity. Modules have been
+first designed for the compiler that compiles modules and then, links
+them against libraries in order to produce executables. A module may
+be split into several files but a file cannot contain more than
+<em id='emph1201'
+>one</em> module. A module is made of a module clause that is a list
+for which the <code id='code1202'
+>car</code> is the symbol <code id='code1203'
+>module</code> and followed by
+any Bigloo expression (that is definitions or expressions). The module
+clause names the module and defines the scope of the definitions. At
+last, the module clause is also the place where foreign bindings are
+defined and where classes are defined. Recent versions of Bigloo (since 2.7b)
+fully supports modules from the interpreter.<br/><br/>
+<!-- Program Structure -->
+<a name="Program-Structure"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.1 Program Structure</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Program-Structure" class="mark"></a><a name="g1205" class="mark"></a>
+A Bigloo program is composed of one or more Bigloo modules where a module is
+defined by the following grammar:<br/><br/><center id='center1210'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1208'
+>&lt;module&gt;             ==&gt; &lt;module-declaration&gt; &lt;module-body&gt;
+&lt;module-declaration&gt; ==&gt; the module declaration
+&lt;module-body&gt;        ==&gt; the module body
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A module is not related to a specific file and can be spread over
+several files if that is convenient. In particular, there is no
+relationship between module names and file names. The module declaration
+(see <a href="bigloo-4.html#Module-Declaration" class="inbound">Module Declaration</a>) must be the first expression in the first
+of the files containing the module; other expressions form the body of
+the module. The module body (see <a href="bigloo-5.html#Core-Language" class="inbound">Core Language</a>) contains global 
+variables, function definitions and <em id='emph1211'
+>top level</em> expressions
+(see <a href="bigloo-5.html#Expressions" class="inbound">Expressions</a>).<br/><br/></div><br>
+<!-- Module declaration -->
+<a name="Module-declaration"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.2 Module declaration</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Module-Declaration" class="mark"></a><a name="g1213" class="mark"></a>
+The module declaration form is<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1217" class="mark"></a><a name="module" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1221" align="left" colspan="1"><strong id='bold1219'
+>module</strong><em id='it1220'
+> name clause ...</em></td><td id="tc1222" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+
+This form defines a module and must be the first in the file.  The
+argument <code id='code1226'
+><em id='it1225'
+>name</em></code> is a symbol naming the module. If the same
+module name is used more than once, Bigloo signals an error. The
+runtime library is composed of modules that are read when a user module
+is compiled and hence, if a user module has the same name as one of the
+library modules, an error is signaled.<br/><br/>A simple module can be:<br/><br/><center id='center1235'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1233'
+>(<font color="#1919af"><strong id='bold29126'
+>module</strong></font> <font color="#1919af"><strong id='bold29128'
+>foo</strong></font>)<br/><br/>(display <font color="red">&quot;this is a module&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The first line here is the complete module definition, the last line is
+the complete module body and together they form a complete Bigloo program. If
+these lines were stored in file <code id='code1236'
+>zz.scm</code>, invoking <samp id='samp1237'
+>bigloo zz.scm</samp>
+would create the executable <code id='code1238'
+>a.out</code> which, when obeyed, would
+display <samp id='samp1239'
+>this is a module</samp> on the terminal.<br/><br/><em id='emph1241'
+>Note:</em>
+Some special identifiers are reserved and can't be used to name modules.
+If such an identifier is used, the compiler will produce the message:<br/><br/><center id='center1250'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1248'
+>#(<font color="#1919af"><strong id='bold29131'
+>module</strong></font> <font color="#1919af"><strong id='bold29133'
+>t</strong></font>
+#^
+# *** ERROR<strong id='bold29135'
+>:bigloo</strong><strong id='bold29137'
+>:TOP-LEVEL</strong><strong id='bold29139'
+>:Parse</strong> error
+# Illegal module name -- (MODULE eval ...
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The list of reserved identifiers may be enlarged for next release. For 
+the current release that list is made of: <code id='code1251'
+>eval</code>, <code id='code1252'
+>foreign</code> and 
+<code id='code1253'
+>t</code>.
+</td></tr>
+</tbody></table><br/>
+Module <code id='code1257'
+><em id='it1256'
+>clause</em></code>s can be:<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1260" class="mark"></a><a name="main" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1264" align="left" colspan="1"><strong id='bold1262'
+>main</strong><em id='it1263'
+> name</em></td><td id="tc1265" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+This clause defines the entry point for a stand alone application to be
+procedure <code id='code1269'
+><em id='it1268'
+>name</em></code> of arity one. Bigloo invokes this procedure at the
+beginning of execution providing the list, composed of the shell command
+line arguments, as its single argument.<br/><br/><center id='center1277'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1275'
+>(<font color="#1919af"><strong id='bold29141'
+>module</strong></font> <font color="#1919af"><strong id='bold29143'
+>foo</strong></font>
+   (main start))<br/><br/>(<font color="#6959cf"><strong id='bold29145'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29147'
+>start</strong></font> argv)
+   (display argv)
+   (newline))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Then if this program is compiled into <code id='code1278'
+>foo</code> and invoked using the
+command <samp id='samp1279'
+>foo -t bar</samp>, the list which is the argument for the main 
+procedure <code id='code1280'
+>start</code> would be <code id='code1281'
+>(&quot;foo&quot; &quot;-t&quot; &quot;bar&quot;)</code>. <br/><br/>The special form <code id='code1283'
+>args-parse</code> helps main function argument parsing 
+(see <a href="bigloo-15.html#Command-Line-Parsing" class="inbound">Command Line Parsing</a>).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1287" class="mark"></a><a name="include" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1291" align="left" colspan="1"><strong id='bold1289'
+>include</strong><em id='it1290'
+> file-name ...</em></td><td id="tc1292" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+<a name="g1295" class="mark"></a>
+This is a list of <code id='code1298'
+><em id='it1297'
+>file-name</em></code>s to be included in the source file. Include
+files are not modules and may have a special syntax. Thus, besides containing
+Bigloo expressions, they can contain import and include clauses, which must
+be written in a single list whose first element is the keyword 
+<code id='code1299'
+>directives</code>. Includes files can be used to include implementation-neutral
+Scheme expressions and definitions in a Bigloo module. Here is an example of 
+an include file.<br/><br/><center id='center1304'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1302'
+><font color="#ffa600"><em id='it29149'
+>;; </em></font>`foo.sch'
+(<font color="#6959cf"><strong id='bold29151'
+>define-struct</strong></font> <font color="#6959cf"><strong id='bold29153'
+>point</strong></font> x y)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+and the module that includes the `foo.sch' file:<br/><br/><center id='center1312'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1310'
+><font color="#ffa600"><em id='it29155'
+>;; </em></font>`foo.scm'
+(<font color="#1919af"><strong id='bold29157'
+>module</strong></font> <font color="#1919af"><strong id='bold29159'
+>foo</strong></font>
+   (include <font color="red">&quot;foo.sch&quot;</font>))<br/><br/>(print (point 1 2))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Include files, may contain module information. This is the role of the
+include <code id='code1313'
+>directives</code> clause here illustrated with the `bar.sch'
+example:<br/><br/><center id='center1322'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1320'
+><font color="#ffa600"><em id='it29162'
+>;; </em></font>`bar.sch'
+<font color="#ffa600"><em id='it29164'
+>;; the directives</em></font>
+(directives (include <font color="red">&quot;foobar.sch&quot;</font>)
+            (<font color="#1919af"><strong id='bold29167'
+>import</strong></font>  <font color="#1919af"><strong id='bold29169'
+>hux</strong></font>))<br/><br/><font color="#ffa600"><em id='it29171'
+>;; expressions</em></font>
+(<font color="#6959cf"><strong id='bold29173'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29175'
+>gee</strong></font> x) (print x))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1326" class="mark"></a><a name="import" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1330" align="left" colspan="1"><strong id='bold1328'
+>import</strong><em id='it1329'
+> import ...</em></td><td id="tc1331" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+An <code id='code1335'
+><em id='it1334'
+>import</em></code> is a list of the form:<br/><br/><center id='center1339'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1337'
+>&lt;import&gt;      ==&gt; &lt;iclause&gt; ...
+&lt;iclause&gt;     ==&gt; (&lt;bind-name&gt; ... &lt;bind-name&gt; &lt;module-name&gt; &lt;file-name&gt; ...)
+                | (&lt;bind-name&gt; ... &lt;bind-name&gt; &lt;module-name&gt;)
+                | &lt;module-name&gt;
+                | (&lt;module-name&gt; &lt;file-name&gt; ...)
+&lt;bind-name&gt;   ==&gt; &lt;r5rs-ident&gt;
+&lt;module-name&gt; ==&gt; &lt;r5rs-ident&gt;
+&lt;file-name&gt;   ==&gt; &lt;string&gt;
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The first alternative in <code id='code1341'
+><em id='it1340'
+>iclause</em></code> imports the variable named 
+<code id='code1343'
+><em id='it1342'
+>bind-name</em></code> which is defined in the module <code id='code1345'
+><em id='it1344'
+>module-name</em></code>, 
+located in the files <code id='code1347'
+><em id='it1346'
+>file-name</em></code> .... The second does the same 
+but without specifying the name of the file where the module is located.  
+The third and the fourth form import all the exported variables of the module
+<code id='code1349'
+><em id='it1348'
+>module-name</em></code>.<br/><br/>Note: The need for specifying in which files modules are located comes
+from the fact that there is no automatic mapping between module names
+and files names. Such a mapping can be defined in a ``module access file''
+(see <a href="bigloo-4.html#Module-Access-File" class="inbound">Module Access File</a>) or in the import clause itself, as
+in the first and fourth alternatives in <code id='code1352'
+><em id='it1351'
+>iclause</em></code> above.<br/><br/>Here is an example of an import clause:<br/><br/><center id='center1372'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1370'
+>(<font color="#1919af"><strong id='bold29177'
+>module</strong></font> <font color="#1919af"><strong id='bold29179'
+>foo</strong></font>
+<font color="#1919af"><strong id='bold29181'
+>   </strong></font>(<font color="#1919af"><strong id='bold29183'
+>import</strong></font><font color="#1919af"><strong id='bold29185'
+> </strong></font>
+      <font color="#ffa600"><em id='it29187'
+>;; import all </em></font><code id='code1355'
+>bar</code> exported bindings:
+      bar
+      <font color="#ffa600"><em id='it29189'
+>;; import the </em></font><code id='code1356'
+>hux</code> binding exported by
+      <font color="#ffa600"><em id='it29191'
+>;; the module </em></font><code id='code1357'
+>hux</code>:
+      (hux hux)       
+      <font color="#ffa600"><em id='it29193'
+>;; import the </em></font><code id='code1358'
+>fun1</code>, <code id='code1359'
+>fun2</code> and <code id='code1360'
+>fun3</code> bindings exported by
+      <font color="#ffa600"><em id='it29195'
+>;; the module </em></font><code id='code1361'
+>mod</code>:
+      (fun1 fun2 fun3 mod)       
+      <font color="#ffa600"><em id='it29197'
+>;; import all </em></font><code id='code1362'
+>gee</code> bindings. the <code id='code1363'
+>gee</code> module
+      <font color="#ffa600"><em id='it29199'
+>;; is located in a file called </em></font>`gee.scm':
+      (gee <font color="red">&quot;gee.scm&quot;</font>)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1376" class="mark"></a><a name="use" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1380" align="left" colspan="1"><strong id='bold1378'
+>use</strong><em id='it1379'
+> use ...</em></td><td id="tc1381" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+<code id='code1384'
+>use</code> has the same meaning as <code id='code1385'
+>import</code> except that modules
+which are <em id='emph1386'
+>used</em> are not initialized (see <a href="bigloo-4.html#Module-Initialization" class="inbound">Module Initialization</a>).
+Used modules are read before imported modules.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1390" class="mark"></a><a name="with" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1394" align="left" colspan="1"><strong id='bold1392'
+>with</strong><em id='it1393'
+> with ...</em></td><td id="tc1395" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+This clause specifies a list of modules which have to be
+initialized at runtime and is used to force the initialization
+of modules which are never imported but which are required by an 
+application (see <a href="bigloo-27.html#Embedded-Bigloo-applications" class="inbound">Embedded Bigloo applications</a>).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1401" class="mark"></a><a name="export" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1405" align="left" colspan="1"><strong id='bold1403'
+>export</strong><em id='it1404'
+> export ...</em></td><td id="tc1406" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+In order to make a module's global bindings available to other modules, they
+have to be <em id='emph1409'
+>exported</em>. Export clauses are in charge of this task and an
+<code id='code1411'
+><em id='it1410'
+>export</em></code> is a list of the form:<br/><br/><center id='center1415'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1413'
+>&lt;export&gt;  ==&gt; &lt;eclause&gt; ...
+&lt;eclause&gt; ==&gt; &lt;ident&gt;
+            | (inline &lt;ident&gt; &lt;ident&gt; ...)
+            | (generic &lt;ident&gt; &lt;ident&gt; &lt;ident&gt; ...)
+            | (&lt;ident&gt; &lt;ident&gt; ...)
+            | &lt;class&gt;
+            | (macro &lt;ident&gt; &lt;ident&gt; ...)
+            | (expander &lt;ident&gt;)
+            | (syntax &lt;ident&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The first form of <code id='code1417'
+><em id='it1416'
+>eclause</em></code> allows the variable <code id='code1419'
+><em id='it1418'
+>ident</em></code> be exported,
+the second allows the function <code id='code1421'
+><em id='it1420'
+>ident</em></code>, always regarded as immutable
+when exported this way, to be exported and the third exports an
+inline-procedure (see <a href="bigloo-4.html#Inline-Procedures" class="inbound">Inline Procedures</a>) whose name is extracted from
+the first <code id='code1423'
+><em id='it1422'
+>ident</em></code> after the word <code id='code1425'
+><em id='it1424'
+>inline</em></code>. The last two are both
+connected with Bigloo's object system.  The <code id='code1427'
+><em id='it1426'
+>generic</em></code> clause exports
+generic functions (see <a href="bigloo-11.html#Generic-functions" class="inbound">Generic functions</a>) and <code id='code1429'
+><em id='it1428'
+>class</em></code> clause exports
+classes (see <a href="bigloo-11.html#Class-declaration" class="inbound">Class declaration</a>).<br/><br/>Note: Only bindings defined in module <code id='code1431'
+>m</code> can be <em id='emph1432'
+>exported</em> 
+by <code id='code1433'
+>m</code> (i.e. bindings <em id='emph1434'
+>imported</em> by <code id='code1435'
+>m</code> cannot be 
+<em id='emph1436'
+>exported</em> by <code id='code1437'
+>m</code>).<br/><br/>Type information, specified in any <code id='code1440'
+><em id='it1439'
+>ident</em></code> in an export clause, is used
+by Bigloo. Where no type information is given, a default generic type named
+<code id='code1441'
+>obj</code> is used.<br/><br/>Note: The last formal argument of a multiple arity function can
+not be typed because this argument is bound to be a <code id='code1443'
+>pair</code>
+or <code id='code1444'
+>null</code>. This union cannot be denoted by any type.<br/><br/>Here is an example of the module <code id='code1446'
+>foo</code> that exports bindings:<br/><br/><center id='center1459'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1457'
+>(<font color="#1919af"><strong id='bold29202'
+>module</strong></font> <font color="#1919af"><strong id='bold29204'
+>foo</strong></font>
+<font color="#1919af"><strong id='bold29206'
+>   </strong></font>(<font color="#1919af"><strong id='bold29208'
+>export</strong></font><font color="#1919af"><strong id='bold29210'
+> </strong></font>
+      <font color="#ffa600"><em id='it29212'
+>;; export the </em></font><code id='code1448'
+>bar</code> mutable variable
+      bar
+      <font color="#ffa600"><em id='it29214'
+>;; export the </em></font><code id='code1449'
+>hux</code> function. this
+      <font color="#ffa600"><em id='it29216'
+>;; function takes exactly two arguments</em></font>
+      (hux x y)       
+      <font color="#ffa600"><em id='it29218'
+>;; export the inline function </em></font><code id='code1450'
+>gee</code>
+      <font color="#ffa600"><em id='it29220'
+>;; that takes at least one argument.</em></font>
+      (<strong id='bold29222'
+>inline</strong> gee x . z)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1463" class="mark"></a><a name="static" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1467" align="left" colspan="1"><strong id='bold1465'
+>static</strong><em id='it1466'
+> static ...</em></td><td id="tc1468" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+A <code id='code1471'
+>static</code> clause has exactly the same syntax as an export
+clause. However, bindings declared static are local to the module. Since
+the default scope of all bindings is static, <code id='code1472'
+>static</code> module clauses
+are useful only for program documentation.<br/><br/></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1477" class="mark"></a><a name="from" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1481" align="left" colspan="1"><strong id='bold1479'
+>from</strong><em id='it1480'
+> from ...</em></td><td id="tc1482" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+<code id='code1485'
+>from</code> clauses have the syntax of <code id='code1486'
+>import</code> 
+clauses. The allow the re-exportation of imported bindings. That is, any 
+module can export any bindings imported via a <code id='code1488'
+><em id='it1487'
+>from</em></code> clause.<br/><br/>As an example, suppose we have module <code id='code1490'
+>bar</code>:<br/><br/><center id='center1501'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1499'
+>(<font color="#1919af"><strong id='bold29223'
+>module</strong></font> <font color="#1919af"><strong id='bold29225'
+>bar</strong></font>
+   (<font color="#1919af"><strong id='bold29227'
+>export</strong></font> (<font color="#1919af"><strong id='bold29229'
+>fun</strong></font>)))<br/><br/>(<font color="#6959cf"><strong id='bold29231'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29233'
+>fun</strong></font>) <font color="red">&quot;bar&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Now, suppose we have a module <code id='code1502'
+>foo</code> that imports <code id='code1503'
+>bar</code>, by the
+means of a <code id='code1504'
+>from</code> clause. Module <code id='code1505'
+>foo</code> is able to re-export the
+<code id='code1506'
+>bar</code> binding of module <code id='code1507'
+>bar</code>:<br/><br/><center id='center1514'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1512'
+>(<font color="#1919af"><strong id='bold29236'
+>module</strong></font> <font color="#1919af"><strong id='bold29238'
+>foo</strong></font>
+   (from (fun bar <font color="red">&quot;bar.scm&quot;</font>)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A third module, let's name it <code id='code1515'
+>gee</code>, importing module <code id='code1516'
+>foo</code>, can see
+the binding for function <code id='code1517'
+>bar</code>:<br/><br/><center id='center1527'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1525'
+>(<font color="#1919af"><strong id='bold29241'
+>module</strong></font> <font color="#1919af"><strong id='bold29243'
+>gee</strong></font>
+   (<font color="#1919af"><strong id='bold29245'
+>import</strong></font> (<font color="#1919af"><strong id='bold29247'
+>foo</strong></font> <font color="red">&quot;foo.scm&quot;</font>)))<br/><br/>(print (fun))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This feature is very useful when compiling modules exporting functions
+with type annotations. In particular, one may write:<br/><br/><center id='center1536'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1534'
+>(<font color="#1919af"><strong id='bold29250'
+>module</strong></font> <font color="#1919af"><strong id='bold29252'
+>foo</strong></font>
+  (<font color="#1919af"><strong id='bold29254'
+>export</strong></font> (<strong id='bold29256'
+>class</strong> <font color="#1919af"><strong id='bold29257'
+>c1</strong></font> x)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Then,
+<center id='center1550'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1548'
+>(<font color="#1919af"><strong id='bold29259'
+>module</strong></font> <font color="#1919af"><strong id='bold29261'
+>bar</strong></font>
+  (<font color="#1919af"><strong id='bold29263'
+>import</strong></font> <font color="#1919af"><strong id='bold29265'
+>foo</strong></font>)
+  (from foo)
+  (<font color="#1919af"><strong id='bold29267'
+>export</strong></font> (<font color="#1919af"><strong id='bold29269'
+>fun</strong></font><font color="#00cf00"><strong id='bold29271'
+>::c1</strong></font>)))<br/><br/>(<font color="#6959cf"><strong id='bold29273'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29275'
+>fun</strong></font>)
+   (<strong id='bold29277'
+>instantiate</strong><font color="#00cf00"><strong id='bold29278'
+>::c1</strong></font> (x 10)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+And,<br/><br/><center id='center1561'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1559'
+>(<font color="#1919af"><strong id='bold29280'
+>module</strong></font> <font color="#1919af"><strong id='bold29282'
+>gee</strong></font>
+   (<font color="#1919af"><strong id='bold29284'
+>import</strong></font> <font color="#1919af"><strong id='bold29286'
+>bar</strong></font>)
+   (main main))<br/><br/>(<font color="#6959cf"><strong id='bold29288'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29290'
+>main</strong></font> x)
+   (<strong id='bold29292'
+>let</strong> ((o (fun)))
+      (print o)
+      (print (c1? o))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1565" class="mark"></a><a name="load" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1569" align="left" colspan="1"><strong id='bold1567'
+>load</strong><em id='it1568'
+> load ...</em></td><td id="tc1570" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+A <code id='code1574'
+><em id='it1573'
+>load</em></code> is a list of the form:<br/><br/><center id='center1578'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1576'
+>&lt;load&gt;    ==&gt; &lt;lclause&gt; ...
+&lt;lclause&gt; ==&gt; (&lt;module-name&gt; &lt;file-name&gt;)
+            | &lt;module-name&gt;
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This clause forces Bigloo to load the module specified in the <code id='code1580'
+><em id='it1579'
+>lclause</em></code>
+in the environment used by the macro expansion mechanism. This means that
+the user's macros can use all the bindings of all the <code id='code1581'
+>load</code>ed modules
+but the <code id='code1582'
+>load</code>ed bindings remains unknown to the compiler.<br/><br/>If the module <code id='code1584'
+>foo</code> is defined by:<br/><br/><center id='center1594'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1592'
+>(<font color="#1919af"><strong id='bold29293'
+>module</strong></font> <font color="#1919af"><strong id='bold29295'
+>foo</strong></font>
+   (<font color="#1919af"><strong id='bold29297'
+>export</strong></font> (<font color="#1919af"><strong id='bold29299'
+>foo</strong></font> x)))<br/><br/>(<font color="#6959cf"><strong id='bold29301'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29303'
+>foo</strong></font> x)
+   `(cons ,x ,x))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+then,<br/><br/><center id='center1604'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1602'
+>(<font color="#1919af"><strong id='bold29305'
+>module</strong></font> <font color="#1919af"><strong id='bold29307'
+>gee</strong></font>
+   (load (foo <font color="red">&quot;foo.scm&quot;</font>)))<br/><br/>(<font color="#6959cf"><strong id='bold29310'
+>define-macro</strong></font> (<font color="#6959cf"><strong id='bold29312'
+>gee</strong></font> x)
+   `(cons ,(-fx x 1) ,(foo x)))<br/><br/>(gee 5)   ==&gt; (cons 4 (cons 5 5))
+          =&gt; (4 5 . 5)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1608" class="mark"></a><a name="eval" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1612" align="left" colspan="1"><strong id='bold1610'
+>eval</strong><em id='it1611'
+> eval...</em></td><td id="tc1613" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+This form allows interactions between compiled code and interpreted
+code. (See the Section <a href="bigloo-23.html#Eval" class="inbound">Eval command line options</a> for a
+presentation of compilation flags that enable compilation tuning for
+<code id='code1616'
+>eval</code>.)  Each <code id='code1618'
+><em id='it1617'
+>eval</em></code> has the following syntax:<br/><br/><center id='center1622'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1620'
+>&lt;eval&gt; ==&gt; (export-all)
+         | (export-module)
+         | (export-exports)
+         | (export &lt;bind-name&gt;)
+         | (export (&#x40; &lt;bind-name&gt; &lt;module-name&gt;))
+         | (import &lt;bind-name&gt;)
+         | (class &lt;bind-name&gt;)
+         | (library lib1 ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+<a name="g1623" class="mark"></a><a name="g1625" class="mark"></a><a name="g1627" class="mark"></a><a name="g1629" class="mark"></a>
+The first clause, <code id='code1631'
+>(export-all)</code>, exports all the variables bound
+in the module (i.e., the variables defined in the module and the
+imported variables).  The second clause, <code id='code1632'
+>(export-module)</code>, exports
+all the module's variables (those declared static and exported) to the
+interpreter; the third exports all the exports (i.e. the ones present
+inside an <code id='code1633'
+>export</code> clause) variables to the interpreter; the fourth
+and fifth clause each export one variable to the interpreter. The last
+clause imports a variable from the interpreter and all such imported
+variables are immutable (i.e. they cannot be the first argument of a
+<code id='code1634'
+>set!</code>  expression with the compiled code). Variables that are
+exported to the evaluators <em id='emph1635'
+>must</em> be exported.  If a variable is
+exported to the evaluators but not exported within an <code id='code1636'
+>export</code>
+clause, the compiler will produce an error message. The <code id='code1637'
+>library</code>
+clause makes the variables and functions of a library accessible from
+the interpreter.<br/><br/><center id='center1651'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1649'
+>(<font color="#1919af"><strong id='bold29314'
+>module</strong></font> <font color="#1919af"><strong id='bold29316'
+>foo</strong></font>
+   (<font color="#1919af"><strong id='bold29318'
+>export</strong></font> (<font color="#1919af"><strong id='bold29320'
+>fib</strong></font> x))
+   (eval (<font color="#1919af"><strong id='bold29322'
+>export</strong></font> <font color="#1919af"><strong id='bold29324'
+>fib</strong></font>)
+         (<font color="#1919af"><strong id='bold29326'
+>import</strong></font> <font color="#1919af"><strong id='bold29328'
+>bar</strong></font>)))<br/><br/>(<font color="#6959cf"><strong id='bold29330'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29332'
+>fib</strong></font> x) ...)
+(print bar)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The clause <code id='code1652'
+>(class &lt;bind-name&gt;)</code> exports a class definition to
+the interpreter. This makes the class constructor, the class predicate
+and the slots access functions available from the interpreter. The
+form 
+   <code id='code1655'
+>(instantiate::<code id='code1654'
+><em id='it1653'
+>class</em></code> ...)</code> 
+and 
+   <code id='code1658'
+>(with-access::<code id='code1657'
+><em id='it1656'
+>class</em></code> ...)</code> 
+are also available from the interpreter.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1662" class="mark"></a><a name="extern" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1666" align="left" colspan="1"><strong id='bold1664'
+>extern</strong><em id='it1665'
+> extern ...</em></td><td id="tc1667" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+Extern (aka foreign) clauses will be explained in the foreign interface
+(see <a href="bigloo-27.html#C-Interface" class="inbound">C Interface</a>).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1673" class="mark"></a><a name="java" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1677" align="left" colspan="1"><strong id='bold1675'
+>java</strong><em id='it1676'
+> java ...</em></td><td id="tc1678" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+Java clauses will be explained in the Java interface
+(see <a href="bigloo-28.html#Java-Interface" class="inbound">Java Interface</a>).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1684" class="mark"></a><a name="option" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1688" align="left" colspan="1"><strong id='bold1686'
+>option</strong><em id='it1687'
+> option ...</em></td><td id="tc1689" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+This clause enables variables which affect compilation to be set from inside
+a module and since the expressions, <code id='code1693'
+><em id='it1692'
+>option</em></code> ..., are evaluated
+<em id='emph1694'
+>when compiling</em>, no code is compiled for them.  They are allowed to
+make side effects and to change the values of the global variables which
+describe how the compiler must compile. Usually they allow the control
+variables, which are described when Bigloo is invoked with the <code id='code1695'
+>-help2</code>
+option, to be set as in the following example:<br/><br/><center id='center1704'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1702'
+>(<font color="#1919af"><strong id='bold29334'
+>module</strong></font> <font color="#1919af"><strong id='bold29336'
+>examplar</strong></font>
+   (option (<strong id='bold29338'
+>set!</strong> *debug* 3)
+           (<strong id='bold29339'
+>set!</strong> *verbose* 2)))<br/><br/>(print 'dummy)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Whatever arguments are passed on the command line, Bigloo will compile this
+module in both verbose mode and debug mode.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1708" class="mark"></a><a name="library" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1712" align="left" colspan="1"><strong id='bold1710'
+>library</strong><em id='it1711'
+> library ...</em></td><td id="tc1713" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+
+This clause enables libraries (see <a href="bigloo-29.html#Bigloo-Libraries" class="inbound">Bigloo Libraries</a>) when compiling and
+linking Bigloo modules. The expressions <code id='code1717'
+><em id='it1716'
+>library</em></code> ... are symbols
+naming the libraries to be used.<br/><br/>Here is an example of a module declaration which makes use of a library
+named <code id='code1719'
+>format</code>:<br/><br/><center id='center1730'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1728'
+>(<font color="#1919af"><strong id='bold29340'
+>module</strong></font> <font color="#1919af"><strong id='bold29342'
+>test</strong></font>
+   (<font color="#1919af"><strong id='bold29344'
+>library</strong></font> <font color="#1919af"><strong id='bold29346'
+>format</strong></font>)
+   (main    test-format)
+   (<font color="#1919af"><strong id='bold29348'
+>import</strong></font>  (<font color="#1919af"><strong id='bold29350'
+>test2</strong></font> <font color="red">&quot;test2.scm&quot;</font>)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Using a library does not automatically binds its variables and functions
+to the interpreter. In order to make these available to the interpreter
+an explicit use of an eval <code id='code1731'
+>library</code> clause must be used.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1735" class="mark"></a><a name="type" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1739" align="left" colspan="1"><strong id='bold1737'
+>type</strong><em id='it1738'
+> type ...</em></td><td id="tc1740" align="right" colspan="1">bigloo module clause</td></tr>
+</tbody></table>
+This forms is used to define builtin Bigloo types. It is not recommended
+to use it in user programs. So, it is left undocumented.
+</td></tr>
+</tbody></table><br/><br/><br/></div><br>
+<!-- Module initialization -->
+<a name="Module-initialization"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.3 Module initialization</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Module-Initialization" class="mark"></a>
+<em id='emph1746'
+>Initializing</em> a module means evaluating, at runtime, its
+top level forms (global bindings are top level forms).<br/><br/>When a module, <code id='code1749'
+><em id='it1748'
+>module1</em></code>, imports a module, <code id='code1751'
+><em id='it1750'
+>module2</em></code>,
+<code id='code1753'
+><em id='it1752'
+>module2</em></code> is initialized before <code id='code1755'
+><em id='it1754'
+>module1</em></code>. Modules are
+initialized only once, nothing being done if a module already met during 
+initialization is met again. Library modules are initialized before user
+modules and imported modules are initialized in the same order as they
+appear in import clauses.<br/><br/>Here is a first example with two modules. First the module <code id='code1757'
+>foo</code>:<br/><br/><center id='center1770'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1768'
+><font color="#ffa600"><em id='it29353'
+>;; module foo</em></font>
+(<font color="#1919af"><strong id='bold29355'
+>module</strong></font> <font color="#1919af"><strong id='bold29357'
+>foo</strong></font>
+   (main main)
+   (<font color="#1919af"><strong id='bold29359'
+>import</strong></font> (<font color="#1919af"><strong id='bold29361'
+>bar</strong></font> <font color="red">&quot;bar.scm&quot;</font>)))<br/><br/>(<font color="#6959cf"><strong id='bold29364'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29366'
+>main</strong></font> argv)
+   (print <font color="red">&quot;argv: &quot;</font> argv))
+(print <font color="red">&quot;foo&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Then the module <code id='code1771'
+>bar</code>
+<center id='center1778'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1776'
+><font color="#ffa600"><em id='it29370'
+>;; module bar</em></font>
+(<font color="#1919af"><strong id='bold29372'
+>module</strong></font> <font color="#1919af"><strong id='bold29374'
+>bar</strong></font>)<br/><br/>(print <font color="red">&quot;bar&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+These can be compiled into the executable <code id='code1780'
+><em id='it1779'
+>a.out</em></code> with:
+<center id='center1783'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1781'
+>$ bigloo -c foo.scm
+$ bigloo -c bar.scm
+$ bigloo foo.o bar.o
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Execution of <code id='code1785'
+><em id='it1784'
+>a.out</em></code> produces:
+<center id='center1788'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1786'
+>$ a.out
+   -| bar
+      foo
+      argv: (a.out)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The explanation is:
+<ul class="itemize" id='itemize1803'
+><li>module <code id='code1789'
+>foo</code> contains the program entry point so this is where
+ initialization begins.
+</li>
+<li>because <code id='code1791'
+>foo</code> imports module <code id='code1792'
+>bar</code>, <code id='code1793'
+>bar</code> must be
+ initialized <em id='emph1794'
+>before</em> <code id='code1795'
+>foo</code>. This explains why the word <code id='code1796'
+>bar</code>
+ is printed before anything else.
+</li>
+<li>module initialization for <code id='code1798'
+>foo</code> is completed before <code id='code1799'
+>main</code>
+ is called. This explains why word <code id='code1800'
+>foo</code> is printed before <code id='code1801'
+>main</code>
+ is entered.
+</li>
+</ul>
+Let's consider another example with 3 modules:
+<center id='center1817'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1815'
+><font color="#ffa600"><em id='it29377'
+>;; </em></font><code id='code1804'
+>module1</code>
+(<font color="#1919af"><strong id='bold29379'
+>module</strong></font> <font color="#1919af"><strong id='bold29381'
+>module1</strong></font>
+   (main main)
+   (<font color="#1919af"><strong id='bold29383'
+>import</strong></font> (<font color="#1919af"><strong id='bold29385'
+>module2</strong></font> <font color="red">&quot;module2.scm&quot;</font>)))<br/><br/>(<font color="#6959cf"><strong id='bold29388'
+>define</strong></font> (<font color="#6959cf"><strong id='bold29390'
+>main</strong></font> argv)
+   (print <font color="red">&quot;argv: &quot;</font> argv))<br/><br/>(print <font color="red">&quot;module1&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The second module:
+<center id='center1828'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1826'
+><font color="#ffa600"><em id='it29394'
+>;; </em></font><code id='code1818'
+>module2</code>
+(<font color="#1919af"><strong id='bold29396'
+>module</strong></font> <font color="#1919af"><strong id='bold29398'
+>module2</strong></font>
+   (<font color="#1919af"><strong id='bold29400'
+>import</strong></font> (<font color="#1919af"><strong id='bold29402'
+>module3</strong></font> <font color="red">&quot;module3.scm&quot;</font>)))<br/><br/>(print <font color="red">&quot;module2&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The third module:
+<center id='center1838'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1836'
+><font color="#ffa600"><em id='it29406'
+>;; </em></font><code id='code1829'
+>module3</code>
+(<font color="#1919af"><strong id='bold29408'
+>module</strong></font> <font color="#1919af"><strong id='bold29410'
+>module3</strong></font>
+   (<font color="#1919af"><strong id='bold29412'
+>import</strong></font> (<font color="#1919af"><strong id='bold29414'
+>module1</strong></font> <font color="red">&quot;module1.scm&quot;</font>)))
+ 
+(print <font color="red">&quot;module3&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Compile with:
+<center id='center1841'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1839'
+>$ bigloo module1.scm -c
+$ bigloo module2.scm -c
+$ bigloo module3.scm -c
+$ bigloo module1.o module2.o module3.o
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Execution produces:<br/><br/><center id='center1845'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1843'
+>$ a.out
+   -| module3
+      module2
+      module1
+      argv: (a.out)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The order of module initialization can be explicitly specified using <code id='code1846'
+>with</code>
+and <code id='code1847'
+>use</code> clauses.
+   
+</div><br>
+<!-- Qualified notation -->
+<a name="Qualified-notation"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.4 Qualified notation</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Qualified-Notation" class="mark"></a><a name="g1848" class="mark"></a><a name="g1850" class="mark"></a>
+Global variables can be referenced using implicit notation or
+using <em id='emph1852'
+>qualified</em> notation. Implicit notation is used when
+variables are referenced just by their name whereas qualified notation
+is used when variables are referenced by their name and 
+the name of the module which defines them. Qualified notation has
+the following syntax:<br/><br/><center id='center1856'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1854'
+>(&#x40; &lt;bind-name&gt; &lt;module-name&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+and is useful when several imported modules export a
+variable with the same name. Using qualified notations instead of
+short notation only affects compilation.<br/><br/>When several variables are defined under the same identifier, the
+compiler uses the two following rules in order to decide which
+variable is selected by an implicit reference: 1) the variable defined
+in a module has a higher precedence than all imported variables, 2)
+imported variables have a higher precedence than library variables.<br/><br/></div><br>
+<!-- Inline procedures -->
+<a name="Inline-procedures"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.5 Inline procedures</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Inline-Procedures" class="mark"></a><a name="g1859" class="mark"></a>
+Bigloo allows procedures called <em id='emph1861'
+>inline</em> and which differ from
+normal ones only in the type of code planted.  An inline procedure is a
+first class object which can be manipulated in the same way as any other
+procedure but when Bigloo sees a reference to one, rather than
+generating a C function call to the function, the body of the inline
+procedure is open-coded.  The definition of an inline is given in the
+following way:<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1864" class="mark"></a><a name="define-inline" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1868" align="left" colspan="1"><strong id='bold1866'
+>define-inline</strong><em id='it1867'
+> (name args ...) body</em></td><td id="tc1869" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1874" align="left" colspan="1"><strong id='bold1872'
+>define-inline</strong><em id='it1873'
+> (name args ... . arg) body</em></td><td id="tc1875" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+
+Apart from the initial word, this form has the same syntax as that used by
+<code id='code1878'
+>define</code> for procedures. Inline procedures are exportable which means
+that the compiler scans imported files to find the bodies of all inline
+procedures. Here is a small example of a module which exports an inline and
+a module which imports it.<br/><br/><center id='center1889'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1887'
+><font color="#ffa600"><em id='it29418'
+>;; the exporter module</em></font>
+(<font color="#1919af"><strong id='bold29420'
+>module</strong></font> <font color="#1919af"><strong id='bold29422'
+>exporter</strong></font>
+        (<font color="#1919af"><strong id='bold29424'
+>export</strong></font> (<strong id='bold29426'
+>inline</strong> <font color="#1919af"><strong id='bold29427'
+>make-list</strong></font> . objs)))<br/><br/>(<font color="#6959cf"><strong id='bold29429'
+>define-inline</strong></font> (<font color="#6959cf"><strong id='bold29431'
+>make-list</strong></font> . objs) objs)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center1897'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1895'
+><font color="#ffa600"><em id='it29433'
+>;; the importer module</em></font>
+(<font color="#1919af"><strong id='bold29435'
+>module</strong></font> <font color="#1919af"><strong id='bold29437'
+>importer</strong></font>
+        (<font color="#1919af"><strong id='bold29439'
+>import</strong></font> <font color="#1919af"><strong id='bold29441'
+>exporter</strong></font>))<br/><br/>(print (make-list 1 2 3 4 5))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Because of the open-coding of the exporter procedure, the above print
+statement is equivalent to:<br/><br/><center id='center1902'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1900'
+>(print (<strong id='bold29443'
+>let</strong> ((objs (list 1 2 3 4 5)))
+          objs))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Any procedure can be an inline. Also any exported procedure can be an inline
+provided all global variables and functions it uses are also exported.<br/><br/>Note: Bigloo can decide to inline procedures declared with
+<code id='code1904'
+>define</code>
+but this can be achieved only with local procedures whereas procedures
+declared with the <code id='code1905'
+>define-inline</code> form are open-coded even through
+module importation.<br/><br/>Note: Procedures declared <em id='emph1907'
+>inline</em> are macro expanded with 
+the macro defined in the module where they are invoked. That is, if 
+module <code id='code1908'
+>module1</code> declares an inline procedure <code id='code1909'
+>p</code> and module 
+<code id='code1910'
+>module2</code> imports it, <code id='code1911'
+>p</code> may have two different macro-expansions: 
+one for <code id='code1912'
+>module1</code> and one for <code id='code1913'
+>module2</code>.
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- Module access file -->
+<a name="Module-access-file"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.6 Module access file</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Module-Access-File" class="mark"></a><a name="g1916" class="mark"></a><a name="g1918" class="mark"></a><a name="g1920" class="mark"></a><a name="g1922" class="mark"></a>
+Bigloo is different from languages such as C where a module is defined by a
+file. For Bigloo, the module name is not necessarily the name of the file
+where the text of the module is written and modules can even be split across
+several files.<br/><br/>Since modules are defined independently of files, it is necessary to make a
+link between a module and its files and there are two ways of doing this.
+Choosing an import clause where the file-names are specified or creating a
+``module access file''. Such a file must contain only one <code id='code1926'
+><em id='it1925'
+>list</em></code>, each
+element of the list being of the form:<br/><br/>(module-name &quot;file-name&quot; ... &quot;file-name&quot;)<br/><br/>Use the <samp id='samp1929'
+>-afile &lt;file&gt;</samp> option to specify the ``module accessfile'' when compiling. By default Bigloo checks if a file named <code id='code1930'
+>.afile</code>
+exists. If it exists it is loaded as a module access file.<br/><br/>See <a href="bigloo-32.html#Compiler-Description" class="inbound">The Bigloo command line</a>.<br/><br/>Note: The Bigloo distribution contains a tool, <code id='code1933'
+>bglafile</code>,
+that can automatically build a ``module access file''. See the manpage for
+<code id='code1934'
+>bglafile</code> for details.<br/><br/></div><br>
+<!-- Reading path -->
+<a name="Reading-path"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.7 Reading path</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Reading-Path" class="mark"></a><a name="g1936" class="mark"></a>
+Imported, included or loaded files are sought first in the current directory
+and then in the directories, sequentially from start to end, of the list in
+the <code id='code1938'
+>*load-path*</code>
+<a name="g1939" class="mark"></a>variable. This variable,
+initially set to the empty list, can be reset by the <samp id='samp1941'
+>-I</samp> option of the
+compiler.
+
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph29449'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it29447'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

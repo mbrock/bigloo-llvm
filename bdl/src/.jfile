@@ -1,0 +1,12 @@
+;; /tmp/bigloo/bdl/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__bdl_env "bigloo.bdl.env")
+  (__bdl_types "bigloo.bdl.types")
+  (__bdl_prgm "bigloo.bdl.prgm")
+  (__bdl_misc "bigloo.bdl.misc")
+  (__bdl_etags "bigloo.bdl.etags")
+  (__bdlread_makelib "bigloo.bdl.make_lib")
+)
+

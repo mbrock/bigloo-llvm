@@ -1,0 +1,94 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/gchavedoblocking            */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Aug  9 13:27:23 1995                          */
+#*    Last change :  Sat Sep  5 06:06:18 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Check the GC version                                             */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+cflags=
+gcdir=gc-boehm
+gcincdir=/usr/include/gc
+gclibdir=/usr/lib
+gclib=gc
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --cflags=*|-cflags=*)
+      cflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --gcincdir=*)
+      gcincdir="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --gclibdir=*)
+      gclibdir="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --gclib=*)
+      gclib="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --dlopen=*)
+      dlopen="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+file=$TMP/actest$USER
+aout=$TMP/Xactest$USER
+
+#*---------------------------------------------------------------------*/
+#*    compile                                                          */
+#*---------------------------------------------------------------------*/
+compile="$CC $cflags $file.c -o $aout -I$gcincdir -I$gcincdir/gc -L$gclibdir -l$gclib >/dev/null"
+
+#*---------------------------------------------------------------------*/
+#*    The test C file                                                  */
+#*---------------------------------------------------------------------*/
+if( test -f $file.c ); then
+   rm -f $file.c || exit $?
+fi
+
+#*---------------------------------------------------------------------*/
+#*    Test1                                                            */
+#*---------------------------------------------------------------------*/
+cat >> $file.c <<EOF
+#include <gc.h>
+#include <stdio.h>
+extern GC_do_blocking();
+
+int check_addr( long a1, long a2 ) {
+    return a1 > a2;
+}
+
+main( int argc, char *argv[] ) {
+   GC_init();
+   if( check_addr( &GC_do_blocking, &main ) ) puts( "yes" ); else puts( "yes" );
+   return 0;
+}
+EOF
+
+if eval "$BUILDSH $compile" 2> /dev/null; then
+   eval "$HOSTSH $aout" 2> /dev/null;
+   rm -f $aout
+else
+   echo "no"
+   rm -f $aout
+fi
+
+\rm -f $file.*
+
+exit 0;

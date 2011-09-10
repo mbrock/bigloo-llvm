@@ -1,0 +1,8 @@
+;; /tmp/bigloo/api/srfi1/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__srfi1 "bigloo.srfi1.srfi1")
+  (__srfi1_makelib "bigloo.srfi1.make_lib")
+)
+

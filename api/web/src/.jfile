@@ -1,0 +1,19 @@
+;; /tmp/bigloo/api/web/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__web_date "bigloo.web.date")
+  (__web_webdav "bigloo.web.webdav")
+  (__web_html "bigloo.web.html")
+  (__web_feeds "bigloo.web.feeds")
+  (__web_atom "bigloo.web.atom")
+  (__web_rss "bigloo.web.rss")
+  (__web_cgi "bigloo.web.cgi")
+  (__web_css-parser "bigloo.web.css_parser")
+  (__web_css-lexer "bigloo.web.css_lexer")
+  (__web_css-ast "bigloo.web.css_ast")
+  (__web_css "bigloo.web.css")
+  (__web_xml "bigloo.web.xml")
+  (__web_makelib "bigloo.web.make_lib")
+)
+

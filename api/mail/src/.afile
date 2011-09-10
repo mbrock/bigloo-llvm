@@ -1,0 +1,14 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/mail/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__mail_imap "Llib/imap.bgl")
+  (__mail_mailbox "Llib/mailbox.scm")
+  (__mail_maildir "Llib/maildir.scm")
+  (__mail_rfc2045 "Llib/rfc2045.scm")
+  (__mail_rfc2047 "Llib/rfc2047.scm")
+  (__mail_rfc2822 "Llib/rfc2822.scm")
+  (__mail_vcard "Llib/vcard.scm")
+)
+

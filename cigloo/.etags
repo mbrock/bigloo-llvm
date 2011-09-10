@@ -1,0 +1,227 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Init/main.scm,49
+(module init_cigloo14,889
+(define (main23,1211
+
+Init/setrc.scm,64
+(module init_setrc14,889
+(define (setup-default-values21,1192
+
+Init/parse_args.scm,106
+(module init_parse-args14,889
+(define (parse-args23,1237
+(define (query150,7589
+(define (help166,8237
+
+Engine/engine.scm,210
+(module engine_engine15,963
+(define-macro (bigloo-name27,1374
+(define (cigloo33,1643
+(define *file-processed*50,2273
+(define (engine55,2526
+(define (translate-stdin87,3665
+(define (translate-file93,3970
+
+Engine/param.scm,1222
+(module engine_param14,889
+(define *cigloo-version*57,1887
+(define *cigloo-name*58,1922
+(define *cigloo-level*59,2000
+(define *cigloo-cmd-name*60,2032
+(define *cigloo-args*61,2074
+(define *cigloo-rest-args*62,2116
+(define *cigloo-author*63,2149
+(define *cigloo-email*64,2195
+(define *cigloo-date*65,2250
+(define *cigloo-tmp*66,2311
+(define *verbose*74,2649
+(define *src*79,2900
+(define *src-dirname*80,2930
+(define *iname*81,2959
+(define *dest*82,2988
+(define *oport*83,3017
+(define *include-path*88,3288
+(define *scan-include*89,3318
+(define *open-include*90,3348
+(define *hookfile*95,3601
+(define *ident-style*100,3853
+(define *c-type-alist*108,4331
+(define *c-unsigned-type-alist*147,5604
+(define *c-signed-type-alist*154,5747
+(define *default-type*160,5881
+(define *no-type*162,5912
+(define *opaque-type*164,5941
+(define *macro-function*169,6192
+(define *macro-variable*170,6221
+(define *directives*175,6473
+(define *include-directive*176,6505
+(define *define*181,6760
+(define *define-fun*182,6791
+(define *eval-stub?*187,7048
+(define *gcc-extensions?*192,7302
+(define *enum-macros*197,7556
+(define *int-enum*202,7805
+(define *use-cpp*207,8051
+(define *omit-underscore*212,8296
+
+Engine/translate.scm,191
+(module engine_translate14,889
+(define *cpp-command*30,1420
+(define *cpp-args*31,1449
+(define (cpp33,1486
+(define (translate43,1947
+(define (parse77,3380
+(define (translate-ast95,4025
+
+Tools/speek.scm,98
+(module tools_speek14,889
+(define (speek22,1221
+(define (verbose31,1588
+(define (fprin37,1902
+
+Tools/error.scm,54
+(module tools_error14,889
+(define (error/ast22,1230
+
+Write/version.scm,141
+(module write_version14,889
+(define (short-version23,1219
+(define (version33,1617
+(define (cat55,2325
+(define (display-to-column82,3083
+
+Parser/parser.scm,93
+(module parser_parser14,889
+(define *anonymous-struct-alist*26,1309
+(define parser31,1570
+
+Parser/lexer.scm,177
+(module parser_lexer14,889
+(define (define-type-id25,1263
+(define *keyword-list*31,1569
+(define *gcc-keyword-list*73,2137
+(define (init-lexer!79,2476
+(define lexer91,2955
+
+Parser/tools.scm,82
+(module parser_tools14,889
+(define (the-coord22,1227
+(define (get-coord28,1555
+
+Parser/cpp.scm,200
+(module parser_cpp14,889
+(define (set-cpp-coord!26,1294
+(define *cpp-coord*32,1577
+(define cpp-lexer37,1824
+(define cpp-parser124,4263
+(define (find-macro?286,8587
+(define (bind-macro!292,8908
+
+Translate/function.scm,482
+(module translate_function14,889
+(define *fun-decl-list*36,1651
+(define (translate-function-declaration45,2199
+(define (translate-function-declarations52,2598
+(define (translate-function-definition89,4009
+(define (translate-parameter154,6368
+(define (translate-para-id166,6909
+(define (detect-struct-or-union207,8247
+(define (string-end=?221,8781
+(define (fix-abstract-array-type233,9291
+(define (parameter-type-list->types249,9859
+(define (translate-para-type291,11287
+
+Translate/declaration.scm,277
+(module translate_declaration14,889
+(define (translate-declaration29,1410
+(define (function-declaration?63,2713
+(define (typedef-sspec?95,3485
+(define (translate-decl107,3910
+(define (translate-variable-declaration123,4602
+(define (translate-typedef-declaration143,5484
+
+Translate/type.scm,882
+(module translate_type14,889
+(define *Tenv*37,1755
+(define *Tlist*45,2233
+(define (find-type50,2477
+(define (bind-type!56,2753
+(define (reset-type-list!63,3094
+(define (string-sans-$72,3592
+(define (type-name-sans-$87,4104
+(define ($-in-name?98,4605
+(define (*-name?113,5158
+(define (replace-$119,5468
+(define (replace-space125,5760
+(define (replace-char131,6060
+(define (make-ptr-type-name159,6953
+(define (compose-type-name172,7414
+(define (make-array-type-name185,7878
+(define (make-function-type-name191,8174
+(define (make-...197,8508
+(define (make-simple207,8888
+(define (make-typedef218,9313
+(define (make-ptr-to226,9668
+(define (make-ptr-to-function250,10587
+(define (make-array266,11174
+(define (make-function289,11972
+(define (make-cstruct341,13524
+(define (make-enum352,13986
+(define (translate-type363,14431
+(define (translate-types!524,18582
+
+Translate/decl.scm,407
+(module translate_decl14,889
+(define (get-decl-ident34,1683
+(define (get-decl-para-decl50,2264
+(define (storage-class-spec-of-decl-spec94,3630
+(define (correct-storage-class-spec?108,4124
+(define (type-spec-of-decl-spec118,4711
+(define (type+decl->type132,5198
+(define (type+ptr->type142,5629
+(define (type+decl2->type160,6299
+(define (type+adecl->type183,7188
+(define (type+adecl2->type194,7654
+
+Translate/tspec.scm,404
+(module translate_tspec14,889
+(define (tspec->type30,1467
+(define (default-tspec?42,1909
+(define (simple-tspec?48,2181
+(define (tspec->default-type54,2478
+(define (tspec-simple->type60,2764
+(define (simple->type72,3228
+(define (struct->type81,3651
+(define (enum->type146,5774
+(define (tspec-coumpound->type165,6537
+(define (type+tspec-coumpound->type207,7954
+(define (tspec-coumpound223,8565
+
+Translate/expr.scm,128
+(module translate_expr14,889
+(define (expr->scheme-id25,1300
+(define (expr->string31,1598
+(define (string->scheme-id64,2547
+
+Translate/eval.scm,171
+(module translate_eval14,889
+(define *fun*24,1294
+(define (add-eval-function!29,1536
+(define (translate-eval-declarations37,2016
+(define (translate-eval-stubs49,2466
+
+Translate/ident.scm,98
+(module translate_ident15,963
+(define (ident->ident22,1265
+(define (ident->scheme-ident32,1611

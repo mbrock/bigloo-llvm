@@ -1,0 +1,107 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/socket                      */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Aug  9 13:27:23 1995                          */
+#*    Last change :  Sun Sep  6 21:21:38 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Check for the host socket library.                               */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+cflags=
+solaris_lib="-lsocket -lnsl"
+mingw_lib="-lws2_32"
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --cflags=*|-cflags=*)
+      cflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --lib=*|-lib=*)
+      lib="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+file=$TMP/actest$USER
+aout=$TMP/Xactest$USER
+
+#*---------------------------------------------------------------------*/
+#*    mingw is super clear                                             */
+#*---------------------------------------------------------------------*/
+if [ "$HOSTOS " = "mingw " ]; then
+  echo "-lws2_32" # -lwsock32 -lmswsock"
+  exit 0
+fi
+
+#*---------------------------------------------------------------------*/
+#*    compile                                                          */
+#*---------------------------------------------------------------------*/
+compile="$CC $cflags $file.c -o $aout $lib >/dev/null"
+compile_solaris="$CC $cflags $file.c -o $aout $solaris_lib >/dev/null"
+compile_mingw="$CC -D_MINGW_VER $cflags $file.c -o $aout $mingw_lib >/dev/null"
+
+#*---------------------------------------------------------------------*/
+#*    The test C file                                                  */
+#*---------------------------------------------------------------------*/
+if( test -f $file.c ); then
+   rm -f $file.c || exit $?
+fi
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*---------------------------------------------------------------------*/
+cat > $file.c <<EOF
+#ifdef _MINGW_VER
+#include <winsock2.h>
+#endif
+
+main( argc, argv )
+int   argc;
+char *argv[];
+{
+   printf( "%d\n", gethostbyname( "toto" ) );
+   printf( "%8x\n", getsockname( 0L, 0L, 0L ) );
+   printf( "%8x\n", accept( 0L, 0L, 0L ) );
+   return 0;
+}
+EOF
+
+#*---------------------------------------------------------------------*/
+#*    Compilation test                                                 */
+#*---------------------------------------------------------------------*/
+if eval "$BUILDSH $compile" 2> /dev/null; then
+  \rm -f $file.*
+  \rm -f $aout
+  \rm -f $aout*
+  echo ""
+  exit 0
+elif eval "$BUILDSH $compile_solaris" 2> /dev/null; then
+  \rm -f $file.*
+  \rm -f $aout
+  \rm -f $aout*
+  echo $solaris_lib
+  exit 0
+elif eval "$BUILDSH $compile_mingw" 2>/dev/null; then
+  \rm -f $file.*
+  \rm -f $aout
+  \rm -f $aout*
+  echo $mingw_lib
+  exit 0
+else
+  \rm -f $file.*
+  exit 0
+fi

@@ -1,0 +1,616 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>34. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Bigloo Development Environment</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center35031'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc35021" align="center" colspan="1"><font color="#ffffff"><strong id='bold35019'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc35028" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc35024" align="left" valign="top" colspan="1"><strong id='bold35023'
+>top:</strong></td><td id="tc35025" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center35041'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc35035" align="center" colspan="1"><font color="#ffffff"><strong id='bold35033'
+>Bigloo Development Environment</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc35038" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">34.1</td><td colspan="4" width="100%"><a href="bigloo-35.html#Installing-the-Bee">Installing the <span class="sc">Bee</span></a></td></tr>
+ <tr><td valign="top" align="left">34.2</td><td colspan="4" width="100%"><a href="bigloo-35.html#Entering-the-Bee">Entering the Bee</a></td></tr>
+ <tr><td valign="top" align="left">34.3</td><td colspan="4" width="100%"><a href="bigloo-35.html#The-Bee-Root-Directory">The <em id='emph28612'
+>Bee Root Directory</em></a></td></tr>
+ <tr><td valign="top" align="left">34.4</td><td colspan="4" width="100%"><a href="bigloo-35.html#Building-a-Makefile">Building a Makefile</a></td></tr>
+ <tr><td valign="top" align="left">34.5</td><td colspan="4" width="100%"><a href="bigloo-35.html#Compiling">Compiling</a></td></tr>
+ <tr><td valign="top" align="left">34.6</td><td colspan="4" width="100%"><a href="bigloo-35.html#Interpreting">Interpreting</a></td></tr>
+ <tr><td valign="top" align="left">34.7</td><td colspan="4" width="100%"><a href="bigloo-35.html#Pretty-Printing">Pretty Printing</a></td></tr>
+ <tr><td valign="top" align="left">34.8</td><td colspan="4" width="100%"><a href="bigloo-35.html#Expansing">Expansing</a></td></tr>
+ <tr><td valign="top" align="left">34.9</td><td colspan="4" width="100%"><a href="bigloo-35.html#On-line-Documentation">On-line Documentation</a></td></tr>
+ <tr><td valign="top" align="left">34.10</td><td colspan="4" width="100%"><a href="bigloo-35.html#Searching-for-Source-Code">Searching for Source Code</a></td></tr>
+ <tr><td valign="top" align="left">34.11</td><td colspan="4" width="100%"><a href="bigloo-35.html#Importing-and-Exporting">Importing and Exporting</a></td></tr>
+ <tr><td valign="top" align="left">34.12</td><td colspan="4" width="100%"><a href="bigloo-35.html#Debugging">Debugging</a></td></tr>
+ <tr><td valign="top" align="left">34.13</td><td colspan="4" width="100%"><a href="bigloo-35.html#Profiling">Profiling</a></td></tr>
+ <tr><td valign="top" align="left">34.14</td><td colspan="4" width="100%"><a href="bigloo-35.html#Revision-Control">Revision Control</a></td></tr>
+ <tr><td valign="top" align="left">34.15</td><td colspan="4" width="100%"><a href="bigloo-35.html#Literate-Programming">Literate Programming</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center35051'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc35045" align="center" colspan="1"><font color="#ffffff"><strong id='bold35043'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc35048" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Bee" class="mark"></a><a name="g28539" class="mark"></a>
+Bigloo release 2.0 or more recent contains an Integrated Development 
+Environment. This environment proposes some services:<br/><br/><ul class="itemize" id='itemize28551'
+><li>Automatic Makefile creation and update.
+</li>
+<li>Code browsing.
+</li>
+<li>Revision control.
+</li>
+<li>Symbol debugging.
+</li>
+<li>Profiling.
+</li>
+<li>On-line documentation.
+</li>
+<li>Source code interpretation.
+</li>
+<li>Source code expansion.
+</li>
+<li>Literate programming.
+</li>
+</ul>
+The environment relies on Bigloo tools:
+<ul class="itemize" id='itemize28564'
+><li><code id='code28552'
+>bglafile</code>: a Module access file generator (see <a href="bigloo-4.html#Module-Access-File" class="inbound">Module Access File</a>).
+</li>
+<li><code id='code28554'
+>bglmake</code>: a Makefile creator.
+</li>
+<li><code id='code28556'
+>bgldepend</code>: a that creates Bigloo dependencies in makefiles.
+</li>
+<li><code id='code28558'
+>bglpp</code>: a pretty printer.
+</li>
+<li><code id='code28560'
+>bglprof</code>: a profiler
+</li>
+<li><code id='code28562'
+>bgltags</code>: a generator of tag file for Emacs.
+</li>
+</ul>
+Each of these tools comes with a dedicated manual page and are not described
+in this documentation. <br/><br/>Extra tools are required for the environment to go its full speed:
+<ul class="itemize" id='itemize28579'
+><li><code id='code28566'
+>Emacs</code> version 21 (or more recent) (<a href="http://www.emacs.org/">http://www.emacs.org/</a>)
+or <code id='code28567'
+>Xemacs</code> version 20.4 (or more recent)
+(<a href="http://www.xemacs.org/">http://www.xemacs.org/</a>).
+</li>
+<li><code id='code28569'
+>prcs</code> version 1.2.1 or more recent
+(<a href="http://prcs.sourceforge.net/">http://prcs.sourceforge.net/</a>).
+</li>
+<li><code id='code28571'
+>gdb</code> version 4.17 or more recent 
+(<a href="http://www.cygnus.com/gdb/">http://www.cygnus.com/gdb/</a>).
+</li>
+<li><code id='code28573'
+>gprof</code> (<a href="ftp:/prep.ai.mit.edu:pub/gnu/">ftp:/prep.ai.mit.edu:pub/gnu/</a>).
+</li>
+<li><code id='code28575'
+>texinfo</code> (<a href="ftp:/prep.ai.mit.edu:pub/gnu/">ftp:/prep.ai.mit.edu:pub/gnu/</a>).
+</li>
+<li><code id='code28577'
+>gmake</code> (<a href="ftp:/prep.ai.mit.edu:pub/gnu/">ftp:/prep.ai.mit.edu:pub/gnu/</a>).
+</li>
+</ul><br/><br/>The following document describes the <span class="sc">Bee</span>, the Bigloo Emacs
+Environment.<br/><br/>
+<!-- Installing the Bee -->
+<a name="Installing-the-Bee"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.1 Installing the <span class="sc">Bee</span></font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Installing-the-Bee" class="mark"></a><a name="g28584" class="mark"></a>
+The standard procedure for installing Bigloo handles the compilation
+of all tools required by the <span class="sc">Bee</span>. Additional Emacs-lisp code have
+to be appended to your <code id='code28587'
+>.emacs</code> file:<br/><br/><center id='center28601'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28599'
+>(autoload 'bdb <font color="red">&quot;bdb&quot;</font> <font color="red">&quot;bdb mode&quot;</font> t)
+(autoload 'bee-mode <font color="red">&quot;bee-mode&quot;</font> <font color="red">&quot;bee mode&quot;</font> t)<br/><br/>(setq auto-mode-alist
+      (append '((<font color="red">&quot;\\.scm$&quot;</font> . bee-mode)
+                (<font color="red">&quot;\\.sch$&quot;</font> . bee-mode)
+                (<font color="red">&quot;\\.scme$&quot;</font> . bee-mode)
+                (<font color="red">&quot;\\.bgl$&quot;</font> . bee-mode)
+                (<font color="red">&quot;\\.bee$&quot;</font> . bee-mode))
+              auto-mode-alist))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This code will force <code id='code28602'
+>emacs</code> to switch to <span class="sc">Bee</span> mode when editing
+Scheme source files.<br/><br/></div><br>
+<!-- Entering the Bee -->
+<a name="Entering-the-Bee"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.2 Entering the Bee</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Entering-the-Bee" class="mark"></a><a name="g28605" class="mark"></a>
+Once, your <code id='code28607'
+>.emacs</code> is updated, to start the <span class="sc">Bee</span> you just need
+to edit a file suffixed with one of the suffix listed in
+<code id='code28610'
+><em id='it28609'
+>auto-mode-alist</em></code> with Emacs. You may either enter the Bee within
+Emacs with <code id='code28611'
+>ESC-X: bee-mode</code>.
+ 
+</div><br>
+<!-- The Bee Root Directory -->
+<a name="The-Bee-Root-Directory"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.3 The <em id='emph28612'
+>Bee Root Directory</em></font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="The-Bee-Root-Directory" class="mark"></a><a name="g28613" class="mark"></a>
+The <em id='emph28615'
+>Bee Root Directory</em> is the directory that contains information
+files that describe a project. When editing a file, the <span class="sc">Bee</span> tries to
+automatically setup the <em id='emph28617'
+>Bee Root Directory</em>. For that, it seeks one
+of the following file: <code id='code28618'
+>Makefile</code>, <code id='code28619'
+>.afile</code> or <code id='code28620'
+>.etags</code>.
+This search unwind directories until the root directory is reached or until
+the number of scanned directories is more than the value of the list
+variable <code id='code28621'
+>bee-root-search-depth</code>.<br/><br/>An alternative <em id='emph28623'
+>Bee Root Directory</em> may be set. This is done clicking
+on the <code id='code28624'
+>Root</code> of the tool bar icon.<br/><br/></div><br>
+<!-- Building a Makefile -->
+<a name="Building-a-Makefile"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.4 Building a Makefile</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Building-a-Makefile" class="mark"></a><a name="g28626" class="mark"></a>
+Once, the <em id='emph28628'
+>Bee Root Directory</em> has been setup (it is printed on the
+left part to the Emacs modeline), a <code id='code28629'
+>Makefile</code> can be automatically
+produced. It can be achieved clicking on the <code id='code28630'
+>Mkmf</code> icon
+of the tool bar, using the popup menu (<kbd id='kbd28631'
+>button-3</kbd>) entries, or using
+one of the two keyboard bindings <kbd id='kbd28632'
+>C-c C-c C-a</kbd> or <kbd id='kbd28633'
+>C-c C-c C-l</kbd>.
+When creating a <code id='code28634'
+>Makefile</code>, you will be asked to give a file name.
+This file must be the one that is the main entry point of your program
+or the one that implements an library heap file.<br/><br/>When the <code id='code28636'
+>Makefile</code> already exists, using the same bindings update 
+Makefile, re-generate <code id='code28637'
+>.afile</code> and <code id='code28638'
+>.etags</code> files.<br/><br/></div><br>
+<!-- Compiling -->
+<a name="Compiling"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.5 Compiling</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Compiling" class="mark"></a><a name="g28640" class="mark"></a>
+Once a <code id='code28642'
+>Makefile</code> exists, it is possible to compile a program
+(or a library). Use either the tool bar icon <code id='code28643'
+>Compile</code>, the popup
+menu entry or <kbd id='kbd28644'
+>C-c C-c C-c</kbd>. If no <code id='code28645'
+>Makefile</code> exists, the <span class="sc">Bee</span>
+will emit a single file compilation.<br/><br/></div><br>
+<!-- Interpreting -->
+<a name="Interpreting"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.6 Interpreting</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Interpreting" class="mark"></a><a name="g28648" class="mark"></a>
+Scheme source code may be interpreted within the <span class="sc">Bee</span> instead of
+been compiled prior to be executed. This facility could be convenient
+for fast prototyping. A <em id='emph28651'
+>Read eval print</em> loop (henceforth
+<em id='emph28652'
+>Repl</em>) could be spawned using the <code id='code28653'
+>Repl</code> icon of the tool
+bar, using the popup menu entry or using the <kbd id='kbd28654'
+>C-c C-r C-r</kbd> binding.<br/><br/>Parts or the whole buffer may be sent to <em id='emph28656'
+>repl</em>.<br/><br/><ul class="itemize" id='itemize28668'
+><li><kbd id='kbd28658'
+>C-c C-r b</kbd> sends the whole buffer.
+</li>
+<li><kbd id='kbd28660'
+>C-c C-r d</kbd> sends the define form the cursor is in.
+</li>
+<li><kbd id='kbd28662'
+>C-c C-r l</kbd> sends the s-expression that preceeds the cursor.
+</li>
+<li><kbd id='kbd28664'
+>C-c C-r t</kbd> sends the top level s-expression the cursor is in.
+</li>
+<li><kbd id='kbd28666'
+>C-c C-r r</kbd> sends the marked region.
+</li>
+</ul>
+</div><br>
+<!-- Pretty Printing -->
+<a name="Pretty-Printing"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.7 Pretty Printing</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Pretty-Printing" class="mark"></a><a name="g28669" class="mark"></a>
+The whole buffer may be pretty printed (long source lines are split) using the
+<code id='code28671'
+>Lisp</code> icon of the tool bar, using the popup menu entry of using
+<kbd id='kbd28673'
+>C-c C-i <kbd id='kbd28672'
+>tab</kbd></kbd>.<br/><br/>Parts or the buffer may be indented (no line is split).<br/><br/><ul class="itemize" id='itemize28682'
+><li><kbd id='kbd28676'
+>C-c C-i d</kbd> indents the define form the cursor is in.
+</li>
+<li><kbd id='kbd28678'
+>C-c C-i l</kbd> indents the s-expression that preceeds the cursor.
+</li>
+<li><kbd id='kbd28680'
+>C-c C-i t</kbd> indents the top level s-expression the cursor is in.
+</li>
+</ul>
+</div><br>
+<!-- Expansing -->
+<a name="Expansing"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.8 Expansing</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Expansing" class="mark"></a><a name="g28683" class="mark"></a>
+For debug purposes, result of the source code macro expansion may be
+checked within the <span class="sc">Bee</span>. <br/><br/>Parts or the whole buffer may be sent to <em id='emph28687'
+>repl</em>.<br/><br/><ul class="itemize" id='itemize28699'
+><li><kbd id='kbd28689'
+>C-c C-e C-e</kbd> expands the whole buffer.
+</li>
+<li><kbd id='kbd28691'
+>C-c C-e C-d</kbd> expands the define form the cursor is in.
+</li>
+<li><kbd id='kbd28693'
+>C-c C-e C-l</kbd> expands the s-expression that preceeds the cursor.
+</li>
+<li><kbd id='kbd28695'
+>C-c C-e C-t</kbd> expands the top level s-expression the cursor is in.
+</li>
+<li><kbd id='kbd28697'
+>C-c C-e C-r</kbd> expands the marked region.
+</li>
+</ul>
+When a part of the buffer is expanded (by opposition to the whole buffer), the
+buffer is scan for macro definitions. These macros will be used for expanding
+the requested form.<br/><br/></div><br>
+<!-- On-line Documentation -->
+<a name="On-line-Documentation"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.9 On-line Documentation</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="On-line-documentation" class="mark"></a><a name="g28701" class="mark"></a>
+On-line documentation may be popped up. This is always done, clicking on
+the <code id='code28703'
+>Info</code> icon of the tool bar or <kbd id='kbd28704'
+>C-c C-d i</kbd>. If an emacs
+region is active, the documentation about that region will be popped up.
+If the cursor is at a Scheme identifier, the documentation of that
+identifier will be printed. Otherwise, the user will be prompted for the
+Section of the documentation to be printed.<br/><br/>Clicking on the <code id='code28706'
+>?</code> icon tool bar, pops up a short description of
+the Bigloo compiler options. <br/><br/>The <span class="sc">Bee</span> uses <code id='code28709'
+>info</code> files for printing On-line
+documentation. It always search the standard documentation and the
+standard definition of Scheme. It is possible to add extra <code id='code28710'
+>info</code>
+files to be searched.  The <span class="sc">Bee</span> always checks for a directory
+<code id='code28712'
+>info</code> in the <em id='emph28713'
+>Bee Root Directory</em>. If such a directory
+exists, contained file will be considered for the search of a document.<br/><br/></div><br>
+<!-- Searching for Source Code -->
+<a name="Searching-for-Source-Code"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.10 Searching for Source Code</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Searching-for-source-code" class="mark"></a><a name="g28715" class="mark"></a>
+Searching for source (variable declaration, module definition, variable
+usage) is supported by the <span class="sc">Bee</span>. Clicking on the <code id='code28718'
+>Find</code> icon of
+the tool bar will pops up the definition of the variable the cursor is
+in or the definition of the module the cursor is in. These two
+operations may be requested using <kbd id='kbd28719'
+>C-x 5 .</kbd> for searching a variable
+definition, <kbd id='kbd28720'
+>C-c C-d m</kbd> for a module definition.<br/><br/>Information and usages of a variable may be printed using either the
+<code id='code28722'
+>Doc</code> icon of the tool bar or the <kbd id='kbd28723'
+>C-c C-d u</kbd> key binding.<br/><br/></div><br>
+<!-- Importing and Exporting -->
+<a name="Importing-and-Exporting"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.11 Importing and Exporting</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Importing-and-Exporting" class="mark"></a><a name="g28725" class="mark"></a>
+Bigloo bindings (functions and variables) may be automatically inserted
+in an export module clause (see <a href="bigloo-4.html#Modules" class="inbound">Modules</a>). Bring the cursor to an
+identifier of a binding that has to be exported then, either click on
+the <code id='code28727'
+>Export</code> tool bar icon or use the <kbd id='kbd28728'
+>C-c C-m b</kbd> key binding.<br/><br/>Bigloo bindings may be automatically inserted in an import module clause.
+Bring the cursor to an identifier of a binding that has to be imported.
+Either click on the <code id='code28730'
+>Import</code> tool bar icon or use the 
+<kbd id='kbd28731'
+>C-c C-m i</kbd> key binding. The <span class="sc">Bee</span>, will search the modules for
+the wanted binding. <br/><br/>Foreign bindings (e.g. C variables and C functions) may be automatically
+inserted in the file module clause. Click on the <code id='code28734'
+>Extern</code> tool bar
+icon or use the key binding <kbd id='kbd28735'
+>C-c C-m c</kbd> to import whole the definition
+of an extern file. You will, be prompted an extern file name to be imported.
+This operation <em id='emph28736'
+>automatically updates</em> the <code id='code28737'
+>Makefile</code> for reflecting
+that the extern file is required in the compilation.<br/><br/></div><br>
+<!-- Debugging -->
+<a name="Debugging"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.12 Debugging</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Debugging" class="mark"></a><a name="g28739" class="mark"></a>
+The Bigloo symbolic Debugger may be spawned either clicking on the
+<code id='code28741'
+>Bdb</code> tool bar icon or using the key binding <kbd id='kbd28742'
+>C-c C-b C-b</kbd>.
+Once the debugger is not is possible to connect the current buffer to
+the debugger. This is done using the tool bar icon <code id='code28743'
+>Connect</code> or the
+key binding <kbd id='kbd28744'
+>C-c C-b c</kbd>. This enables breakpoints to be inserted using
+mouse clicks.<br/><br/></div><br>
+<!-- Profiling -->
+<a name="Profiling"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.13 Profiling</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Profiling" class="mark"></a><a name="g28746" class="mark"></a>
+Automatically produced <code id='code28748'
+>Makefile</code> provides entry for profiling. In
+order to get a profile you must first compile your application for
+profiling.  This is done using a popup menu entry or the <kbd id='kbd28749'
+>C-c C-p c</kbd>
+key binding. Once your program compiled you can run for profile using a
+popup menu entry of the <kbd id='kbd28750'
+>C-c C-p r</kbd> key binding. This last will run
+your program, run <code id='code28751'
+>bglprof</code> to get the profile and this will pops up
+a window displaying the profile informations.<br/><br/></div><br>
+<!-- Revision Control -->
+<a name="Revision-Control"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.14 Revision Control</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Revision-control" class="mark"></a><a name="g28753" class="mark"></a>
+Submitting a new revision is done using <kbd id='kbd28755'
+>C-c C-v i</kbd> or using
+an menu bar entry. This builds an new revision for the entire project.
+The file that compose the project are listed in the <code id='code28756'
+>pop</code> entry
+of the <em id='emph28757'
+>Bee Root Directory</em> <code id='code28758'
+>Makefile</code>.<br/><br/>Checking out an older version of the file currently edited is done using
+the key binding <kbd id='kbd28760'
+>C-c C-v C-o</kbd>. This is not a retrieval of the entire
+project. Global check out may be performed manually. <br/><br/>Comparing the version of the file currently edited with older one is
+done using <kbd id='kbd28762'
+>C-c C-v d</kbd>. A <em id='emph28763'
+>diff</em> of the two buffers will be
+popped up.<br/><br/>With both checking out and comparison of versions. A window presenting
+all the available version will be popped up to let you choose which
+version you would like to inspect.<br/><br/></div><br>
+<!-- Literate Programming -->
+<a name="Literate-Programming"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">34.15 Literate Programming</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Literate-Programming" class="mark"></a><a name="g28766" class="mark"></a>
+The <span class="sc">Bee</span> does not provide real <em id='emph28769'
+>Literate Programming</em>. The reason
+is that we think that when editing documentation we want to benefit the
+full power of context-sensitive editors and we don't want to edit the
+documentation is the same editor <em id='emph28770'
+>mode</em> as the one we use when editing
+source code. Nevertheless it is possible to place anchors within the source
+file to the corresponding documentation file. Then, by the means of simple
+mouse clicks, it becomes possible to edit the documentation of peace of
+codes. The current <span class="sc">Bee</span> literate programming system only supports the
+<em id='emph28772'
+>Texinfo</em> file format.<br/><br/>For that purpose three anchors are available: <code id='code28774'
+>path</code>, <code id='code28775'
+>node</code> and
+<code id='code28776'
+>deffn</code>. All anchor have to be delimited with <code id='code28777'
+>&#x40;</code> characters.<br/><br/><ul class="itemize" id='itemize28815'
+><li><code id='code28779'
+>path</code>: this anchor set the path to the file containing the 
+documentation. Thus,<br/><br/><center id='center28785'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28783'
+>(<font color="#1919af"><strong id='bold35061'
+>module</strong></font> <font color="#1919af"><strong id='bold35063'
+>foo</strong></font>
+   <font color="#ffa600"><em id='it35065'
+>;; </em></font>&#x40;path manuals/foo.texi&#x40;
+   ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Tells the <span class="sc">Bee</span> that the documentation for the module <code id='code28787'
+>foo</code> is located
+in the file named <code id='code28788'
+>manuals/foo.texi</code>.<br/><br/></li>
+<li><code id='code28791'
+>node</code>: sets the name of the node that documents this particular
+source file code.<br/><br/><center id='center28797'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28795'
+>(<font color="#1919af"><strong id='bold35067'
+>module</strong></font> <font color="#1919af"><strong id='bold35069'
+>foo</strong></font>
+   <font color="#ffa600"><em id='it35071'
+>;; </em></font>&#x40;path manuals/foo.texi&#x40;
+   <font color="#ffa600"><em id='it35073'
+>;; </em></font>&#x40;node Foo&#x40;
+   ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</li>
+<li><code id='code28799'
+>deffn</code>: each variable binding may point to its documentation.
+For that, it suffices to use the <code id='code28800'
+>deffn</code> anchor just before the 
+variable definition or within the s-expression that defines the variable.<br/><br/><center id='center28805'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28803'
+><font color="#ffa600"><em id='it35075'
+>;; </em></font>&#x40;deffn foo&#x40;
+(<font color="#6959cf"><strong id='bold35077'
+>define</strong></font> (<font color="#6959cf"><strong id='bold35079'
+>foo</strong></font> . chars)
+   ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+or
+<center id='center28809'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28807'
+>(<font color="#6959cf"><strong id='bold35081'
+>define</strong></font> (<font color="#6959cf"><strong id='bold35083'
+>foo</strong></font> . chars)
+   <font color="#ffa600"><em id='it35085'
+>;; </em></font>&#x40;deffn foo&#x40;
+   ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+When clicking on that anchor, the <span class="sc">Bee</span> will search the documentation file
+named by the <code id='code28811'
+>path</code> anchor and within that file, will search for a 
+<em id='emph28812'
+>texinfo</em> <code id='code28813'
+>deffn</code> command that defines the variable named in the 
+anchor.
+</li>
+</ul><br/><br/><br/>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph35092'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it35090'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

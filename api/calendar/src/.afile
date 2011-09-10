@@ -1,0 +1,10 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/calendar/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__calendar_ical "Llib/icalendar.scm")
+  (__calendar_types "Llib/types.scm")
+  (__calendar_utils "Llib/utils.scm")
+)
+

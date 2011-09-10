@@ -1,0 +1,78 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/xemacspath                  */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Fri Jun 19 08:07:57 1998                          */
+#*    Last change :  Mon Sep  7 09:07:13 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    We search for the xemacs site-lisp path.                         */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+xemacs=xemacs
+path=
+exe_suffix=
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --xemacs=*|-xemacs=*)
+      xemacs="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --path=*|-path=*)
+      path="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --exe=*|-exe=*)
+      exe_suffix="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+#*---------------------------------------------------------------------*/
+#*    The test C file                                                  */
+#*---------------------------------------------------------------------*/
+if( test -f $file.c ); then
+   rm -f $file.c || exit $?
+fi
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*---------------------------------------------------------------------*/
+if [ ! "$path " = " " ]; then
+  echo $path
+else
+  path=`sh -c "$xemacs -batch -q -eval \"(princ (car load-path))\" -kill"`
+
+ if [ ! "$status" = "0" ]; then
+   if [ "$path" = "nil" ]; then
+     echo ""
+   else
+     # we always add a trailing / char
+     case $path in
+       */)
+         ;;
+
+       *)
+         path="$path"/;;
+     esac
+
+     echo $path
+    fi
+  else
+    echo ""
+  fi
+fi
+
+/bin/rm -rf $file.c $file.o $aout $aout*
+   

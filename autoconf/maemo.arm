@@ -1,0 +1,47 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/maemo.arm                   */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Aug  9 13:27:23 1995                          */
+#*    Last change :  Mon Dec 14 16:40:28 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Detect if we are running under maemo for ARM (QEMU)              */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*    -------------------------------------------------------------    */
+#*    We assume that we are under maemo (QEMU) if the arch is an       */
+#*    ARM but /proc/cpuinfo does not show any trace of an ARM          */
+#*    processor.                                                       */
+#*---------------------------------------------------------------------*/
+if [ "$HOSTCPU " = "arm " ]; then
+  if [ "`pkg-config maemo-version --modversion` " = " " ]; then
+    echo "no"
+  else
+    grep -i arm /proc/cpuinfo;
+    if [ "$*" = "0" ]; then
+      echo "no"
+    else
+      echo "yes"
+    fi
+  fi
+else
+  echo "no"
+fi
+

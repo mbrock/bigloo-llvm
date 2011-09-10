@@ -1,0 +1,292 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>1. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Table of contents</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center29025'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29015" align="center" colspan="1"><font color="#ffffff"><strong id='bold29013'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29022" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc29018" align="left" valign="top" colspan="1"><strong id='bold29017'
+>top:</strong></td><td id="tc29019" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center29035'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29029" align="center" colspan="1"><font color="#ffffff"><strong id='bold29027'
+>Table of contents</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29032" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center29045'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29039" align="center" colspan="1"><font color="#ffffff"><strong id='bold29037'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29042" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.1</td><td colspan="3" width="100%"><a href="bigloo-3.html#SRFI">SRFI</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.2</td><td colspan="3" width="100%"><a href="bigloo-3.html#Separate-compilation">Separate compilation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.3</td><td colspan="3" width="100%"><a href="bigloo-3.html#C-interface">C interface</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.4</td><td colspan="3" width="100%"><a href="bigloo-3.html#Java-interface">Java interface</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.5</td><td colspan="3" width="100%"><a href="bigloo-3.html#Object-language">Object language</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.6</td><td colspan="3" width="100%"><a href="bigloo-3.html#Threads">Threads</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.7</td><td colspan="3" width="100%"><a href="bigloo-3.html#SQL">SQL</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.8</td><td colspan="3" width="100%"><a href="bigloo-3.html#Type-annotations">Type annotations</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.9</td><td colspan="3" width="100%"><a href="bigloo-3.html#Unicode-support">Unicode support</a></td></tr>
+ <tr><td></td><td valign="top" align="left">2.10</td><td colspan="3" width="100%"><a href="bigloo-3.html#DSSSL">DSSSL</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.1</td><td colspan="3" width="100%"><a href="bigloo-4.html#Program-Structure">Program Structure</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.2</td><td colspan="3" width="100%"><a href="bigloo-4.html#Module-declaration">Module declaration</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.3</td><td colspan="3" width="100%"><a href="bigloo-4.html#Module-initialization">Module initialization</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.4</td><td colspan="3" width="100%"><a href="bigloo-4.html#Qualified-notation">Qualified notation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.5</td><td colspan="3" width="100%"><a href="bigloo-4.html#Inline-procedures">Inline procedures</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.6</td><td colspan="3" width="100%"><a href="bigloo-4.html#Module-access-file">Module access file</a></td></tr>
+ <tr><td></td><td valign="top" align="left">3.7</td><td colspan="3" width="100%"><a href="bigloo-4.html#Reading-path">Reading path</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1</td><td colspan="3" width="100%"><a href="bigloo-5.html#Syntax">Syntax</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td></td><td valign="top" align="left">5.1</td><td colspan="3" width="100%"><a href="bigloo-6.html#DSSSL-formal-argument-lists">DSSSL formal argument lists</a></td></tr>
+ <tr><td></td><td valign="top" align="left">5.2</td><td colspan="3" width="100%"><a href="bigloo-6.html#Modules-and-DSSSL-formal-argument-lists">Modules and DSSSL formal argument lists</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.1</td><td colspan="3" width="100%"><a href="bigloo-7.html#Scheme-Library">Scheme Library</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.2</td><td colspan="3" width="100%"><a href="bigloo-7.html#Input-and-output">Input and output</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.3</td><td colspan="3" width="100%"><a href="bigloo-7.html#Serialization">Serialization</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.4</td><td colspan="3" width="100%"><a href="bigloo-7.html#Bit-manipulation">Bit manipulation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.5</td><td colspan="3" width="100%"><a href="bigloo-7.html#Weak-Pointers">Weak Pointers</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.6</td><td colspan="3" width="100%"><a href="bigloo-7.html#Hash-Tables">Hash Tables</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.7</td><td colspan="3" width="100%"><a href="bigloo-7.html#System-programming">System programming</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.8</td><td colspan="3" width="100%"><a href="bigloo-7.html#Date">Date</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.9</td><td colspan="3" width="100%"><a href="bigloo-7.html#Digest">Digest</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.10</td><td colspan="3" width="100%"><a href="bigloo-7.html#Cyclic-Redundancy-Check-(CRC)">Cyclic Redundancy Check (CRC)</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.11</td><td colspan="3" width="100%"><a href="bigloo-7.html#Internet">Internet</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.12</td><td colspan="3" width="100%"><a href="bigloo-7.html#URLs">URLs</a></td></tr>
+ <tr><td></td><td valign="top" align="left">6.13</td><td colspan="3" width="100%"><a href="bigloo-7.html#HTTP">HTTP</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1</td><td colspan="3" width="100%"><a href="bigloo-8.html#Bigloo-pattern-matching-facilities">Bigloo pattern matching facilities</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.2</td><td colspan="3" width="100%"><a href="bigloo-8.html#The-pattern-language">The pattern language</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td></td><td valign="top" align="left">8.1</td><td colspan="3" width="100%"><a href="bigloo-9.html#Knuth-Morris-and-Pratt">Knuth, Morris, and Pratt</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td></td><td valign="top" align="left">9.1</td><td colspan="3" width="100%"><a href="bigloo-10.html#Structures">Structures</a></td></tr>
+ <tr><td></td><td valign="top" align="left">9.2</td><td colspan="3" width="100%"><a href="bigloo-10.html#Records-(SRFI-9)">Records (SRFI-9)</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.1</td><td colspan="3" width="100%"><a href="bigloo-11.html#Class-declaration">Class declaration</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.2</td><td colspan="3" width="100%"><a href="bigloo-11.html#Creating-and-accessing-objects">Creating and accessing objects</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.3</td><td colspan="3" width="100%"><a href="bigloo-11.html#Generic-functions">Generic functions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.4</td><td colspan="3" width="100%"><a href="bigloo-11.html#Widening-and-shrinking">Widening and shrinking</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.5</td><td colspan="3" width="100%"><a href="bigloo-11.html#Object-library">Object library</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.6</td><td colspan="3" width="100%"><a href="bigloo-11.html#Object-serialization">Object serialization</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.7</td><td colspan="3" width="100%"><a href="bigloo-11.html#Equality">Equality</a></td></tr>
+ <tr><td></td><td valign="top" align="left">10.8</td><td colspan="3" width="100%"><a href="bigloo-11.html#Introspection">Introspection</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td></td><td valign="top" align="left">11.1</td><td colspan="3" width="100%"><a href="bigloo-12.html#A-new-way-of-reading">A new way of reading</a></td></tr>
+ <tr><td></td><td valign="top" align="left">11.2</td><td colspan="3" width="100%"><a href="bigloo-12.html#The-syntax-of-the-regular-grammar">The syntax of the regular grammar</a></td></tr>
+ <tr><td></td><td valign="top" align="left">11.3</td><td colspan="3" width="100%"><a href="bigloo-12.html#The-semantics-actions">The semantics actions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">11.4</td><td colspan="3" width="100%"><a href="bigloo-12.html#Options-and-user-definitions">Options and user definitions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">11.5</td><td colspan="3" width="100%"><a href="bigloo-12.html#Examples-of-regular-grammar">Examples of regular grammar</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td></td><td valign="top" align="left">12.1</td><td colspan="3" width="100%"><a href="bigloo-13.html#Grammar-definition">Grammar definition</a></td></tr>
+ <tr><td></td><td valign="top" align="left">12.2</td><td colspan="3" width="100%"><a href="bigloo-13.html#Precedence-and-associativity">Precedence and associativity</a></td></tr>
+ <tr><td></td><td valign="top" align="left">12.3</td><td colspan="3" width="100%"><a href="bigloo-13.html#The-parsing-function">The parsing function</a></td></tr>
+ <tr><td></td><td valign="top" align="left">12.4</td><td colspan="3" width="100%"><a href="bigloo-13.html#The-regular-grammar">The regular grammar</a></td></tr>
+ <tr><td></td><td valign="top" align="left">12.5</td><td colspan="3" width="100%"><a href="bigloo-13.html#Debugging-Lalr-Grammars">Debugging Lalr Grammars</a></td></tr>
+ <tr><td></td><td valign="top" align="left">12.6</td><td colspan="3" width="100%"><a href="bigloo-13.html#A-simple-example">A simple example</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">13.1</td><td colspan="3" width="100%"><a href="bigloo-14.html#Regular-Expressions-Procedures">Regular Expressions Procedures</a></td></tr>
+ <tr><td></td><td valign="top" align="left">13.2</td><td colspan="3" width="100%"><a href="bigloo-14.html#Regular-Expressions-Pattern-Language">Regular Expressions Pattern Language</a></td></tr>
+ <tr><td></td><td valign="top" align="left">13.3</td><td colspan="3" width="100%"><a href="bigloo-14.html#An-Extended-Example">An Extended Example</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td></td><td valign="top" align="left">15.1</td><td colspan="3" width="100%"><a href="bigloo-16.html#Symmetric-Block-Ciphers">Symmetric Block Ciphers</a></td></tr>
+ <tr><td></td><td valign="top" align="left">15.2</td><td colspan="3" width="100%"><a href="bigloo-16.html#Public-Key-Cryptography">Public Key Cryptography</a></td></tr>
+ <tr><td></td><td valign="top" align="left">15.3</td><td colspan="3" width="100%"><a href="bigloo-16.html#OpenPGP">OpenPGP</a></td></tr>
+ <tr><td></td><td valign="top" align="left">15.4</td><td colspan="3" width="100%"><a href="bigloo-16.html#Development">Development</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td></td><td valign="top" align="left">16.1</td><td colspan="3" width="100%"><a href="bigloo-17.html#Errors-and-Warnings">Errors and Warnings</a></td></tr>
+ <tr><td></td><td valign="top" align="left">16.2</td><td colspan="3" width="100%"><a href="bigloo-17.html#Exceptions">Exceptions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">16.3</td><td colspan="3" width="100%"><a href="bigloo-17.html#Deprecated-try-form">Deprecated try form</a></td></tr>
+ <tr><td></td><td valign="top" align="left">16.4</td><td colspan="3" width="100%"><a href="bigloo-17.html#Assertions">Assertions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">16.5</td><td colspan="3" width="100%"><a href="bigloo-17.html#Tracing">Tracing</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td></td><td valign="top" align="left">17.1</td><td colspan="3" width="100%"><a href="bigloo-18.html#Thread-Common-Functions">Thread Common Functions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">17.2</td><td colspan="3" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td></td><td valign="top" align="left">17.3</td><td colspan="3" width="100%"><a href="bigloo-18.html#Posix-Threads">Posix Threads</a></td></tr>
+ <tr><td></td><td valign="top" align="left">17.4</td><td colspan="3" width="100%"><a href="bigloo-18.html#Mixing-Thread-APIs">Mixing Thread APIs</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td></td><td valign="top" align="left">18.1</td><td colspan="3" width="100%"><a href="bigloo-19.html#SQLite">SQLite</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.1</td><td colspan="3" width="100%"><a href="bigloo-20.html#Photography">Photography</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.2</td><td colspan="3" width="100%"><a href="bigloo-20.html#Music">Music</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.3</td><td colspan="3" width="100%"><a href="bigloo-20.html#Color">Color</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.1</td><td colspan="3" width="100%"><a href="bigloo-21.html#RFC-2045----MIME-Part-one">RFC 2045 -- MIME, Part one</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.2</td><td colspan="3" width="100%"><a href="bigloo-21.html#RFC-2047----MIME-Part-three">RFC 2047 -- MIME, Part three</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.3</td><td colspan="3" width="100%"><a href="bigloo-21.html#RFC-2426----MIME-Part-three">RFC 2426 -- MIME, Part three</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.4</td><td colspan="3" width="100%"><a href="bigloo-21.html#RFC-2822----Internet-Message-Format">RFC 2822 -- Internet Message Format</a></td></tr>
+ <tr><td></td><td valign="top" align="left">20.5</td><td colspan="3" width="100%"><a href="bigloo-21.html#Mail-servers----imap-and-maildir">Mail servers -- imap and maildir</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td></td><td valign="top" align="left">21.1</td><td colspan="3" width="100%"><a href="bigloo-22.html#BibTeX">BibTeX</a></td></tr>
+ <tr><td></td><td valign="top" align="left">21.2</td><td colspan="3" width="100%"><a href="bigloo-22.html#Character-strings">Character strings</a></td></tr>
+ <tr><td></td><td valign="top" align="left">21.3</td><td colspan="3" width="100%"><a href="bigloo-22.html#Character-encodings">Character encodings</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">22.1</td><td colspan="3" width="100%"><a href="bigloo-23.html#Eval-compliance">Eval compliance</a></td></tr>
+ <tr><td></td><td valign="top" align="left">22.2</td><td colspan="3" width="100%"><a href="bigloo-23.html#Eval-standard-functions">Eval standard functions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">22.3</td><td colspan="3" width="100%"><a href="bigloo-23.html#Eval-command-line-options">Eval command line options</a></td></tr>
+ <tr><td></td><td valign="top" align="left">22.4</td><td colspan="3" width="100%"><a href="bigloo-23.html#Eval-and-the-foreign-interface">Eval and the foreign interface</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td></td><td valign="top" align="left">23.1</td><td colspan="3" width="100%"><a href="bigloo-24.html#Expansion-passing-style-macros">Expansion passing style macros</a></td></tr>
+ <tr><td></td><td valign="top" align="left">23.2</td><td colspan="3" width="100%"><a href="bigloo-24.html#Revised(5)-macro-expansion">Revised(5) macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td></td><td valign="top" align="left">26.1</td><td colspan="3" width="100%"><a href="bigloo-27.html#The-syntax-of-the-foreign-declarations">The syntax of the foreign declarations</a></td></tr>
+ <tr><td></td><td valign="top" align="left">26.2</td><td colspan="3" width="100%"><a href="bigloo-27.html#The-very-dangerous-``pragma''-Bigloo-special-forms">The very dangerous ``pragma'' Bigloo special forms</a></td></tr>
+ <tr><td></td><td valign="top" align="left">26.3</td><td colspan="3" width="100%"><a href="bigloo-27.html#Name-mangling">Name mangling</a></td></tr>
+ <tr><td></td><td valign="top" align="left">26.4</td><td colspan="3" width="100%"><a href="bigloo-27.html#Embedded-Bigloo-applications">Embedded Bigloo applications</a></td></tr>
+ <tr><td></td><td valign="top" align="left">26.5</td><td colspan="3" width="100%"><a href="bigloo-27.html#Using-C-bindings-within-the-interpreter">Using C bindings within the interpreter</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td></td><td valign="top" align="left">27.1</td><td colspan="3" width="100%"><a href="bigloo-28.html#Compiling-with-the-JVM-back-end">Compiling with the JVM back-end</a></td></tr>
+ <tr><td></td><td valign="top" align="left">27.2</td><td colspan="3" width="100%"><a href="bigloo-28.html#JVM-back-end-and-SRFI-0">JVM back-end and SRFI-0</a></td></tr>
+ <tr><td></td><td valign="top" align="left">27.3</td><td colspan="3" width="100%"><a href="bigloo-28.html#Limitation-of-the-JVM-back-end">Limitation of the JVM back-end</a></td></tr>
+ <tr><td></td><td valign="top" align="left">27.4</td><td colspan="3" width="100%"><a href="bigloo-28.html#Connecting-Scheme-and-Java-code">Connecting Scheme and Java code</a></td></tr>
+ <tr><td></td><td valign="top" align="left">27.5</td><td colspan="3" width="100%"><a href="bigloo-28.html#Performance-of-the-JVM-back-end">Performance of the JVM back-end</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.1</td><td colspan="3" width="100%"><a href="bigloo-29.html#Compiling-and-linking-with-a-library">Compiling and linking with a library</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.2</td><td colspan="3" width="100%"><a href="bigloo-29.html#Library-and-inline-functions">Library and inline functions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.3</td><td colspan="3" width="100%"><a href="bigloo-29.html#library-and-eval">library and eval</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.4</td><td colspan="3" width="100%"><a href="bigloo-29.html#library-and-repl">library and repl</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.5</td><td colspan="3" width="100%"><a href="bigloo-29.html#Building-a-library">Building a library</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.6</td><td colspan="3" width="100%"><a href="bigloo-29.html#Library-and-modules">Library and modules</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.7</td><td colspan="3" width="100%"><a href="bigloo-29.html#Library-and-macros">Library and macros</a></td></tr>
+ <tr><td></td><td valign="top" align="left">28.8</td><td colspan="3" width="100%"><a href="bigloo-29.html#A-complete-library-example">A complete library example</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td></td><td valign="top" align="left">30.1</td><td colspan="3" width="100%"><a href="bigloo-31.html#SRFI-0">SRFI 0</a></td></tr>
+ <tr><td></td><td valign="top" align="left">30.2</td><td colspan="3" width="100%"><a href="bigloo-31.html#SRFI-1">SRFI 1</a></td></tr>
+ <tr><td></td><td valign="top" align="left">30.3</td><td colspan="3" width="100%"><a href="bigloo-31.html#SRFI-22">SRFI 22</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.1</td><td colspan="3" width="100%"><a href="bigloo-32.html#C-requirement">C requirement</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.2</td><td colspan="3" width="100%"><a href="bigloo-32.html#JVM-requirement">JVM requirement</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.3</td><td colspan="3" width="100%"><a href="bigloo-32.html#Running-.NET-programs-on-Microsoft-.NET-platforms">Running .NET programs on Microsoft .NET platforms</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.4</td><td colspan="3" width="100%"><a href="bigloo-32.html#Linking">Linking</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5</td><td colspan="3" width="100%"><a href="bigloo-32.html#The-compiler-environment-and-options">The compiler environment and options</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.1</td><td colspan="3" width="100%"><a href="bigloo-33.html#Introduction">Introduction</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.2</td><td colspan="3" width="100%"><a href="bigloo-33.html#Building-the-Bigloo-library-for-the-host-platform">Building the Bigloo library for the host-platform</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.3</td><td colspan="3" width="100%"><a href="bigloo-33.html#Cross-Compiling-Bigloo-Programs">Cross Compiling Bigloo Programs</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.4</td><td colspan="3" width="100%"><a href="bigloo-33.html#Caveats">Caveats</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.5</td><td colspan="3" width="100%"><a href="bigloo-33.html#Examples">Examples</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">33.1</td><td colspan="3" width="100%"><a href="bigloo-34.html#User-pass">User pass</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.1</td><td colspan="3" width="100%"><a href="bigloo-35.html#Installing-the-Bee">Installing the <span class="sc">Bee</span></a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.2</td><td colspan="3" width="100%"><a href="bigloo-35.html#Entering-the-Bee">Entering the Bee</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.3</td><td colspan="3" width="100%"><a href="bigloo-35.html#The-Bee-Root-Directory">The <em id='emph28612'
+>Bee Root Directory</em></a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.4</td><td colspan="3" width="100%"><a href="bigloo-35.html#Building-a-Makefile">Building a Makefile</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.5</td><td colspan="3" width="100%"><a href="bigloo-35.html#Compiling">Compiling</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.6</td><td colspan="3" width="100%"><a href="bigloo-35.html#Interpreting">Interpreting</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.7</td><td colspan="3" width="100%"><a href="bigloo-35.html#Pretty-Printing">Pretty Printing</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.8</td><td colspan="3" width="100%"><a href="bigloo-35.html#Expansing">Expansing</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.9</td><td colspan="3" width="100%"><a href="bigloo-35.html#On-line-Documentation">On-line Documentation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.10</td><td colspan="3" width="100%"><a href="bigloo-35.html#Searching-for-Source-Code">Searching for Source Code</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.11</td><td colspan="3" width="100%"><a href="bigloo-35.html#Importing-and-Exporting">Importing and Exporting</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.12</td><td colspan="3" width="100%"><a href="bigloo-35.html#Debugging">Debugging</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.13</td><td colspan="3" width="100%"><a href="bigloo-35.html#Profiling">Profiling</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.14</td><td colspan="3" width="100%"><a href="bigloo-35.html#Revision-Control">Revision Control</a></td></tr>
+ <tr><td></td><td valign="top" align="left">34.15</td><td colspan="3" width="100%"><a href="bigloo-35.html#Literate-Programming">Literate Programming</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph29051'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it29049'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

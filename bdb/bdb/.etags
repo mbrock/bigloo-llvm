@@ -1,0 +1,568 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Tools/tty.c,257
+int my_fgetc(22,1054
+static char tty_bufname[tty_bufname34,1493
+static int tty_fd[tty_fd39,1747
+static char vintr,44,1994
+static char vintr, vquit;44,1994
+open_tty(51,2328
+tty_init(106,3958
+get_tty0(119,4360
+tty_read(138,5442
+tty_write(166,6230
+
+Command/command.scm,572
+(module command_command17,1111
+(define (command?18,1135
+(define (make-command18,1135
+(define (fill-command!18,1135
+   (export (class command18,1135
+(define (command-name::bstring20,1195
+(define (command-abbrev-len::int22,1290
+(define (command-parser::procedure24,1354
+(define (command-env::pair-nil-set!26,1435
+(define (command-env::pair-nil26,1435
+(define (command-help::bstring28,1495
+(define (toplevel-command-env37,1957
+(define *toplevel-env*45,2378
+(define (bind-toplevel-command!50,2629
+(define (bind-sub-command!62,3094
+(define (find-command82,4046
+
+Command/explore.scm,582
+(module command_explore14,889
+(define *bdb-explore-hook*34,1465
+(define (console-print39,1734
+(define (get-frame-addresses49,2262
+(define (find-local-in-stack-frame83,3527
+(define (holder->string153,5769
+(define (explore-tty-echo252,8983
+(define *bigloo-type-shape*394,13846
+(define *will-explore-value*399,14111
+(define (will-explore-value!404,14377
+(define (explore-value410,14683
+(define (explore-parser445,15860
+(define (explore-value-offset465,16747
+(define (explore-offset-parser474,17159
+(define *explore-help*491,17907
+(define *explore-offset-help*499,18351
+
+Init/setrc.scm,64
+(module init_setrc14,889
+(define (setup-default-values21,1192
+
+Command/parse.scm,218
+(module command_parse14,889
+(define (command-parse37,1966
+(define (generic-parse54,2654
+(define (make-stop-parse75,3520
+(define (parse-error87,4184
+(define (find-pattern100,4743
+(define (fix-tabulation!144,6075
+
+Gdb/gread.scm,241
+(module gdb_read15,963
+(define *buffer*28,1410
+(define (enlarge-buffer!33,1673
+(define (input-port->file43,2114
+(define (getc49,2433
+(define (read-unbuffered-line63,3220
+(define (gdb-read-error104,4707
+(define (gdb-read-line134,6021
+
+Gdb/tools.scm,88
+(module gdb_tools15,963
+(define (gdb-typeof26,1468
+(define (gdb-current-scope39,2193
+
+Engine/engine.scm,208
+(module engine_engine14,889
+(define *quit-hooks*39,1675
+(define (add-quit-hook!44,1924
+(define (engine50,2235
+(define *bdb-exit*113,4813
+(define (bdb-exit118,5059
+(define (init-signal-handler!127,5401
+
+Command/set.scm,341
+(module command_set14,889
+(define (set-mixte-mode!31,1403
+(define (set-scheme-mode!46,1898
+(define (set-c-mode!61,2396
+(define (default-parser68,2699
+(define (set-parser88,3484
+(define (show-parser108,4149
+(define (set-trace-parser116,4497
+(define (show-trace-parser128,5041
+(define *help-set*136,5394
+(define *help-show*196,8705
+
+Bee/etags.scm,135
+(module bee_etags17,1111
+(define *prgm*30,1580
+(define (read-etags-file35,1832
+(define (bigloo-symbol-etags-source-location53,2598
+
+Tools/error.scm,117
+(module tools_error14,889
+(define (bdb-error24,1268
+(define (bdb-notify-error30,1560
+(define (bdb-warning45,2113
+
+Command/backtrace.scm,292
+(module command_backtrace14,889
+(define *display-frame-armed?*35,1481
+(define (display-stack-frames40,1739
+(define (frame=?69,3003
+(define *gc-stacks*79,3565
+(define (reset-gc-stacks!84,3813
+(define (add-gc-stack!90,4090
+(define (get-gc-stack96,4394
+(define *backtrace-help*102,4710
+
+Patient/value.scm,60
+(module patient_value14,889
+(define (patient-value25,1445
+
+Gdb/annotate.scm,4031
+(module gdb_annotate14,889
+(define (stack-frame?53,1944
+(define (make-stack-frame53,1944
+(define (fill-stack-frame!53,1944
+   (export (class stack-frame53,1944
+(define (stack-frame-num::bstring54,1974
+(define (stack-frame-name::bstring55,2006
+(define (stack-frame-args::pair-nil56,2039
+(define (stack-frame-file-name57,2073
+(define (stack-frame-line-num58,2102
+(define (arg?60,2136
+(define (make-arg60,2136
+(define (fill-arg!60,2136
+   (static (class arg60,2136
+(define (arg-name::bstring61,2158
+(define (arg-separator::bstring62,2191
+(define (arg-value::bstring63,2229
+(define *gdb-annotate-reg-starting?*92,4265
+(define *gdb-annotate-reg-stopped?*93,4306
+(define *gdb-annotate-reg-signal?*94,4346
+(define *gdb-annotate-reg-frames-invalid?*95,4385
+(define *gdb-annotate-reg-breakpoints-invalid?*96,4432
+(define *gdb-annotate-reg-breakpoint?*97,4484
+(define *gdb-annotate-reg-busy?*98,4527
+(define *gdb-annotate-reg-error?*99,4564
+(define *gdb-annotate-reg-stack-frame-number*100,4602
+(define *gdb-annotate-reg-stack-function-name*101,4651
+(define *gdb-annotate-reg-stack-args*102,4712
+(define *gdb-annotate-reg-stack-frame-source*103,4755
+(define *gdb-annotate-reg-stack-file*104,4806
+(define *gdb-annotate-reg-stack-line*105,4858
+(define *gdb-annotate-reg-stack-frame*106,4900
+(define *gdb-annotate-reg-stack-frame-previous*107,4953
+(define *gdb-annotate-reg-stack-frames*108,5015
+(define *gdb-annotate-reg-stack-frame-invalid?*109,5060
+(define *gdb-annotate-reg-source*110,5112
+(define *gdb-annotate-reg-breakpoint-table*111,5160
+(define *gdb-annotate-reg-display-table*112,5208
+(define *gdb-annotate-print?*120,5699
+(define *gdb-annotate-print-store*121,5733
+(define (gdb-annotate-reset-registers!126,5996
+(define (gdb-annotate-registers-protect146,7101
+(define (gdb-annotate-frame-invalid?177,8816
+(define (gdb-annotate-user-reset-registers!183,9116
+(define (gdb-annotate-busy?189,9434
+(define (gdb-annotate-error?195,9715
+(define (gdb-annotate-breakpoint-table201,9998
+(define (console-frame207,10301
+(define (gdb-annotate-run-hook242,11561
+(define (gdb-annotate-hook249,11934
+(define (gdb-annotate-running?288,13805
+(define (gdb-annotate-current-function294,14110
+(define (gdb-annotate-current-function-set!301,14452
+(define (gdb-annotate-current-frame307,14778
+(define (gdb-annotate-current-frame-set!314,15109
+(define (gdb-annotate-stack-frames320,15428
+(define (gdb-annotate-reset-stack-frames!326,15723
+(define (gdb-enable-print!332,16036
+(define (gdb-enable-bigloo-print!338,16323
+(define (gdb-enable-explore-print!344,16622
+(define (gdb-enable-store-print!350,16923
+(define (gdb-disable-print!357,17261
+(define (get-gdb-print-store364,17590
+(define *annotate-parser*370,17874
+(define (add-annotate-parser!375,18128
+(define (find-annotate-parser382,18485
+(define (check-line448,21779
+(define (ignore-parser458,22303
+(define (frames-invalid-parser464,22559
+(define (breakpoints-invalid-parser471,22874
+(define (breakpoint-parser478,23199
+(define (starting-parser485,23506
+(define (stopped-parser496,23956
+(define (error-parser507,24404
+(define (error-begin-parser519,25068
+(define (frame-begin-parser529,25697
+(define (frame-end-parser550,26662
+(define (frame-address-parser575,27725
+(define (frame-function-name-parser588,28303
+(define (arg-begin-parser626,29921
+(define (function-call-parser645,30723
+(define (signal-handler-caller-parser651,31001
+(define (frame-source-begin-parser657,31287
+(define (frame-where-parser678,32211
+(define (source-parser684,32493
+(define (exited-parser722,33826
+(define (signal-parser730,34189
+(define (signalled-parser738,34529
+(define (value-begin-parser766,35589
+(define (value-history-begin-parser794,36636
+(define (value-parser828,38015
+(define (field-begin-parser857,38990
+(define (array-section-begin-parser874,39767
+(define (breakpoint-headers-parser942,42225
+(define (breakpoint-table-parser1036,45597
+(define (pre-commands-parser1043,45924
+(define (display-begin-parser1052,46423
+
+Gdb/autoconf.scm,58
+(module gdb_autoconf16,1037
+(define (gdb-version28,1713
+
+Engine/param.scm,1466
+(module engine_param14,889
+(define *bdb-version*82,2406
+(define *bdb-level*83,2441
+(define *bdb-name*84,2474
+(define *bdb-author*85,2545
+(define *bdb-email*86,2591
+(define *bdb-date*87,2653
+(define *bdb-gui-host?*88,2693
+(define *bdb-rc*93,2948
+(define *bdb-rc-variables*94,2986
+(define *gdb*99,3242
+(define *gdb-options*100,3277
+(define *gdb-prompt*101,3354
+(define *exec*106,3615
+(define *args*107,3647
+(define *root-directory*108,3680
+(define *afile*109,3713
+(define *etags*110,3751
+(define *src-suffix*111,3789
+(define *verbose*116,4056
+(define *log-name*117,4087
+(define *active-prompt*118,4131
+(define *bigloo-type*119,4163
+(define *bigloo-classes*120,4220
+(define *bigloo-failure*121,4253
+(define *post-command-hook*122,4297
+(define *pre-command-hook*123,4330
+(define *exit*124,4363
+(define *gdb-run-hook*125,4397
+(define *gdb-call-hook*126,4430
+(define *gdb-busy-hook*127,4463
+(define *bee-client?*132,4719
+(define *emacs-client?*133,4751
+(define *heap-explorer?*134,4783
+(define *force-tty?*135,4815
+(define *tty-init-hook*136,4847
+(define *base-address?*137,4880
+(define *write-circle?*142,5135
+(define *prompt*147,5390
+(define *pin*148,5428
+(define *pout*149,5478
+(define *perr*150,5529
+(define *bout*151,5579
+(define *bin*152,5630
+(define *bdb-mode*157,5903
+(define *bdb-scheme-mode-enabled?*158,5946
+(define *c-std-unmangled*163,6208
+(define *footprint-mark*168,6485
+(define *bdb-fontification?*173,6748
+
+Tools/version.scm,172
+(module tools_version14,889
+(define (console-print24,1232
+(define (short-version31,1540
+(define (version41,1943
+(define (cat67,2846
+(define (display-to-column94,3604
+
+Command/display.scm,497
+(module command_display14,889
+(define (bdb-print-expr?36,1509
+(define (bdb-print-expr46,2027
+(define *display-table*84,3320
+(define *display-register-mode*89,3572
+(define *display-display*94,3834
+(define (set-display-display-function!99,4108
+(define (display-number105,4408
+(define (display->string115,4770
+(define (console-display-display129,5282
+(define (display-display-table!138,5685
+(define (display-parser148,6082
+(define *display-help*174,7109
+(define *cdisplay-help*180,7420
+
+Engine/repl.scm,420
+(module engine_repl14,889
+(define (bdb-repl43,2099
+(define (bdb-repl-prompt59,2569
+(define (read-cmd-line78,3454
+(define (bdb-call118,5048
+(define (port->string-list153,6333
+(define *command-history*168,6985
+(define *command-history-len*169,7016
+(define (add-history!174,7272
+(define (history-command181,7644
+(define (history-command-get189,7972
+(define (all-history202,8435
+(define (reset-history!208,8712
+
+Gdb/ginvoke.scm,349
+(module gdb_invoke14,889
+(define (flush-until-prompt34,1571
+(define (flush-gdb-pending-output98,4242
+(define *gdb-call-armed*112,4831
+(define (echo-command?117,5083
+(define (reentrant-command?126,5448
+(define (gdb-call134,5770
+(define (gdb-call->string179,7573
+(define (gdb-server->string210,8755
+(define (gdb-noerror-call->string235,9790
+
+Patient/server.scm,241
+(module patient_server14,889
+(define *server*25,1267
+(define *client*26,1298
+(define *connected?*27,1319
+(define (get-server-number32,1567
+(define (read-client-reply42,1939
+(define (init-server!93,3961
+(define (close-server!107,4680
+
+Command/run.scm,141
+(module command_run14,889
+(define *run-hooks*28,1341
+(define (add-run-hook!33,1589
+(define (run-parser39,1897
+(define *help-run*50,2379
+
+Tools/speek.scm,213
+(module tools_speek14,889
+(define (speek24,1270
+(define (verbose33,1630
+(define (fprin39,1944
+(define *log-port*45,2243
+(define (open-input-log50,2500
+(define (close-bdb-log57,2844
+(define (bdb-log64,3164
+
+Command/all_cmd.scm,31
+(module command_all-cmd15,963
+
+Tools/date.scm,94
+(module tools_date14,889
+(define-macro (get-expansion-date21,1229
+(define (bdb-date30,1604
+
+Init/parse_args.scm,134
+(module init_parse-args14,889
+(define (parse-args22,1219
+(define (query127,4592
+(define (help135,4870
+(define (bare-help144,5212
+
+Tools/io.scm,1494
+(module tools_io14,889
+(define *console-echo*42,2082
+(define *console-echo-edit*43,2123
+(define *console-echo-explore*44,2188
+(define *console-echo-dprint*45,2256
+(define *console-echo-command*46,2323
+(define *console-error*47,2393
+(define *console-flush*48,2436
+(define *console-prompt*49,2479
+(define *console-source*50,2524
+(define *console-output*51,2569
+(define (set-console-echo-function!56,2837
+(define (get-console-echo-function62,3131
+(define (set-console-echo-edit-function!68,3409
+(define (set-console-echo-explore-function!74,3713
+(define (set-console-echo-dprint-function!80,4023
+(define (set-console-echo-command-function!86,4331
+(define (set-console-error-function!92,4641
+(define (set-console-flush-function!98,4937
+(define (set-console-prompt-function!104,5233
+(define (set-console-source-function!110,5531
+(define (set-console-output-function!116,5829
+(define (console-tty-echo122,6127
+(define (console-tty-error128,6408
+(define (console-tty-output134,6690
+(define (console-echo146,7166
+(define (console-echo-edit152,7443
+(define (console-echo-explore158,7740
+(define (console-echo-dprint164,8043
+(define (console-echo-command170,8344
+(define (console-error176,8657
+(define (console-newline182,8936
+(define (console-tty-flush188,9212
+(define (console-flush194,9494
+(define (console-tty-prompt200,9763
+(define (console-prompt206,10050
+(define (console-tty-source212,10335
+(define (console-source219,10638
+(define (console-output225,10923
+
+Command/help.scm,205
+(module command_help14,889
+(define (print-command-help23,1207
+(define (main-help-callback33,1622
+(define (gdb-help-callback40,1937
+(define (sub-help-command47,2239
+(define (help-command-parse70,2981
+
+Command/print.scm,220
+(module command_print14,889
+(define (print-parser32,1387
+(define (bprint-parser60,2430
+(define (gdb-value->bdb-value88,3652
+(define *print-help*100,4146
+(define *bprint-help*108,4570
+(define *cprint-help*116,5004
+
+Patient/mangling.scm,964
+(module patient_mangling14,889
+(define-struct global-info33,1507
+(define-struct local-info44,1924
+(define (bdb-demangle57,2577
+(define (bdb-demangle285,3757
+(define (bdb-mangle111,4759
+(define (bdb-mangle2130,5563
+(define (bdb-mangle-for-funcall141,6161
+(define *demangling-cache*149,6534
+(define *mangling-cache*150,6575
+(define *unmangled-cache*151,6614
+(define (reset-demangling-cache!156,6877
+(define (local-demangle169,7565
+(define (local-mangle176,7904
+(define (put-local-demangle!183,8241
+(define (remote-demangle196,8989
+(define (remote-demangle2208,9653
+(define (remote-mangle220,10302
+(define (remote-mangle2229,10849
+(define (remote-mangle-for-funcall240,11443
+(define (bigloo-function?248,11940
+(define (local-demangle-local254,12238
+(define (put-local-demangle-local!267,12714
+(define (local-mangle-local273,13067
+(define (put-local-mangle-local!286,13547
+(define (mark-unmangled!292,13898
+(define (mark-unmangled?300,14280
+
+Command/whatis.scm,158
+(module command_whatis14,889
+(define (update-kbdb-classes33,1416
+(define (bigloo-type?50,2357
+(define (whatis-parser57,2698
+(define *whatis-help*84,3920
+
+Tools/tools.scm,343
+(module tools_tools14,890
+(define (num->string30,1634
+(define (newline?46,2356
+(define (string-from55,2872
+(define (string-from-at72,3581
+(define (string-until89,4303
+(define (string-until-at98,4831
+(define (string-char-after115,5557
+(define (string-prefix?131,6247
+(define (bigloo-ident?141,6870
+(define (fetch-source-line165,7828
+
+Patient/pinvoke.scm,61
+(module patient_invoke19,1259
+(define (patient-call31,1777
+
+Command/file.scm,203
+(module command_file14,889
+(define *previous-file*29,1343
+(define (set-previous-file!34,1604
+(define (get-previous-file40,1893
+(define (make-file-callback46,2166
+(define (file-command-parse59,2739
+
+Command/break.scm,461
+(module command_break16,1037
+(define *breakpoint-changed?*41,1906
+(define (breakpoint-changed?46,2163
+(define (breakpoint-changed!52,2448
+(define (display-breakpoint-table64,3181
+(define (footprint-command-parse149,6564
+(define (break-command-parse184,8149
+(define (break-condition224,9913
+(define (break-footprint243,10685
+(define (compare-breakpoint-tables268,11941
+(define (condition-parser347,13973
+(define (generic-break-command-parse417,17060
+
+Command/mangle.scm,68
+(module command_mangle15,963
+(define (mangle-command-parse29,1374
+
+Gdb/proc.scm,291
+(module gdb_proc14,889
+(define *gdb-process*38,1716
+(define (get-gdb-process43,1975
+(define (gdb-start51,2390
+(define (gdb-stop84,3466
+(define *tty-process?*93,3963
+(define (gdb-options-list102,4509
+(define (read-process-tty-output133,5505
+(define (write-process-tty-output144,5891
+
+Command/expr.scm,386
+(module command_expr14,889
+(define (gdb-expr->bdb-expr27,1379
+(define (bdb-expr->gdb-expr47,2615
+(define *expression-table*65,3339
+(define (reset-expression-table!70,3603
+(define (init-expression-table!76,3903
+(define (bigloo-expr?89,4703
+(define (bdb-mangle-expr101,5332
+(define (c-expr->gdb-expr116,5990
+(define (bigloo-expr->gdb-expr134,6904
+(define (compile-expr154,7847
+
+Command/info.scm,332
+(module command_info14,889
+(define (display-var-value35,1421
+(define (display-bigloo-locals52,2328
+(define (display-c-locals102,4291
+(define (info-args116,4795
+(define (info-locals132,5591
+(define (info-parser145,6171
+(define (info-stack-parser163,6847
+(define (info-break-parser175,7340
+(define (info-parser-help183,7737
+
+Bee/binvoke.scm,80
+(module bee_invoke14,889
+(define (bee-call24,1395
+(define (bee-notify46,2210
+
+Command/quit.scm,28
+(module command_quit14,889
+
+Init/main.scm,47
+(module init_bdb21,1408
+(define (main32,1764

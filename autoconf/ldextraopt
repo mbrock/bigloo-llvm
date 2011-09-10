@@ -1,0 +1,51 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/ldextraopt                  */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Aug  9 14:04:49 1995                          */
+#*    Last change :  Sun Sep  6 22:17:39 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Checking extra ld option to link large executables               */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+lflags=
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --lflags=*)
+      lflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+case $HOSTOS in
+  aix)
+    if [ "$CC" = "gcc" ]; then
+      echo "$lflags -Xlinker -bbigtoc"
+    else
+      echo "$lflags -bbigtoc"
+    fi
+    ;;
+
+  cygwin)
+    echo "$lflags -Xlinker --stack -Xlinker 4194304" ;;
+
+  mingw)
+    echo "$lflags -Wl,--stack,8000000" ;;
+
+  *)
+    echo $lflags;;
+esac

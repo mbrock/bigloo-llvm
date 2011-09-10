@@ -1,0 +1,9 @@
+;; /tmp/bigloo/api/packrat/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__packrat_json "bigloo.packrat.json")
+  (__packrat "bigloo.packrat.packrat")
+  (__packrat_makelib "bigloo.packrat.make_lib")
+)
+

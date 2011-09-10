@@ -1,0 +1,362 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/rfc2045.scm,955
+(module __mail_rfc204521,1407
+(define (quoted-printable-encode-port45,2361
+(define (hexa93,3695
+(define quoted-printable-grammar105,4226
+(define (quoted-printable-decode-port150,5605
+(define (quoted-printable-encode156,5947
+(define (quoted-printable-decode166,6386
+(define (parse-error176,6825
+(define token-grammar194,7428
+(define parameter-grammar213,8125
+(define content-type-grammar250,9526
+(define (mime-content-type-decode-port268,10255
+(define (mime-content-type-decode274,10559
+(define content-disposition-grammar283,10942
+(define (mime-content-disposition-decode-port303,11725
+(define (mime-content-disposition-decode309,12043
+(define (fill-line!318,12440
+(define (flush-line343,13241
+(define (is-boundary?358,13790
+(define (last-boundary?367,14222
+(define (multipart-read-up-to-boundary378,14747
+(define (multipart-parse-entry395,15456
+(define (mime-multipart-decode-port466,18070
+(define (mime-multipart-decode473,18492
+
+Llib/rfc2047.scm,256
+(module __mail_rfc204721,1407
+(define (parse-error32,1852
+(define token-grammar46,2381
+(define encoded-text-grammar56,2869
+(define (charset77,3524
+(define rfc2047-grammar115,4387
+(define (rfc2047-decode-port161,5896
+(define (rfc2047-decode179,6574
+
+Llib/rfc2822.scm,255
+(module __mail_rfc282218,1185
+(define (mail-header->list28,1578
+(define (email-normalize112,4201
+(define (rfc2822-address-display-paren-name155,5280
+(define (rfc2822-address-display-bracket-name164,5674
+(define (rfc2822-address-display-name175,6194
+
+Llib/mailbox.scm,2305
+(module __mail_mailbox15,963
+(define (&mailbox-error?17,990
+(define (make-&mailbox-error17,990
+(define (fill-&mailbox-error!17,990
+   (export (class &mailbox-error17,990
+(define-generic (mailbox-close76,4021
+(define-generic (mailbox-prefix78,4081
+(define-generic (mailbox-separator80,4132
+(define-generic (mailbox-hostname82,4196
+(define-generic (mailbox-folders85,4250
+(define-generic (mailbox-folder-select!87,4313
+(define-generic (mailbox-folder-unselect!89,4384
+(define-generic (mailbox-folder-create!92,4456
+(define-generic (mailbox-folder-delete!94,4536
+(define-generic (mailbox-folder-rename!96,4616
+(define-generic (mailbox-folder-move!99,4710
+(define-generic (mailbox-folder-subscribe!141,6308
+(define-generic (mailbox-folder-unsubscribe!143,6391
+(define-generic (mailbox-folder-exists?145,6476
+(define-generic (mailbox-folder-status147,6552
+(define-generic (mailbox-folder-poll149,6626
+(define-generic (mailbox-folder-expunge!151,6692
+(define-generic (mailbox-folder-search153,6762
+(define-generic (mailbox-folder-search-header155,6838
+(define-generic (mailbox-folder-search-keyword157,6926
+(define-generic (mailbox-folder-uids159,7010
+(define-generic (mailbox-folder-dates161,7077
+(define-generic (mailbox-folder-delete-messages!163,7145
+(define-generic (mailbox-folder-messages166,7224
+(define-generic (mailbox-folder-headers168,7295
+(define-generic (mailbox-folder-bodies170,7365
+(define-generic (mailbox-folder-sizes172,7434
+(define-generic (mailbox-folder-flags174,7502
+(define-generic (mailbox-folder-infos176,7570
+(define-generic (mailbox-folder-header-fields178,7638
+(define-generic (mailbox-message181,7726
+(define-generic (mailbox-message-path183,7795
+(define-generic (mailbox-message-body185,7859
+(define-generic (mailbox-message-header187,7938
+(define-generic (mailbox-message-header-list189,8013
+(define-generic (mailbox-message-header-field191,8095
+(define-generic (mailbox-message-size193,8187
+(define-generic (mailbox-message-info195,8256
+(define-generic (mailbox-message-flags197,8330
+(define-generic (mailbox-message-flags-set!199,8406
+(define-generic (mailbox-message-delete!201,8498
+(define-generic (mailbox-message-copy!203,8575
+(define-generic (mailbox-message-move!205,8661
+(define-generic (mailbox-message-create!207,8747
+
+Llib/maildir.scm,4627
+(module __mail_maildir15,963
+(define (&maildir-error?20,1040
+(define (make-&maildir-error20,1040
+(define (fill-&maildir-error!20,1040
+   (export (class &maildir-error20,1040
+(define (maildir?22,1095
+(define (make-maildir22,1095
+(define (fill-maildir!22,1095
+	   (class maildir22,1095
+(define (maildir-%separator::char23,1123
+(define (maildir-%separator-cache::obj-set!24,1173
+(define (maildir-%separator-cache::obj24,1173
+(define (maildir-%folders25,1217
+(define (maildir-%selection::bstring-set!26,1272
+(define (maildir-%selection::bstring26,1272
+(define (maildir-%selection-info-set!27,1314
+(define (maildir-%selection-info27,1314
+(define (maildir-message-base::bstring-set!28,1362
+(define (maildir-message-base::bstring28,1362
+(define (maildir-prefix::bstring29,1414
+(define (maildir-path::bstring30,1467
+(define (folderinfo?32,1506
+(define (make-folderinfo32,1506
+(define (fill-folderinfo!32,1506
+   (static (class folderinfo32,1506
+(define (folderinfo-time::elong-set!33,1535
+(define (folderinfo-time::elong33,1535
+(define (folderinfo-path::bstring34,1554
+(define (folderinfo-uidvalidity::int-set!35,1587
+(define (folderinfo-uidvalidity::int35,1587
+(define (folderinfo-uids36,1611
+(define (folderinfo-nextuid::int-set!37,1635
+(define (folderinfo-nextuid::int37,1635
+(define (folderinfo-count::int-set!38,1669
+(define (folderinfo-count::int38,1669
+(define (folderinfo-recent::int-set!39,1701
+(define (folderinfo-recent::int39,1701
+(define-method (object-print o::maildir p print-slot44,1960
+(define-method (mailbox-close m::maildir57,2517
+(define-method (mailbox-separator m::maildir63,2799
+(define-method (mailbox-hostname m::maildir72,3238
+(define-method (mailbox-prefix m::maildir79,3553
+(define-method (mailbox-folders m::maildir86,3870
+(define (folder->directory99,4428
+(define-method (mailbox-folder-select! m::maildir s::bstring120,5200
+(define-method (mailbox-folder-unselect! m::maildir140,6193
+(define-method (mailbox-folder-create! m::maildir s::bstring151,6692
+(define (is-subfolder?175,7615
+(define (is-direct-subfolder?186,8145
+(define-method (mailbox-folder-delete! m::maildir s::bstring197,8694
+(define-method (mailbox-folder-rename! m::maildir s1::bstring s2::bstring240,10273
+(define-method (mailbox-folder-move! m::maildir s1::bstring s2::bstring264,11220
+(define-method (mailbox-folder-subscribe! m::maildir s::bstring286,12124
+(define-method (mailbox-folder-unsubscribe! m::maildir s::bstring292,12432
+(define-method (mailbox-folder-exists? m::maildir s::bstring298,12739
+(define (get-cached-folder-info305,13126
+(define-method (mailbox-folder-status m::maildir s::bstring319,13808
+(define (folderinfo-valid?350,14899
+(define (make-folder-uidtable357,15252
+(define (invalidate-folderinfo!403,16880
+(define (update-folderinfo!414,17499
+(define (get-folder-info433,18511
+(define (get-nextuid!464,19741
+(define-method (mailbox-folder-uids m::maildir473,20104
+(define-method (mailbox-folder-dates m::maildir490,20845
+(define-method (mailbox-folder-delete-messages! m::maildir501,21300
+(define (mailbox-folder-map521,22161
+(define-method (mailbox-folder-messages m::maildir534,22705
+(define-method (mailbox-folder-headers m::maildir540,23055
+(define-method (mailbox-folder-bodies m::maildir546,23411
+(define-method (mailbox-folder-sizes m::maildir552,23764
+(define-method (mailbox-folder-flags m::maildir558,24116
+(define-method (mailbox-folder-infos m::maildir564,24469
+(define-method (mailbox-folder-header-fields m::maildir s::bstring581,25186
+(define (get-folder-info-message605,26178
+(define (get-folder-message618,26745
+(define (get-message-path632,27335
+(define-method (mailbox-message m::maildir i::int644,27871
+(define-method (mailbox-message-path m::maildir i::int652,28278
+(define-method (mailbox-message-body m::maildir i::int . len658,28617
+(define-method (mailbox-message-header m::maildir i::int681,29447
+(define-method (mailbox-message-header-list m::maildir i::int702,30189
+(define-method (mailbox-message-header-field m::maildir i::int s::bstring711,30651
+(define-method (mailbox-message-size m::maildir i::int722,31119
+(define-method (mailbox-message-info m::maildir i::int729,31512
+(define-method (mailbox-message-flags m::maildir i::int742,32067
+(define-method (mailbox-message-flags-set! m::maildir uid::int flags765,32832
+(define-method (mailbox-message-delete! m::maildir uid::int806,34354
+(define-method (mailbox-message-move! m::maildir uid::int folder::bstring830,35351
+(define (genfilename860,36663
+(define-method (mailbox-message-create! m::maildir folder::bstring txt::bstring869,37083
+
+Llib/vcard.scm,1197
+(module __mail_vcard15,963
+(define (vcard?19,1019
+(define (make-vcard19,1019
+(define (fill-vcard!19,1019
+   (export (class vcard19,1019
+(define (vcard-version::bstring-set!20,1043
+(define (vcard-version::bstring20,1043
+(define (vcard-fn-set!21,1085
+(define (vcard-fn21,1085
+(define (vcard-familyname-set!22,1110
+(define (vcard-familyname22,1110
+(define (vcard-firstname-set!23,1143
+(define (vcard-firstname23,1143
+(define (vcard-face-set!24,1175
+(define (vcard-face24,1175
+(define (vcard-url-set!25,1202
+(define (vcard-url25,1202
+(define (vcard-org-set!26,1228
+(define (vcard-org26,1228
+(define (vcard-emails::pair-nil-set!27,1254
+(define (vcard-emails::pair-nil27,1254
+(define (vcard-phones::pair-nil-set!28,1294
+(define (vcard-phones::pair-nil28,1294
+(define (vcard-addresses::pair-nil-set!29,1334
+(define (vcard-addresses::pair-nil29,1334
+(define (vcard-notes::pair-nil-set!30,1377
+(define (vcard-notes::pair-nil30,1377
+(define (port->vcard38,1769
+(define (string->vcard49,2309
+(define (parse-error58,2714
+(define (vcard-date->date70,3157
+(define (unescape103,4403
+(define (read-values114,4784
+(define (read-options141,5796
+(define vcard-line-grammar170,6770
+
+Llib/imap.bgl,1909
+(module __mail_imap20,1333
+(define (&imap-parse-error?25,1404
+(define (make-&imap-parse-error25,1404
+(define (fill-&imap-parse-error!25,1404
+   (export (class &imap-parse-error25,1404
+(define (&imap-error?26,1458
+(define (make-&imap-error26,1458
+(define (fill-&imap-error!26,1458
+	   (class &imap-error26,1458
+(define (imap?28,1499
+(define (make-imap28,1499
+(define (fill-imap!28,1499
+	   (class imap28,1499
+(define (imap-socket::socket29,1524
+(define (imap-%separator-cache::obj-set!30,1558
+(define (imap-%separator-cache::obj30,1558
+(define-method (object-print o::imap p print-slot85,4058
+(define-macro (regexp-match95,4479
+(define *regexp-all*136,5732
+(define *regexp-match1*144,6052
+(define *regexp-match2*158,6515
+(define *regexp-match3*172,6974
+(define *regexp-match4*186,7478
+(define (void200,8010
+(define-macro (string-starts-with?205,8266
+(define-macro (imap-debug211,8572
+(define (read-n-chars217,8851
+(define (parse-error240,9668
+(define (%imap-read-error254,10199
+(define (%imap-login-error264,10565
+(define (%imap-command-error274,10930
+(define (imap-message-header-list284,11292
+(define-macro (define-imap-method290,11610
+(define-method (mailbox-close m::imap313,12400
+(define-method (mailbox-prefix m::imap320,12724
+(define-method (mailbox-message-body m::imap i::int . len365,14813
+(define-method (mailbox-separator m::imap386,16041
+(define-method (mailbox-hostname m::imap395,16474
+(define-method (mailbox-folder-select! m::imap s402,16805
+(define-method (mailbox-folder-unselect! m::imap416,17410
+(define-method (mailbox-message-path m::imap i430,17990
+(define-method (mailbox-folder-dates m::imap436,18268
+(define (is-subfolder?443,18640
+(define-method (mailbox-folder-delete! m::imap s::bstring457,19246
+(define-method (mailbox-folder-delete-messages! m::imap478,20026
+(define-method (mailbox-message-flags-set! m::imap i::int flags488,20476
+
+Llib/imap.stk,3541
+;;;; imap-lib.stk	-- IMAP Library2,5
+;;;; This program is free software;7,123
+;;;; This program is free software; you can redistribute it and/or modify7,123
+;;;; it under the terms of the GNU General Public License as published by8,197
+;;;; the Free Software Foundation;9,271
+;;;; the Free Software Foundation; either version 2 of the License,9,271
+;;;; the Free Software Foundation; either version 2 of the License, or9,271
+;;;; This program is distributed in the hope that it will be useful,12,389
+;;;; but WITHOUT ANY WARRANTY;13,458
+;;;; but WITHOUT ANY WARRANTY; without even the implied warranty of13,458
+;;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the14,526
+;;;; You should have received a copy of the GNU General Public License17,649
+;;;; along with this program;18,720
+;;;; Foundation,19,785
+;;;; Foundation, Inc., 59 Temple Place - Suite 19,785
+;;;; Foundation, Inc., 59 Temple Place - Suite 330, Boston,19,785
+;;;;           Author: Erick Gallesio 22,877
+;;;;    Creation date:  8-Mar-2005 21:56 (eg)23,928
+;;;; Last file update:  6-Apr-2005 11:12 (eg)24,974
+;;;; IMAP send and response parsing comes from the "imap-unit.ss" file of26,1025
+;; API30,1154
+;;  Server Operations32,1164
+;;	(imap-login s login password)33,1186
+;;	(imap-logout s)35,1229
+;;	(imap-capability s)37,1259
+;;	(imap-separator s)39,1319
+;;	(imap-folders s)41,1391
+;;  Folder operations44,1464
+;;	(imap-folder-select s name)45,1486
+;;	(imap-folder-create! s name)47,1552
+;;	(imap-folder-delete! s name)48,1584
+;;	(imap-folder-rename! s name)49,1616
+;;	(imap-folder-exists? s name)50,1648
+;;	(imap-folder-status s name)52,1716
+;;	(imap-folder-poll s)54,1811
+;;	(imap-folder-expunge! s)56,1877
+;;	(imap-folder-search s request)57,1905
+;;		request must be a valid IMAP search request58,1939
+;;	(imap-folder-search-header s header value)60,2034
+;;	(imap-folder-search-keyword s keyword)62,2126
+;;	(imap-folder-subscribe! s folder)64,2220
+;;	(imap-folder-unsubscribe! s folder)65,2257
+;;	(imap-folder-uids s)66,2296
+;;      Shortcuts68,2348
+;; Messages operations78,2919
+;;	(imap-message s num)79,2942
+;;	(imap-message-header  s num)82,3026
+;;	(imap-message-body  s num . count)84,3129
+;;	(imap-message-info  s num)86,3236
+;;	(imap-message-size s num)88,3333
+;;	(imap-message-internal-date s num)90,3382
+;;	(imap-message-structure s num)92,3449
+;;	(imap-message-envelope s num)94,3537
+;;	(imap-message-parts s num)96,3623
+;;	(imap-message-part s num p)98,3714
+;;		   part numbering starts from 100,3810
+;;	(imap-message-flags-change! s num flags)102,3849
+;;		Flags are the new flags associated to message num103,3893
+;;	(imap-message-flags-set! s num flags)104,3947
+;;	(imap-message-flags-unset! s num flags)106,4050
+;;	(imap-message-delete! s num)108,4166
+;;	(imap-message-undelete! s num)109,4198
+;;	(imap-message-flagged! s num)110,4232
+;;	(imap-message-unflagged! s num)111,4265
+;;	(imap-message-exists? s num)113,4303
+;;		=> #t if the message exists; #f otherwise114,4335
+;;	(imap-message-uid-exists? s uid)115,4381
+;;		=> #t if the message with uid exists; #f otherwise116,4417
+;;	(imap-message-copy! s num folder)118,4475
+;;	(imap-message-move! s num folder)119,4512
+;;	(imap-message-create! s folder txt)120,4549
+;;;; 			S e r v e r   O p e r a t i o n s	352,11722
+(define (imap-login s name password)360,12015
+		(%imap-send s "LOGOUT" void void)378,12598
+;;;; 			F o l d e r   O p e r a t i o n s	429,14148
+;;;; 			M e s s a g e   O p e r a t i o n s	637,20306

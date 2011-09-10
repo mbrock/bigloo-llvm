@@ -1,0 +1,203 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/ccoptim                     */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Thu Jan 14 10:31:33 1999                          */
+#*    Last change :  Sun Sep  6 20:48:38 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Checking the C compiler optimization option                      */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+cflags="-O3"
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --cflags=*|-cflags=*)
+      cflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+file1=$TMP/actest1$USER
+file2=$TMP/actest2$USER
+aout=$TMP/Xactest$USER
+
+#*---------------------------------------------------------------------*/
+#*    On some archiecture (e.g., alpha, Mac PPC, etc.) cc -O3 option   */
+#*    cannot be used otherwise call/cc crashes. I will have to figure  */
+#*    out why. In the mean time, I use an ad-hoc configuration scheme. */
+#*---------------------------------------------------------------------*/
+case $HOSTOS in
+  linux)
+    case $HOSTCPU in
+       sparc64)
+          cflags="-O2";;
+       ppc)
+          cflags="-O2";;
+       *)
+          ;;
+    esac;;
+
+  osf)
+    case $HOSTCPU in
+       alpha)
+          cflags="-O3";;
+           *)
+              ;;
+    esac;;
+
+  solaris)
+    cflags="-O3";;
+
+  hpux)
+    cflags="-O";;
+esac
+
+#*---------------------------------------------------------------------*/
+#*    The test C file                                                  */
+#*---------------------------------------------------------------------*/
+if( test -f $file1.c ); then
+   rm -f $file1.c || exit $?
+fi
+if( test -f $file2.c ); then
+   rm -f $file2.c || exit $?
+fi
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*    -------------------------------------------------------------    */
+#*    GCC versions 3.xx (until gcc3.3.3 I think) on the register       */
+#*    allocations. We try to detect this in the Bigloo configuration.  */
+#*---------------------------------------------------------------------*/
+cat > $file2.c <<EOF
+int gcc3xxx_bug( int x ) {
+   /* This function is badly compiled, the value of x is not restored */
+   /* after the call to foo. This is supposed to be fixed             */
+   if( x ) {
+      foo( 10 );
+      return x;
+   }
+   failure_then_exit( x );
+}
+EOF
+
+cat > $file1.c <<EOF
+#include <stdlib.h>
+extern int gcc3xxx_bug();
+
+int foo( int x ) {
+   return x + 1;
+}
+
+int failure_then_exit( int x ) {
+   exit( x );
+}
+
+int direction( int new_addr )
+{
+   static int *old_addr;
+   static int flag = 0;
+
+   if( !flag )
+   {
+      old_addr = &new_addr;
+      flag = 1;
+      return direction( 2 );
+   }
+   else
+   {
+      return old_addr > &new_addr ? 1 : 2;
+   }
+}
+
+main( int argc, char *argv[] )
+{
+   if( gcc3xxx_bug( 5 ) != 5 )
+      return 1;
+
+   if( direction( 1 ) < 1 )
+      return 1;
+   else
+      return 0;
+}
+EOF
+
+#*---------------------------------------------------------------------*/
+#*    Compilation test                                                 */
+#*---------------------------------------------------------------------*/
+compile="$CC $cflags $file1.c -c && 
+         mv `basename $file1.o` $file1.o && \
+         $CC $cflags $file2.c -c && 
+         mv `basename $file2.o` $file2.o && \
+         $CC $cflags $file1.o $file2.o -o $aout"
+
+if eval "$BUILDSH $compile"; then
+   eval "$HOSTSH $aout"; res=$?
+else
+   res=1;
+fi
+
+if [ "$res" = "0" ]; then
+   \rm -f $file1.*
+   \rm -f $file2.*
+   echo $cflags
+   exit 0
+fi
+
+cflags=-O3
+compile="$CC $cflags $file1.c -c && \
+         mv `basename $file1.o` $file1.o && \
+         $CC $cflags $file2.c -c && \
+         mv `basename $file2.o` $file2.o && \
+         $CC $cflags $file1.o $file2.o -o $aout"
+
+if eval "$BUILDSH $compile"; then
+   eval "$HOSTSH $aout"; res=$?
+else
+   res=1;
+fi
+
+if [ "$res" = "0" ]; then
+   \rm -f $file1.*
+   \rm -f $file2.*
+   echo $cflags
+   exit 0
+fi
+
+cflags=-O2
+compile="$CC $cflags $file1.c -c && \
+         mv `basename $file1.o` $file1.o && \
+         $CC $cflags $file2.c -c && \
+         mv `basename $file2.o` $file2.o && \
+         $CC $cflags $file1.o $file2.o -o $aout"
+
+if eval "$BUILDSH $compile"; then
+   eval "$HOSTSH $aout"; res=$?
+else
+   res=1;
+fi
+
+if [ "$res" = "0" ]; then
+   \rm -f $file1.*
+   \rm -f $file2.*
+   echo $cflags
+   exit 0
+fi
+
+\rm -f $file1.*
+\rm -f $file2.*
+echo "-O"
+exit 0

@@ -1,0 +1,10 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/text/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__text_bibtex "Llib/bibtex.scm")
+  (__text_gb2312 "Llib/gb2312.scm")
+  (__text_hyphenation "Llib/hyphenation.scm")
+)
+

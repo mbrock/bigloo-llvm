@@ -1,0 +1,136 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/gcflags                     */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Thu Jan 14 10:31:33 1999                          */
+#*    Last change :  Fri Dec 17 18:23:54 2010 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Checking GC compilation flags                                    */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+cflags=""
+cgcflags68="-DSILENT -DNO_SIGNALS -DNO_DEBUGGING -Iinclude"
+#cgcflagsdarwin="-DNO_DEBUGGING -Iinclude -I./libatomic_ops/src"
+cgcflags="-DNO_DEBUGGING -Iinclude -Ilibatomic_ops-install/include -DATOMIC_UNCOLLECTABLE -DNO_EXECUTE_PERMISSION"
+
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --cflags=*|-cflags=*)
+      cflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+#*---------------------------------------------------------------------*/
+#*    On some archiecture (e.g., alpha, Mac PPC, etc.) cc -O3 option   */
+#*    cannot be used otherwise call/cc crashes. I will have to figure  */
+#*    out why. In the mean time, I use an ad-hoc configuration scheme. */
+#*---------------------------------------------------------------------*/
+case $HOSTOS in
+   linux)
+     echo $cgcflags;;
+
+   cygwin)
+     echo $cgcflags;;
+
+   mingw)
+     echo "$cgcflags -DGC_DLL -DGC_BUILD -DGC_DLL -DNO_EXECUTE_PERMISSION -DALLINTERIOR_POINTERS -DATOMIC_UNCOLLECTABLE -D_REENTRANT ";;
+
+   darwin)
+     flags="$cgcflags -DGC_DARWIN_THREADS=1";
+
+     case $HOSTCPU in
+       i386)
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     x86_thread_state32_t.eax \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+           flags="$flags -DHAS_X86_THREAD_STATE32_EAX";
+         fi
+
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     x86_thread_state32_t.__eax \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+           flags="$flags -DHAS_X86_THREAD_STATE32___EAX";
+         fi
+         ;;
+
+       ppc)
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     ppc_thread_state_t.__r0 \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+           flags="$flags -DHAS_PPC_THREAD_STATE___R0";
+         fi
+
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     ppc_thread_state_t.r0 \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+            flags="$flags -DHAS_PPC_THREAD_STATE_R0";
+         fi
+
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     ppc_thread_state64_t.r0 \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+           flags="$flags -DHAS_PPC_THREAD_STATE64_R0";
+         fi
+
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     ppc_thread_state64_t.__r0 \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+            flags="$flags -DHAS_PPC_THREAD_STATE64___R0";
+         fi;
+         ;;
+
+       *)
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     x86_thread_state64_t.rax \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+          
+         if [ "$member " = "yes " ]; then
+            flags="$flags -DHAS_X86_THREAD_STATE64_RAX";
+         fi
+
+         member=`./autoconf/runtest -v1 -- checkmember --cflags=$cflags \
+                     x86_thread_state64_t.__rax \
+                     "#include <sys/cdefs.h>" \
+                     "#include <mach/thread_status.h>"` || exit 1;
+         if [ "$member " = "yes " ]; then
+            flags="$flags -DHAS_X86_THREAD_STATE64___RAX";
+         fi
+         ;;
+
+     esac
+     echo $flags
+     ;;
+
+   *)
+     echo $cgcflags;;
+esac
+
+exit 0

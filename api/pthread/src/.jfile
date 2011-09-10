@@ -1,0 +1,11 @@
+;; /tmp/bigloo/api/pthread/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__pth_backend "bigloo.pthread.pbackend")
+  (__pth_thread "bigloo.pthread.pthread")
+  (__pth_condvar "bigloo.pthread.pcondvar")
+  (__pth_mutex "bigloo.pthread.pmutex")
+  (__pth_makelib "bigloo.pthread.make_lib")
+)
+

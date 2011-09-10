@@ -1,0 +1,74 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+bdb.scm,751
+(module __bdb14,889
+(define (bdb-init!66,2680
+(define (bdb-initial-breakpoint72,2940
+(define *client*78,3214
+(define (bdb:init-client!89,3912
+(define (bdb-close-client!109,4751
+(define (bdb-invoke118,5111
+(define *bdb-module-info*153,6864
+(define (mangle160,7266
+(define (mangle2170,7753
+(define (mangle-for-funcall182,8407
+(define (demangle192,8914
+(define (demangle2202,9399
+(define (output-value210,9758
+(define (output-classes226,10344
+(define (dump-classes236,10710
+(define (bdb-print248,11398
+(define (bdb-whatis264,12051
+(define (bdb-true277,12571
+(define (bdb-false283,12820
+(define (bdb-bchar289,13070
+(define (bdb-bint295,13374
+(define (bdb-nil301,13658
+(define (bdb-funcall307,13907
+(define (bdb-find-type313,14203
+
+env.scm,1100
+(module __bdb_env16,1037
+(define-struct file-info39,1989
+(define-struct module-info48,2320
+(define-struct function-info61,2800
+(define-struct local-info74,3310
+(define-struct global-info88,3847
+(define (bgl->c106,4494
+(define (bgl->c-funcall115,4862
+(define (bgl-bgl->c126,5295
+(define (c-bgl->c138,5760
+(define (c->bgl150,6217
+(define (c-c->bgl159,6579
+(define (bdb-set-module-info!177,7483
+(define *module-env*239,9807
+(define *global-scm-env*240,9846
+(define *global-c-env*241,9885
+(define *file-env*242,9924
+(define *function-env*243,9963
+(define *class-env*244,10002
+(define (initialize-env!249,10264
+(define (bind-module!265,11024
+(define (find-scm-global289,11890
+(define (find-c-global302,12497
+(define (find-global/env313,12946
+(define (bdb:bind-global!337,13599
+(define (bdb:bind-c-function!376,15050
+(define (find-scm-local392,15581
+(define (find-c-local398,15915
+(define (find-local/get-key404,16241
+(define (find-module417,16705
+(define (find-file425,17060
+(define (bdb:bind-file!436,17627
+(define (bgl-source448,18041
+(define (bgl-get-classes463,18641

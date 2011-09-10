@@ -1,0 +1,302 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/srfi1.bgl,23
+(module __srfi114,889
+
+Llib/srfi1.srfi,17206
+;;; Reference implementation2,53
+;;; Copyright (c) 1998, 1999 by Olin Shivers. You may do as you please with4,86
+;;; this code as long as you do not remove this copyright notice or5,162
+;;;     -OlinOlin7,309
+;;; This is a library of list- and pair-processing functions. I wrote it after9,324
+;;; carefully considering the functions provided by the libraries found in10,403
+;;; R4RS/R5RS Scheme,11,478
+;;; R4RS/R5RS Scheme, MIT Scheme,11,478
+;;; R4RS/R5RS Scheme, MIT Scheme, Gambit,11,478
+;;; R4RS/R5RS Scheme, MIT Scheme, Gambit, RScheme,11,478
+;;; R4RS/R5RS Scheme, MIT Scheme, Gambit, RScheme, MzScheme,11,478
+;;; R4RS/R5RS Scheme, MIT Scheme, Gambit, RScheme, MzScheme, slib,11,478
+;;; R4RS/R5RS Scheme, MIT Scheme, Gambit, RScheme, MzScheme, slib, Common11,478
+;;; Lisp,12,552
+;;; Lisp, Bigloo,12,552
+;;; Lisp, Bigloo, guile,12,552
+;;; Lisp, Bigloo, guile, T,12,552
+;;; Lisp, Bigloo, guile, T, APL and the SML standard basis. It is a pretty12,552
+;;; rich toolkit,13,627
+;;; rich toolkit, providing a superset of the functionality found in any of13,627
+;;; This implementation is intended as a portable reference implementation16,742
+;;; Exported:Exported19,884
+;;; xcons tree-copy make-list list-tabulate cons* list-copy copy20,898
+;;; proper-list? circular-list? dotted-list? not-pair? null-list? list=21,959
+;;; iota23,1057
+;;; first second third fourth fifth sixth seventh eighth ninth tenth24,1066
+;;; car+cdrcdr25,1135
+;;; take       drop 26,1147
+;;; take-right drop-right right27,1174
+;;; last last-pairpair30,1253
+;;; zip unzip1 unzip2 unzip3 unzip4 unzip531,1272
+;;; count32,1315
+;;; unfold       fold       pair-fold       reduce34,1394
+;;; unfold-right fold-right pair-fold-right reduce-rightright35,1445
+;;; filter  partition  remove37,1572
+;;; find find-tail any every list-indexindex39,1634
+;;; alist-cons alist-copycopy43,1759
+;;; lset-union  lset-intersection  lset-difference  lset-xor  lset-diff+intersectionintersection48,1902
+;;; In principle,51,2078
+;;; In principle, the following R4RS list- and pair-processing procedures51,2078
+;;; in this file:owing R53,2227
+;;; in this file:file53,2227
+;;;   Non-primitives: list length append reverse cadr ... cddddr list-refref55,2306
+;;;                   memq memv assq assv56,2380
+;;; These R4RS procedures have extended definitions in SRFI-1 and are defined59,2498
+;;; in this file:file60,2576
+;;; The remaining two R4RS list-processing procedures are not included:included63,2630
+;;; A note on recursion and iteration/reversal:reversal68,2763
+;;; Many iterative list-processing algorithms naturally compute the elements69,2811
+;;; of the answer list in the wrong order 70,2888
+;;; structure. In a stack-based system,77,3425
+;;; structure. In a stack-based system, this improves cache locality and77,3425
+;;; Recurse, where natural. Multiple-value rue 79,3575
+;;; Recurse,79,3575
+;;; Recurse, where natural. Multiple-value returns make this even more79,3575
+;;; convenient,80,3646
+;;; Porting:Porting82,3719
+;;; This is carefully tuned code;83,3732
+;;;   - It is careful to share storage when possible;84,3790
+;;; That said,87,3916
+;;; That said, a port of this library to a specific Scheme system might wish87,3916
+;;; The single most important compiler-specific optimisation you could make89,4062
+;;; to this library would be to add rewrite rules or transforms to:to90,4138
+;;;   LSET-UNION) into multiple applications of a primitive two-argument argument92,4283
+;;;   ANY, EVERY) into open-coded loops. The killer here is that these 95,4449
+;;;   functions are n-ary. Handling the general case is quite inefficient,96,4521
+;;;   requiring many intermediate data structures to be allocated and97,4596
+;;; - transform applications of procedures that take optional arguments99,4683
+;;;   into calls to variants that do not take optional arguments. This100,4755
+;;; These transforms would provide BIG speedups. In particular,103,4902
+;;; These transforms would provide BIG speedups. In particular, the n-aryary103,4902
+;;; mapping functions are particularly slow and cons-intensive,intensive104,4976
+;;; mapping functions are particularly slow and cons-intensive, and are good104,4976
+;;; but what you really want to do is exploit the fact that the compiler106,5131
+;;; usually knows how many arguments are being passed to a particular107,5204
+;;; application of these functions -- they are usually explicitly called,108,5274
+;;; application of these functions -- they are usually explicitly called, not108,5274
+;;; passed around as higher-order values. If you can arrange to have your109,5352
+;;; compiler produce custom code or custom linkages based on the number of110,5426
+;;; arguments in the call,111,5501
+;;; arguments in the call, you can speed these functions up a *lot*. But this111,5501
+;;; kind of compiler technology no longer exists in the Scheme world as far as112,5579
+;;; Note that this code is,115,5677
+;;; Note that this code is, of course,115,5677
+;;; the R5RS procedures -- i.e., it assumes that the variable CAR is bound116,5753
+;;; to the procedure that takes the car of a list. If your Scheme 117,5828
+;;; implementation allows user code to alter the bindings of these procedures118,5895
+;;; in a manner that would be visible to these definitions,119,5973
+;;; in a manner that would be visible to these definitions, then there might119,5973
+;;; be trouble. You could consider horrible kludgery along the lines of120,6050
+;;;    (define fact 121,6122
+;;;          real-fact)fact125,6298
+;;; Or you could consider shifting to a reasonable Scheme system that,126,6324
+;;; Or you could consider shifting to a reasonable Scheme system that, say,126,6324
+;;; This code does a fair amount of run-time argument checking. If your129,6471
+;;; Scheme system has a sophisticated compiler that can eliminate redundant130,6543
+;;; error checks,131,6619
+;;; error checks, this is no problem. However,131,6619
+;;; some performance overhead -- and,132,6693
+;;; some performance overhead -- and, in a safe Scheme implementation,132,6693
+;;; some performance overhead -- and, in a safe Scheme implementation, they132,6693
+;;; parameter is a procedure,134,6842
+;;; we try to call the value. It'It135,6917
+;;; checking code out if it's inain136,6990
+;;; On the other hand,139,7104
+;;; in can *help*, since their presence can be ele142,7340
+;;; in can *help*, since their presence can be elided in redundant cases,142,7340
+;;; and in cases where they are needed, performing the checks early, at143,7414
+;;; Finally, I have only checked the properties that can portably be checked146,7546
+;;; with R5RS Scheme -- and this is not complete. You may wish to alter147,7623
+;;; the CHECK-ARG parameter checks to perform extra, implementation-specificspecific148,7695
+;;; The code has only these non-R4RS dependencies:dependencies151,7837
+;;;   A few calls to an ERROR procedure;152,7888
+;;;   Uses of the R5RS multiple-value procedure VALUES and the m-v binding153,7929
+;;;   Many calls to a parameter-checking procedure check-arg:arg155,8070
+;;;    (define (check-arg pred val caller)156,8132
+;;; Most of these procedures use the NULL-LIST? test to trigger the162,8383
+;;; base case in the inner loop or recursion. The NULL-LIST? function163,8451
+;;; non-nil, non-pair value. The spec allows an implementation to use165,8590
+;;; a less-careful implementation that simply defines NULL-LIST? to166,8660
+;;; be NOT-PAIR?. This would speed up the inner loops of these procedures167,8728
+;;; A note on dotted lists:lists170,8867
+;;; I, personally, take the view that the only consistent view of lists171,8895
+;;; in Scheme is the view that *everything* is a list -- values such as172,8967
+;;; fact that Scheme actually has no true list type. It has a pair type,174,9112
+;;; and there is an *interpretation* of the trees built using this type175,9185
+;;; I lobbied to have these list-processing procedures hew to this178,9275
+;;; view, and accept any value as a list argument. I was overwhelmingly179,9342
+;;; overruled during the SRFI discussion phase. So I am inserting this180,9414
+;;; Many of the procedures in this library can be trivially redefined184,9582
+;;; to handle dotted lists, just by changing the NULL-LIST? base-casecase185,9652
+;;; check to NOT-PAIR?, meaning that any non-pair value is taken to be186,9722
+;;; required. val188,9861
+;;; *produce* lists from other lists.  Were we to extend these procedures to191,9950
+;;; accept dotted lists, we would have to define how they terminate the lists192,10027
+;;; produced as results when passed a dotted list. I designed a coherent set193,10105
+;;; discussion list. I additionally wrote an earlier version of this library195,10254
+;;; that implemented that spec. It has been discarded during later phases of196,10331
+;;; The argument *against* defining these procedures to work on dotted199,10467
+;;; lists is that dotted lists are the rare, odd case, and that by 200,10538
+;;; in the cases where a dotted list is passed by accident -- e.g., when202,10678
+;;; the programmer swaps a two arguments to a list-processing function,203,10751
+;;; one being a scalar and one being a list. For example,204,10823
+;;; Constructors218,11269
+;;; Occasionally useful as a value to be passed to a fold or other221,11304
+;(define (tree-copy x)226,11466
+;(define (list . ans) ans)244,11974
+;(define (list . ans) ans)	; R4RS244,11974
+;* ;;; (cons* a1 a2 ... an)256,12318
+;* ;;; (cons* a1)257,12392
+;;; I thought these were lovely, but the public at large did not share my296,13844
+;;; IOTA: to		(1 ... to)302,14043
+;(define (%parse-iota-args arg1 rest-args proc)306,14153
+;    (check arg1)308,14260
+;		    (values arg1 arg2 arg3)316,14533
+;	      (values arg1 arg2 317,14566
+;	(values 0 arg1 318,14597
+;(define (iota: arg1 . rest-args)args320,14622
+;	   (last-val (+ from (* step numsteps)323,14775
+;	   (val last-val (- val step)326,14946
+;(define (:iota arg1 . rest-args)args331,15046
+;	   (last-val (+ from (* step (- numsteps 334,15201
+;	   (val last-val (- val step)337,15378
+;;; <proper-list> ::= ()			; Empty proper list348,15591
+;;;		  |   (cons <x> <proper-list>)	; Proper-list pair349,15638
+;;; Note that this definition rules out circular lists -- and this350,15693
+;;; <dotted-list> ::= <non-nil,non-pair>	; Empty dotted list369,16231
+;;; This is a legal definition which is fast and sloppy:sloppy394,16850
+;(define (length x)422,17667
+;(define (length x)			; LENGTH may diverge or422,17667
+;    (if (pair? x)			; a circular list. This version424,17766
+;;; Selectors444,18252
+;;; R4RS non-primitives:primitives447,18281
+;;; TAKE-RIGHT and DROP-RIGHT work by getting two pointers into the list,513,20177
+;;; off by K, then chasing down the list until the lead pointer falls off514,20252
+;;; In this function, LEAD is actually K+1 ahead of LAG. This lets531,20688
+;(define (list-ref lis i) (car (drop lis i)))	; R4RS546,21163
+;;; These use the APL convention, whereby negative indices mean 548,21217
+;;; SRFI reviewers.ativ550,21347
+;(define (take lis k)554,21492
+;  (check-arg integer? k take)555,21514
+;(define (drop lis k)563,21724
+;  (check-arg integer? k drop)564,21746
+;      (list-tail lis k)570,21939
+;(define (take! lis k)573,21970
+;	((positive? k)576,22050
+;	 lis)578,22109
+;(define (drop! lis k)581,22165
+;		   lis)587,22362
+;;; Unzippers -- 1 through 615,23238
+;(define (append . lists)682,25945
+;              (fold-right cons tail list1)687,26138
+;            list1)688,26206
+;(define (append-reverse! rev-head tail)693,26309
+;             tail695,26411
+;             rev-head)head696,26430
+;;; Fold/map internal utilities716,27021
+;;; These little internal utilities are used by the general718,27133
+;;; An aggressive implementation should simply re-write these functions 721,27348
+;;; I use the dreaded call/cc to do local aborts. A good compiler could725,27542
+;;; handle this with extreme efficiency. An implementation that provides726,27614
+;;; a one-shot, non-persistent continuation grabber could help the compiler727,27687
+;;; g729,27830
+;;; These functions have funky definitions that are precisely tuned to730,27834
+;;; Like %CARS+CDRS, but we pass in a final elt tacked onto the end of the764,29130
+;;; count788,29990
+;;; fold/unfoldunfold808,30478
+	      (lp tail)952,34885
+;;; NOTE: Some implementations of R5RS MAP are compliant with this spec;989,36019
+(define map map-in-order)order1011,36735
+;;; filter, remove, partition1014,36764
+;;; FILTER, REMOVE, PARTITION and their destructive counterparts do not1016,36824
+(define (filter pred lis)1022,37095
+;(define (filter pred lis)1036,37605
+;			(values l #t)t1048,38032
+;		    (values ans #f)f1051,38132
+;    ans)1052,38160
+;(define (filter! pred lis)1056,38174
+;(define (filter! pred lis)			; Things are much simpler1056,38174
+;    (if (pair? lis)				; push N stack frames & do N1058,38282
+;        (cond ((pred (car lis))		; SET-CDR! writes, where N is1059,38335
+;               lis)1061,38475
+;        lis)1063,38541
+;;; - is caris ca1068,38633
+;;; - is careful not to do redundant SET-CDR! writes, as writes to memory are 1068,38633
+;;;   usually expensive on modern machines, and can be extremely expensive on 1069,38712
+;;; It just zips down contiguous runs of in and out elts in LIS doing the 1071,38854
+;;; minimal number of SET-CDR!s to splice the tail of one run of ins to the 1072,38929
+	  ;;          Scan over a contiguous segment of the list that1083,39346
+	  ;;           When the segment ends, patch in ch in1087,39571
+	  ;;           When the segment ends, patch in a link from PREV1087,39571
+	  ;;           to the start of the next good segment, and jump to1088,39636
+;;; Answers share common tail with LIS where possible;1108,40195
+;(define (partition! pred lis)1124,40676
+;(define (partition! pred lis)			; Things are much simpler1124,40676
+;    (if (null-list? lis) (values lis lis)	; push N stack frames & do N1126,40787
+;        (let ((elt (car lis)))			; SET-CDR! writes, where N is1127,40859
+;                   (set-cdr! lis in)1130,41022
+;                   (values lis out)1131,41060
+;                        (values in lis)1133,41142
+;;; - is caris ca1138,41269
+;;; - is careful not to do redundant SET-CDR! writes, as writes to memory are1138,41269
+;;;   usually expensive on modern machines, and can be extremely expensive on 1139,41347
+;;; It just zips down contiguous runs of in and out elts in LIS doing the1141,41489
+;;; minimal number of SET-CDR!s to splice these runs together into the result 1142,41563
+      ;; This pair of loops zips down contiguous in & out runs of the1149,41766
+      ;; list, splicing the runs together. The invariants are1150,41836
+;;; (I do(I d1196,43391
+;;; (I don't actually think these are the world's most important1196,43391
+;;; functions -- the procedural FILTER/REMOVE/FIND/FIND-TAIL variants1197,43456
+;;; Function			Action1200,43557
+;;; remove pred lis		Delete by general predicate1202,43659
+;;; delete x lis [=]		Delete by element comparison1203,43708
+;;; find pred lis		Search by general predicate1205,43773
+;;; find-tail pred lis		Search by general predicate1206,43820
+;;; member x lis [=]		Search by element comparison1207,43872
+;;; assoc key lis [=]		Search alist by key comparison1209,43927
+;;; The MEMBER and thenthe1226,44517
+;;; The MEMBER and then FIND-TAIL call should definitely1226,44517
+;;; right-duplicate deletion1232,44699
+;;; Beware -- these are N^2 algorithms. To efficiently remove duplicates1236,44853
+;;; in long lists, sort the list to bring duplicates together, then use a 1237,44926
+;;; linear-time algorithm to kill the dups. Or use an algorithm based on1238,45001
+;;; alist stuff1262,45834
+;(define (every pred list)1372,49083
+;    (or (not (pair? list))Simpl1374,49222
+;;; Reverse1414,50415
+;(define (reverse! lis)1420,50523
+;;; Lists-as-setssets1430,51064
+;;; This is carefully tuned code;1433,51101
+;;; - It is careful to share storage when possible;1434,51159
+;;; - It tries to avoid linear-time scans in special cases where constant-timetime1436,51276
+;;;   For example, it uses the fact that the implementations of MEMBER and1439,51470
+;;;   FILTER in this source code share longest common tails between args1440,51545
+  (reduce (lambda (b a)			; Compute A xor B:B1544,54940
+	    ;; Note that this code relies on the constant-timetime1545,54985
+	    ;; short-cuts provided by LSET-DIFF+INTERSECTION,INTERSECTION1546,55041
+	    ;; LSET-DIFFERENCE & APPEND to provide constant-time short1547,55096
+	    ;; built in.A 1550,55287
+	    ;; Compute a-b and a^b, then compute b-(a^b) and1552,55306
+  (reduce (lambda (b a)			; Compute A xor B:B1566,55742
+	    ;; Note that this code relies on the constant-timetime1567,55787
+	    ;; short-cuts provided by LSET-DIFF+INTERSECTION,INTERSECTION1568,55843
+	    ;; LSET-DIFFERENCE & APPEND to provide constant-time short1569,55898
+	    ;; built in.A 1572,56089
+	    ;; Compute a-b and a^b, then compute b-(a^b) and1574,56108

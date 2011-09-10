@@ -1,0 +1,29 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/gstreamer/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__gstreamer_gstbin "Llib/gstbin.scm")
+  (__gstreamer_gstbuffer "Llib/gstbuffer.scm")
+  (__gstreamer_gstbus "Llib/gstbus.scm")
+  (__gstreamer_gstcaps "Llib/gstcaps.scm")
+  (__gstreamer_gstelement "Llib/gstelement.scm")
+  (__gstreamer_gstelementfactory "Llib/gstelementfactory.scm")
+  (__gstreamer_gsterror "Llib/gsterror.scm")
+  (__gstreamer_gstghostpad "Llib/gstghostpad.scm")
+  (__gstreamer_gstmessage "Llib/gstmessage.scm")
+  (__gstreamer_multimedia_music "Llib/gstmm_music.scm")
+  (__gstreamer_gstobject "Llib/gstobject.scm")
+  (__gstreamer_gstpad "Llib/gstpad.scm")
+  (__gstreamer_gstpadtemplate "Llib/gstpadtemplate.scm")
+  (__gstreamer_gstparse "Llib/gstparse.scm")
+  (__gstreamer_gstpipeline "Llib/gstpipeline.scm")
+  (__gstreamer_gstplugin "Llib/gstplugin.scm")
+  (__gstreamer_plugin_bglports "Llib/gstplugin_bglports.scm")
+  (__gstreamer_gstpluginfeature "Llib/gstpluginfeature.scm")
+  (__gstreamer_gstreamer "Llib/gstreamer.scm")
+  (__gstreamer_gstregistry "Llib/gstregistry.scm")
+  (__gstreamer_gststructure "Llib/gststructure.scm")
+  (__gstreamer_gsttypefind "Llib/gsttypefind.scm")
+)
+

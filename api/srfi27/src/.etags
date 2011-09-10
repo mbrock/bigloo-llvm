@@ -1,0 +1,19 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/srfi27.bgl,206
+(module __srfi2715,963
+(define-struct $random-source33,1572
+(define (srfi-27-error44,1919
+(define $random-source-make54,2300
+(define ($random-source-current-time60,2571
+(define (inexact->exact73,3163

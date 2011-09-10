@@ -1,0 +1,173 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/types.scm,3954
+(module __calendar_types15,963
+(define (calendar?17,992
+(define (make-calendar17,992
+(define (fill-calendar!17,992
+   (export (class calendar17,992
+(define (calendar-name::bstring18,1019
+(define (calendar-id::bstring19,1065
+(define (calendar-version::bstring-set!20,1124
+(define (calendar-version::bstring20,1124
+(define (calendar-events::pair-nil-set!21,1166
+(define (calendar-events::pair-nil21,1166
+(define (calendar-method-set!22,1206
+(define (calendar-method22,1206
+(define (calevent?24,1251
+(define (make-calevent24,1251
+(define (fill-calevent!24,1251
+	   (class calevent24,1251
+(define (calevent-calendar-set!25,1271
+(define (calevent-calendar25,1271
+(define (calevent-uid-set!26,1302
+(define (calevent-uid26,1302
+(define (calevent-dtstart-set!27,1338
+(define (calevent-dtstart27,1338
+(define (calevent-dtend-set!28,1378
+(define (calevent-dtend28,1378
+(define (calevent-summary-set!29,1416
+(define (calevent-summary29,1416
+(define (calevent-description-set!30,1456
+(define (calevent-description30,1456
+(define (calevent-recurrence-set!31,1500
+(define (calevent-recurrence31,1500
+(define (calevent-klass-set!32,1533
+(define (calevent-klass32,1533
+(define (calevent-categories-set!33,1571
+(define (calevent-categories33,1571
+(define (calevent-%optionals::pair-nil-set!34,1614
+(define (calevent-%optionals::pair-nil34,1614
+(define (calevent-attach-set!35,1658
+(define (calevent-attach35,1658
+(define (calevent-priority-set!37,1764
+(define (calevent-priority37,1764
+(define (calevent-ressources-set!39,1871
+(define (calevent-ressources39,1871
+(define (calevent-location-set!41,1986
+(define (calevent-location41,1986
+(define (calevent-status-set!43,2093
+(define (calevent-status43,2093
+(define (calevent-duration-set!45,2199
+(define (calevent-duration45,2199
+(define (calevent-related-to-set!47,2306
+(define (calevent-related-to47,2306
+(define (calevent-url-set!49,2421
+(define (calevent-url49,2421
+(define (calevent-action-set!51,2515
+(define (calevent-action51,2515
+(define (calevent-trigger-set!53,2621
+(define (calevent-trigger53,2621
+(define (calevent-repeat-set!55,2731
+(define (calevent-repeat55,2731
+(define (calevent-flush-set!57,2838
+(define (calevent-flush57,2838
+(define (caltodo?60,2946
+(define (make-caltodo60,2946
+(define (fill-caltodo!60,2946
+	   (class caltodo60,2946
+(define (calrecurrence?62,2981
+(define (make-calrecurrence62,2981
+(define (fill-calrecurrence!62,2981
+	   (class calrecurrence62,2981
+(define (calrecurrence-frequency::symbol-set!63,3006
+(define (calrecurrence-frequency::symbol63,3006
+(define (calrecurrence-interval::int-set!64,3049
+(define (calrecurrence-interval::int64,3049
+(define (calrecurrence-count-set!65,3084
+(define (calrecurrence-count65,3084
+(define (calrecurrence-until-set!66,3112
+(define (calrecurrence-until66,3112
+(define (calrecurrence-bysecond::pair-nil-set!67,3140
+(define (calrecurrence-bysecond::pair-nil67,3140
+(define (calrecurrence-byminute::pair-nil-set!68,3182
+(define (calrecurrence-byminute::pair-nil68,3182
+(define (calrecurrence-byhour::pair-nil-set!69,3224
+(define (calrecurrence-byhour::pair-nil69,3224
+(define (calrecurrence-byweekday::pair-nil-set!70,3264
+(define (calrecurrence-byweekday::pair-nil70,3264
+(define (calrecurrence-bymonthday::pair-nil-set!71,3307
+(define (calrecurrence-bymonthday::pair-nil71,3307
+(define (calrecurrence-byyearday::pair-nil-set!72,3351
+(define (calrecurrence-byyearday::pair-nil72,3351
+(define (calrecurrence-byweekno::pair-nil-set!73,3394
+(define (calrecurrence-byweekno::pair-nil73,3394
+(define (calrecurrence-bymonth::pair-nil-set!74,3436
+(define (calrecurrence-bymonth::pair-nil74,3436
+(define (calrecurrence-bysetpos::pair-nil-set!75,3477
+(define (calrecurrence-bysetpos::pair-nil75,3477
+(define (calrecurrence-wkst-set!76,3519
+(define (calrecurrence-wkst76,3519
+(define (calevent-optional-getter84,3853
+(define (calevent-optional-setter95,4265
+
+Llib/icalendar.scm,1615
+(module __calendar_ical15,963
+(define (line?22,1164
+(define (make-line22,1164
+(define (fill-line!22,1164
+   (static (class line22,1164
+(define (line-name::symbol23,1187
+(define (line-params::pair-nil24,1219
+(define (line-val::bstring25,1255
+(define (line-fname-set!26,1287
+(define (line-fname26,1287
+(define (line-location-set!27,1300
+(define (line-location27,1300
+(define (block?29,1322
+(define (make-block29,1322
+(define (fill-block!29,1322
+	   (class block29,1322
+(define (block-l0::line30,1339
+(define (block-ln::line31,1367
+(define (block-body::pair-nil32,1395
+(define (write-icalendar37,1655
+(define (write-block64,2585
+(define (write-line72,2963
+(define (write-list87,3481
+(define (write-list-line98,3893
+(define (write-value113,4415
+(define (write-calevent140,5262
+(define (port->icalendar228,8195
+(define (read-block278,9816
+(define (read-block-body301,10606
+(define (line-show326,11431
+(define (is-line?334,11761
+(define (is-line-name?341,12080
+(define (is-line-value?347,12377
+(define (read-icalendar-line353,12676
+(define (parse-error359,12975
+(define-macro (lexer-error371,13422
+(define *contentline-lexer*385,13933
+(define *params-lexer*413,15007
+(define *param-name-lexer*427,15605
+(define *param-values-lexer*439,16173
+(define *value-lexer*471,17230
+(define *rrule-value-lexer*492,17931
+(define (vevent->calevent692,23691
+(define (icalendar-line-list->list762,26240
+(define (icalendar-date->date786,27021
+(define (int4->string819,28283
+(define (int2->string833,28787
+(define (date->icalendar-date850,29251
+(define (date->icalendar-date-time859,29681
+
+Llib/utils.scm,271
+(module __calendar_utils15,963
+(define (calendar-insert!29,1552
+(define (calendar-sort!55,2587
+(define (is-day?70,3144
+(define (simple-during-day?78,3511
+(define (recurrence-during-day?99,4492
+(define (calevent-during-day?128,5587
+(define (calendar->list136,6007

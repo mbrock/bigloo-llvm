@@ -1,0 +1,293 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Example</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center10028'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc10018" align="center" colspan="1"><font color="#ffffff"><strong id='bold10016'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc10025" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc10021" align="left" valign="top" colspan="1"><strong id='bold10020'
+>top:</strong></td><td id="tc10022" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center10038'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc10032" align="center" colspan="1"><font color="#ffffff"><strong id='bold10030'
+>Example</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc10035" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center10048'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc10042" align="center" colspan="1"><font color="#ffffff"><strong id='bold10040'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc10045" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Example" class="mark"></a> 
+
+<samp id='samp7070'
+>Integrate-system</samp> integrates the system <br/><br/><center id='center7078'
+>y'<sub id='sub7072'
+>k</sub><sup id='sup7073'
+> </sup>= f<sub id='sub7074'
+>k</sub>(y<sub id='sub7075'
+>1</sub>, y<sub id='sub7076'
+>2</sub>, ..., y<sub id='sub7077'
+>n</sub>),    k = 1, ..., n</center>
+
+of differential equations with the method of Runge-Kutta.<br/><br/>The parameter <tt id='tt7080'
+>system-derivative</tt> is a function that takes a system
+state (a vector of values for the state variables y<sub id='sub7081'
+>1</sub>, ..., 
+y<sub id='sub7082'
+>n</sub>)
+and produces a system derivative (the values y'<sub id='sub7083'
+>1</sub>, ..., 
+y'<sub id='sub7084'
+>n</sub>).  The parameter <tt id='tt7085'
+>initial-state</tt> provides an initial
+system state, and <tt id='tt7086'
+>h</tt> is an initial guess for the length of the
+integration step.<br/><br/>The value returned by <samp id='samp7088'
+>integrate-system</samp> is an infinite stream of
+system states.<br/><br/><center id='center7096'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7094'
+>(<font color="#6959cf"><strong id='bold10049'
+>define</strong></font> <font color="#6959cf"><strong id='bold10051'
+>integrate-system</strong></font>
+  (<strong id='bold10053'
+>lambda</strong> (system-derivative initial-state h)
+    (<strong id='bold10054'
+>let</strong> ((next (runge-kutta-4 system-derivative h)))
+      (<strong id='bold10055'
+>letrec</strong> ((states
+                (cons initial-state
+                      (delay (map-streams next
+                                          states)))))
+        states))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<samp id='samp7097'
+>Runge-Kutta-4</samp> takes a function, <tt id='tt7098'
+>f</tt>, that produces a
+system derivative from a system state.  <samp id='samp7099'
+>Runge-Kutta-4</samp>
+produces a function that takes a system state and
+produces a new system state.<br/><br/><br/><center id='center7128'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7126'
+>(<font color="#6959cf"><strong id='bold10056'
+>define</strong></font> <font color="#6959cf"><strong id='bold10058'
+>runge-kutta-4</strong></font>
+  (<strong id='bold10060'
+>lambda</strong> (f h)
+    (<strong id='bold10061'
+>let</strong> ((*h (scale-vector h))
+          (*2 (scale-vector 2))
+          (*1/2 (scale-vector (/ 1 2)))
+          (*1/6 (scale-vector (/ 1 6))))
+      (<strong id='bold10062'
+>lambda</strong> (y)
+        <font color="#ffa600"><em id='it10063'
+>;; y </em></font>is a system state
+        (<strong id='bold10065'
+>let*</strong> ((k0 (*h (f y)))
+               (k1 (*h (f (add-vectors y (*1/2 k0)))))
+               (k2 (*h (f (add-vectors y (*1/2 k1)))))
+               (k3 (*h (f (add-vectors y k2)))))
+          (add-vectors y
+            (*1/6 (add-vectors k0
+                               (*2 k1)
+                               (*2 k2)
+                               k3))))))))<br/><br/>(<font color="#6959cf"><strong id='bold10066'
+>define</strong></font> <font color="#6959cf"><strong id='bold10068'
+>elementwise</strong></font>
+  (<strong id='bold10070'
+>lambda</strong> (f)
+    (<strong id='bold10071'
+>lambda</strong> vectors
+      (generate-vector
+        (vector-length (car vectors))
+        (<strong id='bold10072'
+>lambda</strong> (i)
+          (<strong id='bold10073'
+>apply</strong> f
+                 (map (<strong id='bold10074'
+>lambda</strong> (v) (vector-ref  v i))
+                      vectors)))))))<br/><br/>(<font color="#6959cf"><strong id='bold10075'
+>define</strong></font> <font color="#6959cf"><strong id='bold10077'
+>generate-vector</strong></font>
+  (<strong id='bold10079'
+>lambda</strong> (size proc)
+    (<strong id='bold10080'
+>let</strong> ((ans (make-vector size)))
+      (<strong id='bold10081'
+>letrec</strong> ((loop
+                (<strong id='bold10082'
+>lambda</strong> (i)
+                  (<strong id='bold10083'
+>cond</strong> ((= i size) ans)
+                        (else
+                         (vector-set! ans i (proc i))
+                         (loop (+ i 1)))))))
+        (loop 0)))))<br/><br/>(<font color="#6959cf"><strong id='bold10084'
+>define</strong></font> <font color="#6959cf"><strong id='bold10086'
+>add-vectors</strong></font> (elementwise +))<br/><br/>(<font color="#6959cf"><strong id='bold10088'
+>define</strong></font> <font color="#6959cf"><strong id='bold10090'
+>scale-vector</strong></font>
+  (<strong id='bold10092'
+>lambda</strong> (s)
+    (elementwise (<strong id='bold10093'
+>lambda</strong> (x) (* x s)))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<samp id='samp7129'
+>Map-streams</samp> is analogous to <samp id='samp7130'
+>map</samp>: it applies its first
+argument (a procedure) to all the elements of its second argument (a
+stream).<br/><br/><center id='center7136'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7134'
+>(<font color="#6959cf"><strong id='bold10094'
+>define</strong></font> <font color="#6959cf"><strong id='bold10096'
+>map-streams</strong></font>
+  (<strong id='bold10098'
+>lambda</strong> (f s)
+    (cons (f (head s))
+          (delay (map-streams f (tail s))))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Infinite streams are implemented as pairs whose car holds the first
+element of the stream and whose cdr holds a promise to deliver the rest
+of the stream.<br/><br/><center id='center7143'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7141'
+>(<font color="#6959cf"><strong id='bold10099'
+>define</strong></font> <font color="#6959cf"><strong id='bold10101'
+>head</strong></font> car)
+(<font color="#6959cf"><strong id='bold10103'
+>define</strong></font> <font color="#6959cf"><strong id='bold10105'
+>tail</strong></font>
+  (<strong id='bold10107'
+>lambda</strong> (stream) (force (cdr stream))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The following illustrates the use of <samp id='samp7144'
+>integrate-system</samp> in
+integrating the system<br/><br/><center id='center7149'
+> C dv<sub id='sub7146'
+>C</sub> / dt = -i<sub id='sub7147'
+>L</sub> - v<sub id='sub7148'
+>C</sub> / R</center>
+
+<center id='center7152'
+> L di<sub id='sub7150'
+>L</sub> / dt = v<sub id='sub7151'
+>C</sub></center>
+
+which models a damped oscillator.<br/><br/><center id='center7162'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7160'
+>(<font color="#6959cf"><strong id='bold10108'
+>define</strong></font> <font color="#6959cf"><strong id='bold10110'
+>damped-oscillator</strong></font>
+  (<strong id='bold10112'
+>lambda</strong> (R L C)
+    (<strong id='bold10113'
+>lambda</strong> (state)
+      (<strong id='bold10114'
+>let</strong> ((Vc (vector-ref state 0))
+            (Il (vector-ref state 1)))
+        (vector (- 0 (+ (/ Vc (* R C)) (/ Il C)))
+                (/ Vc L))))))<br/><br/>(<font color="#6959cf"><strong id='bold10115'
+>define</strong></font> <font color="#6959cf"><strong id='bold10117'
+>the-states</strong></font>
+  (integrate-system
+     (damped-oscillator 10000 1000 .001)
+     '#(1 0)
+     .01))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+
+
+         
+
+
+
+
+
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph10124'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it10122'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+;; /tmp/bigloo/api/gstreamer/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__gstreamer_multimedia_music "bigloo.gstreamer.gstmm_music")
+  (__gstreamer_plugin_bglports "bigloo.gstreamer.gstplugin_bglports")
+  (__gstreamer_gstparse "bigloo.gstreamer.gstparse")
+  (__gstreamer_gsttypefind "bigloo.gstreamer.gsttypefind")
+  (__gstreamer_gststructure "bigloo.gstreamer.gststructure")
+  (__gstreamer_gsterror "bigloo.gstreamer.gsterror")
+  (__gstreamer_gstreamer "bigloo.gstreamer.gstreamer")
+  (__gstreamer_gstplugin "bigloo.gstreamer.gstplugin")
+  (__gstreamer_gstpadtemplate "bigloo.gstreamer.gstpadtemplate")
+  (__gstreamer_gstpad "bigloo.gstreamer.gstpad")
+  (__gstreamer_gstregistry "bigloo.gstreamer.gstregistry")
+  (__gstreamer_gstpluginfeature "bigloo.gstreamer.gstpluginfeature")
+  (__gstreamer_gstpipeline "bigloo.gstreamer.gstpipeline")
+  (__gstreamer_gstobject "bigloo.gstreamer.gstobject")
+  (__gstreamer_gstmessage "bigloo.gstreamer.gstmessage")
+  (__gstreamer_gstghostpad "bigloo.gstreamer.gstghostpad")
+  (__gstreamer_gstelementfactory "bigloo.gstreamer.gstelementfactory")
+  (__gstreamer_gstelement "bigloo.gstreamer.gstelement")
+  (__gstreamer_gstcaps "bigloo.gstreamer.gstcaps")
+  (__gstreamer_gstbuffer "bigloo.gstreamer.gstbuffer")
+  (__gstreamer_gstbus "bigloo.gstreamer.gstbus")
+  (__gstreamer_gstbin "bigloo.gstreamer.gstbin")
+  (__gstreamer_makelib "bigloo.gstreamer.make_lib")
+)
+

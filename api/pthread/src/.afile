@@ -1,0 +1,11 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/pthread/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__pth_backend "Llib/pbackend.scm")
+  (__pth_condvar "Llib/pcondvar.scm")
+  (__pth_mutex "Llib/pmutex.scm")
+  (__pth_thread "Llib/pthread.scm")
+)
+

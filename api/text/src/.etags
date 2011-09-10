@@ -1,0 +1,55 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/bibtex.scm,517
+(module __text_bibtex15,963
+(define (bibtex25,1410
+(define (bibtex-port37,1823
+(define (bibtex-file43,2109
+(define (bibtex-string49,2412
+(define *bibtex-string-table*55,2723
+(define (make-bibtex-hashtable60,2990
+(define (parse-bibtex73,3517
+(define (the-coord95,4244
+(define bibtex-lexer101,4553
+(define bibtex-parser236,9767
+(define (bibtex-parse-authors344,12839
+(define (bibtex-string-def!370,13974
+(define (parse-entry-value386,14551
+(define (make-bibtex-entry410,15301
+(define (untexify424,15831
+
+Llib/gb2312.scm,154
+(module __text_gb231216,1037
+(define gb2312-lock23,1333
+(define gb2312-table28,1590
+(define (load-gb2312-tables!33,1838
+(define (gb2312->ucs253,2539
+
+Llib/hyphenation.scm,461
+(module __text_hyphenation25,1703
+(define (load-hyphens33,2108
+(define (make-hyphens57,2994
+(define (make-t-hyph65,3416
+(define (fold-left84,4034
+(define t-null92,4370
+(define (a-look97,4624
+(define (a-bind106,4987
+(define (t-look115,5419
+(define (t-bind124,5808
+(define (char-num133,6257
+(define (split-pat141,6711
+(define (split-exn164,7647
+(define (t-looks178,8216
+(define (max-rule191,8739
+(define (fixup200,9157
+(define (hyphenate206,9467

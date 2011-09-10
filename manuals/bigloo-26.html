@@ -1,0 +1,241 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>25. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Explicit typing</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center33865'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33855" align="center" colspan="1"><font color="#ffffff"><strong id='bold33853'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33862" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc33858" align="left" valign="top" colspan="1"><strong id='bold33857'
+>top:</strong></td><td id="tc33859" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33875'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33869" align="center" colspan="1"><font color="#ffffff"><strong id='bold33867'
+>Explicit typing</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33872" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33885'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33879" align="center" colspan="1"><font color="#ffffff"><strong id='bold33877'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33882" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Explicit-Typing" class="mark"></a><a name="g25789" class="mark"></a>
+Bigloo supports <em id='emph25791'
+>type annotation</em> or <em id='emph25792'
+>type information</em>. As shown in
+Section ref Module declaration, these annotations can be written both in
+the module clauses and in module bodies although module body type
+information is optional. It helps the compiler to produce better quality
+code and to reject incorrectly typed programs. Type annotations can describe
+both the result and formal parameter types for global functions and also
+types for local variable. Due to our module language design (in particular
+module initialization), Scheme global variables <em id='emph25793'
+>cannot</em> support type
+information.<br/><br/>Types are either atomic types (see <a href="bigloo-27.html#Atomic-types" class="inbound">Atomic types</a>), foreign types
+(see <a href="bigloo-27.html#Defining-an-extern-type" class="inbound">Defining an extern type</a>), or a classes
+(see <a href="bigloo-11.html#Class-declaration" class="inbound">Class declaration</a>).<br/><br/><em id='emph25796'
+>Warning: </em> All type annotations are ignored by the interpreter.<br/><br/>Module body type annotations are introduced by the following
+special forms.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25801" align="left" colspan="1"><strong id='bold25799'
+>define</strong><em id='it25800'
+> (f[::type] [a[::type]]...) body</em></td><td id="tc25802" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25807" align="left" colspan="1"><strong id='bold25805'
+>define-inline</strong><em id='it25806'
+> (f[::type] [a[::type]]...) body</em></td><td id="tc25808" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25813" align="left" colspan="1"><strong id='bold25811'
+>let</strong><em id='it25812'
+> ((var[::type] ...) ...) body</em></td><td id="tc25814" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25819" align="left" colspan="1"><strong id='bold25817'
+>let</strong><em id='it25818'
+> loop ((var[::type] ...) ...) body</em></td><td id="tc25820" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25825" align="left" colspan="1"><strong id='bold25823'
+>let*</strong><em id='it25824'
+> ((var[::type] ...) ...) body</em></td><td id="tc25826" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25831" align="left" colspan="1"><strong id='bold25829'
+>letrec</strong><em id='it25830'
+> ((var[::type] ...) ...) body</em></td><td id="tc25832" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25837" align="left" colspan="1"><strong id='bold25835'
+>labels</strong><em id='it25836'
+> ((var[::type] (var[::type]...) b) ...) body</em></td><td id="tc25838" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+
+Type annotations are optional. That is, for any of these
+constructions, if a type annotation is missing, Bigloo uses
+the default generic type <code id='code25841'
+>obj</code> instead.<br/><br/>Here is an example of type annotated program:<br/><br/><center id='center25863'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog25861'
+>(<font color="#1919af"><strong id='bold33886'
+>module</strong></font> <font color="#1919af"><strong id='bold33888'
+>example</strong></font>
+   (<font color="#1919af"><strong id='bold33890'
+>export</strong></font> (<font color="#1919af"><strong id='bold33892'
+>vector-fill!</strong></font><font color="#00cf00"><strong id='bold33894'
+>::vector</strong></font> <font color="#00cf00"><strong id='bold33896'
+>::vector</strong></font> <font color="#00cf00"><strong id='bold33898'
+>::obj</strong></font>)))<br/><br/>(<font color="#6959cf"><strong id='bold33900'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33902'
+>vector-fill!</strong></font> v filler)
+  (<strong id='bold33904'
+>let</strong> loop ((i<font color="#00cf00"><strong id='bold33905'
+>::long</strong></font> (- (vector-length v) 1)))
+     (<strong id='bold33907'
+>if</strong> (&lt; i 0)
+         v
+         (<strong id='bold33908'
+>begin</strong>
+            (vector-set! v i filler)
+            (loop (- i 1))))))<br/><br/>(<strong id='bold33909'
+>let</strong> ((v<font color="#00cf00"><strong id='bold33910'
+>::vector</strong></font> (make-vector 3 4)))
+   (vector-fill! v <font color="red">&quot;dummy&quot;</font>))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The types that can be used in annotations are any of: <br/><br/><ul class="itemize" id='itemize25877'
+><li>the basic Scheme types <code id='code25865'
+>pair</code>, <code id='code25866'
+>null</code>, <code id='code25867'
+>bstring</code>,
+<code id='code25868'
+>bint</code> (presented in Section <a href="bigloo-27.html#Defining-an-extern-type" class="inbound">Defining an extern type</a>).
+</li>
+<li>the basic extern types <code id='code25870'
+>long</code>, <code id='code25871'
+>int</code>, <code id='code25872'
+>char</code>, 
+<code id='code25873'
+>string</code> presented in Section <a href="bigloo-27.html#Defining-an-extern-type" class="inbound">Defining an extern type</a>.
+</li>
+<li>the compound extern types described in Section 
+<a href="bigloo-27.html#Defining-an-extern-type" class="inbound">Defining an extern type</a>.
+</li>
+<li>the types introduced by class declarations (Section 
+<a href="bigloo-11.html#Class-declaration" class="inbound">Class declaration</a>).
+</li>
+</ul><br/><br/>When a function that contains type annotation is exported, the type 
+annotations must be written in the prototype of the function in
+the export clause. In that case the type annotation need to be
+written in the function definition:<br/><br/><center id='center25890'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog25888'
+>(<font color="#1919af"><strong id='bold33913'
+>module</strong></font> <font color="#1919af"><strong id='bold33915'
+>foo</strong></font>
+   (<font color="#1919af"><strong id='bold33917'
+>export</strong></font> (<font color="#1919af"><strong id='bold33919'
+>succ</strong></font><font color="#00cf00"><strong id='bold33921'
+>::int</strong></font> <font color="#00cf00"><strong id='bold33923'
+>::int</strong></font>)))<br/><br/>(<font color="#6959cf"><strong id='bold33925'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33927'
+>succ</strong></font> x) (+ 1 x))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph33934'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it33932'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

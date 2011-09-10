@@ -1,0 +1,18 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/configure.scm,60
+(module @configure16,1002
+(define (pkgcomp-version29,1542
+
+Llib/interface.scm,26
+(module @interface15,963

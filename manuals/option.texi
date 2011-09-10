@@ -1,0 +1,882 @@
+@c -- The Bigloo command line -------------------------------------- @c
+@subsection The Bigloo command line
+@cindex compiler options
+
+If no input file is specified, Bigloo enters its interpreter.
+Here is the exhaustive list of Bigloo options and configuration variables:
+
+@display
+
+usage: bigloo [options] [name.suf]
+
+
+Misc:
+   -                           Read source code on current input channel
+   -help,--help                This help message
+   -help2                      The exhaustive help message
+   -help-manual                The help message formatted for the manual
+   -o FILE                     Name the output FILE
+   --to-stdout                 Write C code on current output channel
+   -c                          Suppress linking and produce a .o file
+   -suffix SUFFIX              Recognize suffix as Scheme source
+   -afile FILE                 Name of the access file
+   -access MODULE FILE         Set access between module and file
+   -jfile FILE                 Name of the Jvm package file
+   -jadd MODULE QTYPE          Set JVM qualifed type name for module
+   -main FUN                   Set the main function
+   -with MODULE                Import addition module
+   -multiple-inclusion         Enables multiple inclusions of the Bigloo includes
+   -library LIBRARY            Compile/link with additional Bigloo library
+   -srfi SRFI                  Declares srfi support
+   -dload-sym                  Emit a Bigloo dynamic loading entry point
+   -dload-init-sym NAME        Emit a Bigloo dynamic loading entry point, named NAME
+   -heapsize SIZE              Set the initial heap size value (in megabyte)
+
+Configuration and path:
+   -version                    The current release
+   -revision                   The current release (short format)
+   -query                      Dump the current configuration
+   -q                          Do not load any rc file
+   -eval STRING                Evaluate STRING before compiling
+   -load FILE                  Load FILE before compiling
+   -I DIR                      Add DIR to the load path
+   -lib-dir DIR                Set lib-path to DIR
+   -L NAME                     Set additional library path
+   -lib-version VERSION        Set the Bigloo library version
+   -libgc-version VERSION      Set the Bigloo GC library version
+   -libgc GC                   Use the given GC library
+
+Back-end:
+   -native                     Compile module to native object file (via C)
+   -jvm                        Compile module to JVM .class files
+   -dotnet                     Compile module to .NET object files
+   -saw                        Cut the AST in the saw-mill
+   -no-saw                     Disable saw back-ends
+   -i                          Interprete module
+
+Dialect:
+   -snow                       Compiles a snow source code
+   -scmpkg,-spi                Compiles a ScmPkg source code
+   -nil                        Evaluate '() as #f in `if' expression
+   -call/cc                    Enable call/cc function
+   -hygien                     Obsolete (R5rs macros are always supported)
+   -fno-reflection             Disable reflection code production
+   +fno-reflection             Enable reflection code production
+   -fclass-nil                 Enables generation of "class-nil" function
+   -fno-class-nil              Disables generation of "class-nil" function
+   -farithmetic                Suppress genericity of arithmetic operators
+   -fcase-sensitive            Case sensitive reader (default)
+   -fcase-insensitive          Case insensitive reader (downcase symbols)
+   -fallow-type-redefinition   allow type redifinition
+
+Optimization:
+   -Obench                     Benchmarking mode
+   -O[2..6]                    Optimization modes
+   -fcfa-arithmetic            Enable arithmetic spec. (fixum and flonum)
+   -fno-cfa-arithmetic         Disable arithmetic spec.
+   -fcfa-arithmetic-fixnum     Enable fixnum arithmetic spec.
+   -fno-cfa-arithmetic-fixnum  Disable fixnum arithmetic spec.
+   -fcfa-arithmetic-flonum     Enable flonum arithmetic spec. (enabled from -O2)
+   -fno-cfa-arithmetic-flonum  Disable flonum arithmetic spec. 
+   -funroll-loop               Enable loop unrolling (enabled from -O3)
+   -fno-unroll-loop            Disable loop unrolling
+   -fno-loop-inlining          Disable loop inlining
+   -floop-inlining             Enable loop inlining (default)
+   -fno-inlining               Disable inline optimization
+   -fno-user-inlining          Disable user inline optimization
+   -fbeta-reduce               Enable simple beta reduction (enabled from -O2)
+   -fno-beta-reduce            Disable simple beta reduction
+   -fdataflow                  Enable dataflow optimizations (enabled from -O)
+   -fno-dataflow               Disable dataflow optimizations
+   -fdataflow-for-errors       Enable dataflow optimizations for improviing type error messages
+   -fno-dataflow-for-errors    Disable dataflow optimizations for improviing type error messages
+   -fdataflow-types            Enable type dataflow optimizations (enabled from -O2)
+   -fno-dataflow-types         Disable type dataflow optimizations
+   -fO-macro                   Enable Optimization macro (default)
+   -fno-O-macro                Disable Optimization macro
+   -fglobal-tailc              Enable global tail-call optimization
+   -fno-global-tailc           Disable global tail-call optimization
+   -fold-closure-integration   Enable old closure integration technique
+   -fsaw-realloc               Enable saw register re-allocation
+   -fsaw-regalloc              Enable saw register allocation
+   -fno-saw-regalloc           Disable saw register allocation
+   -fsaw-regalloc-msize SIZE   Set the register allocation body size limit
+   -fsaw-regalloc-fun NAME     Allocate registers on this very function
+   -fno-saw-regalloc-fun NAME  Don't allocate registers on this very function
+   -fsaw-regalloc-onexpr       Allocate registers on expressions
+   -fno-saw-regalloc-onexpr    Don't allocate registers on expressions
+
+Safety:
+   -unsafe[atrsvleh]           Don't check [type/arity/range/struct/version/library/eval/heap]
+   -safe[atrsvle]              Enforce check [type/arity/range/struct/version/library/eval]
+
+Debug:
+   -glines                     Emit # line directives
+   -gbdb-no-line               Don't emit # line directives
+   -gbdb[23]                   Compile with bdb debug informations
+   -gself                      Enables self compiler debug options
+   -gmodule                    Debug module initialization
+   -gerror-localization        Localize error calls in the source code
+   -gno-error-localization     Don't localize error calls in the source code
+   -gjvm                       Annote JVM classes for debug
+   -gtrace[12]                 Producing stack traces
+   -g[234]                     Produce Bigloo debug informations
+   -cg                         Compile C files with debug option
+   -export-all                 Eval export-all all routines
+   -export-exports             Eval export-exports all routines
+   -export-mutable             Enables Eval redefinition of all "::obj" routines
+
+Profiling:
+   -p[2]                       Compile files for profiling
+   -pg                         Compile files with profiling option
+   -pmem                       Compile files for memory profiling
+   -pmem2                      Compile files for memory profiling
+
+Verbosity:
+   -s                          Be silent and inhibit all warning messages
+   -v[23]                      Be verbose
+   -hello                      Say hello
+   -no-hello                   Dont' say hello even in verbose mode
+   -w                          Inhibit all warning messages
+   -wslots                     Inhibit overriden slots warning messages
+   -Wvariables                 Enable overriden variable warning messages
+   -Wall                       warn about all possible type errors
+
+Compilation modes:
+   <-/+>rm                     Don't or force removing .c or .il files
+   -extend NAME                Extend the compiler
+   -fsharing                   Attempt to share constant data
+   -fno-sharing                Do not attempt to share constant data
+   -fmco                       Produce an .mco file
+   -fmco-include-path DIR      Add dir to mco C include path
+
+Native specific options:
+   -cc COMPILER                Specify the C compiler
+   -stdc                       Generate strict ISO C code
+   -copt STRING                Invoke cc with STRING
+   -cheader STRING             C header
+   -cfoot STRING               C foot
+   -ldopt STRING               Invoke ld with STRING
+   -ldpostopt STRING           Invoke ld with STRING (end of arguments)
+   --force-cc-o                Force the C compiler to use -o instead of mv
+   -ld-relative                Link using -l notation for libraries (default)
+   -ld-absolute                Link using absolute path names for libraries
+   -static-bigloo              Link with the static bigloo library
+   -static-all-bigloo          Link with static version of all bigloo libraries
+   -ld-libs1                   Add once user libraries when linking
+   -ld-libs2                   Add twice user libraries when linking (default)
+   -lLIBRARY                   Link with host library
+
+Jvm specific options:
+   -jvm-shell SHELL            Shell for JVM scripts ("sh", "msdos")
+   -jvm-purify                 Produce byte code verifier compliant JVM code (default)
+   -no-jvm-purify              Don't care about JVM code verifier
+   -jvm-mainclass CLASS        JVM main class
+   -jvm-classpath PATH         JVM application classpath
+   -jvm-bigloo-classpath P     JVM Bigloo rts classpath
+   -jvm-path-separator SEP     Set the JVM classpath separator
+   -jvm-directory NAME         Directory where to store class files.
+   -jvm-catch-errors           Catch internal JVM errors
+   -no-jvm-catch-errors        Don't catch internal JVM errors
+   -jvm-jarpath NAME           Set the JVM classpath for the produced jar file
+   -jvm-cinit-module           Enable JVM class constructors to initiliaze bigloo modules
+   -no-jvm-cinit-module        Disable JVM class constructors to initiliaze bigloo modules
+   -jvm-char-info              Generate char info for the debugger (in addition to line info)
+   -no-jvm-char-info           Do not generate char info for the debugger
+   -fjvm-inlining              Enable JVM back-end inlining
+   -fjvm-constr-inlining       Enable JVM back-end inlining for constructors
+   -fno-jvm-inlining           Disable JVM back-end inlining
+   -fno-jvm-constr-inlining    Disable JVM back-end inlining for constructors
+   -fjvm-peephole              Enable JVM back-end peephole
+   -fno-jvm-peephole           Disable JVM back-end peephole
+   -fjvm-branch                Enable JVM back-end branch
+   -fno-jvm-branch             Disable JVM back-end branch
+   -fjvm-fasteq                EQ? no longer works on integers (use =FX)
+   -fno-jvm-fasteq             Disable JVM back-end fasteq transformation
+   -jvm-env VAR                Make the shell variable visible to GETENV
+   -jvm-jar                    Enable JVM jar files generation
+   -no-jvm-jar                 Disable JVM jar files generation (default)
+   -jvm-java FILE              Use FILE as JVM
+   -jvm-opt STRING             JVM invocation option
+
+.NET specific options:
+   -dotnet-managed             Produce byte code verifier compliant .NET code (default)
+   -dotnet-unmanaged           Don't care about .NET code verifier
+   -dotnet-linux-mono          Compile for Mono on a Linux
+   -dotnet-clr FILE            Use FILE as .NET CLR
+   -dotnet-clr-style STYLE     Use CLR invokation style
+   -dotnet-clr-opt S           Set the .NET CLR options
+   -dotnet-ld FILE             Use FILE as .NET LD
+   -dotnet-ld-style STYLE      Use LD invokation style
+   -dotnet-dll-path NAME       Set the .NET DLL search path
+   -dotnet-external-asm        Enable external assembler (default)
+   -no-dotnet-external-asm     Disable external assembler
+   -ilasm ASM                  Specify external IL assembler
+   -fdotnet-tailc              Flag tail calls for inside module calls
+   -fno-dotnet-tailc           Don't flag tail calls
+   -fdotnet-tailc-full         Flag tail calls everywhere
+   -fdotnet-tailc-module       Flag tail calls across modules
+   -fno-dotnet-tailc-module    Don't flag tail calls across modules
+   -fdotnet-tailc-funcall      Flag tail calls for funcalls
+   -fno-dotnet-tailc-funcall   Don't flag tail call for funcalls
+   -dotnet-mono-workaround     Workaround Mono .NET buts (switch)
+   -no-dotnet-mono-workaround  Disable workaround Mono .NET buts (switch)
+   -dotnet-pnet-workaround     Workaround pnet swich bug
+   -no-dotnet-pnet-workaround  Disable Workaround pnet swich bug
+
+Traces:
+   -t[2|3|4]                   Generate a trace file (*)
+   +tPASS                      Force pass to be traced
+   -shape[mktTalun]            Some debugging tools (private)
+
+Compilation stages:
+   -mco                        Stop after .mco production
+   -syntax                     Stop after the syntax stage (see -hygiene)
+   -expand                     Stop after the preprocessing stage
+   -expand-module              Produce the expanded module clause
+   -ast                        Stop after the ast construction stage
+   -bdb-spread-obj             Stop after the bdb obj spread stage
+   -trace                      Stop after the trace pass
+   -callcc                     Stop after the callcc pass
+   -bivalue                    Stop after the bivaluation stage
+   -inline                     Stop after the inlining stage
+   -inline+                    Stop after the 2nd inlining stage
+   -beta                       Stop after the constant beta reduction stage
+   -fail                       Stop after the failure replacement stage
+   -abound                     Stop after the array bound checking stage
+   -dataflow                   Stop after the type dataflow stage
+   -dataflow+                  Stop after the second type dataflow stage
+   -fuse                       Stop after the fuse stage
+   -user                       Stop after the user pass
+   -coerce                     Stop after the type coercing stage
+   -effect                     Stop after the effect stage
+   -effect+                    Stop after the 2nd effect stage
+   -reduce                     Stop after the reduction opt. stage
+   -reduce+                    Stop after the 2nd reduction opt. stage
+   -reduce-                    Stop after the very first reduction stage
+   -assert                     Stop after the assertions stage
+   -cfa                        Stop after the cfa stage
+   -closure                    Stop after the globalization stage
+   -recovery                   Stop after the type recovery stage
+   -bdb                        Stop after the Bdb code production
+   -cnst                       Stop after the constant allocation
+   -integrate                  Stop after the integration stage
+   -tailc                      Stop after the tailc stage
+   -init                       Stop after the initialization construction stage
+   -egen                       Produce an include file for effects (requires -saw)
+   -hgen                       Produce a C header file with class definitions
+   -cgen                       Do not C compile and produce a .c file
+   -indent                     Produce an indented .c file
+   -jvmas                      Produce a JVM .jas file
+   -il                         Produce a .NET .asm file
+
+Constant initialization:
+   -init-[lib|read|intern]     Constants initialization mode
+   init-object-[legacy|staged] Object system initialization
+
+Bootstrap and setup:
+   -mklib                      Compile a library module
+   -mkaddlib                   Compile an additional library module
+   -mkheap                     Build an heap file
+   -mkaddheap                  Build an additional heap file
+   -mkdistrib                  Compile a main file for a distribution
+   --license                   Display the Bigloo license and exit
+   -LICENSE                    Add the license to the generated C files
+   -heap NAME                  Specify an heap file (or #f to not load heap)
+   -heap-library LIB           The library the heap belongs to
+   -dump-heap NAME             Dump the content of a heap
+   -addheap NAME               Specify an additional heap file
+   -fread-internal             Read source from binary interned file
+   -fread-internal-src         Read source only from binary interned file
+   -fread-plain                Read source from plain text file
+   -target LANG                DON'T USE, (see -native, -jvm, -dotnet)
+
+Shell Variables:
+   - TMPDIR
+     temporary directory (default "/tmp")
+   - BIGLOOLIB
+     libraries' directory
+   - BIGLOOHEAP
+     the initial heap size in megabytes (4 MB by default)
+   - BIGLOOSTACKDEPTH
+     the error stack depth printing
+   - BIGLOOLIVEPROCESS
+     the maximum number of Bigloo live processes
+
+Runtime Command file:
+   - ~/.bigloorc
+
+
+------------
+ * : only available in developing mode
+ . : option enabled from -O3 mode
+
+
+Bigloo Control Variables:
+   All the Bigloo control variables can be changed from the
+   interpreter, by the means of the `-eval' option, or using
+   the module clause `option'. For instance the option
+   "-eval '(set! *strip* #t)'" will set the variable
+   `*strip*' to the value `#t'.
+   These variables are:
+
+   - *access-file-default* : 
+     The default access file name
+     default: ".afile"
+   - *access-files* : 
+     The access file names
+     default: ()
+   - *additional-bigloo-libraries* : 
+     The user extra Bigloo libraries
+     default: ()
+   - *additional-bigloo-zips* : 
+     The user extra Bigloo Zip files
+     default: ()
+   - *additional-heap-name* : 
+     A name of an additional heap file name to be build
+     default: #f
+   - *additional-heap-names* : 
+     A list of Bigloo additional heap file name
+     default: ()
+   - *additional-include-foreign* : 
+     The additional C included files
+     default: ()
+   - *allow-type-redefinition* : 
+     If true, allow type redefinitions
+     default: #f
+   - *ast-case-sensitive* : 
+     Case sensitivity
+     default: #t
+   - *auto-mode* : 
+     auto-mode (extend mode) list
+     default: (("ml" . "caml") ("mli" . "caml") ("oon" . "meroon") ("snow" . "snow") ("spi" . "pkgcomp"))
+   - *bdb-debug* : 
+     Bdb debugging mode
+     default: 0
+   - *bigloo-abort?* : 
+     Do we have the bigloo-abort function in executables?
+     default: #f
+   - *bigloo-lib* : 
+     The Bigloo library
+     default: bigloo
+   - *bigloo-libraries-c-setup* : 
+     A list of C functions to be called when starting the application
+     default: ()
+   - *bigloo-licensing?* : 
+     Add the Bigloo license ?
+     default: #f
+   - *bigloo-name* : 
+     The Bigloo name
+     default: "Bigloo (3.6a)"
+   - *bigloo-specific-version* : 
+     The Bigloo specific version
+     default: ""
+   - *bigloo-tmp* : 
+     The tmp directory name
+     default: "/tmp"
+   - *bigloo-user-lib* : 
+     The user extra C libraries
+     default: ("-ldl" "-lgmp" "-lm")
+   - *bigloo-version* : 
+     The Bigloo major release number
+     default: "3.6a"
+   - *bmem-profiling* : 
+     Instrument code for bmem profiling
+     default: #f
+   - *c-debug* : 
+     C debugging mode?
+     default: #f
+   - *c-debug-lines-info* : 
+     Emit # line directives
+     default: #f
+   - *c-debug-option* : 
+     cc debugging option
+     default: "-g"
+   - *c-files* : 
+     The C source files
+     default: ()
+   - *c-object-file-extension* : 
+     The C object file extension
+     default: "o"
+   - *c-split-string* : 
+     C split long strings
+     default: #f
+   - *c-suffix* : 
+     C legal suffixes
+     default: ("c")
+   - *c-user-foot* : 
+     C foot
+     default: ()
+   - *c-user-header* : 
+     C header
+     default: ()
+   - *call/cc?* : 
+     Shall we enable call/cc?
+     default: #f
+   - *cc* : 
+     The C compiler
+     default: "gcc"
+   - *cc-move* : 
+     Use mv instead of -o when C compiling
+     default: #t
+   - *cc-o-option* : 
+     The C compiler -o option
+     default: "-o "
+   - *cc-options* : 
+     cc options
+     default: " -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG"
+   - *cc-style* : 
+     The C compiler style
+     default: "gcc"
+   - *cflags* : 
+     The C compiler option
+     default: " -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG"
+   - *cflags-optim* : 
+     The C compiler optimization option
+     default: "-O3  -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG"
+   - *cflags-prof* : 
+     The C compiler profiling option
+     default: "-pg -fno-inline  -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG"
+   - *class-nil?* : 
+     Shall we produce class-nil function for classes
+     default: #t
+   - *compiler-debug* : 
+     Debugging level
+     default: 0
+   - *compiler-debug-trace* : 
+     Debugging trace level
+     default: 0
+   - *compiler-sharing-debug?* : 
+     Compiler self sharing debug
+     default: #f
+   - *csharp-suffix* : 
+     C# legal suffixes
+     default: ("cs")
+   - *debug-module* : 
+     Module initilazation debugging
+     default: 0
+   - *default-lib-dir* : 
+     The default lib dir path (without version)
+     default: "/users/serrano/prgm/project/bigloo/lib/3.6a"
+   - *dest* : 
+     The target name
+     default: #f
+   - *dlopen-init* : 
+     Emit a standard Bigloo dynamic loading init entry point
+     default: #f
+   - *dotnet-clr* : 
+     CLR to be used to run .NET programs
+     default: "mono"
+   - *dotnet-clr-opt* : 
+     CLR extra options to be used to run .NET programs
+     default: ""
+   - *dotnet-clr-style* : 
+     CLR style to be used to run .NET programs
+     default: "mono"
+   - *dotnet-dll-path* : 
+     Bigloo.dll path
+     default: #f
+   - *dotnet-external-asm* : 
+     Force using and external assembler for .NET code
+     default: "ilasm.pnet"
+   - *dotnet-external-asm-style* : 
+     Force using and external assembler for .NET code
+     default: pnet
+   - *dotnet-ld* : 
+     .NET object file linker
+     default: "cscc"
+   - *dotnet-ld-style* : 
+     .NET object file linker style
+     default: "mono"
+   - *dotnet-mono-workaround-switch* : 
+     Workaround mono 0.23..0.30 bug
+     default: #t
+   - *dotnet-pnet-workaround-switch* : 
+     Workaround pnet switch bug
+     default: #t
+   - *dotnet-shell* : 
+     .NET object file linker
+     default: "sh"
+   - *dotnet-tail* : 
+     Enable/disable tail call generations
+     default: #f
+   - *dotnet-tail-across-modules* : 
+     Enable/disable tail call generations across modules
+     default: #f
+   - *dotnet-tail-funcall* : 
+     Enable/disable tail call generations for funcall
+     default: #f
+   - *dotnet-use-external-asm* : 
+     Force using and external assembler for .NET code
+     default: #t
+   - *double-ld-libs?* : 
+     Do we include the additional user libraries twice?
+     default: #t
+   - *error-localization* : 
+     Localize error calls in the source code
+     default: #f
+   - *eval-options* : 
+     A user variable to store dynamic command line options
+     default: ()
+   - *extend-entry* : 
+     Extend entry
+     default: #f
+   - *garbage-collector* : 
+     The garbage collector
+     default: boehm
+   - *gc-custom?* : 
+     Are we using a custom GC library?
+     default: #t
+   - *gc-lib* : 
+     The Gc library
+     default: bigloogc
+   - *global-tail-call?* : 
+     Do we apply the self-global-tail-call stage?
+     default: #f
+   - *globalize-integrate-28c* : 
+     Enable the old closure integration technique (deprecated)
+     default: #f
+   - *heap-base-name* : 
+     The Bigloo heap base name
+     default: "bigloo"
+   - *heap-dump-names* : 
+     The name of the heap to be dumped
+     default: ()
+   - *heap-jvm-name* : 
+     The Bigloo heap file name for the JVM backend
+     default: "bigloo.jheap"
+   - *heap-library* : 
+     The library the heap belongs to
+     default: bigloo
+   - *heap-name* : 
+     The Bigloo heap file name
+     default: "bigloo.heap"
+   - *hello* : 
+     Say hello (when verbose)
+     default: #f
+   - *include-foreign* : 
+     The C included files
+     default: ("bigloo.h")
+   - *include-multiple* : 
+     Enable/disable multiple inclusion of same file
+     default: #f
+   - *indent* : 
+     The name of the C beautifier
+     default: "indent -npro -bap -bad -nbc -bl -ncdb -nce -nfc1 -ip0 -nlp -npcs -nsc -nsob -cli0.5 -di0 -l80 -d1 -c0 -ts2 -st"
+   - *init-mode* : 
+     Module initialization mode
+     default: read
+   - *inlining-kfactor* : 
+     Inlining growth factor
+     default: #<procedure:8109530.1>
+   - *inlining-reduce-kfactor* : 
+     Inlinine growth factor reductor
+     default: #<procedure:8109440.1>
+   - *inlining?* : 
+     Inlining optimization
+     default: #t
+   - *interpreter* : 
+     Shall we interprete the source file?
+     default: #f
+   - *jvm-bigloo-classpath* : 
+     JVM Bigloo classpath
+     default: #f
+   - *jvm-catch* : 
+     Catch internal errors
+     default: #t
+   - *jvm-cinit-module* : 
+     Enable JVM class constructors to initiliaze bigloo modules
+     default: #f
+   - *jvm-classpath* : 
+     JVM classpath
+     default: "."
+   - *jvm-debug* : 
+     JVM debugging mode?
+     default: #f
+   - *jvm-directory* : 
+     JVM object directory
+     default: #f
+   - *jvm-env* : 
+     List of environment variables to be available in the compiled code
+     default: ()
+   - *jvm-foreign-class-id* : 
+     The identifier of the Jlib foreign class
+     default: foreign
+   - *jvm-foreign-class-name* : 
+     The name of the Jlib foreign class
+     default: "bigloo.foreign"
+   - *jvm-jar?* : 
+     Enable/disable a JAR file production for the JVM back-end
+     default: #f
+   - *jvm-jarpath* : 
+     JVM jarpath
+     default: #f
+   - *jvm-java* : 
+     JVM to be used to run Java programs
+     default: "java"
+   - *jvm-mainclass* : 
+     JVM main class
+     default: #f
+   - *jvm-options* : 
+     JVM options
+     default: ""
+   - *jvm-path-separator* : 
+     JVM classpath
+     default: #f
+   - *jvm-shell* : 
+     Shell to be used when producing JVM run scripts
+     default: "sh"
+   - *ld-debug-option* : 
+     The C linker debugging option
+     default: "-g "
+   - *ld-library-dir* : 
+     The ld lib dir path (without version)
+     default: "/users/serrano/prgm/project/bigloo/lib"
+   - *ld-o-option* : 
+     The C linker -o option
+     default: "-o "
+   - *ld-optim-flags* : 
+     The C linker optimization flags
+     default: ""
+   - *ld-options* : 
+     ld options
+     default: ""
+   - *ld-post-options* : 
+     ld post options
+     default: ""
+   - *ld-relative* : 
+     Relative or absolute path names for libraries
+     default: #t
+   - *ld-style* : 
+     ld style
+     default: "gcc"
+   - *lib-dir* : 
+     The lib dir path
+     default: ("." "/users/serrano/prgm/project/bigloo/lib/3.6a")
+   - *lib-mode* : 
+     Lib-mode compilation?
+     default: #f
+   - *lib-src-dir* : 
+     The lib dir path
+     default: "runtime"
+   - *load-path* : 
+     The load path
+     default: ("." "/users/serrano/prgm/project/bigloo/lib/3.6a")
+   - *max-c-foreign-arity* : 
+     Max C function arity
+     default: 16
+   - *max-c-token-length* : 
+     Max C token length
+     default: 1024
+   - *mco-include-path* : 
+     Module checksum C include path
+     default: (".")
+   - *mco-suffix* : 
+     Module checksum object legal suffixes
+     default: ("mco")
+   - *module-checksum-object?* : 
+     Produce a module checksum object (.mco)
+     default: #f
+   - *multi-threaded-gc?* : 
+     Are we using a multi-threaded GC?
+     default: #f
+   - *o-files* : 
+     The additional obect files
+     default: ()
+   - *obj-suffix* : 
+     Object legal suffixes
+     default: ("o" "a" "so")
+   - *object-init-mode* : 
+     Object initialization mode
+     default: stagged
+   - *optim* : 
+     Optimization level
+     default: 0
+   - *optim-O-macro?* : 
+     Enable optimization by macro-expansion
+     default: #f
+   - *optim-cfa-fixnum-arithmetic?* : 
+     Enable refined fixnum arithmetic specialization
+     default: #f
+   - *optim-cfa-flonum-arithmetic?* : 
+     Enable refined flonum arithmetic specialization
+     default: #f
+   - *optim-dataflow-for-errors?* : 
+     Enable simple dataflow optimization for eliminating bad error messages
+     default: #t
+   - *optim-dataflow-types?* : 
+     Enable dataflow optimization for types
+     default: #f
+   - *optim-dataflow?* : 
+     Enable simple dataflow optimization
+     default: #f
+   - *optim-integrate?* : 
+     Enable function integration (closure analysis)
+     default: #t
+   - *optim-jvm* : 
+     Enable optimization by inlining jvm code
+     default: 0
+   - *optim-jvm-branch* : 
+     Enable JVM branch tensioning
+     default: 0
+   - *optim-jvm-constructor-inlining* : 
+     Enable JVM inlining for constructors
+     default: 0
+   - *optim-jvm-fasteq* : 
+     EQ? no longer works on integers (use =FX instead)
+     default: #f
+   - *optim-jvm-inlining* : 
+     Enable JVM inlining
+     default: 0
+   - *optim-jvm-peephole* : 
+     Enable JVM peephole optimization
+     default: 0
+   - *optim-loop-inlining?* : 
+     Loop inlining optimization
+     default: #t
+   - *optim-reduce-beta?* : 
+     Enable simple beta reduction
+     default: #f
+   - *optim-symbol-case* : 
+     Optimize case forms descrimining on symbols only
+     default: #f
+   - *optim-unroll-loop?* : 
+     Loop unrolling optimization
+     default: #unspecified
+   - *pass* : 
+     Stop after the pass
+     default: ld
+   - *pre-processor* : 
+     An optional function that pre-processes the source file
+     default: #<procedure:81093c0.1>
+   - *prof-table-name* : 
+     Bprof translation table file name
+     default: "bmon.out"
+   - *profile-library* : 
+     Use the profiled library version
+     default: #f
+   - *profile-mode* : 
+     Bigloo profile mode
+     default: 0
+   - *purify* : 
+     Produce byte code verifier compliant JVM code
+     default: #t
+   - *qualified-type-file* : 
+     The qualifed-type association file name
+     default: #f
+   - *qualified-type-file-default* : 
+     The qualifed-type association file name
+     default: ".jfile"
+   - *reader* : 
+     The way the reader reads input file ('plain or 'intern)
+     default: plain
+   - *reflection?* : 
+     Shall we produce reflection code for classes
+     default: #t
+   - *rm-tmp-files* : 
+     Shall the .c and .il produced files be removed?
+     default: #t
+   - *saw* : 
+     Do we go to the saw-mill?
+     default: #f
+   - *saw-no-register-allocation-functions* : 
+     The list of functions disabling register allocation
+     default: ()
+   - *saw-register-allocation-functions* : 
+     The list of functions allowing register allocation
+     default: ()
+   - *saw-register-allocation-max-size* : 
+     Max function size for optimizing the register allocation
+     default: 4000
+   - *saw-register-allocation-onexpression?* : 
+     Enable/disable saw register allocation on expression
+     default: #f
+   - *saw-register-allocation?* : 
+     Enable/disable saw register allocation
+     default: #f
+   - *saw-register-reallocation?* : 
+     Enable/disable saw register re-allocation
+     default: #f
+   - *shared-cnst?* : 
+     Shared constant compilation?
+     default: #t
+   - *shell* : 
+     The shell to exec C compilations
+     default: "/bin/sh"
+   - *src-files* : 
+     The sources files
+     default: ()
+   - *src-suffix* : 
+     Scheme legal suffixes
+     default: ("scm" "bgl")
+   - *startup-file* : 
+     A startup file for the interpreter
+     default: #f
+   - *static-all-bigloo?* : 
+     Do we use the static version of all Bigloo libraries?
+     default: #f
+   - *static-bigloo?* : 
+     Do we use the static Bigloo library
+     default: #f
+   - *stdc* : 
+     Shall we produce ISO C?
+     default: #f
+   - *strip* : 
+     Shall we strip the executable?
+     default: #t
+   - *target-language* : 
+     The target language (either c, c-saw, jvm, or .net)
+     default: native
+   - *trace-name* : 
+     Trace file name
+     default: "trace"
+   - *trace-write-length* : 
+     Trace dumping max level
+     default: 80
+   - *unsafe-arity* : 
+     Runtime type arity safety
+     default: #f
+   - *unsafe-eval* : 
+     Disable type checking for eval functions
+     default: #f
+   - *unsafe-heap* : 
+     Disable heap version checking
+     default: #f
+   - *unsafe-library* : 
+     Use the unsafe library version
+     default: #f
+   - *unsafe-range* : 
+     Runtime range safety
+     default: #f
+   - *unsafe-struct* : 
+     Runtime struct range safety
+     default: #f
+   - *unsafe-type* : 
+     Runtime type safety
+     default: #f
+   - *unsafe-version* : 
+     Module version safety
+     default: #f
+   - *user-heap-size* : 
+     Heap size (in MegaByte) or #f for default value
+     default: 0
+   - *user-inlining?* : 
+     User inlining optimization
+     default: #t
+   - *user-pass* : 
+     The user specific compilation pass
+     default: #unspecified
+   - *verbose* : 
+     The verbosity level
+     default: 0
+   - *warning-overriden-slots* : 
+     Set to #t to warn about virtual slot overriding
+     default: #t
+   - *warning-overriden-variables* : 
+     Set to #t to warn about variable overriding
+     default: #f
+   - *with-files* : 
+     The additional modules
+     default: ()
+@end display
+

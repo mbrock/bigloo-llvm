@@ -1,0 +1,647 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>9. R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Variables and Procedures</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center9243'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc9233" align="center" colspan="1"><font color="#ffffff"><strong id='bold9231'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc9240" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc9236" align="left" valign="top" colspan="1"><strong id='bold9235'
+>top:</strong></td><td id="tc9237" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center9253'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc9247" align="center" colspan="1"><font color="#ffffff"><strong id='bold9245'
+>Variables and Procedures</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc9250" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center9263'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc9257" align="center" colspan="1"><font color="#ffffff"><strong id='bold9255'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc9260" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<center><big><big><strong id='bold9265'
+><em id='it9264'
+><a href="r5rs-12.html#*7340" class="inbound">*</a></em></strong></big></big> <big><big><strong id='bold9268'
+><em id='it9267'
+><a href="r5rs-12.html#+7341" class="inbound">+</a></em></strong></big></big> <big><big><strong id='bold9271'
+><em id='it9270'
+><a href="r5rs-12.html#-7342" class="inbound">-</a></em></strong></big></big> <big><big><strong id='bold9274'
+><em id='it9273'
+><a href="r5rs-12.html#/7343" class="inbound">/</a></em></strong></big></big> <big><big><strong id='bold9277'
+><em id='it9276'
+><a href="r5rs-12.html#<7344" class="inbound">&lt;</a></em></strong></big></big> <big><big><strong id='bold9280'
+><em id='it9279'
+><a href="r5rs-12.html#=7345" class="inbound">=</a></em></strong></big></big> <big><big><strong id='bold9283'
+><em id='it9282'
+><a href="r5rs-12.html#>7346" class="inbound">&gt;</a></em></strong></big></big> <big><big><strong id='bold9286'
+><em id='it9285'
+><a href="r5rs-12.html#A7347" class="inbound">A</a></em></strong></big></big> <big><big><strong id='bold9289'
+><em id='it9288'
+><a href="r5rs-12.html#B7348" class="inbound">B</a></em></strong></big></big> <big><big><strong id='bold9292'
+><em id='it9291'
+><a href="r5rs-12.html#C7349" class="inbound">C</a></em></strong></big></big> <big><big><strong id='bold9295'
+><em id='it9294'
+><a href="r5rs-12.html#D7350" class="inbound">D</a></em></strong></big></big> <big><big><strong id='bold9298'
+><em id='it9297'
+><a href="r5rs-12.html#E7351" class="inbound">E</a></em></strong></big></big> <big><big><strong id='bold9301'
+><em id='it9300'
+><a href="r5rs-12.html#F7352" class="inbound">F</a></em></strong></big></big> <big><big><strong id='bold9304'
+><em id='it9303'
+><a href="r5rs-12.html#G7353" class="inbound">G</a></em></strong></big></big> <big><big><strong id='bold9307'
+><em id='it9306'
+><a href="r5rs-12.html#I7354" class="inbound">I</a></em></strong></big></big> <big><big><strong id='bold9310'
+><em id='it9309'
+><a href="r5rs-12.html#L7355" class="inbound">L</a></em></strong></big></big> <big><big><strong id='bold9313'
+><em id='it9312'
+><a href="r5rs-12.html#M7356" class="inbound">M</a></em></strong></big></big> <big><big><strong id='bold9316'
+><em id='it9315'
+><a href="r5rs-12.html#N7357" class="inbound">N</a></em></strong></big></big> <big><big><strong id='bold9319'
+><em id='it9318'
+><a href="r5rs-12.html#O7358" class="inbound">O</a></em></strong></big></big> <big><big><strong id='bold9322'
+><em id='it9321'
+><a href="r5rs-12.html#P7359" class="inbound">P</a></em></strong></big></big> <big><big><strong id='bold9325'
+><em id='it9324'
+><a href="r5rs-12.html#Q7360" class="inbound">Q</a></em></strong></big></big> <big><big><strong id='bold9328'
+><em id='it9327'
+><a href="r5rs-12.html#R7361" class="inbound">R</a></em></strong></big></big> <big><big><strong id='bold9331'
+><em id='it9330'
+><a href="r5rs-12.html#S7362" class="inbound">S</a></em></strong></big></big> <big><big><strong id='bold9334'
+><em id='it9333'
+><a href="r5rs-12.html#T7363" class="inbound">T</a></em></strong></big></big> <big><big><strong id='bold9337'
+><em id='it9336'
+><a href="r5rs-12.html#V7364" class="inbound">V</a></em></strong></big></big> <big><big><strong id='bold9340'
+><em id='it9339'
+><a href="r5rs-12.html#W7365" class="inbound">W</a></em></strong></big></big> <big><big><strong id='bold9343'
+><em id='it9342'
+><a href="r5rs-12.html#Z7366" class="inbound">Z</a></em></strong></big></big> </center><br/><br/><table class="index-table" width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc9548" width="33%" align="center" valign="top" colspan="1"><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr class="index-mark-entry"><td id="tc9349" align="left" colspan="2"><strong id='bold9348'
+><em id='it9347'
+><span class="sf"><a name="*7340" class="mark">*</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9351" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3393" class="inbound"><code id='code3392'
+>*</code></a></td></tr>
+<tr><td id="tc9358" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9356" align="left" colspan="2"><strong id='bold9355'
+><em id='it9354'
+><span class="sf"><a name="+7341" class="mark">+</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9360" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3384" class="inbound"><code id='code3383'
+>+</code></a></td></tr>
+<tr><td id="tc9367" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9365" align="left" colspan="2"><strong id='bold9364'
+><em id='it9363'
+><span class="sf"><a name="-7342" class="mark">-</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9369" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3407" class="inbound"><code id='code3406'
+>-</code></a></td></tr>
+<tr><td id="tc9376" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9374" align="left" colspan="2"><strong id='bold9373'
+><em id='it9372'
+><span class="sf"><a name="/7343" class="mark">/</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9378" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3430" class="inbound"><code id='code3429'
+>/</code></a></td></tr>
+<tr><td id="tc9385" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9383" align="left" colspan="2"><strong id='bold9382'
+><em id='it9381'
+><span class="sf"><a name="<7344" class="mark">&lt;</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9387" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3243" class="inbound"><code id='code3242'
+>&lt;</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9389" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3261" class="inbound"><code id='code3260'
+>&lt;=</code></a></td></tr>
+<tr><td id="tc9396" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9394" align="left" colspan="2"><strong id='bold9393'
+><em id='it9392'
+><span class="sf"><a name="=7345" class="mark">=</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9398" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3234" class="inbound"><code id='code3233'
+>=</code></a></td></tr>
+<tr><td id="tc9405" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9403" align="left" colspan="2"><strong id='bold9402'
+><em id='it9401'
+><span class="sf"><a name=">7346" class="mark">&gt;</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9407" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3252" class="inbound"><code id='code3251'
+>&gt;</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9409" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3270" class="inbound"><code id='code3269'
+>&gt;=</code></a></td></tr>
+<tr><td id="tc9416" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9414" align="left" colspan="2"><strong id='bold9413'
+><em id='it9412'
+><span class="sf"><a name="A7347" class="mark">A</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9418" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3458" class="inbound"><code id='code3457'
+>abs</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9420" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3823" class="inbound"><code id='code3822'
+>acos</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9422" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1977" class="inbound"><code id='code1976'
+>and</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9424" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3958" class="inbound"><code id='code3957'
+>angle</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9426" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4619" class="inbound"><code id='code4618'
+>append</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9428" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5805" class="inbound"><code id='code5804'
+>apply</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9430" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3812" class="inbound"><code id='code3811'
+>asin</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9432" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4801" class="inbound"><code id='code4800'
+>assoc</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9434" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4783" class="inbound"><code id='code4782'
+>assq</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9436" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4792" class="inbound"><code id='code4791'
+>assv</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9438" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3834" class="inbound"><code id='code3833'
+>atan</code></a></td></tr>
+<tr><td id="tc9445" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9443" align="left" colspan="2"><strong id='bold9442'
+><em id='it9441'
+><span class="sf"><a name="B7348" class="mark">B</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9447" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2113" class="inbound"><code id='code2112'
+>begin</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9449" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4233" class="inbound"><code id='code4232'
+>boolean?</code></a></td></tr>
+<tr><td id="tc9456" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9454" align="left" colspan="2"><strong id='bold9453'
+><em id='it9452'
+><span class="sf"><a name="C7349" class="mark">C</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9458" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4492" class="inbound"><code id='code4491'
+>caar</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9460" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4501" class="inbound"><code id='code4500'
+>cadr</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9462" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6019" class="inbound"><code id='code6018'
+>call-with-current-continuation</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9464" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6307" class="inbound"><code id='code6306'
+>call-with-input-file</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9466" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6316" class="inbound"><code id='code6315'
+>call-with-output-file</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9468" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6119" class="inbound"><code id='code6118'
+>call-with-values</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9470" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4415" class="inbound"><code id='code4414'
+>car</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9472" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1941" class="inbound"><code id='code1940'
+>case</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9474" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4517" class="inbound"><code id='code4516'
+>cdddar</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9476" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4526" class="inbound"><code id='code4525'
+>cddddr</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9478" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4435" class="inbound"><code id='code4434'
+>cdr</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9480" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3674" class="inbound"><code id='code3673'
+>ceiling</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9482" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5136" class="inbound"><code id='code5135'
+>char-&gt;integer</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9484" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5087" class="inbound"><code id='code5086'
+>char-alphabetic?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9486" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5063" class="inbound"><code id='code5062'
+>char-ci&lt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9488" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5045" class="inbound"><code id='code5044'
+>char-ci&lt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9490" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5036" class="inbound"><code id='code5035'
+>char-ci=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9492" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5072" class="inbound"><code id='code5071'
+>char-ci&gt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9494" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5054" class="inbound"><code id='code5053'
+>char-ci&gt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9496" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5205" class="inbound"><code id='code5204'
+>char-downcase</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9498" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5123" class="inbound"><code id='code5122'
+>char-lower-case?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9500" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5096" class="inbound"><code id='code5095'
+>char-numeric?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9502" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6589" class="inbound"><code id='code6588'
+>char-ready?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9504" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5196" class="inbound"><code id='code5195'
+>char-upcase</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9506" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5114" class="inbound"><code id='code5113'
+>char-upper-case?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9508" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5105" class="inbound"><code id='code5104'
+>char-whitespace?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9510" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5001" class="inbound"><code id='code5000'
+>char&lt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9512" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4983" class="inbound"><code id='code4982'
+>char&lt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9514" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4974" class="inbound"><code id='code4973'
+>char=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9516" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5010" class="inbound"><code id='code5009'
+>char&gt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9518" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4992" class="inbound"><code id='code4991'
+>char&gt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9520" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4959" class="inbound"><code id='code4958'
+>char?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9522" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6454" class="inbound"><code id='code6453'
+>close-input-port</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9524" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6463" class="inbound"><code id='code6462'
+>close-output-port</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9526" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3128" class="inbound"><code id='code3127'
+>complex?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9528" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1891" class="inbound"><code id='code1890'
+>cond</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9530" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4393" class="inbound"><code id='code4392'
+>cons</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9532" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3790" class="inbound"><code id='code3789'
+>cos</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9534" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6371" class="inbound"><code id='code6370'
+>current-input-port</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9536" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6380" class="inbound"><code id='code6379'
+>current-output-port</code></a></td></tr>
+<tr><td id="tc9543" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9541" align="left" colspan="2"><strong id='bold9540'
+><em id='it9539'
+><span class="sf"><a name="D7350" class="mark">D</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9545" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2193" class="inbound"><code id='code2192'
+>delay</code></a></td></tr>
+</tbody></table>
+</td><td id="tc9738" width="33%" align="center" valign="top" colspan="1"><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr class="index-primary-entry"><td id="tc9549" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3649" class="inbound"><code id='code3648'
+>denominator</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9551" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6656" class="inbound"><code id='code6655'
+>display</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9553" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2137" class="inbound"><code id='code2136'
+>do</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9555" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6144" class="inbound"><code id='code6143'
+>dynamic-wind</code></a></td></tr>
+<tr><td id="tc9562" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9560" align="left" colspan="2"><strong id='bold9559'
+><em id='it9558'
+><span class="sf"><a name="E7351" class="mark">E</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9564" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6573" class="inbound"><code id='code6572'
+>eof-object?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9566" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g2917" class="inbound"><code id='code2916'
+>eq?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9568" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g2966" class="inbound"><code id='code2965'
+>equal?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9570" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g2690" class="inbound"><code id='code2689'
+>eqv?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9572" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6229" class="inbound"><code id='code6228'
+>eval</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9574" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3340" class="inbound"><code id='code3339'
+>even?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9576" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4037" class="inbound"><code id='code4036'
+>exact-&gt;inexact</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9578" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3210" class="inbound"><code id='code3209'
+>exact?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9580" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3757" class="inbound"><code id='code3756'
+>exp</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9582" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3890" class="inbound"><code id='code3889'
+>expt</code></a></td></tr>
+<tr><td id="tc9589" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9587" align="left" colspan="2"><strong id='bold9586'
+><em id='it9585'
+><span class="sf"><a name="F7352" class="mark">F</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9591" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3665" class="inbound"><code id='code3664'
+>floor</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9593" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5878" class="inbound"><code id='code5877'
+>for-each</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9595" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5907" class="inbound"><code id='code5906'
+>force</code></a></td></tr>
+<tr><td id="tc9602" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9600" align="left" colspan="2"><strong id='bold9599'
+><em id='it9598'
+><span class="sf"><a name="G7353" class="mark">G</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9604" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3615" class="inbound"><code id='code3614'
+>gcd</code></a></td></tr>
+<tr><td id="tc9611" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9609" align="left" colspan="2"><strong id='bold9608'
+><em id='it9607'
+><span class="sf"><a name="I7354" class="mark">I</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9613" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1836" class="inbound"><code id='code1835'
+>if</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9615" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3936" class="inbound"><code id='code3935'
+>imag-part</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9617" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4048" class="inbound"><code id='code4047'
+>inexact-&gt;exact</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9619" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3221" class="inbound"><code id='code3220'
+>inexact?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9621" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6346" class="inbound"><code id='code6345'
+>input-port?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9623" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5145" class="inbound"><code id='code5144'
+>integer-&gt;char</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9625" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3155" class="inbound"><code id='code3154'
+>integer?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9627" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6293" class="inbound"><code id='code6292'
+>interaction-environment</code></a></td></tr>
+<tr><td id="tc9634" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9632" align="left" colspan="2"><strong id='bold9631'
+><em id='it9630'
+><span class="sf"><a name="L7355" class="mark">L</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9636" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1784" class="inbound"><code id='code1783'
+>lambda</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9638" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3624" class="inbound"><code id='code3623'
+>lcm</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9640" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4602" class="inbound"><code id='code4601'
+>length</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9642" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2019" class="inbound"><code id='code2018'
+>let</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9644" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2048" class="inbound"><code id='code2047'
+>let*</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9646" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2355" class="inbound"><code id='code2354'
+>let-syntax</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9648" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2079" class="inbound"><code id='code2078'
+>letrec</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9650" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2389" class="inbound"><code id='code2388'
+>letrec-syntax</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9652" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4585" class="inbound"><code id='code4584'
+>list</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9654" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5546" class="inbound"><code id='code5545'
+>list-&gt;string</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9656" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5745" class="inbound"><code id='code5744'
+>list-&gt;vector</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9658" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4689" class="inbound"><code id='code4688'
+>list-ref</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9660" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4660" class="inbound"><code id='code4659'
+>list-tail</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9662" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4565" class="inbound"><code id='code4564'
+>list?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9664" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6737" class="inbound"><code id='code6736'
+>load</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9666" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3768" class="inbound"><code id='code3767'
+>log</code></a></td></tr>
+<tr><td id="tc9673" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9671" align="left" colspan="2"><strong id='bold9670'
+><em id='it9669'
+><span class="sf"><a name="M7356" class="mark">M</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9675" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3947" class="inbound"><code id='code3946'
+>magnitude</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9677" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3916" class="inbound"><code id='code3915'
+>make-polar</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9679" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3907" class="inbound"><code id='code3906'
+>make-rectangular</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9681" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5278" class="inbound"><code id='code5277'
+>make-string</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9683" align="left" valign="top" colspan="2"><a href="r5rs-4.html#g1264" class="inbound"><code id='code1263'
+>make-vector</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9685" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5838" class="inbound"><code id='code5837'
+>map</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9687" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3356" class="inbound"><code id='code3355'
+>max</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9689" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4737" class="inbound"><code id='code4736'
+>member</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9691" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4719" class="inbound"><code id='code4718'
+>memq</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9693" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4728" class="inbound"><code id='code4727'
+>memv</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9695" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3365" class="inbound"><code id='code3364'
+>min</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9697" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3491" class="inbound"><code id='code3490'
+>modulo</code></a></td></tr>
+<tr><td id="tc9704" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9702" align="left" colspan="2"><strong id='bold9701'
+><em id='it9700'
+><span class="sf"><a name="N7357" class="mark">N</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9706" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3318" class="inbound"><code id='code3317'
+>negative?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9708" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6690" class="inbound"><code id='code6689'
+>newline</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9710" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4213" class="inbound"><code id='code4212'
+>not</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9712" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6266" class="inbound"><code id='code6265'
+>null-environment</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9714" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4546" class="inbound"><code id='code4545'
+>null?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9716" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4070" class="inbound"><code id='code4069'
+>number-&gt;string</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9718" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3119" class="inbound"><code id='code3118'
+>number?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9720" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3638" class="inbound"><code id='code3637'
+>numerator</code></a></td></tr>
+<tr><td id="tc9727" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9725" align="left" colspan="2"><strong id='bold9724'
+><em id='it9723'
+><span class="sf"><a name="O7358" class="mark">O</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9729" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3329" class="inbound"><code id='code3328'
+>odd?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9731" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6432" class="inbound"><code id='code6431'
+>open-input-file</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9733" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6443" class="inbound"><code id='code6442'
+>open-output-file</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9735" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1993" class="inbound"><code id='code1992'
+>or</code></a></td></tr>
+</tbody></table>
+</td><td id="tc9926" width="33%" align="center" valign="top" colspan="1"><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr class="index-primary-entry"><td id="tc9739" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6355" class="inbound"><code id='code6354'
+>output-port?</code></a></td></tr>
+<tr><td id="tc9746" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9744" align="left" colspan="2"><strong id='bold9743'
+><em id='it9742'
+><span class="sf"><a name="P7359" class="mark">P</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9748" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4373" class="inbound"><code id='code4372'
+>pair?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9750" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6534" class="inbound"><code id='code6533'
+>peek-char</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9752" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3307" class="inbound"><code id='code3306'
+>positive?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9754" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5784" class="inbound"><code id='code5783'
+>procedure?</code></a></td></tr>
+<tr><td id="tc9761" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9759" align="left" colspan="2"><strong id='bold9758'
+><em id='it9757'
+><span class="sf"><a name="Q7360" class="mark">Q</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9763" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2224" class="inbound"><code id='code2223'
+>quasiquote</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9765" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1693" class="inbound"><code id='code1692'
+>quote</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9767" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3473" class="inbound"><code id='code3472'
+>quotient</code></a></td></tr>
+<tr><td id="tc9774" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9772" align="left" colspan="2"><strong id='bold9771'
+><em id='it9770'
+><span class="sf"><a name="R7361" class="mark">R</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9776" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3146" class="inbound"><code id='code3145'
+>rational?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9778" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3732" class="inbound"><code id='code3731'
+>rationalize</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9780" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6482" class="inbound"><code id='code6481'
+>read</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9782" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6510" class="inbound"><code id='code6509'
+>read-char</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9784" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3925" class="inbound"><code id='code3924'
+>real-part</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9786" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3137" class="inbound"><code id='code3136'
+>real?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9788" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3482" class="inbound"><code id='code3481'
+>remainder</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9790" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4643" class="inbound"><code id='code4642'
+>reverse</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9792" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3692" class="inbound"><code id='code3691'
+>round</code></a></td></tr>
+<tr><td id="tc9799" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9797" align="left" colspan="2"><strong id='bold9796'
+><em id='it9795'
+><span class="sf"><a name="S7362" class="mark">S</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9801" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6257" class="inbound"><code id='code6256'
+>scheme-report-environment</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9803" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g1867" class="inbound"><code id='code1866'
+>set!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9805" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4453" class="inbound"><code id='code4452'
+>set-car!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9807" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4476" class="inbound"><code id='code4475'
+>set-cdr!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9809" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3779" class="inbound"><code id='code3778'
+>sin</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9811" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3875" class="inbound"><code id='code3874'
+>sqrt</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9813" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5308" class="inbound"><code id='code5307'
+>string</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9815" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5537" class="inbound"><code id='code5536'
+>string-&gt;list</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9817" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4115" class="inbound"><code id='code4114'
+>string-&gt;number</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9819" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4913" class="inbound"><code id='code4912'
+>string-&gt;symbol</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9821" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5524" class="inbound"><code id='code5523'
+>string-append</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9823" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5464" class="inbound"><code id='code5463'
+>string-ci&lt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9825" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5446" class="inbound"><code id='code5445'
+>string-ci&lt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9827" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5394" class="inbound"><code id='code5393'
+>string-ci=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9829" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5473" class="inbound"><code id='code5472'
+>string-ci&gt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9831" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5455" class="inbound"><code id='code5454'
+>string-ci&gt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9833" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5564" class="inbound"><code id='code5563'
+>string-copy</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9835" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5577" class="inbound"><code id='code5576'
+>string-fill!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9837" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5319" class="inbound"><code id='code5318'
+>string-length</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9839" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5332" class="inbound"><code id='code5331'
+>string-ref</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9841" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5354" class="inbound"><code id='code5353'
+>string-set!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9843" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5428" class="inbound"><code id='code5427'
+>string&lt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9845" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5410" class="inbound"><code id='code5409'
+>string&lt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9847" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5385" class="inbound"><code id='code5384'
+>string=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9849" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5437" class="inbound"><code id='code5436'
+>string&gt;=?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9851" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5419" class="inbound"><code id='code5418'
+>string&gt;?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9853" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5263" class="inbound"><code id='code5262'
+>string?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9855" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5490" class="inbound"><code id='code5489'
+>substring</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9857" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4884" class="inbound"><code id='code4883'
+>symbol-&gt;string</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9859" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g4864" class="inbound"><code id='code4863'
+>symbol?</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9861" align="left" valign="top" colspan="2"><a href="r5rs-7.html#g2419" class="inbound"><code id='code2418'
+>syntax-rules</code></a></td></tr>
+<tr><td id="tc9868" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9866" align="left" colspan="2"><strong id='bold9865'
+><em id='it9864'
+><span class="sf"><a name="T7363" class="mark">T</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9870" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3801" class="inbound"><code id='code3800'
+>tan</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9872" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6768" class="inbound"><code id='code6767'
+>transcript-off</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9874" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6759" class="inbound"><code id='code6758'
+>transcript-on</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9876" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3683" class="inbound"><code id='code3682'
+>truncate</code></a></td></tr>
+<tr><td id="tc9883" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9881" align="left" colspan="2"><strong id='bold9880'
+><em id='it9879'
+><span class="sf"><a name="V7364" class="mark">V</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9885" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6096" class="inbound"><code id='code6095'
+>values</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9887" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5648" class="inbound"><code id='code5647'
+>vector</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9889" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5736" class="inbound"><code id='code5735'
+>vector-&gt;list</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9891" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5766" class="inbound"><code id='code5765'
+>vector-fill!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9893" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5664" class="inbound"><code id='code5663'
+>vector-length</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9895" align="left" valign="top" colspan="2"><a href="r5rs-4.html#g1243" class="inbound"><code id='code1242'
+>vector-ref</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9897" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5700" class="inbound"><code id='code5699'
+>vector-set!</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9899" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g5615" class="inbound"><code id='code5614'
+>vector?</code></a></td></tr>
+<tr><td id="tc9906" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9904" align="left" colspan="2"><strong id='bold9903'
+><em id='it9902'
+><span class="sf"><a name="W7365" class="mark">W</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9908" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6391" class="inbound"><code id='code6390'
+>with-input-from-file</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9910" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6400" class="inbound"><code id='code6399'
+>with-output-to-file</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9912" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6630" class="inbound"><code id='code6629'
+>write</code></a></td></tr>
+<tr class="index-primary-entry"><td id="tc9914" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g6712" class="inbound"><code id='code6711'
+>write-char</code></a></td></tr>
+<tr><td id="tc9921" align="center" colspan="2"></td></tr>
+<tr class="index-mark-entry"><td id="tc9919" align="left" colspan="2"><strong id='bold9918'
+><em id='it9917'
+><span class="sf"><a name="Z7366" class="mark">Z</a></span></em></strong></td></tr>
+<tr class="index-primary-entry"><td id="tc9923" align="left" valign="top" colspan="2"><a href="r5rs-9.html#g3296" class="inbound"><code id='code3295'
+>zero?</code></a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph9934'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it9932'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

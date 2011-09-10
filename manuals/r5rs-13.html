@@ -1,0 +1,158 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Notes</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center9948'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc9938" align="center" colspan="1"><font color="#ffffff"><strong id='bold9936'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc9945" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc9941" align="left" valign="top" colspan="1"><strong id='bold9940'
+>top:</strong></td><td id="tc9942" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center9958'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc9952" align="center" colspan="1"><font color="#ffffff"><strong id='bold9950'
+>Notes</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc9955" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Language-changes">Language changes</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center9968'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc9962" align="center" colspan="1"><font color="#ffffff"><strong id='bold9960'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc9965" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Notes" class="mark"></a>
+
+
+<!-- Language changes -->
+<a name="Language-changes"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">Language changes</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Language-changes" class="mark"></a>
+This section enumerates the changes that have been made to Scheme since
+the ``Revised^4 report'' [R4RS] was published.<br/><br/><ul class="itemize" id='itemize7068'
+><li>The report is now a superset of the IEEE standard for Scheme
+[IEEEScheme]: implementations that conform to the report will
+also conform to the standard.  This required the following changes:<br/><br/><ul class="itemize" id='itemize7048'
+><li>The empty list is now required to count as true.<br/><br/></li>
+<li>The classification of features as essential or inessential has been
+removed.  There are now three classes of built-in procedures: primitive,
+library, and optional.  The optional procedures are <samp id='samp7036'
+>load</samp>,
+<samp id='samp7037'
+>with-input-from-file</samp>, <samp id='samp7038'
+>with-output-to-file</samp>,
+<samp id='samp7039'
+>transcript-on</samp>, <samp id='samp7040'
+>transcript-off</samp>, and
+<samp id='samp7041'
+>interaction-environment</samp>,
+and <samp id='samp7042'
+>-</samp> and <samp id='samp7043'
+>/</samp> with more than two arguments.
+None of these are in the IEEE standard.<br/><br/></li>
+<li>Programs are allowed to redefine built-in procedures.  Doing so
+will not change the behavior of other built-in procedures.<br/><br/></li>
+</ul>
+</li>
+<li><em id='emph7050'
+>Port</em> has been added to the list of disjoint types.<br/><br/></li>
+<li>The macro appendix has been removed.  High-level macros are now part
+of the main body of the report.  The rewrite rules for derived expressions
+have been replaced with macro definitions.  There are no reserved identifiers.<br/><br/></li>
+<li><samp id='samp7055'
+>Syntax-rules</samp> now allows vector patterns.<br/><br/></li>
+<li>Multiple-value returns, <samp id='samp7058'
+>eval</samp>, and <samp id='samp7059'
+>dynamic-wind</samp> have
+been added.<br/><br/></li>
+<li>The calls that are required to be implemented in a properly tail-recursive
+fashion are defined explicitly.<br/><br/></li>
+<li>`<samp id='samp7064'
+>&#x40;</samp>' can be used within identifiers. `<samp id='samp7065'
+>|</samp>' is reserved
+for possible future extensions.<br/><br/></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+       
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph9974'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it9972'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

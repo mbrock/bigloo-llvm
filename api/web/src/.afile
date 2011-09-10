@@ -1,0 +1,19 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/web/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__web_atom "Llib/atom.scm")
+  (__web_cgi "Llib/cgi.scm")
+  (__web_css "Llib/css.scm")
+  (__web_css-ast "Llib/css_ast.scm")
+  (__web_css-lexer "Llib/css_lexer.scm")
+  (__web_css-parser "Llib/css_parser.scm")
+  (__web_date "Llib/date.scm")
+  (__web_feeds "Llib/feeds.scm")
+  (__web_html "Llib/html.scm")
+  (__web_rss "Llib/rss.scm")
+  (__web_webdav "Llib/webdav.scm")
+  (__web_xml "Llib/xml.scm")
+)
+

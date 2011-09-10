@@ -1,0 +1,103 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bdb</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>7. Bdb<br/>The ``Bigloo Debugger''<br/>Nov 1999 -- Using BDB under Emacs</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center1681'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc1671" align="center" colspan="1"><font color="#ffffff"><strong id='bold1669'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc1678" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1674" align="left" valign="top" colspan="1"><strong id='bold1673'
+>top:</strong></td><td id="tc1675" align="right" valign="top" colspan="1"><a href="bdb.html#Bdb-The-``Bigloo-Debugger''-Nov-1999" class="inbound">Bdb<br/>The ``Bigloo Debugger''<br/>Nov 1999</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center1691'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc1685" align="center" colspan="1"><font color="#ffffff"><strong id='bold1683'
+>Using BDB under Emacs</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc1688" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center1701'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc1695" align="center" colspan="1"><font color="#ffffff"><strong id='bold1693'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc1698" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bdb-1.html#Bdb-Copying-Conditions">Bdb Copying Conditions</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bdb-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bdb-3.html#Overview">Overview</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bdb-4.html#Running-Programs-Under-BDB">Running Programs Under BDB</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bdb-5.html#Stopping">Stopping</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bdb-6.html#Continuing-execution-after-a-breakpoint">Continuing execution after a breakpoint</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bdb-7.html#Examining-the-Stack">Examining the Stack</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bdb-8.html#Using-BDB-under-Emacs">Using BDB under Emacs</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bdb-9.html#Bibliography">Bibliography</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bdb-10.html#Index">Index</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Emacs" class="mark"></a><a name="g1342" class="mark"></a>
+A special interface allows you to use Emacs to view (and edit)
+the source files for the program you are debugging with BDB.<br/><br/>To use this interface, use the command <code id='code1345'
+>M-x bdb</code> in Emacs or click the
+<code id='code1346'
+>Bdb</code> icon of the Bee tool bar 
+Give the executable file you want to debug as an argument. This command
+starts BDB as a subprocess of Emacs, with input and output through a
+newly created Emacs buffer.<br/><br/>Breakpoints may be set by the means of mouse clicks. Once a buffer is
+connected to the debugger (connection is automatic when the execution
+thread stops inside a buffer, or connection may be explicitly requested
+with the <code id='code1348'
+>Connect</code> icon), a left margin is printed. Clicking
+<kbd id='kbd1350'
+><kbd id='kbd1349'
+>button-3</kbd></kbd> on the margin will pop up a menu that enables
+breakpoint settings.<br/><br/>Breakpoints may be disabled or deleted by the means of mouse menu. Click
+<kbd id='kbd1353'
+><kbd id='kbd1352'
+>button-2</kbd></kbd> on a breakpoint icon.<br/><br/>The <code id='code1355'
+>M-x bdb</code> provides facilities for displaying all kinds of information
+such as stack frames, automatic display, source code browsing, stepping, etc.<br/><br/></div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph1707'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it1705'
+>Mon Jan 24 14:32:21 2011</em>.</font></p></div>
+</body>
+</html>

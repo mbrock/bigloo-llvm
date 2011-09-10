@@ -1,0 +1,4088 @@
+2011-01-24  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/imap.stk, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, gc/configure-gc-7.2alpha4,
+	runtime/Pp/circle.scm, runtime/Unsafe/url.scm:
+	Force GC static library to be always build
+	[87737c7ba6cf]<3.6a>
+
+2011-01-22  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Llib/phone.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Eval/evmeaning.scm,
+	runtime/Eval/evmodule.scm, runtime/Llib/object.scm,
+	runtime/Pp/circle.scm:
+	Fix eval define (bootstrap)
+	[c21b0e1095a6]<3.6a>
+
+2011-01-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* arch/maemo/makedeb.sh:
+	3.6a release.
+	[8c70053bb592]<3.6a>
+
+2011-01-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* .hgtags:
+	Added tag 3.6a for changeset 579f5ee91fe2
+	[e95d8cb05988]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	www/Makefile:
+	Preparation of 3.6a (bootstrap)
+	[579f5ee91fe2]<3.5b>
+
+	* api/web/src/Llib/html.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	pre-3.6a (bootstrap)
+	[dd860f533414]<3.5b>
+
+2011-01-18  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bde/bpp/bpp.scm, bde/bpp/reader.scm:
+	Fix bglpp
+	[45c78704c803]<3.5b>
+
+	* bmacs/bmacs-config.el, configure, manuals/error.texi,
+	manuals/stdlib.texi, recette/string.scm, runtime/Ieee/string.scm:
+	Add STRING-DELETE.
+	[a2e7511e1040]<3.5b>
+
+	* Makefile, configure:
+	Allow bglpkg to be disabled at configure time.
+	[7a3c01f22ebe]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/stdlib.texi,
+	recette/flonum.scm, runtime/CSlib/foreign.cs, runtime/Clib/cstring.c,
+	runtime/Ieee/flonum.scm, runtime/Include/bigloo.h,
+	runtime/Jlib/foreign.java:
+	Resurect double->llong-bits et al. (bootstrap)
+	[4abda7a8a35b]<3.5b>
+
+2011-01-11  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bdb/blib/bdb.scm, bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/library.scm:
+	Re-fix the function LIBRARY-EXISTS?
+	[fcb8be1753a2]<3.5b>
+
+2011-01-09  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Llib/phone.scm, autoconf/androidmkdir,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	gc/gc-7.2alpha4-android.patch:
+	Extend phone API (bootstrap)
+	[e638f6f2016c]<3.5b>
+
+2011-01-04  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Object/slots.scm,
+	comptime/Tools/date.scm, recette/object.scm:
+	. (bootstrap)
+	[c851deec6485]<3.5b>
+
+2011-01-03  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* arch/android/droid-gcc.in:
+	Add bionic/linker in the GCC path for Android.
+	[555ab01c9ea3]<3.5b>
+
+2010-12-31  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/pthread/src/Posix/bglpmutex.c, api/web/src/Llib/feeds.scm,
+	api/web/src/Llib/rss.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, manuals/stdlib.texi, runtime/Clib/cthread.c,
+	runtime/Eval/evcompile.scm, runtime/Eval/evmeaning.scm,
+	runtime/Eval/expanders.scm, runtime/Ieee/output.scm,
+	runtime/Llib/trace.scm:
+	. (bootstrap)
+	[4cbb81c78fe4]<3.5b>
+
+2010-12-30  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/multimedia/src/Llib/id3.scm, api/multimedia/src/Makefile,
+	bde/bmem/lib/alloc.c, bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	id3 parsing improvements (bootstrap)
+	[1655036b8fb3]<3.5b>
+
+2010-12-29  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/multimedia/src/Llib/id3.scm, bmacs/bmacs-config.el,
+	comptime/Expand/initial.scm, comptime/Tools/date.scm,
+	runtime/Ieee/number.scm:
+	Fix id3 network parsing and mmap-ref/set (bootstrap)
+	[5b1c46c830f9]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	gc/gc-7.2alpha4.patch, gc/install-gc-7.2alpha4:
+	Try to use the official GC android patch (bootstrap)
+	[82e12dbc91ef]<3.5b>
+
+2010-12-28  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/examples/bgst_png.scm,
+	api/gstreamer/src/Plugin/bglgst_portsink.c,
+	api/web/src/Llib/html.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, configure, manuals/system.texi,
+	runtime/Clib/csystem.c, runtime/Llib/error.scm,
+	runtime/Unsafe/url.scm:
+	Change time unit for millisecond (bootstrap)
+	[7ed00f53824a]<3.5b>
+
+2010-12-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/eval.scm:
+	. (bootstrap)
+	[660926d7516a]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/eval.scm, runtime/Eval/evcompile.scm,
+	runtime/Eval/evmodule.scm:
+	. (bootstrap)
+	[4f89974f1168]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evmodule.scm:
+	. (bootstrap)
+	[1b29e6aad37a]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	. (bootstrap)
+	[faac093acb4d]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Module/module.scm,
+	comptime/Tools/date.scm, runtime/Eval/evmodule.scm:
+	. (bootstrap)
+	[d287848638b8]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evmodule.scm, runtime/Eval/expdsrfi0.scm,
+	runtime/Eval/library.scm:
+	Fix eval include directives (bootstrap)
+	[849cd8d40049]<3.5b>
+
+2010-12-18  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Llib/dsssl.scm:
+	. (bootstrap)
+	[a58f718bae9a]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Llib/dsssl.scm:
+	. (bootstrap)
+	[361bab5148dc]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Llib/dsssl.scm:
+	. (bootstrap)
+	[abcac76b1456]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/expanders.scm, runtime/Eval/expdtrace.scm,
+	runtime/Llib/dsssl.scm:
+	Fix DSSSL rest argument parsing (bootstrap)
+	[2a00286f8963]<3.5b>
+
+2010-12-17  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/CSlib/foreign.cs, runtime/Ieee/bignum.sch,
+	runtime/Jlib/foreign.java:
+	. (bootstrap)
+	[5bd0483c5c45]<3.5b>
+
+	* bmacs/bmacs-config.el, recette/bignum.scm, runtime/CSlib/foreign.cs,
+	runtime/Clib/cbignum.c, runtime/Ieee/bignum.sch,
+	runtime/Ieee/number.scm, runtime/Jlib/foreign.java:
+	Fix bignum division.
+	[a522a01b35f8]<3.5b>
+
+	* arch/android/androidsh.in, configure:
+	Accommodate android changes.
+	[10d130f43ba7]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Llib/error.scm, runtime/Llib/object.scm:
+	EXCEPTION-NOTIFY is now a generic (bootstrap)
+	[6a5c9d697994]<3.5b>
+
+2010-12-16  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/imap.bgl, runtime/Eval/evobject.scm:
+	Support serialization for interpreted classes.
+	[119fee633afc]<3.5b>
+
+2010-12-15  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/src/Clib/bglgst.c, autoconf/bigloo_gc.h.in,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	gc/gc-7.2alpha4.patch, manuals/stdlib.texi, recette/string.scm,
+	runtime/Ieee/output.scm, runtime/Ieee/string.scm:
+	Change the GC init (gc >= 720) (bootstrap)
+	[491adefb3e95]<3.5b>
+
+2010-12-14  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	gc/gc-7.2alpha4.patch:
+	Script typo fix (bootstrap)
+	[ade898016d94]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	gc/gc-7.2alpha4.patch, runtime/Eval/evaluate.scm:
+	Change the GC compilation flags (bootstrap)
+	[067db1007a63]<3.5b>
+
+2010-12-13  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* autoconf/gstreamer, bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	. (bootstrap)
+	[31f022e66f18]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evcompile.scm, runtime/Eval/expdlet.scm:
+	Move the letrec optim of the interpreter (bootstrap)
+	[1a4fdde10808]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evaluate.scm:
+	New BPS interpreter (bootstrap)
+	[b73c49506edd]<3.5b>
+
+2010-12-12  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/css_lexer.scm, api/web/src/Llib/css_parser.scm,
+	bmacs/bmacs-config.el, comptime/Ast/sexp.scm,
+	comptime/Expand/exit.scm, comptime/Expand/initial.scm,
+	comptime/Tools/date.scm, comptime/Tools/error.scm,
+	comptime/Trace/walk.scm, runtime/Llib/error.scm:
+	Improve trace locations
+	[515940dd2895]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Use full name for tracing (bootstrap)
+	[dde45f350be9]<3.5b>
+
+2010-12-11  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/pthread/src/Llib/pthread.scm, autoconf/bigloo_gc.h.in,
+	bmacs/bmacs-config.el, comptime/Expand/exit.scm, comptime/Makefile,
+	comptime/Tools/date.scm, comptime/Trace/walk.scm,
+	runtime/CSlib/foreign.cs, runtime/Eval/eval.scm,
+	runtime/Eval/evmeaning.scm, runtime/Include/bigloo.h,
+	runtime/Jlib/foreign.java, runtime/Llib/error.scm:
+	Improve eval tracing (bootstrap)
+	[c76a1d19751f]<3.5b>
+
+2010-12-10  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* autoconf/alignment, autoconf/pthread, autoconf/sigaction,
+	bde/bmem/lib/trace.c, bmacs/bmacs-config.el,
+	comptime/Engine/compiler.scm, comptime/Expand/exit.scm,
+	comptime/Tools/date.scm, comptime/Trace/walk.scm, manuals/eval.texi,
+	runtime/CSlib/foreign.cs, runtime/CSlib/stack_trace.cs,
+	runtime/Clib/cthread.c, runtime/Clib/ctrace.c,
+	runtime/Eval/evcompile.scm, runtime/Eval/evmeaning.scm,
+	runtime/Include/bigloo.h, runtime/Jlib/foreign.java,
+	runtime/Jlib/stack_trace.java, runtime/Llib/error.scm:
+	New trace implementation (bootstrap)
+	[8070f60a4f96]<3.5b>
+
+	* api/phone/src/Llib/phone.scm, bmacs/bmacs-config.el,
+	comptime/Ast/app.scm, comptime/Ast/dump.scm, comptime/Ast/node.scm,
+	comptime/Ast/pragma.scm, comptime/Callcc/walk.scm,
+	comptime/Cfa/approx.scm, comptime/Cfa/arithmetic.scm,
+	comptime/Cfa/cfa.scm, comptime/Cfa/closure.scm,
+	comptime/Cfa/collect.scm, comptime/Cfa/iterate.scm,
+	comptime/Cfa/loose.scm, comptime/Cfa/setup.scm,
+	comptime/Cfa/specialize.scm, comptime/Cfa/tvector.scm,
+	comptime/Cfa/type.scm, comptime/Cfa/vector.scm,
+	comptime/Cfa/walk.scm, comptime/Cnst/alloc.scm,
+	comptime/Coerce/coerce.scm, comptime/Coerce/convert.scm,
+	comptime/Dataflow/walk.scm, comptime/Engine/compiler.scm,
+	comptime/Engine/param.scm, comptime/Expand/iarith.scm,
+	comptime/Globalize/free.scm, comptime/Globalize/node.scm,
+	comptime/Init/parse_args.scm, comptime/Integrate/node.scm,
+	comptime/Module/class.scm, comptime/Object/predicate.scm,
+	comptime/Tools/date.scm, comptime/Tools/shape.scm,
+	comptime/Type/typeof.scm, configure, recette/0cfa.scm,
+	recette/eval.scm, recette/hash.scm, recette/kapture.scm,
+	recette/vector.scm, recette/wind.scm, runtime/Clib/cdlopen.c,
+	runtime/Clib/csocket.c, runtime/Clib/ctrace.c, runtime/Eval/eval.scm,
+	runtime/Eval/evcompile.scm, runtime/Eval/evmeaning.scm,
+	runtime/Eval/evmodule.scm, runtime/Eval/evobject.scm,
+	runtime/Eval/expanders.scm, runtime/Ieee/number.scm,
+	runtime/Ieee/vector.scm, runtime/Include/bigloo.h,
+	runtime/Llib/hash.scm, runtime/Llib/object.scm,
+	runtime/Read/reader.scm, runtime/Rgc/rgcexpand.scm,
+	runtime/Unsafe/intext.scm:
+	No longer save/restore sig mask on bind-exit (bootstrap)
+	[107a0b45aaa2]<3.5b>
+
+2010-12-03  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Clib/cdlopen.c, runtime/Ieee/vector.scm:
+	Fix classes on 64bits arch (bootstrap)
+	[2a15ef9aa7a3]<3.5b>
+
+2010-12-01  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Llib/phone.scm:
+	Add phone api prototypes
+	[3e5a9a8d481a]<3.5b>
+
+2010-11-29  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Coerce/coerce.scm,
+	comptime/Coerce/convert.scm, comptime/Dataflow/walk.scm,
+	comptime/Engine/compiler.scm, comptime/Init/parse_args.scm,
+	comptime/Module/class.scm, comptime/Object/predicate.scm,
+	comptime/Tools/date.scm, comptime/Tools/shape.scm:
+	Dataflow + type + failure (bootstrap)
+	[ab5af1077846]<3.5b>
+
+	* bmacs/bmacs-config.el, comptime/Dataflow/walk.scm,
+	comptime/Globalize/free.scm, comptime/Globalize/node.scm,
+	comptime/Integrate/node.scm, comptime/Tools/date.scm,
+	comptime/Type/typeof.scm, recette/kapture.scm:
+	Dataflow type refinement fixes (bootstrap)
+	[2e670abcce55]<3.5b>
+
+2010-11-28  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Callcc/walk.scm,
+	comptime/Cnst/alloc.scm, comptime/Dataflow/walk.scm,
+	comptime/Engine/compiler.scm, comptime/Globalize/node.scm,
+	comptime/Integrate/node.scm, comptime/Tools/date.scm,
+	comptime/Type/typeof.scm, recette/hash.scm,
+	runtime/Eval/evmeaning.scm, runtime/Ieee/number.scm,
+	runtime/Llib/object.scm, runtime/Read/reader.scm,
+	runtime/Unsafe/intext.scm:
+	Dataflow + type reduction (bootstrap)
+	[5d9af4fe54af]<3.5b>
+
+2010-11-27  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Ast/pragma.scm,
+	comptime/Cfa/approx.scm, comptime/Cfa/arithmetic.scm,
+	comptime/Cfa/cfa.scm, comptime/Cfa/collect.scm,
+	comptime/Cfa/iterate.scm, comptime/Cfa/loose.scm,
+	comptime/Cfa/setup.scm, comptime/Cfa/type.scm,
+	comptime/Dataflow/walk.scm, comptime/Expand/iarith.scm,
+	comptime/Tools/date.scm, recette/0cfa.scm, recette/eval.scm,
+	recette/wind.scm, runtime/Eval/eval.scm, runtime/Eval/evmodule.scm,
+	runtime/Eval/expanders.scm, runtime/Llib/object.scm,
+	runtime/Rgc/rgcexpand.scm:
+	dataflow + cfa (bootstrap)
+	[33957b5f92de]<3.5b>
+
+2010-11-26  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/rfc2045.scm, api/mail/src/Llib/rfc2822.scm,
+	bmacs/bmacs-config.el, comptime/Ast/app.scm, comptime/Ast/dump.scm,
+	comptime/Ast/node.scm, comptime/Dataflow/walk.scm,
+	comptime/Engine/compiler.scm, comptime/Init/parse_args.scm,
+	comptime/Inline/simple.scm, comptime/Makefile,
+	comptime/Reduce/1occ.scm, comptime/Reduce/cond.scm,
+	comptime/Reduce/copy.scm, comptime/Reduce/cse.scm,
+	comptime/Reduce/ftypec.scm, comptime/Reduce/sbeta.scm,
+	comptime/Reduce/typec.scm, comptime/SawMill/remove.scm,
+	comptime/Tools/date.scm, comptime/Type/typeof.scm, recette/vital.scm,
+	runtime/Clib/ccontrol.c, runtime/Clib/cvector.c,
+	runtime/Include/bigloo.h:
+	Add dataflow type annotation (bootstrap)
+	[f02c812033d9]<3.5b>
+
+2010-11-25  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* autoconf/bigloo_gc.h.in, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/CSlib/foreign.cs,
+	runtime/Clib/cvector.c, runtime/Ieee/vector.scm,
+	runtime/Include/bigloo.h, runtime/Jlib/foreign.java,
+	runtime/Llib/object.scm:
+	Use uncollectable vectors for classes and generics (bootstrap)
+	[1d3ddc4ee0a9]<3.5b>
+
+2010-11-24  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, Makefile.prcs, bigloo.lsm, bigloo.spec:
+	Cleanup
+	[02ec4529143c]<3.5b>
+
+	* api/pthread/src/Posix/bglsetup.c, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, gc/Makefile, gc/Makefile-gc6.8,
+	gc/Makefile-gc7.0alpha7, gc/gc6.8.patch, gc/gc7.0alpha7.patch,
+	gc/install-gc-7.2alpha4, gc/install-gc6.8, gc/install-gc7.0alpha7,
+	runtime/Clib/cports.c:
+	Resurrect old GC ports (for perf. evaluation) (bootstrap)
+	[58212348ee1d]<3.5b>
+
+	* api/gstreamer/src/Llib/gstmm_music.scm,
+	api/gstreamer/src/Llib/gstobject.scm,
+	api/pthread/src/Posix/bglpcondvar.c,
+	api/pthread/src/Posix/bglpmutex.c, api/pthread/src/Posix/bglsetup.c,
+	api/web/src/Llib/css_ast.scm, api/web/src/Llib/css_lexer.scm,
+	api/web/src/Llib/css_parser.scm, arch/maemo/makedeb.sh,
+	autoconf/bigloo_config.h.in, bde/bmem/lib/init.c,
+	bmacs/bee/bee-indent.el, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, configure, runtime/Clib/cmain.c,
+	runtime/Clib/inline_alloc.c, runtime/Ieee/string.scm:
+	Pthread mutex and condvar fixes (bootstrap)
+	[d269da55bc66]<3.5b>
+
+2010-11-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* .hgtags:
+	Added tag 3.5b for changeset 39d120697de3
+	[abae1d0ef40c]<3.5b>
+
+	* api/text/src/Llib/hyphenation.scm, bmacs/bmacs-config.el,
+	comptime/Ast/unit.scm, comptime/Object/getter.scm,
+	comptime/Object/method.scm, comptime/Object/slots.scm,
+	comptime/Tools/date.scm, configure, recette/object.scm,
+	recette/object5.scm, runtime/Clib/ccontrol.c,
+	runtime/Eval/evobject.scm, runtime/Eval/expddefine.scm,
+	runtime/Llib/object.scm, runtime/Unsafe/intext.scm:
+	Create 3.5b. Fix Eval with-access expansion. Re-engineer generic
+	functions.
+	[39d120697de3]<3.5b>
+
+2010-11-09  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/css_parser.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Llib/object.scm:
+	Increase the default size of generic buckets (switch to 16).
+	[f7e47804f1e4]<3.5a>
+
+2010-11-05  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* README, api/fthread/examples/README, bmacs/bmacs-config.el,
+	bmacs/ude/ude-config.el, comptime/Engine/param.scm,
+	comptime/Tools/date.scm, www/Makefile, www/bigloo.skb:
+	. (bootstrap)
+	[8258efd088df]<3.5a>
+
+	* gmp/install-gmp:
+	Fix gmp installation.
+	[ed60d4dc5c4f]<3.5a>
+
+	* runtime/Makefile:
+	Fix library cleaning.
+	[dd3ba154fcc8]<3.5a>
+
+2010-10-27  Cyprien Nicolas <Cyprien.Nicolas@inria.fr>
+
+	* runtime/Makefile:
+	runtime/Makefile:bigboot: the bigboot target does not create
+	runtime/objs/* directories, nor runtime/.afile, making it failing on
+	my setup.
+	[3c580407b06f]<3.4b>
+
+2010-11-03  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* ChangeLog, Makefile, Makefile.mercurial, tools/hglog.scm:
+	Generate ChangeLog directly from the SVN.
+	[d6453b7bcaf0]<3.4b>
+
+	* ChangeLog, Makefile, Makefile.mercurial, arch/maemo/makedeb.sh,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, tools/Makefile,
+	tools/basm, tools/hglog.scm:
+	Add the ChangeLog generator.
+	[857d0a56b929]<3.4b>
+
+2010-11-02  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* .hgtags:
+	Added tag 3.5a for changeset 05b7ddf0e677
+	[70b2701a52a0]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure:
+	Switch to 3.5a (bootstrap)
+	[05b7ddf0e677]<3.4b>
+
+	* api/phone/src/Llib/phone.scm, arch/maemo/rules.in,
+	bde/btags/btags.scm, bmacs/bee/bee-tags.el, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, manuals/lalr.texi, runtime/Lalr/driver.scm:
+	bgltags improvements (bootstrap)
+	[41fd7a203713]<3.4b>
+
+2010-10-29  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Llib/phone.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Phone contact extension (bootstrap)
+	[fdc58612d0a7]<3.4b>
+
+2010-10-28  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Llib/phone.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Extend phone API (bootstrap)
+	[7a418d548170]<3.4b>
+
+2010-10-27  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Llib/phone.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Extend phone api (bootstrap)
+	[8e54dd86cfa8]<3.4b>
+
+2010-10-25  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evobject.scm, runtime/Makefile, runtime/Pp/pp.scm:
+	co-instantiate fix (bootstrap)
+	[3b3483cd1cdc]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Module/eval.scm,
+	comptime/Tools/date.scm:
+	. (bootstrap)
+	[1277ae371deb]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evobject.scm:
+	. (bootstrap)
+	[bb21c9c75845]<3.4b>
+
+2010-10-23  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evobject.scm, runtime/Makefile:
+	co-instantiate fixes (bootstrap)
+	[5640cf9b930e]<3.4b>
+
+2010-10-22  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/pthread/src/Llib/pthread.scm, api/pthread/src/Makefile,
+	bmacs/bmacs-config.el, comptime/Expand/object.scm,
+	comptime/Tools/date.scm, runtime/Eval/evobject.scm:
+	Fix co-instantiate macro expansion (bootstrap)
+	[3e2c68bbb83d]<3.4b>
+
+	* api/mail/src/Llib/rfc2045.scm, api/mail/src/Makefile,
+	bmacs/bmacs-config.el, comptime/BackEnd/c.scm,
+	comptime/Init/parse_args.scm, comptime/Tools/date.scm, configure,
+	doc/README.android, recette/macro.scm, runtime/Eval/eval.scm,
+	runtime/Eval/evcompile.scm, runtime/Eval/expddefine.scm,
+	runtime/Eval/expdlet.scm, runtime/Eval/progn.scm:
+	Installation fix, eval improved error msg (bootstrap)
+	[a175ac6e55b2]<3.4b>
+
+	* api/openpgp/src/Llib/pgp_encode.scm,
+	api/openpgp/src/Llib/pgp_packets.scm, api/sqlite/Makefile,
+	bdl/Makefile, bdl/src/Makefile, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, configure:
+	Bdl compilation/installation fix (bootstrap)
+	[77f3747cdbae]<3.4b>
+
+2010-10-21  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, api/mail/src/Llib/imap.stk, api/mail/src/Llib/rfc2045.scm,
+	api/mail/src/Makefile, api/openpgp/src/Makefile,
+	api/phone/src/Llib/phone.scm, bmacs/bee/bee-indent.el,
+	bmacs/bmacs-config.el, comptime/Ast/let.scm, comptime/Ast/sexp.scm,
+	comptime/Ast/venv.scm, comptime/BackEnd/dotnet.scm,
+	comptime/BackEnd/jvm.scm, comptime/Cnst/alloc.scm,
+	comptime/Expand/eps.scm, comptime/Expand/initial.scm,
+	comptime/Expand/lambda.scm, comptime/Expand/let.scm,
+	comptime/Expand/object.scm, comptime/Init/parse_args.scm,
+	comptime/Integrate/definition.scm, comptime/Integrate/loc2glo.scm,
+	comptime/Integrate/node.scm, comptime/Module/alibrary.scm,
+	comptime/Module/eval.scm, comptime/Module/library.scm,
+	comptime/Object/class.scm, comptime/Object/method.scm,
+	comptime/Object/nil.scm, comptime/Tools/date.scm, configure,
+	manuals/core.texi, recette/callcc.scm, recette/kapture.scm,
+	recette/letrec.scm, recette/object5.scm, runtime/Clib/cinit_obj.c,
+	runtime/Clib/cmain.c, runtime/Clib/csymbol.c,
+	runtime/Eval/evmodule.scm, runtime/Eval/evobject.scm,
+	runtime/Eval/expanders.scm, runtime/Eval/expdlet.scm,
+	runtime/Ieee/fixnum.scm, runtime/Llib/error.scm,
+	runtime/Llib/object.scm, runtime/Unsafe/crc.scm,
+	runtime/Unsafe/hmac.scm:
+	Fix nil for byte fields (bootstrap)
+	[2bf0f3bba1e2]<3.4b>
+
+2010-10-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/BackEnd/dotnet.scm,
+	comptime/BackEnd/jvm.scm, comptime/Tools/date.scm:
+	Port the new lib linking to Jvm and .NET (bootstrap)
+	[5f867da3d607]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Integrate/definition.scm,
+	comptime/Integrate/node.scm, comptime/Tools/date.scm:
+	Complete the integrate fix (bootstrap)
+	[89d9f77f7dbf]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Ast/sexp.scm, comptime/Ast/venv.scm,
+	comptime/Module/alibrary.scm, comptime/Module/library.scm,
+	comptime/Object/method.scm, comptime/Tools/date.scm,
+	runtime/Clib/cinit_obj.c, runtime/Clib/csymbol.c,
+	runtime/Llib/error.scm, runtime/Llib/object.scm:
+	Minor debug improvement (bootstrap)
+	[010557552641]<3.4b>
+
+2010-10-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Init/parse_args.scm,
+	comptime/Integrate/definition.scm, comptime/Integrate/loc2glo.scm,
+	comptime/Integrate/node.scm, comptime/Tools/date.scm,
+	runtime/Clib/cmain.c, runtime/Ieee/fixnum.scm:
+	Fix a very old compiler bug (integate duplicated) (bootstrap)
+	[9fd8379aa0d0]<3.4b>
+
+2010-10-18  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* configure:
+	Enable auto-configuration of thread local storage.
+	[6c04f5b63392]<3.4b>
+
+	* api/mail/src/Llib/rfc2045.scm, api/mail/src/Makefile,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Minor mail fix.
+	[944477575b6c]<3.4b>
+
+	* api/mail/src/Llib/imap.stk, bmacs/bmacs-config.el,
+	comptime/Ast/let.scm, comptime/Expand/eps.scm,
+	comptime/Expand/initial.scm, comptime/Expand/lambda.scm,
+	comptime/Expand/let.scm, comptime/Tools/date.scm, recette/letrec.scm:
+	Imap fix (bootstrap)
+	[bbfbb0c9abbe]<3.4b>
+
+	* api/phone/src/Llib/phone.scm, bmacs/bee/bee-indent.el,
+	bmacs/bmacs-config.el, comptime/Ast/let.scm, comptime/Ast/sexp.scm,
+	comptime/Tools/date.scm, manuals/core.texi, recette/letrec.scm,
+	runtime/Eval/expanders.scm, runtime/Eval/expdlet.scm:
+	Add support for letrec* (bootstrap)
+	[7148436bd17b]<3.4b>
+
+2010-10-17  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Module/eval.scm,
+	comptime/Object/class.scm, comptime/Tools/date.scm,
+	runtime/Eval/evmodule.scm, runtime/Eval/evobject.scm,
+	runtime/Llib/object.scm:
+	Eval support for co-instantiate (bootstrap)
+	[93951bdfc47c]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Ast/let.scm, comptime/Tools/date.scm:
+	Optimize letrec as let when legal (fix) (bootstrap)
+	[761c299e909b]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Ast/let.scm, comptime/Cnst/alloc.scm,
+	comptime/Expand/object.scm, comptime/Tools/date.scm,
+	recette/callcc.scm, recette/kapture.scm, runtime/Eval/evobject.scm,
+	runtime/Eval/expanders.scm, runtime/Unsafe/crc.scm,
+	runtime/Unsafe/hmac.scm:
+	Optimize letrec as let when legal (bootstrap)
+	[bf477fafb7f4]<3.4b>
+
+2010-10-15  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* runtime/Ieee/port.scm:
+	Export file-gzip?.
+	[a61e4c15b0ee]<3.4b>
+
+2010-10-14  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/src/Llib/gstmm_music.scm, api/phone/src/Llib/phone.scm,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Extent the phone API
+	[6971805740ae]<3.4b>
+
+2010-10-12  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/phone/src/Makefile, api/phone/src/Misc/make_lib.scm,
+	api/phone/src/Misc/phone.init, bmacs/bmacs-config.el,
+	comptime/Module/eval.scm, comptime/Tools/date.scm, configure,
+	runtime/Clib/cdlopen.c, runtime/Eval/library.scm,
+	runtime/Llib/os.scm:
+	Fix eval library static link (bootstrap)
+	[526ce2e59a1d]<3.4b>
+
+	* api/Makefile, api/mail/src/Llib/vcard.scm, api/mail/src/Makefile,
+	api/phone/Makefile, api/phone/README, api/phone/src/Llib/phone.scm,
+	api/phone/src/Makefile, api/phone/src/Misc/make_lib.scm,
+	api/phone/src/Misc/phone.init, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Add the phone library (bootstrap)
+	[fbcba60b46ea]<3.4b>
+
+2010-10-07  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	runtime/Ieee/equiv.scm, runtime/Llib/os.scm,
+	runtime/Match/normalize.scm, runtime/Pp/pp.scm,
+	runtime/Unsafe/ftp.scm, runtime/Unsafe/http.scm,
+	runtime/Unsafe/intext.scm:
+	Remove useless string copy (bootstrap)
+	[18a03b2bfe00]<3.4b>
+
+2010-10-03  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* comptime/Engine/link.scm, comptime/Module/eval.scm,
+	comptime/Tools/date.scm, manuals/modules.texi:
+	Complete the new implementation of eval library (link phase).
+	[e10f8122ec86]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Cc/ld.scm,
+	comptime/Module/alibrary.scm, comptime/Module/eval.scm,
+	comptime/Tools/date.scm, runtime/Eval/library.scm:
+	Change the C behavior of eval libraries.
+	From now on, when a library is declared as accessible from eval, the
+	_e version of that library is linked against the application and
+	initialization as a regular library. In the past, the library was
+	automatically loaded with an implicit library-load call.
+	[7ce96f70fbb5]<3.4b>
+
+2010-10-02  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	gc/gc-7.2alpha4.patch, runtime/Clib/cmain.c,
+	runtime/Clib/inline_alloc.c:
+	Better Android GC customization (bootstrap)
+	[8771f3ffd413]<3.4b>
+
+2010-10-01  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	. (bootstrap)
+	[7fd2bcfc93c5]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure:
+	MacOS configure fix
+	[83b6488ea7b0]<3.4b>
+
+	* runtime/Clib/cmain.c:
+	Fix GC initialization error.
+	[4c32625e38b7]<3.4b>
+
+2010-09-30  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* INSTALL, Makefile, api/mail/src/Llib/rfc2045.scm,
+	api/web/src/Llib/css_parser.scm, arch/Makefile,
+	arch/android/Makefile, arch/android/README,
+	arch/android/droid-gcc.in, autoconf/Makefile, autoconf/androidmkdir,
+	autoconf/bcopy, autoconf/bigloo_config.sch.in,
+	autoconf/gcconfigureopt, autoconf/gcversion, autoconf/mkruntest,
+	autoconf/osversion, autoconf/runtest.in, autoconf/thread,
+	bde/bmem/lib/init.c, bmacs/bmacs-config.el,
+	comptime/BackEnd/c_emit.scm, comptime/Engine/param.scm,
+	comptime/Init/parse_args.scm, comptime/Tools/date.scm, configure,
+	doc/Makefile, doc/README.android, gc/Makefile,
+	gc/configure-gc-7.2alpha4, gc/configure-gc-7.2alpha4-android,
+	gc/gc-7.2alpha4.patch, gc/install-gc-7.2alpha4, manuals/mail.texi,
+	runtime/Clib/cmain.c, runtime/Clib/inline_alloc.c,
+	runtime/Eval/eval.scm, runtime/Eval/evcompile.scm,
+	runtime/Include/bigloo.h, www/download.skb:
+	Fix MacOS configure. Change -Obench (bootstrap)
+	[9a3a21892469]<3.4b>
+
+	* INSTALL, api/web/src/Llib/css_parser.scm, arch/Makefile,
+	arch/android/Makefile, arch/android/README,
+	arch/android/droid-gcc.in, autoconf/Makefile, autoconf/androidmkdir,
+	autoconf/bcopy, autoconf/bigloo_config.sch.in,
+	autoconf/gcconfigureopt, autoconf/gcversion, autoconf/mkruntest,
+	autoconf/osversion, autoconf/runtest.in, autoconf/thread,
+	bde/bmem/lib/init.c, bmacs/bmacs-config.el,
+	comptime/BackEnd/c_emit.scm, comptime/Engine/param.scm,
+	comptime/Tools/date.scm, configure, doc/Makefile, doc/README.android,
+	gc/Makefile, gc/configure-gc-7.2alpha4,
+	gc/configure-gc-7.2alpha4-android, gc/gc-7.2alpha4.patch,
+	gc/install-gc-7.2alpha4, runtime/Clib/cmain.c,
+	runtime/Clib/inline_alloc.c, runtime/Include/bigloo.h,
+	www/download.skb:
+	Fix recently introduced MacOSX configure error (bootstrap)
+	[ff3af5e13ff1]<3.4b>
+
+2010-09-27  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/BackEnd/c_emit.scm,
+	comptime/Engine/param.scm, comptime/Tools/date.scm,
+	runtime/Clib/cmain.c, runtime/Include/bigloo.h:
+	Cleanup init for the C backend (bootstrap)
+	[08094847c829]<3.4b>
+
+2010-09-24  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bde/bmem/lib/init.c, configure, doc/README.android:
+	First complete (pthread support) Android port.
+	[7ab0f5075026]<3.4b>
+
+	* comptime/BackEnd/c_emit.scm, configure, doc/README.android,
+	gc/gc-7.2alpha4.patch, runtime/Clib/cmain.c,
+	runtime/Clib/inline_alloc.c:
+	Android improvements.
+	[5738196b7de4]<3.4b>
+
+	* gc/gc-7.2alpha4.patch:
+	Patch the GC (7.2alpha4) to accommodate Android threads.
+	[284d04f471a7]<3.4b>
+
+2010-09-23  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* arch/android/Makefile, arch/android/droid-gcc.in, autoconf/gcversion,
+	configure:
+	Improve Android port.
+	[31af28faec86]<3.4b>
+
+	* arch/Makefile, arch/android/Makefile, arch/android/androidsh.in,
+	autoconf/Makefile, autoconf/androidmkdir, autoconf/bcopy,
+	autoconf/gcconfigureopt, autoconf/gcversion, autoconf/mkruntest,
+	autoconf/osversion, autoconf/runtest.in, autoconf/thread,
+	bmacs/bmacs-config.el, configure, gc/configure-gc-7.2alpha4,
+	gc/gc-7.2alpha4.patch:
+	Various configuration changes for Android.
+	[bdcae730fdb1]<3.4b>
+
+2010-09-22  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, api/Makefile.api, api/gstreamer/Makefile,
+	api/gstreamer/src/Clib/bglgst.c, arch/android/COMPILING.txt,
+	arch/android/config.sh, autoconf/Makefile, bmacs/bmacs-config.el,
+	comptime/Hgen/walk.scm, comptime/Tools/date.scm:
+	From now on, -hgen only generates local classes (bootstrap)
+	[a6318e886fcc]<3.4b>
+
+2010-09-17  Marcos Dione <mdione@sophia.inria.fr>
+
+	* arch/android/config.sh:
+	* another change in Android's layout. how unsurprising...
+	[db49dfa09797]<3.4b>
+
+	* arch/android/droid-wrapper.diff:
+	+ include changes in the Makefile.
+	[8cf1c2708077]<3.4b>
+
+	* arch/android/droid-wrapper.diff, arch/android/version-linker.diff:
+	> the patch is more general now, so, just change its name.
+	[aff7822a69c5]<3.4b>
+
+	* arch/android/version-linker.diff:
+	* update patch for droid-gcc.
+	[889c45580031]<3.4b>
+
+2010-09-16  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/COMPILING.txt:
+	* more detailed instructions on how to get Android's code.
+	[8a7f843096d1]<3.4b>
+
+	* arch/android/COMPILING.txt:
+	* improved the instructions.
+	[2da83a2795c9]<3.4b>
+
+	* arch/android/config.sh, configure, www/Makefile:
+	^ merge from my work elsewere.
+	* Android SDK r07 ahnged the path again.
+	[e97259d8e3c7]<3.4b>
+
+2010-08-09  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gc/gc-7.2alpha4.patch:
+	* no, it actually declares itself as 'arm-unknown-linux-gnulibc'. I
+	only trust the first and third part...
+	[91c993edb98b]<3.3b-android-threads>
+
+	* bmacs/bmacs-config.el, comptime/Makefile, comptime/Tools/date.scm,
+	configure, www/Makefile:
+	^ merge from 3.4b
+	[c3ccefc81a1a]<3.3b-android-threads>
+
+	* arch/android/config.sh, comptime/Makefile, gc/gc-7.2alpha4.patch:
+	* Android's gcc reports as arm-glibc-linux.
+	[c4e1b4db3778]<3.3b-android-threads>
+
+2010-08-05  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gc/gc-7.2alpha4.patch:
+	* try to force GC to use threads under Android.
+	[053e0a949236]<3.3b-android-threads>
+
+	* arch/android/build-android.sh, arch/android/config-local.sh.sample,
+	configure:
+	^ from upstream.
+	[dfdf3ca89c1d]<3.3b-android-threads>
+
+	* api/calendar/src/Misc/make-lib.scm,
+	api/crypto/src/Llib/block-ciphers.scm,
+	api/crypto/src/Misc/make-lib.scm, api/fthread/src/Misc/make-lib.scm,
+	api/gstreamer/examples/bgst-inspect.scm,
+	api/gstreamer/examples/bgst-launch.scm,
+	api/gstreamer/examples/bgst-mm.scm,
+	api/gstreamer/examples/bgst-play.scm,
+	api/gstreamer/examples/bgst-png.scm,
+	api/gstreamer/examples/bgst-repl.scm,
+	api/gstreamer/src/Llib/gstmm-music.scm,
+	api/gstreamer/src/Llib/gstplugin-bglports.scm,
+	api/gstreamer/src/Misc/make-lib.scm, api/mail/src/Misc/make-lib.scm,
+	api/multimedia/src/Misc/make-lib.scm,
+	api/packrat/src/Misc/make-lib.scm, api/pkgcomp/src/Misc/make-lib.scm,
+	api/pkglib/src/Misc/make-lib.scm, api/pthread/src/Misc/make-lib.scm,
+	api/sqlite/src/Misc/make-lib.scm, api/srfi1/src/Misc/make-lib.scm,
+	api/srfi27/src/Misc/make-lib.scm,
+	api/ssl/src/Java/ssl_client_socket.java,
+	api/ssl/src/Java/ssl_server_socket.java,
+	api/ssl/src/Misc/make-lib.scm, api/text/src/Misc/make-lib.scm,
+	api/web/src/Llib/css-ast.scm, api/web/src/Llib/css-lexer.scm,
+	api/web/src/Llib/css-parser.scm, api/web/src/Misc/make-lib.scm,
+	arch/android/build-android.sh, arch/android/config-local.sh.sample,
+	arch/android/config.sh.sample, bdb/bdb/Command/all-cmd.scm,
+	bdb/bdb/Init/parse-args.scm, bdb/blib/make-lib.scm,
+	bdl/src/make-lib.scm, bglpkg/etc/make-lib.scm, cigloo/.afile,
+	cigloo/Example/b-file.scm, cigloo/Example/c-file.c,
+	cigloo/Example/c-file.h, cigloo/Init/parse-args.scm,
+	comptime/Ast/check-init.scm, comptime/Ast/check-sharing.scm,
+	comptime/Ast/find-gdefs.scm, comptime/Ast/glo-decl.scm,
+	comptime/Ast/glo-def.scm, comptime/BackEnd/c-emit.scm,
+	comptime/BackEnd/c-main.scm, comptime/BackEnd/c-proto.scm,
+	comptime/BackEnd/dotnet-class.scm, comptime/BackEnd/jvm-class.scm,
+	comptime/Bdb/bdb-emit.scm, comptime/Bdb/bdb-initialize.scm,
+	comptime/Bdb/spread-obj.scm, comptime/Cgen/emit-cop.scm,
+	comptime/Globalize/new-body.scm, comptime/Init/lib-dir.scm,
+	comptime/Init/parse-args.scm, comptime/Integrate/let-fun.scm,
+	comptime/Object/java-access.scm, comptime/Object/plain-access.scm,
+	comptime/Object/wide-access.scm, comptime/Prof/prof-emit.scm,
+	configure, examples/Embedded/c-main.c,
+	examples/Embedded/scm-main.scm, examples/Lib/make-lib.scm,
+	examples/Lib/scm-point.scm, gc/gc-7.2alpha4.patch, macosx/Info.plist,
+	macosx/Info.plist.bee, macosx/Makefile, macosx/Makefile.macosx,
+	macosx/dmg/Readme-bee.txt, macosx/dmg/Readme.txt,
+	pnet2ms/win32-base.scm, pnet2ms/win32-helpers.scm,
+	pnet2ms/win32-registry.scm, recette/alias-aux.scm,
+	recette/big-file.scm, recette/external-c.scm, recette/rgc-eval.scm,
+	recette/rgc-insert.scm, recette/rgc-jm.scm, recette/rgc-trap.scm,
+	runtime/Clib/cinit-obj.c, runtime/Clib/inline-alloc.c,
+	runtime/Clib/non-inline-alloc.c, runtime/Llib/make-lib.scm:
+	^ from upstream.
+	[ba4b8695ee75]<3.3b-android-threads>
+
+2010-07-12  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* autoconf/android:
+	+ support Android versions >=2.1.
+	* the tmp dir is handled elsewhere.
+	[c414cb3028dd]<3.4a>
+
+	* arch/android/build-android.sh:
+	* make greps quiet. + forgot to save the found tmp dir.
+	[c877c94a86b4]<3.4a>
+
+	*
+	^ upstream.
+	[22294874703c]<3.4a>
+
+2010-07-09  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	* better and more complete routine for finding a tmp dir in the
+	device.
+	[f43ab465c13b]<3.4a>
+
+	* arch/android/android-target.sh:
+	* always set -e
+	[a5097f59dc94]<3.4a>
+
+2010-09-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/xml.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	XML parser fix (bootstrap)
+	[b267b8b154d5]<3.4b>
+
+	* api/mail/src/Llib/maildir.scm, api/mail/src/Makefile,
+	api/pthread/src/Llib/pthread.scm, api/pthread/src/Posix/bglpthread.c,
+	api/pthread/src/Posix/bglpthread.h, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Complete maildir implementation (bootstrap)
+	[9fbece7b90a2]<3.4b>
+
+2010-09-14  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* configure:
+	Remove FORTIFY bypass.
+	[c18f98240c05]<3.4b>
+
+2010-09-10  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Jlib/foreign.java:
+	. (bootstrap)
+	[046b768df280]<3.4b>
+
+	* Makefile, bmacs/bmacs-config.el, comptime/Abound/walk.scm,
+	comptime/BackEnd/backend.scm, comptime/BackEnd/jvm.scm,
+	comptime/Engine/compiler.scm, comptime/Tools/date.scm,
+	runtime/CSlib/constant.cs, runtime/CSlib/foreign.cs,
+	runtime/CSlib/stack_trace.cs, runtime/Include/bigloo.h,
+	runtime/Jlib/cnst.java, runtime/Jlib/constant.java,
+	runtime/Jlib/foreign.java, runtime/Jlib/stack_trace.java,
+	runtime/Llib/error.scm, runtime/Makefile:
+	No longer emit runtime tests on the JVM.
+	We now rely on the JVM for detecting index out of bounds and illegal
+	class cast conversion. Bigloo now merely intercept the JVM raised
+	exception. On the other hand, Bigloo debug modes (-g and higher)
+	still introduce explicit runtime tests.
+	[11a109e8059c]<3.4b>
+
+2010-09-08  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Abound/walk.scm,
+	comptime/Cnst/alloc.scm, comptime/Coerce/convert.scm,
+	comptime/SawMill/expr.scm, comptime/Tools/date.scm,
+	comptime/Tvector/access.scm, manuals/error.texi,
+	runtime/Clib/cerror.c, runtime/Ieee/string.scm,
+	runtime/Llib/error.scm, runtime/Llib/tvector.scm,
+	runtime/Llib/type.scm:
+	New code generation for type tests (bootstrap)
+	[ef7cbd3f41e5]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Abound/walk.scm,
+	comptime/Ast/app.scm, comptime/Ast/dump.scm, comptime/Ast/hrtype.scm,
+	comptime/Ast/lvtype.scm, comptime/Ast/node.scm,
+	comptime/Ast/private.scm, comptime/Ast/sexp.scm,
+	comptime/Ast/unit.scm, comptime/Cfa/collect.scm,
+	comptime/Cfa/setup.scm, comptime/Cfa/specialize.scm,
+	comptime/Cfa/tvector.scm, comptime/Cgen/cgen.scm,
+	comptime/Cnst/initialize.scm, comptime/Coerce/coerce.scm,
+	comptime/Coerce/convert.scm, comptime/Expand/initial.scm,
+	comptime/Integrate/a.scm, comptime/Reduce/1occ.scm,
+	comptime/Reduce/copy.scm, comptime/Reduce/cse.scm,
+	comptime/Reduce/ftypec.scm, comptime/Reduce/sbeta.scm,
+	comptime/Reduce/typec.scm, comptime/SawJvm/inline.scm,
+	comptime/SawMill/node2rtl.scm, comptime/SawMsil/inline.scm,
+	comptime/Tools/date.scm, comptime/Type/typeof.scm,
+	runtime/Ieee/input.scm, runtime/Ieee/output.scm,
+	runtime/Ieee/port.scm, runtime/Ieee/string.scm,
+	runtime/Ieee/symbol.scm, runtime/Ieee/vector.scm,
+	runtime/Llib/error.scm, runtime/Llib/mmap.scm,
+	runtime/Llib/tvector.scm, runtime/Llib/type.scm,
+	runtime/Llib/unicode.scm, runtime/Unsafe/hmac.scm,
+	runtime/Unsafe/intext.scm, runtime/Unsafe/uuid.scm:
+	Switch to the new string bound checking model (bootstrap)
+	[8ed5af269f4c]<3.4b>
+
+2010-09-07  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Ast/app.scm, comptime/Ast/build.scm,
+	comptime/Ast/hrtype.scm, comptime/Ast/occur.scm,
+	comptime/Ast/private.scm, comptime/Ast/remove.scm,
+	comptime/Ast/sexp.scm, comptime/Cfa/tvector.scm,
+	comptime/Engine/compiler.scm, comptime/Heap/make.scm,
+	comptime/Inline/simple.scm, comptime/Makefile,
+	comptime/Reduce/walk.scm, comptime/Tools/date.scm:
+	Improve side-effect propagation for extern nodes (bootstrap)
+	[9ce61ea7e059]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Abound/walk.scm,
+	comptime/Ast/alphatize.scm, comptime/Ast/node.scm,
+	comptime/Ast/private.scm, comptime/Cfa/tvector.scm,
+	comptime/Engine/compiler.scm, comptime/Init/parse_args.scm,
+	comptime/Makefile, comptime/Object/tools.scm,
+	comptime/Reduce/walk.scm, comptime/Tools/date.scm,
+	comptime/Tvector/access.scm, runtime/Ieee/string.scm,
+	runtime/Ieee/vector.scm, runtime/Llib/error.scm,
+	runtime/Llib/object.scm, runtime/Unsafe/intext.scm:
+	Array bound checking move in the compiler (bootstrap)
+	[ab706a280b32]<3.4b>
+
+2010-09-06  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/Makefile.api, bmacs/bmacs-config.el, comptime/Engine/param.scm,
+	comptime/Tools/date.scm:
+	Compile heaps with BFLAGS (bootstrap)
+	[dae77e5319ff]<3.4b>
+
+2010-09-04  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Cfa/collect.scm,
+	comptime/Cfa/specialize.scm, comptime/Engine/param.scm,
+	comptime/Init/parse_args.scm, comptime/Tools/date.scm:
+	Split cfa-arithmetic optim (fixnum+flonum) (bootstrap)
+	[4e740b823aff]<3.4b>
+
+2010-09-03  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bdl/src/Makefile, bmacs/bmacs-config.el,
+	comptime/Engine/compiler.scm, comptime/Inline/app.scm,
+	comptime/Tools/date.scm:
+	Fix reduce inlining optimization (bootstrap)
+	[2d1430881940]<3.4b>
+
+	* api/web/src/Llib/css_parser.scm, arch/maemo/makedeb.sh,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Fix CSS parsing (bootstrap)
+	[f28ecc8c7872]<3.4b>
+
+2010-09-01  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/srfi1/recette/Makefile, api/srfi1/recette/recette.scm,
+	api/text/src/Llib/hyphenation.scm:
+	Remove eval from SRFI1 recette.
+	[830071d785d5]<3.4b>
+
+	* api/text/src/Llib/hyphenation.scm, autoconf/Makefile,
+	autoconf/bigloo_config.h.in, autoconf/pthreadlock, autoconf/setenv,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	runtime/Clib/cprocess.c:
+	Use setenv instead of environ (bootstrap)
+	[447c92c61a69]<3.4b>
+
+2010-08-31  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/text/Makefile, api/text/data/en-hyphens.sch,
+	api/text/data/fr-hyphens.sch, api/text/data/gb2312.sch,
+	api/text/src/Llib/bibtex.scm, api/text/src/Llib/gb2312.scm,
+	api/text/src/Llib/hyphenation.scm, api/text/src/Makefile,
+	api/text/src/Misc/make_lib.scm, bmacs/bee/bee-indent.el,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/Makefile,
+	manuals/bigloo.texi, manuals/eval.texi, manuals/mail.texi,
+	manuals/text.texi:
+	Add official support for the Text API (bootstrap)
+	[d16869ba019f]<3.4b>
+
+	* autoconf/Makefile, autoconf/environ, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Add missing environ file (bootstrap)
+	[ad682a528605]<3.4b>
+
+	* Makefile, api/srfi1/recette/Makefile, autoconf/bigloo_config.h.in,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	runtime/Clib/cprocess.c:
+	fix MacOS X environ dependency (bootstrap)
+	[b0e963839b8e]<3.4b>
+
+2010-08-30  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Prof/prof_emit.scm,
+	comptime/Tools/date.scm, runtime/Eval/library.scm,
+	runtime/Llib/bconfigure.scm, runtime/Makefile:
+	Fix profiling library (bootstrap)
+	[c7b8dde1f923]<3.4b>
+
+	* api/srfi1/recette/recette.scm, autoconf/ccstrip,
+	bmacs/bmacs-config.el, comptime/Makefile, comptime/Tools/date.scm,
+	configure:
+	Fix ical parsing (bootstrap)
+	[83e12b4aa6ad]<3.4b>
+
+	* api/calendar/src/Llib/icalendar.scm, api/calendar/src/Makefile,
+	api/openpgp/src/Llib/pgp_composition.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Fix ical parsing (bootstrap)
+	[42c0166f81fb]<3.4b>
+
+	* api/openpgp/src/Llib/pgp_composition.scm,
+	api/openpgp/src/Llib/pgp_decode.scm,
+	api/openpgp/src/Llib/pgp_packets.scm, api/openpgp/src/Makefile:
+	OpenPGP signature decoding fix.
+	[b9e7f38e195b]<3.4b>
+
+2010-08-27  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/multimedia/src/Llib/id3.scm, api/multimedia/src/Makefile,
+	api/web/src/Llib/xml.scm, autoconf/Makefile, autoconf/ccfortify,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	runtime/Llib/type.scm:
+	XML parser fix. Improved C autoconfiguration (bootstrap)
+	[f3c5df477165]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/srfi.texi,
+	manuals/system.texi, runtime/Clib/cprocess.c,
+	runtime/Eval/expdsrfi0.scm:
+	Add CONFIG syntax in cond-expand (bootstrap)
+	[07545344a71b]<3.4b>
+
+2010-08-26  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Makefile, runtime/R5rs/hygiene.scm, runtime/R5rs/syntax.scm:
+	Fix macro hygienic rewritting (bootstrap)
+	[788b77ee2d94]<3.4b>
+
+2010-08-25  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Clib/cports.c, runtime/Clib/cwriter.c,
+	runtime/Unsafe/sha2.scm:
+	Minor sha256 fix (bootstrap)
+	[bd4e2a7cfc7c]<3.4b>
+
+	* runtime/Unsafe/sha2.scm:
+	Fix sha2 on 64bits architectures.
+	[59753c0f43a5]<3.4b>
+
+2010-08-24  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/openpgp/src/Llib/pgp_algo.scm,
+	api/openpgp/src/Llib/pgp_facade.scm, api/openpgp/src/Llib/util.scm,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/digest.texi,
+	recette/string.scm, runtime/Clib/cstring.c,
+	runtime/Eval/evprimop.scm, runtime/Jlib/mmaps.java,
+	runtime/Llib/make_lib.scm, runtime/Makefile, runtime/Unsafe/sha1.scm,
+	runtime/Unsafe/sha2.scm:
+	sha256 (bootstrap)
+	[734cfc9de594]<3.4b>
+
+2010-08-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/openpgp/src/Llib/pgp_decode.scm,
+	api/openpgp/src/Llib/port_util.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	OpenPGP fix (bootstrap)
+	[e777159a7579]<3.4b>
+
+2010-08-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/openpgp/src/Llib/pgp_composition.scm,
+	api/openpgp/src/Llib/pgp_decode.scm,
+	api/openpgp/src/Llib/pgp_encode.scm,
+	api/openpgp/src/Llib/pgp_facade.scm,
+	api/openpgp/src/Llib/pgp_logic.scm,
+	api/openpgp/src/Llib/pgp_packets.scm,
+	api/openpgp/src/Llib/pgp_s2k.scm, api/openpgp/src/Makefile,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	manuals/cryptography.texi, manuals/io.texi,
+	runtime/Unsafe/gunzip.scm:
+	Complete ZLIB support in OpenPGP (bootstrap)
+	[4f1a834a8521]<3.4b>
+
+2010-08-18  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/io.texi,
+	runtime/Eval/evprimop.scm, runtime/Ieee/port.scm,
+	runtime/Llib/make_lib.scm, runtime/Makefile, runtime/Unsafe/ftp.scm:
+	Add client-ftp support (bootstrap)
+	[8c0b1df7516f]<3.4b>
+
+	* runtime/Ieee/port.scm:
+	Minor zlib change.
+	[8d05921918d8]<3.4b>
+
+	* api/openpgp/src/Llib/pgp_decode.scm,
+	api/openpgp/src/Llib/pgp_facade.scm,
+	api/openpgp/src/Llib/pgp_logic.scm, api/openpgp/src/Llib/util.scm,
+	api/openpgp/src/Makefile, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, manuals/io.texi, runtime/Clib/cports.c,
+	runtime/Unsafe/gunzip.scm:
+	Add zlib inflate support (bootstrap)
+	[2dd0026ee36a]<3.4b>
+
+2010-08-16  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* INSTALL, api/mail/src/Llib/rfc2045.scm, api/mail/src/Llib/vcard.scm,
+	api/openpgp/src/Llib/pgp_logic.scm, bde/bmem/lib/gchook.c,
+	bmacs/bmacs-config.el, comptime/Init/parse_args.scm,
+	comptime/Tools/date.scm, doc/Makefile, doc/README.solaris,
+	gc/gc-7.2alpha4.patch, gc/install-gc-7.1, gc/install-gc-7.2alpha4,
+	manuals/cryptography.texi, recette/srfi4.scm:
+	Installation fix. Disable cfa-arithmetic by default. Minor mail
+	change.
+	[90b9befc8956]<3.4b>
+
+2010-08-12  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, Makefile.misc, api/Makefile, api/Makefile.api,
+	api/mail/src/Makefile, api/ssl/Makefile, bdb/Makefile, bde/Makefile,
+	bde/bmem/Makefile, bdl/Makefile, bglpkg/Makefile,
+	bglpkg/etc/Makefile, bmacs/Makefile, bmacs/bmacs-config.el,
+	cigloo/Makefile, comptime/Makefile, comptime/Tools/date.scm,
+	configure, examples/Sqltiny/Makefile, gmp/Makefile, jigloo/Makefile,
+	manuals/Makefile, pnet2ms/Makefile, runtime/Makefile:
+	Replace BMASK with MODXXX.
+	[caf9dac4db2d]<3.4b>
+
+2010-08-11  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/maildir.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Maildir fixes (bootstrap)
+	[30ce40cd3b8c]<3.4b>
+
+	* Makefile, cigloo/Makefile:
+	Installation fix.
+	[f241b60aab84]<3.4b>
+
+	* bdl/src/Makefile, bmacs/bmacs-config.el, configure:
+	Installation fixes.
+	[15ff4cf3b7a5]<3.4b>
+
+	* api/crypto/src/Makefile, api/openpgp/src/Makefile, bde/bmem/Makefile:
+	Installation fixes.
+	[3c271ff87dae]<3.4b>
+
+	* api/crypto/src/Llib/dsa.scm, api/crypto/src/Llib/pem.scm,
+	api/crypto/src/Misc/make_lib.scm,
+	api/openpgp/src/Llib/pgp_composition.scm,
+	api/openpgp/src/Llib/pgp_decode.scm,
+	api/openpgp/src/Llib/pgp_encode.scm,
+	api/openpgp/src/Llib/pgp_facade.scm,
+	api/openpgp/src/Llib/pgp_key_manager.scm,
+	api/openpgp/src/Llib/pgp_logic.scm,
+	api/openpgp/src/Misc/make_lib.scm, api/openpgp/src/Misc/openpgp.init,
+	bmacs/bmacs-config.el, comptime/Cc/cc.scm, comptime/Tools/date.scm,
+	manuals/cryptography.texi:
+	Change CC invocation not to use -I on missing dirs (bootstrap)
+	[bbd0177ed74e]<3.4b>
+
+	* api/openpgp/Makefile, api/openpgp/README, bde/bmem/bmem/bmem.scm,
+	bde/bmem/bmem/function.scm, bde/bmem/bmem/gc.scm,
+	bde/bmem/bmem/tools.scm, bde/bmem/bmem/type.scm:
+	OpenPGP installation, bmem fix
+	[62103aa339d6]<3.4b>
+
+	* api/Makefile, api/crypto/recette/recette.scm,
+	api/crypto/src/Llib/des.scm, api/crypto/src/Llib/elgamal.scm,
+	api/crypto/src/Llib/rsa.scm, api/crypto/src/Llib/string2key.scm,
+	api/openpgp/recette/Makefile,
+	api/openpgp/recette/publicTesty_elgamal.encrypted,
+	api/openpgp/recette/publicTesty_rsa_rsa.encrypted,
+	api/openpgp/recette/pwd:foobar_public:testy.encrypted,
+	api/openpgp/recette/recette.scm,
+	api/openpgp/recette/rsa_testy_abcd_efgh_sig,
+	api/openpgp/recette/rsa_testy_abcd_sig,
+	api/openpgp/recette/symmetric3DES_pwd_foobar.msg,
+	api/openpgp/recette/symmetricCAST5_noAlgoInfo_pwd_foobar.msg,
+	api/openpgp/recette/symmetricCAST5_pwd_foobar.msg,
+	api/openpgp/recette/testy_abcd_efgh_sig,
+	api/openpgp/recette/testy_abcd_sig,
+	api/openpgp/recette/testy_dsa_elgamal_pwd_xyz.key,
+	api/openpgp/recette/testy_rsa_pwd_xyz.key,
+	api/openpgp/recette/testy_rsa_rsa_pwd_xyz.key,
+	api/openpgp/src/Llib/pgp_algo.scm,
+	api/openpgp/src/Llib/pgp_composition.scm,
+	api/openpgp/src/Llib/pgp_conversion.scm,
+	api/openpgp/src/Llib/pgp_decode.scm,
+	api/openpgp/src/Llib/pgp_encode.scm,
+	api/openpgp/src/Llib/pgp_enums.scm,
+	api/openpgp/src/Llib/pgp_facade.scm,
+	api/openpgp/src/Llib/pgp_human.scm,
+	api/openpgp/src/Llib/pgp_key_manager.scm,
+	api/openpgp/src/Llib/pgp_logic.scm,
+	api/openpgp/src/Llib/pgp_packets.scm,
+	api/openpgp/src/Llib/pgp_s2k.scm, api/openpgp/src/Llib/port_util.scm,
+	api/openpgp/src/Llib/util.scm, api/openpgp/src/Makefile,
+	api/openpgp/src/Misc/make_lib.scm, api/openpgp/src/Misc/openpgp.init,
+	bde/bmem/lib/alloc.c, bde/bmem/lib/gchook.c, bdl/src/Makefile,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	manuals/cryptography.texi:
+	OpenPGP integration. Fix BDL installation (bootstrap)
+	[429a7e004553]<3.4b>
+
+	* api/mail/src/Llib/imap.bgl, api/mail/src/Llib/imap.stk,
+	api/mail/src/Llib/maildir.scm, autoconf/gcflags,
+	bde/bmem/lib/alloc.c, bde/bmem/lib/bmem.h, bde/bmem/lib/gchook.c,
+	bde/bmem/lib/init.c, bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	configure:
+	Fix bglmem (bootstrap)
+	[c0cdc8378094]<3.4b>
+
+2010-08-09  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bdl/src/Makefile:
+	Fix bee parallel compilation.
+	[d2e35404d194]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Expand/expander.scm,
+	comptime/Module/module.scm, comptime/Read/inline.scm,
+	comptime/Tools/date.scm, manuals/bigloo.texi, manuals/database.texi,
+	manuals/eval.texi, manuals/library.texi, manuals/mail.texi,
+	manuals/modules.texi, manuals/multimedia.texi, manuals/sqlite.texi,
+	manuals/thread.texi, runtime/Match/compiler.scm,
+	runtime/Match/descr.scm:
+	Pattern matching fix. Libraries doc fix. (bootstrap)
+	[93a68e9b6cf3]<3.4b>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Match/compiler.scm, www/Makefile:
+	Mix match-case optimization (bootstrap)
+	[fd4a830ade64]<3.4b>
+
+2010-08-06  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/library.texi:
+	Fix the documentation.
+	[d99719983b17]<3.4b>
+
+2010-07-06  Cyprien Nicolas <Cyprien.Nicolas@sophia.inria.fr>
+
+	* Makefile:
+	Do APIs test invocation only if the binary was built (which was not
+	the case for gstreamer's ./recette-jvm).
+	[56ccbd81b3f9]<3.4b>
+
+2010-08-06  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bde/Makefile, comptime/Makefile, configure:
+	Fix install permissions for executables.
+	[cadf04b7180c]<3.4b>
+
+	* api/Makefile.api, api/calendar/src/Makefile, api/crypto/src/Makefile,
+	api/fthread/src/Makefile, api/gstreamer/src/Makefile,
+	api/mail/src/Makefile, api/multimedia/src/Makefile,
+	api/packrat/src/Makefile, api/pkgcomp/src/Makefile,
+	api/pkglib/src/Makefile, api/pthread/src/Makefile,
+	api/sqlite/src/Makefile, api/srfi1/src/Makefile,
+	api/srfi27/src/Makefile, api/ssl/src/Makefile, api/text/src/Makefile,
+	api/web/src/Makefile, bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Fix API makefiles.
+	[217776a64bb2]<3.4b>
+
+2010-08-05  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Ast/sexp.scm,
+	comptime/Tools/date.scm:
+	Prevent procedure in source sexps (bootstrap)
+	[8b7c6608455c]<3.4b>
+
+2010-08-04  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/rfc2047.scm, arch/maemo/makedeb.sh,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	RFC 2047 support fix (bootstrap)
+	[5f65f3894740]<3.4b>
+
+	* comptime/Tools/date.scm, recette/hygiene.scm,
+	runtime/R5rs/syntax.scm:
+	Complete new hygienic macro expansion.
+	[2bc8dfffaa4f]<3.4b>
+
+2010-08-03  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/rfc2822.scm, api/mail/src/Makefile,
+	bmacs/bmacs-config.el, comptime/Expand/eps.scm,
+	comptime/Expand/let.scm, comptime/Module/class.scm,
+	comptime/Tools/date.scm, comptime/Tools/dsssl.scm,
+	comptime/Tools/location.scm, recette/hygiene.scm, recette/main.scm,
+	runtime/Eval/eval.scm, runtime/Eval/evcompile.scm,
+	runtime/Eval/evmeaning.scm, runtime/Eval/evmodule.scm,
+	runtime/Eval/evobject.scm, runtime/Eval/evprimop.scm,
+	runtime/Eval/evutils.scm, runtime/Eval/expand.scm,
+	runtime/Eval/expanders.scm, runtime/Eval/expddefine.scm,
+	runtime/Eval/expdlet.scm, runtime/Eval/progn.scm,
+	runtime/Ieee/symbol.scm, runtime/Llib/dsssl.scm,
+	runtime/Llib/error.scm, runtime/Llib/make_lib.scm, runtime/Makefile,
+	runtime/R5rs/syntax.scm, runtime/Read/reader.scm:
+	Brand new syntax-case implementation.
+	[aa654dc5da2b]<3.4b>
+
+2010-07-06  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/ude/ude-compile.el, bmacs/ude/ude-config.el:
+	Bmacs back ports.
+	[33286cffe58e]<3.4a>
+
+	* api/Makefile.api, api/ssl/Makefile:
+	Minor .NET installation fix.
+	[73198ac046b0]<3.4a>
+
+	* api/Makefile.api, api/ssl/Makefile:
+	Minor .NET installation fix.
+	[32a7b0f55498]<3.4b>
+
+2010-07-05  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/srfi1/src/Llib/srfi1.bgl, api/srfi1/src/Misc/srfi1.init,
+	bmacs/ude/ude-compile.el, bmacs/ude/ude-config.el,
+	comptime/Module/eval.scm, manuals/bigloo.texi, manuals/library.texi:
+	Emacs fix, library documentation fix.
+	[cacb91492c59]<3.4b>
+
+2010-07-02  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* runtime/Eval/eval.scm, runtime/Eval/evmeaning.scm:
+	Initial preparations for the new interpreter.
+	[5525571dab33]<3.4b>
+
+	* .hgtags:
+	Added tag 3.4b for changeset 60692fd66141
+	[0d83a9b190f8]<3.4a>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure:
+	Initial 3.4b (bootstrap)
+	[60692fd66141]<3.4a>
+
+2010-07-01  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Shipped bootstrap (bootstrap)
+	[b83da0dfe53e]<3.4a>
+
+	* Makefile, api/Makefile, bmacs/bmacs-config.el, configure:
+	Change the default configuration for thread local storage.
+	[b0942112e240]<3.4a>
+
+2010-06-30  Marcos Dione <mdione@sophia.inrira.fr>
+
+	*
+	^ merge my changes.
+	[8c283418b55d]<3.4a>
+
+	* arch/android/build-android.sh, arch/android/config-local.sh.sample:
+	* the install prefix is now not defined by the user, but set to a
+	dir inside the arch/android dir. we need to install it so hop can
+	find everything in its place and this way we don't leave stuff
+	outside the source dir, and the user could not use such a bigloo
+	anyways.
+	[cf15100d0a62]<3.4a>
+
+	* arch/android/android-target.sh:
+	* typo.
+	[d4882fd82f0f]<3.4a>
+
+2010-07-01  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Ieee/port.scm, runtime/Jlib/foreign.java,
+	runtime/Jlib/input_port.java:
+	Yet another JVM (minor) fix (bootstrap)
+	[af2ba9480192]<3.4a>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Jlib/input_resource_port.java:
+	Yet another JVM fix (bootstrap)
+	[806aa5adf6e2]<3.4a>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Jlib/binary_port.java, runtime/Jlib/foreign.java:
+	Fix java binary resource input access (bootstrap)
+	[7ec10b7eb7bf]<3.4a>
+
+2010-06-30  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Jlib/foreign.java:
+	Minor JVM bug fix (bootstrap)
+	[a3e599f82143]<3.4a>
+
+	* api/Makefile.api:
+	Minor JVM fix.
+	[71a2e4f34c16]<3.4a>
+
+	* Makefile.misc:
+	Fix shared library installation.
+	[0abff24b8d55]<3.4a>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	. (bootstrap)
+	[691de0f113f9]<3.4a>
+
+2010-06-29  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	+ try to detect an usable tmp file in the android device.
+	[3dbf2388dc14]<3.4a>
+
+	* arch/android/android-target.sh:
+	+ load the config of which tmp directory to use from a config file.
+	[7cc9a457382c]<3.4a>
+
+	* api/Makefile.api, arch/android/android-target.sh:
+	* typo in static rules.
+	[05ebf520f46e]<3.4a>
+
+	* api/Makefile.api:
+	^ I don't understand. I updated to 3.4a, merged with 3.3b and still
+	3 commits in 3.4a were left out. merge them by changeset.
+	[61369d868728]<3.4a>
+
+	* api/Makefile.api:
+	^ my last work on 3.3b.
+	[e9c4068a5214]<3.4a>
+
+	* arch/android/android-target.sh, autoconf/android:
+	* the adb tool 'eats' the commands error value, so we can't make
+	tests. blindly create the tmp directory.
+	[3eb5c28cf005]<3.3b>
+
+	* api/Makefile.api, cigloo/Example/c-file.c, cigloo/Example/c-file.h,
+	examples/Embedded/c-main.c:
+	^ upstream.
+	[e4c3cc771373]<3.3b>
+
+2010-06-24  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	+ hop will look for some Makefiles in lib/$version. symlink them.
+	[556ccc284a55]<3.3b>
+
+2010-06-22  Marcos Dione <mdione@sophia.inrira.fr>
+
+	*
+	^ cyprien's fixes.
+	[10af4b488496]<3.3b>
+
+	* api/Makefile.api:
+	+ compile static/safe version of the eval lib. + make clean also
+	removes the static versions.
+	[e8095810c878]<3.3b>
+
+2010-06-29  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, Makefile.misc, api/Makefile.api, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, manuals/Makefile:
+	Installation fix
+	[c2618d022f2a]<3.4a>
+
+	* api/fthread/src/Makefile, arch/maemo/makedeb.sh, www/Makefile:
+	MacOSX fix
+	[98df1254e879]<3.4a>
+
+	* .hgtags:
+	Added tag 3.4a for changeset 8891da48b29d
+	[a50af2851e98]<3.4a>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	3.4a boot (bootstrap)
+	[8891da48b29d]<3.4a>
+
+	* configure:
+	Switch to 3.4a nomenclature.
+	[6da1e838e155]<3.4a>
+
+	*
+	Rename 3.3b into 3.4a.
+	[b63fd035305e]<3.4a>
+
+	*
+	Temporary branch
+	[39aa75c9dfcc]<3.3.b-merge>
+
+	* api/Makefile.api, api/mail/src/Llib/imap.stk, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, manuals/trace.texi:
+	Minor imap bug fix (bootstrap)
+	[b8b6d01586fd]<3.3b>
+
+2010-06-28  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* runtime/Include/bigloo.h:
+	Minor mmap fix for MinGW.
+	[8a9612c26458]<3.3b>
+
+	* api/mail/src/Llib/imap.stk, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	rollback.
+	[d019699e1745]<3.3b>
+
+2010-06-25  Cyprien Nicolas <Cyprien.Nicolas@sophia.inria.fr>
+
+	* bdb/Makefile:
+	Bee/bdb: Change ./bdb/bdb invocation, using mode target
+	[15e56b745a44]<3.3b>
+
+2010-06-28  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/mail/src/Llib/imap.stk, bmacs/bmacs-config.el, cigloo/.afile,
+	comptime/Tools/date.scm, gc/gc-7.1alpha3-080220.patch:
+	Minor imap bug fix (bootstrap)
+	[395050747563]<3.3b>
+
+2010-06-26  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el:
+	Bmem fix.
+	[1cdcbe90195b]<3.3b>
+
+	* bde/bmem/lib/alloc.c, bde/bmem/lib/bmem.h, bde/bmem/lib/init.c,
+	bmacs/bmacs-config.el, cigloo/.afile, comptime/Tools/date.scm,
+	gc/gc-7.1alpha3-080220.patch, manuals/bigloo.texi,
+	manuals/fthread.texi, manuals/internet.texi:
+	Fix bmem.
+	[f7785544a324]<3.3b>
+
+	* api/mail/src/Llib/rfc2045.scm, api/mail/src/Llib/rfc2822.scm,
+	bmacs/bmacs-config.el, cigloo/.afile, comptime/Tools/date.scm,
+	gc/gc-7.1alpha3-080220.patch, manuals/io.texi,
+	runtime/CSlib/foreign.cs, runtime/Clib/cports.c,
+	runtime/Ieee/port.scm, runtime/Jlib/foreign.java:
+	Minor change in the mail API (bootstrap)
+	[49559c0092bb]<3.3b>
+
+2010-06-25  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/Makefile.api, api/mail/src/Llib/imap.bgl,
+	api/mail/src/Llib/mailbox.scm, api/mail/src/Llib/maildir.scm,
+	api/mail/src/Llib/rfc2045.scm:
+	Minor API improvement.
+	[89fd61fcb2f1]<3.3b>
+
+2010-06-22  Cyprien Nicolas <Cyprien.Nicolas@sophia.inria.fr>
+
+	* bdb/bdb/Makefile:
+	Bdb: Fix all_cmd and parse_args compile errors (replacing '-' by
+	'_')
+	[fa40db3e82b9]<3.3b>
+
+	* api/sqlite/Makefile:
+	Api/Sqlite: Fix Makefile displaying JVM instead of C for build-c
+	[8a6ec0c82a14]<3.3b>
+
+2010-06-21  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/COMPILING.txt, arch/android/FAQ.txt:
+	* typo galore...
+	[2918b94760b7]<3.3b>
+
+	* arch/android/android-target.sh, autoconf/android:
+	* /tmp sometimes is not present on the emulated images. use
+	/data/tmp instead. + add missing script! why was it being ignored?
+	[5e8b7868af0a]<3.3b>
+
+	* autoconf/android:
+	* support emulator's system version (2.0), even while there should
+	be a 2.0.1 image due to bugs in 2.0.
+	[0dd577d8f58c]<3.3b>
+
+	* cigloo/.afile:
+	- remove generated file.
+	[03ab97e361aa]<3.3b>
+
+2010-06-24  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/fthread/src/Misc/fthread.init.in, api/web/src/Llib/css_lexer.scm,
+	api/web/src/Llib/css_parser.scm, bmacs/bmacs-config.el,
+	cigloo/.afile, comptime/Tools/date.scm, configure,
+	gc/gc-7.1alpha3-080220.patch, runtime/Eval/expdcase.scm,
+	runtime/Ieee/string.scm:
+	Minor bug fixes.
+	[ecf98901d6db]<3.3b>
+
+2010-06-21  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure:
+	SRFI-27 improved auto-configuration (bootstrap)
+	[1739c32af8a4]<3.3b>
+
+	* bmacs/bmacs-config.el, cigloo/.afile, comptime/Tools/date.scm,
+	gc/gc-7.1alpha3-080220.patch, runtime/Eval/evmeaning.scm:
+	Fix errornous eval double function eval (bootstrap)
+	[e740881ea4bc]<3.3b>
+
+2010-06-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Coerce/convert.scm,
+	comptime/Tools/date.scm:
+	Replace symbols with strings in error msg. (bootstrap)
+	[7ace03adbc7a]<3.3b>
+
+	* Makefile, Makefile.misc, api/Makefile, api/calendar/Makefile,
+	api/calendar/src/Makefile, api/crypto/Makefile,
+	api/crypto/src/Makefile, api/fthread/Makefile,
+	api/fthread/src/Makefile, api/fthread/src/Misc/fthread.init.in,
+	api/gstreamer/Makefile, api/gstreamer/src/Makefile,
+	api/mail/Makefile, api/mail/src/Makefile, api/multimedia/Makefile,
+	api/multimedia/src/Makefile, api/packrat/Makefile,
+	api/packrat/src/Makefile, api/pkgcomp/Makefile,
+	api/pkgcomp/src/Makefile, api/pkglib/Makefile,
+	api/pkglib/src/Makefile, api/pthread/Makefile,
+	api/pthread/src/Makefile, api/pthread/src/Misc/pthread.init.in,
+	api/pthread/src/Posix/bglsetup.c, api/sqlite/Makefile,
+	api/sqlite/src/Makefile, api/srfi1/Makefile, api/srfi1/src/Makefile,
+	api/srfi27/Makefile, api/srfi27/src/Makefile, api/ssl/Makefile,
+	api/ssl/src/Makefile, api/text/Makefile, api/text/src/Makefile,
+	api/web/Makefile, api/web/src/Makefile, bmacs/bmacs-config.el,
+	comptime/SawJvm/jld.scm, comptime/Tools/date.scm, configure,
+	runtime/Eval/library.scm, runtime/Llib/bconfigure.scm,
+	runtime/Llib/os.scm, runtime/Makefile:
+	Change the overall organisation of libs for MacOS X.
+	[8797c8a6ea61]<3.3b>
+
+2010-06-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile.misc, api/ssl/Makefile,
+	api/ssl/src/Java/ssl_client_socket.java,
+	api/ssl/src/Java/ssl_server_socket.java, api/ssl/src/Makefile,
+	bmacs/bmacs-config.el, cigloo/.afile, comptime/Tools/date.scm,
+	configure, gc/gc-7.1alpha3-080220.patch:
+	MacOS X installation fix (first attempt that only fix ssl).
+	[bf3443eb889c]<3.3b>
+
+2010-06-18  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/calendar/src/Misc/calendar.init, api/mail/src/Misc/mail.init,
+	api/srfi1/src/Misc/srfi1.init, api/srfi27/src/Misc/srfi27.init,
+	api/text/src/Misc/text.init, api/web/src/Misc/web.init:
+	Fix -/_ in init files.
+	[659f84a4ff7e]<3.3b>
+
+	* api/pthread/src/Java/bglpmutex.java, api/web/src/Llib/css_parser.scm,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Fix CSS mutex (bootstrap)
+	[3270236ab77b]<3.3b>
+
+	* bde/bmem/Makefile:
+	Fix bmem compilation.
+	[2974327877b5]<3.3b>
+
+2010-06-17  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* autoconf/alignment, bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Fix alignment auto-configuration.
+	[80d01d1f74ff]<3.3b>
+
+	* api/web/src/Llib/css_lexer.scm, api/web/src/Llib/css_parser.scm,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Ieee/port.scm:
+	Improve CSS parsing.
+	[99a62ca0658b]<3.3b>
+
+2010-06-16  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/css_ast.scm, bmacs/bmacs-config.el,
+	comptime/Cnst/initialize.scm, comptime/Tools/date.scm,
+	runtime/Clib/cwriter.c, runtime/Eval/evmodule.scm,
+	runtime/Llib/error.scm, runtime/Llib/object.scm:
+	Fix constants printing (bootstrap)
+	[05c4cd3603ba]<3.3b>
+
+2010-06-10  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/css_ast.scm, api/web/src/Llib/css_lexer.scm,
+	api/web/src/Llib/css_parser.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Fix CSS parser (bootstrap)
+	[06e80ff62c44]<3.3b>
+
+2010-06-09  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	gc/gc-7.0.patch, gc/gc-7.1.patch, gc/gc-7.1alpha2.patch,
+	gc/gc-7.2alpha2.patch, gc/install-gc-7.0, gc/install-gc-7.1,
+	gc/install-gc-7.1alpha2, gc/install-gc-7.1alpha3-080220,
+	gc/install-gc-7.2alpha2, gc/install-gc-7.2alpha4,
+	runtime/Clib/inline_alloc.c, runtime/Clib/non_inline_alloc.c,
+	runtime/Makefile:
+	-/_ substitutions
+	[d0ecc11b48ea]<3.3b>
+
+2010-06-07  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* macosx/Info.plist, macosx/Info.plist.bee, macosx/Makefile,
+	macosx/Makefile.macosx, macosx/dmg/Readme-bee.txt,
+	macosx/dmg/Readme.txt:
+	deleting old macosx dir.
+	[644f59cea66b]<3.3b>
+
+2010-06-03  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/config.sh:
+	* rearranging definitions.
+	[2c22f2dd06b3]<3.3b-android>
+
+	* arch/android/build-android.sh, arch/android/config.sh:
+	* properly load the config-local script.
+	[850af48c827a]<3.3b-android>
+
+	* arch/android/FAQ.txt:
+	+ note about .apk.
+	[c6300766c0a2]<3.3b-android>
+
+	* arch/android/COMPILING.txt:
+	+ note about installing.
+	[404f9e39d792]<3.3b-android>
+
+	* arch/android/config.sh:
+	* config file we can share with Hop.
+	[0c3e7e366870]<3.3b-android>
+
+	* arch/android/config-local.sh.sample, arch/android/config.sh.sample,
+	bmacs/bmacs-config.el:
+	* changed name.
+	[fdb05a245102]<3.3b-android>
+
+	* arch/android/COMPILING.txt, arch/android/version-linker.diff:
+	+ compiling instructions. + diff for droid-wrapper.
+	[a83068cccb38]<3.3b-android>
+
+	* arch/android/build-android.sh, arch/android/config.sh.sample:
+	* set the install prefix in config.sh.
+	[2286c6f4199f]<3.3b-android>
+
+	* arch/android/FAQ.txt:
+	+ USB Debugging and permissions.
+	[bb850853666e]<3.3b-android>
+
+2010-06-02  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/FAQ.txt:
+	+ small FAQ.
+	[ef42df9aa09e]<3.3b-android>
+
+	* arch/android/build-android.sh, arch/android/config.sh.sample:
+	* moved config to an external file.
+	[574db9746ed0]<3.3b-android>
+
+	* arch/android/build-android.sh, arch/android/config.sh.sample:
+	* moved configuration to an external file.
+	[7d7dc1c24de0]<3.3b-android-threads>
+
+	* gc/gc-7.2alpha4.patch:
+	* typos in comments.
+	[530984068d71]<3.3b-android-threads>
+
+	* autoconf/gcflags:
+	+ disable thread canceling on Android, there's not enough support in
+	the platform.
+	[e1d97e45f6e5]<3.3b-android-threads>
+
+2010-06-01  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gc/gc-7.2alpha4.patch:
+	- removed not-needed backup file included in the patch.
+	[6b0f657f5427]<3.3b-android-threads>
+
+	* autoconf/thread, configure:
+	* reapplied commits e65b0c47275e and 2a1c13b0fad3 into a new branch.
+	[86e1def14d58]<3.3b-android-threads>
+
+	*
+	* megerd both backouts.
+	[9f1231c97af1]<3.3b-android>
+
+	* autoconf/thread:
+	* Backed out changeset 2a1c13b0fad3. it will be developed in a
+	seperate branch, as it most probably will break everything :)
+	[598109939833]<3.3b-android>
+
+	* configure:
+	* Backed out changeset e65b0c47275e
+	[6244a3e5722f]<3.3b-android>
+
+2010-05-27  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* configure:
+	+ add -DLINUX to CFLAGS when on android so gc compiles with threads.
+	[e65b0c47275e]<3.3b-android>
+
+	* autoconf/thread:
+	* use the same config for android than for linux.
+	[2a1c13b0fad3]<3.3b-android>
+
+	* arch/android/build-android.sh:
+	* cleanup.
+	[07219c97f80d]<3.3b-android>
+
+	* configure:
+	* better error message when an android device cannot be contacted.
+	[314eea92f0fe]<3.3b-android>
+
+	* autoconf/android:
+	* decrease verboseness.
+	[93f0459c7468]<3.3b-android>
+
+	* arch/android/build-android.sh:
+	* use the default device. this allows use a fone too.
+	[c799a4e9beb1]<3.3b-android>
+
+2010-05-26  Marcos Dione <mdione@sophia.inrira.fr>
+
+	*
+	* merge from upstream.
+	[4f5d2311c78c]<3.3b-android>
+
+2010-03-31  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gmp/Makefile:
+	* reapply 42d66a8d670a because it was accidentally rolled back
+	during the merge.
+	[90cd23edf6bc]<3.3b>
+
+2010-05-19  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* Makefile, api/fthread/src/Makefile, comptime/Tools/date.scm:
+	* merge from upstream.
+	[df849de08837]<3.3b-android>
+
+	* arch/android/build-android.sh:
+	* it's gcc, not gc (which might confuse to think of Boehm's GC).
+	[ee5785fec1b0]<3.3b-android>
+
+2010-05-05  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* bde/bmem/Makefile:
+	* make install was not working in the android port because the dep
+	was pointing to a place where the lib never was (which also meant
+	that it was built all the time).
+	[01f3f5501887]<3.3b-android>
+
+	* api/multimedia/Makefile, api/multimedia/src/Makefile,
+	api/web/Makefile, api/web/src/Makefile:
+	* compile and install a static version of the eval version of the
+	library. needed for the android port of hop.
+	[b2eeaeb8cbda]<3.3b-android>
+
+	* comptime/Tools/date.scm, configure:
+	* merge from upstream.
+	[a7975cb3c2d8]<3.3b-android>
+
+	* arch/android/build-android.sh, comptime/Tools/date.scm,
+	comptime/Tools/license.scm:
+	* note on arch/android/buil-android.sh about defining paths as CLI
+	params.
+	[76c4b570341f]<3.3b-android>
+
+2010-05-19  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* runtime/Makefile:
+	* reverted comments that slipped in the last commit.
+	[737a5e369038]<3.3b-felix>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, configure,
+	runtime/Makefile:
+	* merge from upstream.
+	[4f78ada28881]<3.3b-felix>
+
+2010-05-18  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* bmacs/bmacs-config.el, runtime/Clib/cinit-obj.c,
+	runtime/Clib/cinit_obj.c, runtime/Clib/non-inline-alloc.c,
+	runtime/Clib/non_inline_alloc.c:
+	* renamed still more c files.
+	[c01e7ee3f364]<3.3b-felix>
+
+	* gc/gc-7.2alpha4.patch, runtime/Clib/inline-alloc.c,
+	runtime/Clib/inline_alloc.c:
+	* s/inline-alloc.c/inline_alloc.c/.
+	[73680af7b4b6]<3.3b-felix>
+
+2010-05-05  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gc/gc-7.2alpha4.patch, gc/install-gc-7.2alpha4:
+	* s/inline-alloc/inline_alloc/.
+	[1bc24e088c83]<3.3b-felix>
+
+2010-04-15  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* api/packrat/src/Misc/packrat.init.in,
+	api/pkgcomp/src/Misc/pkgcomp.init.in,
+	api/pkglib/src/Misc/pkglib.init,
+	api/pthread/src/Misc/pthread.init.in,
+	api/sqlite/src/Misc/sqlite.init.in, api/ssl/src/Misc/ssl.init.in:
+	* more s/make-lib/make_lib/
+	[bba860502370]<3.3b-felix>
+
+2010-05-18  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* runtime/Jlib/dlopen.java, runtime/Jlib/mmap.java:
+	* some references to the ClassLoader were still using java's while
+	it should the current one.
+	[5f521cc30b5b]<3.3b-felix>
+
+2010-04-15  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* api/calendar/src/Makefile, api/calendar/src/Misc/make_lib.scm,
+	api/crypto/src/Makefile, api/crypto/src/Misc/make_lib.scm,
+	api/fthread/src/Makefile, api/fthread/src/Misc/make_lib.scm,
+	api/gstreamer/src/Makefile, api/gstreamer/src/Misc/make_lib.scm,
+	api/mail/src/Makefile, api/mail/src/Misc/make_lib.scm,
+	api/multimedia/src/Makefile, api/multimedia/src/Misc/make_lib.scm,
+	api/packrat/src/Makefile, api/packrat/src/Misc/make_lib.scm,
+	api/pkgcomp/src/Makefile, api/pkgcomp/src/Misc/make_lib.scm,
+	api/pkglib/src/Makefile, api/pkglib/src/Misc/make_lib.scm,
+	api/pthread/src/Makefile, api/pthread/src/Misc/make_lib.scm,
+	api/sqlite/src/Makefile, api/sqlite/src/Misc/make_lib.scm,
+	api/srfi1/src/Makefile, api/srfi1/src/Misc/make_lib.scm,
+	api/srfi27/src/Makefile, api/srfi27/src/Misc/make_lib.scm,
+	api/ssl/src/Makefile, api/ssl/src/Misc/make_lib.scm,
+	api/text/src/Makefile, api/text/src/Misc/make_lib.scm,
+	api/web/src/Makefile, api/web/src/Misc/make_lib.scm,
+	bdb/blib/Makefile, bdb/blib/make_lib.scm, bdl/src/Makefile,
+	bdl/src/make_lib.scm, bglpkg/Makefile, bglpkg/etc/Makefile,
+	bglpkg/etc/make_lib.scm, bglpkg/install.scm, examples/Lib/Makefile,
+	examples/Lib/make_lib.scm, manuals/library.texi,
+	runtime/Eval/library.scm, runtime/Llib/make_lib.scm,
+	runtime/Makefile:
+	* s/make-lib/make_lib/.
+	[e60bb5dd902b]<3.3b-felix>
+
+2010-03-31  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gmp/Makefile:
+	* reapply 42d66a8d670a because it was accidentally rolled back
+	during the merge.
+	[f66ef2fe69a9]<3.3b-felix>
+
+	* runtime/Jlib/dlopen.java:
+	* use the current class loader and not java's. this makes it work
+	under osgi.
+	[1192d0481190]<3.3b-felix>
+
+	* api/crypto/src/Makefile, api/gstreamer/src/Makefile,
+	api/web/src/Makefile, bdb/bdb/Makefile, cigloo/Makefile,
+	comptime/Makefile, pnet2ms/Makefile, runtime/Makefile:
+	* modify the Makefiles for the filename changes.
+	[5af3a6772d05]<3.3b-felix>
+
+2010-05-18  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* api/calendar/src/Misc/make-lib.scm,
+	api/calendar/src/Misc/make_lib.scm,
+	api/crypto/src/Llib/block-ciphers.scm,
+	api/crypto/src/Llib/block_ciphers.scm,
+	api/crypto/src/Misc/make-lib.scm, api/crypto/src/Misc/make_lib.scm,
+	api/fthread/src/Misc/make-lib.scm, api/fthread/src/Misc/make_lib.scm,
+	api/gstreamer/examples/bgst-inspect.scm,
+	api/gstreamer/examples/bgst-launch.scm,
+	api/gstreamer/examples/bgst-mm.scm,
+	api/gstreamer/examples/bgst-play.scm,
+	api/gstreamer/examples/bgst-png.scm,
+	api/gstreamer/examples/bgst-repl.scm,
+	api/gstreamer/examples/bgst_inspect.scm,
+	api/gstreamer/examples/bgst_launch.scm,
+	api/gstreamer/examples/bgst_mm.scm,
+	api/gstreamer/examples/bgst_play.scm,
+	api/gstreamer/examples/bgst_png.scm,
+	api/gstreamer/examples/bgst_repl.scm,
+	api/gstreamer/src/Llib/gstmm-music.scm,
+	api/gstreamer/src/Llib/gstmm_music.scm,
+	api/gstreamer/src/Llib/gstplugin-bglports.scm,
+	api/gstreamer/src/Llib/gstplugin_bglports.scm,
+	api/gstreamer/src/Misc/make-lib.scm,
+	api/gstreamer/src/Misc/make_lib.scm, api/mail/src/Misc/make-lib.scm,
+	api/mail/src/Misc/make_lib.scm, api/multimedia/src/Misc/make-lib.scm,
+	api/multimedia/src/Misc/make_lib.scm,
+	api/packrat/src/Misc/make-lib.scm, api/packrat/src/Misc/make_lib.scm,
+	api/pkgcomp/src/Misc/make-lib.scm, api/pkgcomp/src/Misc/make_lib.scm,
+	api/pkglib/src/Misc/make-lib.scm, api/pkglib/src/Misc/make_lib.scm,
+	api/pthread/src/Misc/make-lib.scm, api/pthread/src/Misc/make_lib.scm,
+	api/sqlite/src/Misc/make-lib.scm, api/sqlite/src/Misc/make_lib.scm,
+	api/srfi1/src/Misc/make-lib.scm, api/srfi1/src/Misc/make_lib.scm,
+	api/srfi27/src/Misc/make-lib.scm, api/srfi27/src/Misc/make_lib.scm,
+	api/ssl/src/Misc/make-lib.scm, api/ssl/src/Misc/make_lib.scm,
+	api/text/src/Misc/make-lib.scm, api/text/src/Misc/make_lib.scm,
+	api/web/src/Llib/css-ast.scm, api/web/src/Llib/css-lexer.scm,
+	api/web/src/Llib/css-parser.scm, api/web/src/Llib/css_ast.scm,
+	api/web/src/Llib/css_lexer.scm, api/web/src/Llib/css_parser.scm,
+	api/web/src/Misc/make-lib.scm, api/web/src/Misc/make_lib.scm,
+	bdb/bdb/Command/all-cmd.scm, bdb/bdb/Command/all_cmd.scm,
+	bdb/bdb/Init/parse-args.scm, bdb/bdb/Init/parse_args.scm,
+	bdb/blib/make-lib.scm, bdb/blib/make_lib.scm, bdl/src/make-lib.scm,
+	bdl/src/make_lib.scm, bglpkg/etc/make-lib.scm,
+	bglpkg/etc/make_lib.scm, cigloo/Example/b-file.scm,
+	cigloo/Example/b_file.scm, cigloo/Init/parse-args.scm,
+	cigloo/Init/parse_args.scm, comptime/Ast/check-init.scm,
+	comptime/Ast/check-sharing.scm, comptime/Ast/check_init.scm,
+	comptime/Ast/check_sharing.scm, comptime/Ast/find-gdefs.scm,
+	comptime/Ast/find_gdefs.scm, comptime/Ast/glo-decl.scm,
+	comptime/Ast/glo-def.scm, comptime/Ast/glo_decl.scm,
+	comptime/Ast/glo_def.scm, comptime/BackEnd/c-emit.scm,
+	comptime/BackEnd/c-main.scm, comptime/BackEnd/c-proto.scm,
+	comptime/BackEnd/c_emit.scm, comptime/BackEnd/c_main.scm,
+	comptime/BackEnd/c_proto.scm, comptime/BackEnd/dotnet-class.scm,
+	comptime/BackEnd/dotnet_class.scm, comptime/BackEnd/jvm-class.scm,
+	comptime/BackEnd/jvm_class.scm, comptime/Bdb/bdb-emit.scm,
+	comptime/Bdb/bdb-initialize.scm, comptime/Bdb/bdb_emit.scm,
+	comptime/Bdb/bdb_initialize.scm, comptime/Bdb/spread-obj.scm,
+	comptime/Bdb/spread_obj.scm, comptime/Cgen/emit-cop.scm,
+	comptime/Cgen/emit_cop.scm, comptime/Globalize/new-body.scm,
+	comptime/Globalize/new_body.scm, comptime/Init/lib-dir.scm,
+	comptime/Init/lib_dir.scm, comptime/Init/parse-args.scm,
+	comptime/Init/parse_args.scm, comptime/Integrate/let-fun.scm,
+	comptime/Integrate/let_fun.scm, comptime/Object/java-access.scm,
+	comptime/Object/java_access.scm, comptime/Object/plain-access.scm,
+	comptime/Object/plain_access.scm, comptime/Object/wide-access.scm,
+	comptime/Object/wide_access.scm, comptime/Prof/prof-emit.scm,
+	comptime/Prof/prof_emit.scm, examples/Embedded/scm-main.scm,
+	examples/Embedded/scm_main.scm, examples/Lib/make-lib.scm,
+	examples/Lib/make_lib.scm, examples/Lib/scm-point.scm,
+	examples/Lib/scm_point.scm, pnet2ms/win32-base.scm,
+	pnet2ms/win32-helpers.scm, pnet2ms/win32-registry.scm,
+	pnet2ms/win32_base.scm, pnet2ms/win32_helpers.scm,
+	pnet2ms/win32_registry.scm, recette/alias-aux.scm,
+	recette/alias_aux.scm, recette/big-file.scm, recette/big_file.scm,
+	recette/external-c.scm, recette/external_c.scm, recette/rgc-eval.scm,
+	recette/rgc-insert.scm, recette/rgc-jm.scm, recette/rgc-trap.scm,
+	recette/rgc_eval.scm, recette/rgc_insert.scm, recette/rgc_jm.scm,
+	recette/rgc_trap.scm, runtime/Llib/make-lib.scm,
+	runtime/Llib/make_lib.scm:
+	* s/-/_/g in filenames.
+	[d9e5a0f57974]<3.3b-felix>
+
+	* comptime/Tools/date.scm, manuals/java.texi:
+	* merged my fixes upstream.
+	[f3b6fb965cd3]<3.3b>
+
+2010-03-09  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* comptime/Tools/date.scm, comptime/Tools/license.scm,
+	manuals/java.texi:
+	* method gramamr rule had '(field' instead of '(method'.
+	[dc40e4020bff]<3.3b>
+
+2010-06-06  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, cigloo/.afile, comptime/Tools/date.scm,
+	runtime/Eval/evobject.scm, runtime/Ieee/string.scm, runtime/Makefile:
+	Minor distribution Makefile fix.
+	[26c986df631b]<3.3b>
+
+2010-05-30  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/css-ast.scm, api/web/src/Llib/css-parser.scm,
+	api/web/src/Misc/make-lib.scm, bde/bpp/reader.scm,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, recette/bps.scm,
+	recette/read.scm, recette/string.scm, recette/vital.scm,
+	runtime/CSlib/foreign.cs, runtime/Clib/crgc.c,
+	runtime/Clib/cstring.c, runtime/Ieee/boolean.scm,
+	runtime/Ieee/char.scm, runtime/Ieee/control.scm,
+	runtime/Ieee/equiv.scm, runtime/Ieee/fixnum.scm,
+	runtime/Ieee/flonum.scm, runtime/Ieee/number.scm,
+	runtime/Ieee/pairlist.scm, runtime/Ieee/string.scm,
+	runtime/Ieee/vector.scm, runtime/Jlib/foreign.java,
+	runtime/Read/reader.scm, runtime/Rgc/rgc.scm,
+	runtime/Rgc/rgcexpand.scm, runtime/Unsafe/aes.scm,
+	runtime/Unsafe/bignumber.scm, runtime/Unsafe/crc.scm,
+	runtime/Unsafe/kmp.scm, runtime/Unsafe/rsa.scm,
+	runtime/Unsafe/uuid.scm:
+	Improve reader performance (bootstrap)
+	[1d7593813def]<3.3b>
+
+2010-05-27  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/pthread/recette/recette.scm, api/pthread/src/Llib/pthread.scm,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Fix (p)thread-terminate problem (bootstrap)
+	[fc7b769eb715]<3.3b>
+
+	* api/web/src/Llib/css-ast.scm, api/web/src/Llib/css-lexer.scm,
+	api/web/src/Llib/css-parser.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Clib/capply.c:
+	Accomodate CSS media query (bootstrap)
+	[327a5a37eb6f]<3.3b>
+
+2010-05-21  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/css-lexer.scm, api/web/src/Llib/css-parser.scm,
+	api/web/src/Misc/make-lib.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, recette/apply.scm, runtime/Clib/capply.c:
+	raise max apply arity to 50 (bootstrap)
+	[f325bb40f536]<3.3b>
+
+2010-05-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Misc/make-lib.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	Export css class from the web library (bootstrap)
+	[c9d1bca1e2f2]<3.3b>
+
+	* bmacs/bmacs-config.el, cigloo/.afile, comptime/Tools/date.scm,
+	runtime/Llib/thread.scm:
+	Add thread-join to nothread (bootstrap)
+	[a17c46a1202c]<3.3b>
+
+2010-05-11  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/io.texi:
+	Add string-skip (bootstrap)
+	[04cb1839325c]<3.3b>
+
+	* Makefile, bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	manuals/io.texi, recette/string.scm, runtime/Ieee/input.scm,
+	runtime/Ieee/string.scm:
+	Add string-skip (bootstrap)
+	[4b29edf6f5cc]<3.3b>
+
+	* Makefile, api/gstreamer/src/Plugin/bglgst_portsrc.c,
+	bmacs/bmacs-config.el, cigloo/.afile, comptime/Expand/map.scm,
+	comptime/Tools/date.scm, runtime/Ieee/pairlist.scm:
+	Fix comptime optimizing macro for reduce.
+	[1059592bd420]<3.3b>
+
+2010-05-08  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile, api/web/src/Llib/html.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Unsafe/http.scm:
+	Fix HTTP-SEND-CHUNK for HTTP proxy (bootstrap)
+	[6f54b1ef82c2]<3.3b>
+
+2010-05-05  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* .hgtags, api/fthread/src/Makefile,
+	api/gstreamer/src/Llib/gstmm-music.scm,
+	api/mail/src/Llib/rfc2045.scm, api/multimedia/src/Llib/id3.scm,
+	api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/mpg123.scm,
+	api/multimedia/src/Llib/music.scm,
+	api/multimedia/src/Llib/musicloop.scm, api/web/src/Llib/webdav.scm,
+	api/web/src/Llib/xml.scm, bmacs/bmacs-config.el, cigloo/.afile,
+	comptime/Ast/app.scm, comptime/Ast/dump.scm, comptime/Ast/exit.scm,
+	comptime/Ast/venv.scm, comptime/Expand/initial.scm,
+	comptime/Expand/map.scm, comptime/Heap/make.scm,
+	comptime/Module/eval.scm, comptime/SawJvm/inline.scm,
+	comptime/SawJvm/out.scm, comptime/Tools/date.scm,
+	comptime/Trace/walk.scm, gmp/Makefile, manuals/multimedia.texi,
+	manuals/stdlib.texi, runtime/CSlib/foreign.cs, runtime/Clib/callcc.c,
+	runtime/Clib/cports.c, runtime/Clib/cstring.c, runtime/Clib/ctrace.c,
+	runtime/Clib/cunicode.c, runtime/Eval/evmeaning.scm,
+	runtime/Eval/evmodule.scm, runtime/Eval/evobject.scm,
+	runtime/Eval/expanders.scm, runtime/Ieee/fixnum.scm,
+	runtime/Ieee/pairlist.scm, runtime/Ieee/port.scm,
+	runtime/Ieee/string.scm, runtime/Include/bigloo.h,
+	runtime/Jlib/foreign.java, runtime/Jlib/mmap.java,
+	runtime/Llib/bexit.scm, runtime/Llib/error.scm,
+	runtime/Read/reader.scm:
+	Merging
+	[639d24740f09]<3.3b>
+
+2010-05-04  Marcos Dione <mdione@sophia.inrira.fr>
+
+	*
+	* merge from -merge branch, where I worked integrating last 2 months
+	of commits in another repo.
+	[756f15a694b9]<3.3b>
+
+2010-04-23  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/src/Plugin/bglgst_portsrc.c, bmacs/bmacs-config.el,
+	comptime/Engine/compiler.scm, comptime/Engine/param.scm,
+	comptime/Init/parse-args.scm, comptime/Tools/date.scm,
+	comptime/Trace/walk.scm, gc/gc-7.2alpha4.patch:
+	GC patch (for bmem). Gstreamer fix (all gstreamer version). Compiler
+	traces.
+	[05c25831ea56]<3.3.b-merge>
+
+2010-04-09  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/src/Clib/bglgst.c, runtime/Clib/cstring.c:
+	Fix gstreamer initializing bug.
+	 The regular gstreamer initialization (gst_init) allows itself to
+	change the locale of the application! This error fix restores the
+	locale in use before gstreamer initializes.
+	[087e91735dca]<3.3.b-merge>
+
+2010-04-07  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/src/Clib/bglgst.c,
+	api/gstreamer/src/Clib/bglgst_config.h.in:
+	Improve Gstreamer autoconfiguration.
+	[23504981ac8f]<3.3.b-merge>
+
+	* api/gstreamer/src/Clib/bglgst.c, bmacs/bmacs-config.el,
+	cigloo/.afile, comptime/Tools/date.scm:
+	Gstreamer backward compatibility.
+	[e812ef8f7c03]<3.3.b-merge>
+
+2010-03-29  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/web/src/Llib/webdav.scm, api/web/src/Misc/make-lib.scm,
+	bmacs/bmacs-config.el, comptime/Ast/app.scm, comptime/Expand/eps.scm,
+	comptime/Expand/initial.scm, comptime/Tools/date.scm,
+	runtime/Llib/error.scm:
+	Improve debug macro error messages, fix key argument passing.
+	[89031e61c4d7]<3.3.b-merge>
+
+2010-03-22  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* runtime/Unsafe/http.scm:
+	Improve HTTP to support arbitrary POST commands.
+	[c7e8750c003c]<3.3.b-merge>
+
+2010-03-16  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* runtime/Clib/csocket.c:
+	Improve connect error messages.
+	[2b39ae32eb00]<3.3.b-merge>
+
+2010-05-04  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* api/multimedia/src/Llib/mpc.scm,
+	api/multimedia/src/Llib/musicloop.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	* raise a more explicit exception when the host is unreachable.
+	[64eaebe2f865]<3.3.b-merge>
+
+	* ChangeLog, api/multimedia/src/Llib/mpc.scm,
+	api/multimedia/src/Llib/musicloop.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm:
+	* runtime/comptime, c-backend. Make C BIND-EXIT thread-safe!
+	[38f01685c3c7]<3.3.b-merge>
+
+	* api/gstreamer/src/Llib/gstmm-music.scm,
+	api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/mpg123.scm,
+	api/multimedia/src/Llib/mplayer.scm,
+	api/multimedia/src/Llib/music.scm,
+	api/multimedia/src/Llib/musicloop.scm, comptime/Tools/date.scm,
+	runtime/Eval/evmodule.scm:
+	* fixes in mpd code.
+	[f4692799b0e7]<3.3.b-merge>
+
+	* api/gstreamer/src/Llib/gstmm-music.scm,
+	api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/music.scm:
+	* music-prev/next moved from gstreamer to multimedia.
+	* use a lock instead of a timed-lock in music-volume-set!.
+	[acabdb162927]<3.3.b-merge>
+
+	* api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/mpg123.scm,
+	api/multimedia/src/Llib/music.scm, runtime/Eval/evobject.scm:
+	+ music-can-play-type?
+	* fixes in evobject.
+	[e8b6f8ada73f]<3.3.b-merge>
+
+	* comptime/Heap/make.scm, manuals/io.texi, runtime/Ieee/port.scm:
+	* shrink global to be sure that we do not save extra information. +
+	call-with-output-string.
+	[062132ad3f65]<3.3.b-merge>
+
+	* api/gstreamer/src/Llib/gstmm-music.scm,
+	api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/mpd.scm,
+	api/multimedia/src/Llib/mpg123.scm,
+	api/multimedia/src/Llib/mplayer.scm,
+	api/multimedia/src/Llib/musicloop.scm, manuals/multimedia.texi:
+	* work on mpd and gstreamer.
+	[4171f97584d7]<3.3.b-merge>
+
+2010-02-26  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* api/gstreamer/src/Llib/gstmm-music.scm:
+	Minor gstreamer fixes.
+	[e184d9c1072f]<3.3.b-merge>
+
+2010-02-21  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* configure:
+	Fix macosx GC configure setting.
+	[ddd2cfabae4d]<3.3.b-merge>
+
+2010-02-20  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* Makefile.mercurial:
+	Add explicit Mercurial check after each commit.
+	[f20f26815d20]<3.3.b-merge>
+
+	* api/multimedia/src/Llib/mpc.scm:
+	Fix error handler setting of mpc status.
+	[838fe35f5975]<3.3.b-merge>
+
+2010-05-04  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/mpd.scm,
+	autoconf/gcflags, configure, gc/install-gc-7.2alpha4,
+	runtime/Clib/cports.c, runtime/Llib/ucs2.scm:
+	* fixes in mpd's code.
+	* special configuration for gc on PPC. + integer->ucs2-ur.
+	[5731d60f4c56]<3.3.b-merge>
+
+	* arch/android/build-android.sh:
+	* add bigloo's lib dir to LD_LIBRARY_PATH.
+	[8f2ab54fec2c]<3.3b-android>
+
+	* arch/android/build-android.sh, configure:
+	* bail out if we find an Android hostos but we can't determine which
+	one it is.
+	[682d44d90482]<3.3b-android>
+
+2010-03-02  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	* remove extra \ which made the make part not run when both
+	configure and make options were given.
+	[c549139f6a99]<3.3b-android>
+
+2010-03-01  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* api/pthread/src/Posix/bglpthread.c:
+	* s/BGL_PTHREAD_TERM_SIG/PTHREAD_CANCEL_ASYNCHRONOUS/. the semantics
+	of that check is not clear, as right now it's a constant in the
+	configure script, and it is not linked to the exitsence of
+	PTHREAD_CANCEL_ASYNCHRONOUS in the platform's headers.
+	[66cec46d5aef]<3.3b-android>
+
+	* api/fthread/src/Makefile:
+	* we were trying to link the fthread lib to itself!
+	[b9d285a1319a]<3.3b-android>
+
+	* arch/android/build-android.sh:
+	* normally we'll have only one emulator running. change the port
+	accordingly.
+	* we compile bigloo for android. make it explicit in the prefix
+	dirname.
+	* rearrange options fo configure so we can move them arround at will.
+	[637f1c5922df]<3.3b-android>
+
+	* Makefile:
+	* check that we're configured before trying to compile anything.
+	[878d372f442f]<3.3b-android>
+
+2010-02-25  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* autoconf/pthread:
+	* for Android pthreads is included in the libc, so we don't need and
+	extra -l<lib> LDFLAG.
+	[0e9e83f57987]<3.3b-android>
+
+	* runtime/Clib/cmain.c, runtime/Clib/inline-alloc.c:
+	* move __satck_base__ to inline-alloc.c, so it's included in
+	libbigloogc.so and Android can find it.
+	[47bf62831539]<3.3b-android>
+
+2010-02-19  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	* s/reconfigure/configure/.
+	* fix bug in script/source detection.
+	* cleanup.
+	[1be70a86db90]<3.3b-android>
+
+2010-02-17  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	! use eclair's (android 2.0) tools.
+	[dc09ed1359bf]<3.3b-android>
+
+2010-02-16  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* autoconf/android:
+	* support eclair too.
+	[fc7069f819db]<3.3b-android>
+
+2010-05-04  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* autoconf/bcopy:
+	* fix bug in bcopy detection. seems like at some point I mixed
+	whether we needed stddef.h or not in andriod: it turns out we needed
+	them, and the original version was right. also, it must be included
+	before including string.h.
+	[523818fa86ff]<3.3b-android>
+
+2010-02-10  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* arch/android/build-android.sh:
+	+ gc 7.2alpha4 source code needed for Android arch.
+	[db64ab24712f]<3.3b-android>
+
+2010-03-30  Marcos Dione <mdione@sophia.inrira.fr>
+
+	* gmp/Makefile:
+	* make make clean work when we can't find gmp.
+	[42d66a8d670a]<3.3b>
+
+2010-02-19  Manuel Serrano <Manuel.Serrano@inria.fr>
+
+	* configure:
+	Get rid of PPC GC special configuration.
+	[5f4530cbf51e]<3.3b>
+
+2010-02-03  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	*
+	Initial commit for 3.3b.
+	[2bddb5aa6734]<3.3b>
+
+	* autoconf/android, autoconf/gcversion, autoconf/ldshare, configure,
+	gc/install-gc-7.2alpha4:
+	Android fixes.
+	[4d69711944c1]<3.3a>
+
+	* api/fthread/examples/prims/prims.scm, autoconf/bcopy,
+	autoconf/ldshare, autoconf/os, autoconf/sendfile, configure,
+	gc/Makefile, runtime/Clib/cerror.c:
+	Android patches.
+	[de831f8e4154]<3.3a>
+
+2010-01-04  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* autoconf/sendfile, www/Makefile:
+	Change sendfile detection (use /etc/hosts instead of /etc/passwd).
+	[6f24c64a0e80]<3.2c>
+
+2009-12-14  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* autoconf/maemo.arm:
+	Maemo autoconf fix.
+	[5a508880d577]<3.2c>
+
+2009-12-07  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* comptime/Makefile, runtime/Makefile:
+	Touch .afile to avoid regenerating afile on boot.
+	[8fc4c7cb60e1]<3.2c>
+
+	* bmacs/Makefile:
+	Minor bmacs installation fix.
+	[acf5738ea37b]<3.2c>
+
+2009-12-04  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* configure, gmp/install-gmp, macosx/Makefile.macosx:
+	Improve GMP custom installation
+	[6658efadb0ed]<3.2c>
+
+2009-12-03  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* Makefile, autoconf/signbit, comptime/Tools/date.scm, configure,
+	recette/bignum.scm, runtime/CSlib/foreign.cs, runtime/Clib/cbignum.c,
+	runtime/Ieee/bignum.sch, runtime/Ieee/number.scm,
+	runtime/Include/bigloo.h, runtime/Jlib/foreign.java:
+	Add automatic bignum->fixnum conversion to arith. ops. (bootstrap)
+	[95432e058928]<3.2c>
+
+2009-12-02  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* Makefile, runtime/Makefile:
+	Minor Makefiles fixes for .deb creation
+	[0a5c1664ca69]<3.2c>
+
+2009-12-01  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* .hgtags:
+	Added tag 3.3a for changeset 216b62fb5084
+	[a22622c826ee]<3.2c>
+
+	* Makefile:
+	Split Makefile install entry
+	[82c2b0570dfb]<3.2c>
+
+2009-11-30  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* runtime/Clib/cports.c:
+	Fix SENDFILE bug. Offset was ignored!
+	[f39ebdf1b2a2]<3.2c>
+
+2009-11-23  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* INSTALL, api/sqlite/recette/recette.scm,
+	api/sqlite/src/Misc/sqlite.init.in, configure, manuals/Makefile,
+	manuals/bdb.man:
+	SQLITE configuration fix.
+	[104d861f27bf]<3.2c>
+
+	* configure:
+	Autoconf fix.
+	[0f0c04ad55a0]<3.2c>
+
+	* autoconf/ccdiv0, autoconf/cctest, autoconf/os, autoconf/oscharset,
+	autoconf/strip:
+	autoconf fixes
+	[288012ce7d22]<3.2c>
+
+	* configure, gc/Makefile-gc-7.1:
+	Yet another MinGW fix.
+	[6f01bfbecaa1]<3.2c>
+
+	* autoconf/rdynamic, configure:
+	MinGW configuration fix.
+	[18fcefc01023]<3.2c>
+
+2009-11-13  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* autoconf/ldshare, comptime/Tools/date.scm:
+	Fix LDSHARE autoconfiguration.
+	[b3f2ba7c712b]<3.2c>
+
+	* autoconf/sigchld:
+	Fix SIGCHLD autoconfiguration.
+	[24adcaf94211]<3.2c>
+
+2009-11-12  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* ChangeLog, api/pthread/recette/recette.scm,
+	api/sqlite/recette/recette.scm, api/srfi27/recette/recette.scm,
+	api/srfi27/src/Llib/srfi27.bgl, api/srfi27/src/Llib/srfi27.sch,
+	comptime/Tools/date.scm, runtime/Clib/cbignum.c,
+	runtime/Clib/cinit-obj.c, runtime/Ieee/number.scm,
+	runtime/Llib/error.scm:
+	Fix bignum multiplication and SRFI-27 (bootstrap)
+	[47292b16f21f]<3.2c>
+
+	* comptime/Tools/date.scm, runtime/Unsafe/http.scm:
+	Fix JVM strings generation (MacOS X only). Fix HTTP status line
+	parsing.
+	[7fada995c725]<3.2c>
+
+2009-11-11  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* configure:
+	Fix threads configuration
+	[4cd74e3a6fae]<3.2c>
+
+	* configure:
+	Fix DBUS configuration
+	[d1baf4629c0e]<3.2c>
+
+	* configure:
+	Fix user --enable-XXX option
+	[ab21fa790f7b]<3.2c>
+
+	* configure:
+	Fix SQLITE configuration
+	[27232740f659]<3.2c>
+
+	* configure:
+	Fix DBUS configuration
+	[8bb32e06fe36]<3.2c>
+
+	* configure:
+	Fix JVM configuration
+	[48b281c994df]<3.2c>
+
+	* configure:
+	Fix DBUS configuration
+	[ed2f8478e29a]<3.2c>
+
+2009-11-04  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* manuals/error.texi:
+	Document the new behavior of WITH-HANDLER.
+	[800099f5ac18]<3.2c>
+
+2009-10-15  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* comptime/Makefile:
+	Fix the comptime/bigloo.plain entry that prevented bootstraps.
+	[67d31463d5e2]<3.2c>
+
+2009-10-14  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* manuals/stdlib.texi, runtime/Ieee/flonum.scm:
+	rename double->ieee-string, etc to double->octet-string. Old forms
+	still exist but are not documented.
+	[2d2f25bea9c8]<3.2c>
+
+2009-10-07  Florian Loitsch
+
+	* manuals/stdlib.texi, recette/flonum.scm, runtime/CSlib/foreign.cs,
+	runtime/Clib/cstring.c, runtime/Ieee/flonum.scm,
+	runtime/Include/bigloo.h, runtime/Jlib/foreign.java:
+	fixed ieee-string->float (and inverse). added double->llong-bits,
+	float->int-bits (and inverse).
+	[1ed8a5d263e3]<3.2c>
+
+2009-10-05  Florian Loitsch
+
+	* runtime/Llib/ucs2.scm:
+	integer->ucs2 now allows '0'. added integer->ucs2-ur.
+	[10cae5604257]<3.2c>
+
+2009-10-02  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* bmacs/Makefile, runtime/Eval/expddefine.scm:
+	Fix bmacs installation.
+	[cbb01b342d31]<3.2c>
+
+2009-10-01  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* Makefile:
+	Minor Makefile fix (thanks Cyprien).
+	[af1b285290c1]<3.2c>
+
+2009-09-11  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* gc/install-gc-7.1:
+	Minor GC install fix.
+	[840d0ee068c6]<3.2c>
+
+2009-09-28  Florian Loitsch
+
+	*
+	closing branch. changes have been merged into main tree.
+	[8d8076900e9e]
+
+2009-09-25  Florian Loitsch
+
+	* Makefile:
+	stop compilation when the first error is encountered.
+	[cd605b0164dc]<3.2c>
+
+2009-09-22  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* gc/install-gc-7.1:
+	small configure-bugfix.
+	[c7c1332d8f16]<3.2c>
+
+	* runtime/Jlib/foreign.java:
+	fix. seed-random! now correctly transmits the seed (Java).
+	[9a6061c77632]<3.2c>
+
+2009-09-11  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* api/calendar/src/Makefile, api/crypto/src/Makefile,
+	api/fthread/src/Makefile, api/gstreamer/src/Makefile,
+	api/mail/src/Makefile, api/multimedia/src/Makefile,
+	api/packrat/src/Makefile, api/pkgcomp/src/Makefile,
+	api/pkglib/src/Makefile, api/pthread/src/Makefile,
+	api/sqlite/src/Makefile, api/srfi1/src/Makefile,
+	api/srfi27/src/Makefile, api/ssl/src/Makefile, api/text/src/Makefile,
+	api/web/src/Makefile, bglpkg/Makefile:
+	parallel build patches.
+	[bfd859dda381]<3.2c>
+
+	* Makefile, comptime/Makefile:
+	parallel build patch.
+	[f9fb8fc9aed7]<3.2c>
+
+	* comptime/Init/parse-args.scm, comptime/Makefile:
+	bugfix. (pass-parse-args).
+	[2baa6464719a]<3.2c>
+
+	* Makefile:
+	last one did not work completely for mercurial checkouts.
+	[2e7fb97cb468]<3.2c>
+
+	* comptime/Init/parse-args.scm, comptime/Init/pass-args-parse.sch:
+	slightly changed pass-args-parse syntax.
+	[7f0c3f292a52]<3.2c>
+
+	* Makefile, comptime/Tools/date.scm:
+	Fix arity checking (bootstrap)
+	[625e1d052cec]<3.2c>
+
+	* autoconf/ldsoname, comptime/Ast/glo-def.scm:
+	Fix arity checking.
+	[ebfa670b4964]<3.2c>
+
+	* autoconf/cnstalign, autoconf/enforcedcnstalign, cigloo/Makefile,
+	comptime/Ast/app.scm, comptime/Ast/labels.scm, comptime/Ast/let.scm,
+	comptime/Ast/sexp.scm, comptime/Ast/unit.scm,
+	comptime/Coerce/convert.scm, comptime/Expand/initial.scm,
+	comptime/Reduce/copy.scm, comptime/Tools/date.scm, configure,
+	gc/install-gc-7.1, recette/vital.scm:
+	Full Bootstrap at 11Sep09
+	[2d3cbfa0daf2]<3.2c>
+
+2009-09-10  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* comptime/Tools/date.scm:
+	Full Bootstrap at 10Sep09
+	[dcc5414fd899]<3.2c>
+
+	* Makefile, api/calendar/src/Makefile, api/crypto/src/Makefile,
+	api/fthread/src/Makefile, api/gstreamer/src/Makefile,
+	api/mail/src/Makefile, api/multimedia/src/Makefile,
+	api/packrat/src/Makefile, api/pkgcomp/src/Makefile,
+	api/pkglib/src/Makefile, api/pthread/src/Makefile,
+	api/sqlite/src/Makefile, api/srfi1/src/Makefile,
+	api/srfi27/src/Makefile, api/ssl/src/Makefile, api/text/src/Makefile,
+	api/web/src/Makefile, bde/Makefile, bde/bmem/Makefile,
+	bglpkg/Makefile, cigloo/Example/Makefile, comptime/Makefile,
+	configure, recette/Makefile, runtime/Makefile:
+	Rename BUILDBINDIR into BGLBUILDBINDIR (and BUILDLIBDIR).
+	[0ee36f656ce1]<3.2c>
+
+	* api/fthread/src/Makefile:
+	MacOS pthread Makefile fix.
+	[7d7ec42f0460]<3.2c>
+
+	* autoconf/ldshare:
+	Fix autoconf/ldshare test.
+	[382e31a6a65b]<3.2c>
+
+	* comptime/Init/cross.scm, comptime/Tools/date.scm:
+	Full Bootstrap at 10Sep09
+	[396c5a0322de]<3.2c>
+
+	* api/multimedia/src/Llib/m3u.scm:
+	Bug fix.
+	[499a563b4dc9]<3.2c>
+
+2009-09-09  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* manuals/Makefile, manuals/bigloo.texi, manuals/compiler.texi,
+	manuals/cross.texi, manuals/extension.texi:
+	added cross-compilation documentation
+	[a1208a775350]<3.2c>
+
+	* examples/Makefile, examples/hostsh/Makefile,
+	examples/hostsh/by-hand/kdialog-host.sh,
+	examples/hostsh/netcat/Readme, examples/hostsh/netcat/build.sh,
+	examples/hostsh/netcat/build1.sh, examples/hostsh/netcat/build2.sh,
+	examples/hostsh/netcat/host.sh, examples/hostsh/netcat/host_exec.sh,
+	examples/hostsh/ssh/ipod.sh, examples/hostsh/ssh/ssh-copy.sh:
+	added some hostsh examples.
+	[f0c05d8ba7e0]<3.2c>
+
+	* Makefile, autoconf/bigloo_config.sch.in, bde/Makefile,
+	comptime/Init/cross.scm, comptime/Init/lib-dir.scm,
+	comptime/Init/parse-args.scm, comptime/Init/pass-args-parse.sch,
+	comptime/Makefile, configure, runtime/Makefile:
+	-lib-dir now handles cross-compilation. make (-> make boot) is now
+	sufficient for bootstrap from mercurial.
+	[9b3798e20a57]<3.2c>
+
+2009-09-08  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* autoconf/Makefile, autoconf/arflags, comptime/Tools/date.scm,
+	configure:
+	Full Bootstrap at 08Sep09
+	[c673d35f2157]<3.2c>
+
+	* autoconf/alignment, autoconf/alloca, autoconf/allocah,
+	autoconf/ascpp, autoconf/bcopy, autoconf/bigendian, autoconf/ccdiv0,
+	autoconf/ccoptim, autoconf/ccpic, autoconf/ccpic2, autoconf/ccprof,
+	autoconf/ccstrip, autoconf/cctest, autoconf/checkinclude,
+	autoconf/checkmember, autoconf/cnstalign, autoconf/cpu,
+	autoconf/dbus, autoconf/dlopen, autoconf/dotnettest,
+	autoconf/doubleprec, autoconf/enforcedcnstalign, autoconf/fcntl,
+	autoconf/gcconfigureopt, autoconf/gchavedoblocking,
+	autoconf/gchavestartblocking, autoconf/gcstd, autoconf/gcversion,
+	autoconf/getaddrinfo, autoconf/getcwd, autoconf/getprotoent,
+	autoconf/getuid, autoconf/getwd, autoconf/gmaketest, autoconf/gmp,
+	autoconf/gstreamer, autoconf/gstreameraudio, autoconf/indent,
+	autoconf/inet_aton, autoconf/jartest, autoconf/labs,
+	autoconf/ldshare, autoconf/ldsoname, autoconf/limbs, autoconf/llabs,
+	autoconf/longlong, autoconf/machdep, autoconf/macosx, autoconf/mmap,
+	autoconf/openssl, autoconf/openssl-dtls, autoconf/os,
+	autoconf/oscharset, autoconf/osversion, autoconf/pipe,
+	autoconf/posixfileops, autoconf/processor, autoconf/pthread,
+	autoconf/pthreadlocalstorage, autoconf/pthreadlock, autoconf/ptrsize,
+	autoconf/ranlib, autoconf/rdynamic, autoconf/readline,
+	autoconf/select, autoconf/sendfile, autoconf/setjmp,
+	autoconf/setjmp.sparc, autoconf/setsockopt, autoconf/sigaction,
+	autoconf/sigchld, autoconf/signbit, autoconf/sigpipe,
+	autoconf/sigprocmask, autoconf/sigsetmask, autoconf/sigsetmask.ucb,
+	autoconf/sleep, autoconf/socket, autoconf/socklen, autoconf/sqlite,
+	autoconf/stackdown, autoconf/stacksize, autoconf/stdint,
+	autoconf/stdlibint, autoconf/strip, autoconf/strtoll,
+	autoconf/strtoull, autoconf/timeval, autoconf/timezone,
+	autoconf/unistdint, autoconf/unixsocket, autoconf/winreg,
+	autoconf/ziptest, bmacs/bmacs-config.el, comptime/Makefile,
+	comptime/Tools/date.scm, configure, runtime/Makefile:
+	cross-configuration seems to work again.
+	[b5ffec034600]<3.2c>
+
+	* autoconf/cnstalign, autoconf/enforcedcnstalign, autoconf/runtest.in,
+	autoconf/timezone, bmacs/bmacs-config.el:
+	Minor autoconf changes.
+	[dad3012662de]<3.2c>
+
+	* configure:
+	Minor autoconf fix.
+	[90013631e14f]<3.2c>
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/library.scm:
+	Full Bootstrap at 08Sep09
+	[b8470627db42]<3.2c>
+
+	* ChangeLog, bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	manuals/dsssl.texi, recette/dsssl.scm, runtime/Eval/library.scm,
+	runtime/Llib/dsssl.scm, runtime/Unsafe/http.scm:
+	Full Bootstrap at 08Sep09
+	[d444f5af41ba]<3.2c>
+
+2009-09-07  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* Makefile.mercurial:
+	Mercurial fix.
+	[f13d139317be]<3.2c>
+
+	* bmacs/Makefile:
+	Minor emacs(23) install fix.
+	[4df7b0a66e3b]<3.2c>
+
+	* Makefile, Makefile.misc, api/calendar/src/Makefile,
+	api/crypto/src/Makefile, api/fthread/src/Makefile,
+	api/gstreamer/src/Makefile, api/mail/src/Makefile,
+	api/multimedia/src/Makefile, api/packrat/src/Makefile,
+	api/pkgcomp/src/Makefile, api/pkglib/src/Makefile,
+	api/pthread/src/Makefile, api/sqlite/src/Makefile,
+	api/srfi1/src/Makefile, api/srfi27/src/Makefile,
+	api/ssl/src/Makefile, api/text/src/Makefile, api/web/src/Makefile,
+	autoconf/Makefile, autoconf/alignment, autoconf/alloca,
+	autoconf/allocah, autoconf/ascpp, autoconf/bcopy, autoconf/bigendian,
+	autoconf/ccdiv0, autoconf/ccoptim, autoconf/ccpic, autoconf/ccpic2,
+	autoconf/ccprof, autoconf/ccstrip, autoconf/cctest,
+	autoconf/checkinclude, autoconf/checkmember, autoconf/cnstalign,
+	autoconf/cpu, autoconf/dbus, autoconf/dirname, autoconf/dlopen,
+	autoconf/dotnettest, autoconf/doubleprec, autoconf/enforcedcnstalign,
+	autoconf/fcntl, autoconf/gcflags, autoconf/gchavedoblocking,
+	autoconf/gchavestartblocking, autoconf/gcstd, autoconf/gcversion,
+	autoconf/getaddrinfo, autoconf/getcwd, autoconf/getprotoent,
+	autoconf/getuid, autoconf/getwd, autoconf/gmp, autoconf/gstreamer,
+	autoconf/gstreameraudio, autoconf/indent, autoconf/inet_aton,
+	autoconf/inet_pton, autoconf/info, autoconf/installinfo,
+	autoconf/installinfodir, autoconf/javatest, autoconf/labs,
+	autoconf/ldextraopt, autoconf/ldpreload, autoconf/ldshare,
+	autoconf/ldsharedopt, autoconf/ldsoname, autoconf/ldstaticopt,
+	autoconf/limbs, autoconf/llabs, autoconf/longlong, autoconf/machdep,
+	autoconf/macosx, autoconf/maemo.arm, autoconf/mkruntest,
+	autoconf/mmap, autoconf/openssl, autoconf/openssl-dtls, autoconf/os,
+	autoconf/oscharset, autoconf/osversion, autoconf/pipe,
+	autoconf/posixfileops, autoconf/pthread,
+	autoconf/pthreadlocalstorage, autoconf/pthreadlock, autoconf/ptrsize,
+	autoconf/ranlib, autoconf/rdynamic, autoconf/readline,
+	autoconf/runtest.in, autoconf/select, autoconf/sendfile,
+	autoconf/setjmp, autoconf/setjmp.sparc, autoconf/setsockopt,
+	autoconf/sigaction, autoconf/sigchld, autoconf/signbit,
+	autoconf/sigpipe, autoconf/sigprocmask, autoconf/sigsetmask,
+	autoconf/sigsetmask.ucb, autoconf/sleep, autoconf/socket,
+	autoconf/socklen, autoconf/sqlite, autoconf/stackdown,
+	autoconf/stacksize, autoconf/stdint, autoconf/stdlibint,
+	autoconf/strip, autoconf/strtoll, autoconf/strtoull, autoconf/termio,
+	autoconf/termios, autoconf/thread, autoconf/timeval,
+	autoconf/timezone, autoconf/unistdint, autoconf/unix,
+	autoconf/unixsocket, autoconf/user, autoconf/winreg,
+	autoconf/xemacspath, bde/Makefile, bde/bmem/Makefile,
+	bench/Makefile.bench, bench/bague/Makefile, bench/byte/Makefile,
+	bench/conform/Makefile, bench/earley/Makefile, bench/fft/Makefile,
+	bench/leval/Makefile, bench/pseudoknot/Makefile,
+	bench/queens/Makefile, bench/rgc/Makefile, bglpkg/Makefile,
+	bmacs/bmacs-config.el, cigloo/Example/Makefile, cigloo/Makefile,
+	comptime/Makefile, comptime/Tools/date.scm, configure, gc/Makefile,
+	gc/configure-gc-7.2alpha2, recette/Makefile, runtime/Makefile,
+	tools/Makefile, tools/if_mach.c, tools/if_not_there.c:
+	Brand new configure implementation (to prepare cross installation).
+	[a0147983b3aa]
+
+2009-09-04  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/Makefile, api/crypto/Makefile, api/crypto/README,
+	api/crypto/recette/Makefile, api/crypto/recette/recette.scm,
+	api/crypto/recette/recette_dsa_key.pem,
+	api/crypto/recette/recette_rsa_key.pem, api/crypto/src/Llib/DER.scm,
+	api/crypto/src/Llib/aes.scm, api/crypto/src/Llib/block-ciphers.scm,
+	api/crypto/src/Llib/cast128.scm, api/crypto/src/Llib/ciphers.scm,
+	api/crypto/src/Llib/des.scm, api/crypto/src/Llib/dsa.scm,
+	api/crypto/src/Llib/elgamal.scm, api/crypto/src/Llib/idea-round.png,
+	api/crypto/src/Llib/idea.scm, api/crypto/src/Llib/pad.scm,
+	api/crypto/src/Llib/pem.scm, api/crypto/src/Llib/rsa.scm,
+	api/crypto/src/Llib/string2key.scm, api/crypto/src/Llib/util.scm,
+	api/crypto/src/Makefile, api/crypto/src/Misc/crypto.init,
+	api/crypto/src/Misc/make-lib.scm, api/mail/src/Llib/rfc2047.scm,
+	autoconf/Makefile, bmacs/Makefile, bmacs/bmacs-config.el,
+	cigloo/Engine/param.scm, cigloo/Makefile, comptime/Ast/node.scm,
+	comptime/Ast/remove.scm, comptime/Engine/compiler.scm,
+	comptime/Engine/param.scm, comptime/Init/cross.scm,
+	comptime/Init/parse-args.scm, comptime/Inline/app.scm,
+	comptime/Inline/walk.scm, comptime/Makefile, comptime/Tools/date.scm,
+	configure, gc/Makefile, gc/Makefile-gc-7.0, gc/Makefile-gc-7.1,
+	gc/Makefile-gc-7.2alpha2, gc/gc-7.2alpha2.patch, gc/install-gc-7.1,
+	gc/install-gc-7.2alpha2, manuals/Makefile, manuals/crc.texi,
+	manuals/cryptography.texi, manuals/digest.texi,
+	manuals/internet.texi, manuals/io.texi, manuals/socket.texi,
+	manuals/stdlib.texi, manuals/trace.texi, recette/Makefile,
+	recette/crc.scm, recette/main.scm, recette/rgc-insert.scm,
+	runtime/CSlib/foreign.cs, runtime/Clib/crgc.c,
+	runtime/Eval/evprimop.scm, runtime/Ieee/fixnum.scm,
+	runtime/Ieee/input.scm, runtime/Jlib/foreign.java,
+	runtime/Llib/make-lib.scm, runtime/Makefile, runtime/Read/reader.scm,
+	runtime/Rgc/rgc.scm, runtime/Unsafe/crc.scm,
+	runtime/Unsafe/crc16.scm, runtime/Unsafe/md5.scm:
+	Full Bootstrap at 04Sep09
+	[b703724f5f14]
+
+2009-09-03  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/gstreamer/examples/bgst-play.scm,
+	api/gstreamer/src/Clib/bglgst.c,
+	api/gstreamer/src/Llib/gstmm-music.scm,
+	api/gstreamer/src/Plugin/bglgst_portsrc.c,
+	api/multimedia/src/Llib/id3.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, manuals/multimedia.texi,
+	runtime/Llib/type.scm:
+	Full Bootstrap at 03Sep09
+	[75e5004a404a]
+
+2009-09-01  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/gstreamer/examples/bgst-play.scm,
+	api/gstreamer/src/Llib/gstmm-music.scm,
+	api/gstreamer/src/Plugin/bglgst_portsrc.c, autoconf/emacsbrand,
+	bdb/Makefile, bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Eval/evmodule.scm:
+	Full Bootstrap at 01Sep09
+	[1d9692c30adc]
+
+2009-08-31  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* ChangeLog, bmacs/bmacs-config.el, comptime/Ast/app.scm,
+	comptime/Ast/labels.scm, comptime/Ast/private.scm,
+	comptime/Ast/sexp.scm, comptime/Ast/venv.scm,
+	comptime/Expand/let.scm, comptime/Tools/date.scm,
+	manuals/foreign.texi, manuals/object.texi, manuals/typing.texi,
+	recette/vital.scm, runtime/Eval/evmodule.scm,
+	runtime/Llib/module.scm:
+	Full Bootstrap at 31Aug09
+	[461c50254af5]
+
+	* api/gstreamer/src/Llib/gstmm-music.scm,
+	api/multimedia/src/Llib/mpc.scm,
+	api/multimedia/src/Llib/musicloop.scm,
+	api/web/src/Llib/css-parser.scm, bmacs/Makefile,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Clib/cports.c, runtime/Eval/evmodule.scm,
+	runtime/Eval/evobject.scm, runtime/Eval/expddefine.scm:
+	Full Bootstrap at 31Aug09
+	[572febdb0a71]
+
+2009-07-30  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/fthread/recette/recette.scm, api/fthread/src/Llib/_pthread.scm,
+	api/fthread/src/Llib/_scheduler.scm, api/fthread/src/Llib/_types.scm,
+	api/fthread/src/Llib/scheduler.scm, api/fthread/src/Llib/thread.scm,
+	api/fthread/src/Llib/types.scm, api/pthread/src/Posix/bglsetup.c,
+	bmacs/bmacs-config.el, comptime/Tools/date.scm, manuals/fthread.texi,
+	manuals/pthread.texi, manuals/thread.texi:
+	Full Bootstrap at 30Jul09
+	[8e77773d35dd]
+
+2009-07-28  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Full Bootstrap at 28Jul09
+	[7839d5fb2c38]
+
+	* api/pthread/src/Llib/pthread.scm, api/pthread/src/Posix/bglsetup.c,
+	comptime/Ast/init.scm, comptime/BackEnd/c-main.scm:
+	Fix pthread init process.
+	[578975e21240]
+
+2009-07-24  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/CSlib/foreign.cs, runtime/Clib/cstring.c,
+	runtime/Ieee/flonum.scm, runtime/Jlib/foreign.java:
+	Full Bootstrap at 24Jul09
+	[feea40caa606]
+
+2009-09-03  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* runtime/Clib/crgc.c:
+	fixes segfaults when using unread-char and unread-string
+	[155e1f853655]
+
+2009-08-04  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* manuals/cryptography.texi:
+	typo. rsa-encrypt -> rsa-sign.
+	[24409766f944]
+
+	* api/crypto/Makefile, api/crypto/README, api/crypto/recette/Makefile,
+	api/crypto/recette/recette.scm,
+	api/crypto/recette/recette_dsa_key.pem,
+	api/crypto/recette/recette_rsa_key.pem, api/crypto/src/Llib/DER.scm,
+	api/crypto/src/Llib/aes.scm, api/crypto/src/Llib/bits32.sch,
+	api/crypto/src/Llib/block-ciphers.scm,
+	api/crypto/src/Llib/cast128.scm, api/crypto/src/Llib/ciphers.scm,
+	api/crypto/src/Llib/des.scm, api/crypto/src/Llib/dsa.scm,
+	api/crypto/src/Llib/elgamal.scm, api/crypto/src/Llib/idea-round.png,
+	api/crypto/src/Llib/idea.scm, api/crypto/src/Llib/pad.scm,
+	api/crypto/src/Llib/pem.scm, api/crypto/src/Llib/rsa.scm,
+	api/crypto/src/Llib/string2key.scm, api/crypto/src/Llib/util.scm,
+	api/crypto/src/Makefile, api/crypto/src/Misc/crypto.init,
+	api/crypto/src/Misc/make-lib.scm, configure,
+	manuals/cryptography.texi:
+	first psuh of crypto-api. remaining issues:
+	 - the ciphers are still compiled in Unsafe mode, and
+	 - cast-128 allocates elongs like crazy. Both are not showstoppers,
+	though.
+	[899a30ac24a7]
+
+	* manuals/io.texi:
+	embarrassing, but another fix in the manual (old spurious
+	documentation).
+	[db80594dcdc4]
+
+	* manuals/io.texi:
+	little typo... functions are named "unread-char!.." and not "rgc-
+	buffer-unread-char!, ..."
+	[64f28e6a6446]
+
+	* manuals/io.texi, recette/Makefile, recette/main.scm,
+	recette/rgc-insert.scm, runtime/CSlib/foreign.cs,
+	runtime/Clib/crgc.c, runtime/Ieee/input.scm,
+	runtime/Jlib/foreign.java, runtime/Rgc/rgc.scm:
+	added unread-char! and unread-string!
+	[38147f0311bd]
+
+	* manuals/stdlib.texi:
+	added CRC to menu (otherwise the whole thing won't build...)
+	[935acbc61d69]
+
+2009-07-31  Florian Loitsch <florian.loitsch@sophia.inria.fr>
+
+	* manuals/crc.texi, manuals/digest.texi, manuals/internet.texi,
+	manuals/stdlib.texi, recette/Makefile, recette/crc.scm,
+	recette/main.scm, runtime/Eval/evprimop.scm,
+	runtime/Llib/make-lib.scm, runtime/Makefile, runtime/Unsafe/crc.scm,
+	runtime/Unsafe/crc16.scm:
+	Added CRC (and small fix to doc from previous commit).
+	[4ac326cd0b45]
+
+	* manuals/stdlib.texi, runtime/Ieee/fixnum.scm,
+	runtime/Read/reader.scm, runtime/Unsafe/md5.scm:
+	added bignum->octet-string, octet-string->bignum and the #zxHEX
+	notation.
+	[a4ad2f62679b]
+
+2009-07-24  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* ChangeLog, api/fthread/examples/Makefile,
+	api/fthread/examples/http/Makefile,
+	api/fthread/examples/http/http.scm, runtime/Ieee/input.scm:
+	Add http fthread example. Fix read-chars on eof.
+	[c6459770b319]
+
+2009-07-23  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm,
+	runtime/Unsafe/url.scm:
+	Full Bootstrap at 23Jul09
+	[d48012318c55]
+
+2009-07-22  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/fthread/examples/gas/gas.scm, api/fthread/examples/gas2/gas2.scm,
+	api/fthread/examples/gas3/gas3.scm,
+	api/fthread/examples/mtracker/mtracker.scm,
+	api/fthread/examples/sticker/sticker.scm,
+	api/fthread/recette/recette.scm, api/fthread/src/Llib/_pthread.scm,
+	api/fthread/src/Llib/_scheduler.scm,
+	api/fthread/src/Llib/_thread.scm, api/fthread/src/Llib/_types.scm,
+	api/fthread/src/Llib/scheduler.scm, api/fthread/src/Llib/thread.scm,
+	api/fthread/src/Llib/types.scm, api/fthread/src/Misc/fthread.init.in,
+	api/pthread/src/Llib/pthread.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Ieee/output.scm,
+	runtime/Llib/bconfigure.scm, runtime/Llib/thread.scm:
+	Full Bootstrap at 22Jul09
+	[7dd75fededf6]
+
+2009-07-17  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/fthread/examples/gas/gas.scm, api/fthread/recette/recette.scm,
+	api/fthread/src/Llib/_env.scm, api/fthread/src/Llib/_pthread.scm,
+	api/fthread/src/Llib/_scheduler.scm,
+	api/fthread/src/Llib/_thread.scm, api/fthread/src/Llib/_types.scm,
+	api/fthread/src/Llib/async.scm, api/fthread/src/Llib/env.scm,
+	api/fthread/src/Llib/env2d.scm, api/fthread/src/Llib/fthread.scm,
+	api/fthread/src/Llib/scheduler.scm, api/fthread/src/Llib/signal.scm,
+	api/fthread/src/Llib/thread.scm, api/fthread/src/Llib/time.scm,
+	api/fthread/src/Llib/types.scm, api/fthread/src/Makefile,
+	api/fthread/src/Misc/fthread.init.in,
+	api/fthread/src/Misc/make-lib.scm,
+	api/gstreamer/src/Llib/gstreamer.scm,
+	api/pthread/recette/recette.scm, api/pthread/src/Llib/pbackend.scm,
+	api/pthread/src/Llib/pthread.scm, api/pthread/src/Posix/bglpthread.c,
+	api/web/src/Llib/webdav.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Llib/object.scm,
+	runtime/Llib/thread.scm:
+	Full Bootstrap at 17Jul09
+	[84f22bc88de1]
+
+2009-07-16  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Full Bootstrap at 16Jul09
+	[410d5f662b15]
+
+2009-07-10  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* api/mail/src/Llib/rfc2045.scm, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, runtime/Eval/evcompile.scm,
+	runtime/Eval/evmeaning.scm, runtime/Include/bigloo.h:
+	Full Bootstrap at 10Jul09
+	[578ffdb6739f]
+
+2009-07-07  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* bmacs/Makefile, bmacs/etc/bass-snap.au:
+	Fix bmacs Makefile.
+	[ac6ac1049f6b]
+
+	* bmacs/bmacs-config.el, comptime/Tools/date.scm:
+	Full Bootstrap at 07Jul09
+	[2bf9106fa7e1]
+
+	* Makefile, Makefile.mercurial, bmacs/bmacs-config.el,
+	comptime/Tools/date.scm, configure:
+	Full Bootstrap at 07Jul09
+	[5eb4ab7b09c9]
+
+	* ChangeLog, Makefile, api/mail/src/Llib/rfc2045.scm,
+	api/ssl/src/Makefile, examples/DNet/Makefile, examples/DNet/main.scm:
+	Improve mime multipart decoding.
+	[af9b35619eaf]
+
+2009-07-06  Manuel Serrano (Manuel.Serrano@inria.fr)
+
+	* .hgignore, COPYING, ChangeLog, INSTALL, INSTALL.jvm, LICENSE,
+	Makefile, Makefile.mercurial, Makefile.misc, Makefile.prcs, README,
+	api/Makefile, api/README, api/calendar/Makefile, api/calendar/README,
+	api/calendar/src/Llib/icalendar.scm, api/calendar/src/Llib/types.scm,
+	api/calendar/src/Llib/utils.scm, api/calendar/src/Makefile,
+	api/calendar/src/Misc/calendar.init,
+	api/calendar/src/Misc/make-lib.scm, api/fthread/Makefile,
+	api/fthread/README, api/fthread/examples/Makefile,
+	api/fthread/examples/README, api/fthread/examples/gas/Makefile,
+	api/fthread/examples/gas/gas.scm, api/fthread/examples/gas2/Makefile,
+	api/fthread/examples/gas2/gas2.scm,
+	api/fthread/examples/gas3/Makefile,
+	api/fthread/examples/gas3/gas3.scm,
+	api/fthread/examples/mtracker/Makefile,
+	api/fthread/examples/mtracker/mtracker.scm,
+	api/fthread/examples/prims/Makefile,
+	api/fthread/examples/prims/prims.scm,
+	api/fthread/examples/srfi18/Makefile,
+	api/fthread/examples/srfi18/srfi18.scm,
+	api/fthread/examples/sticker/Makefile,
+	api/fthread/examples/sticker/sticker.scm,
+	api/fthread/examples/trepl/Makefile,
+	api/fthread/examples/trepl/ex.scm,
+	api/fthread/examples/trepl/trepl.scm, api/fthread/recette/Makefile,
+	api/fthread/recette/recette.scm, api/fthread/semantics/Makefile,
+	api/fthread/semantics/ev.scm, api/fthread/semantics/test.scm,
+	api/fthread/src/Llib/_env.scm, api/fthread/src/Llib/_scheduler.scm,
+	api/fthread/src/Llib/_thread.scm, api/fthread/src/Llib/_types.scm,
+	api/fthread/src/Llib/async.scm, api/fthread/src/Llib/env.scm,
+	api/fthread/src/Llib/env2d.scm, api/fthread/src/Llib/fbackend.scm,
+	api/fthread/src/Llib/fthread.scm, api/fthread/src/Llib/scheduler.scm,
+	api/fthread/src/Llib/signal.scm, api/fthread/src/Llib/thread.scm,
+	api/fthread/src/Llib/time.scm, api/fthread/src/Llib/types.scm,
+	api/fthread/src/Makefile, api/fthread/src/Misc/fthread.init.in,
+	api/fthread/src/Misc/make-lib.scm, api/gstreamer/Makefile,
+	api/gstreamer/README, api/gstreamer/examples/Makefile,
+	api/gstreamer/examples/bgst-inspect.scm,
+	api/gstreamer/examples/bgst-launch.scm,
+	api/gstreamer/examples/bgst-mm.scm,
+	api/gstreamer/examples/bgst-play.scm,
+	api/gstreamer/examples/bgst-png.scm,
+	api/gstreamer/examples/bgst-repl.scm,
+	api/gstreamer/examples/typefind.scm, api/gstreamer/recette/Makefile,
+	api/gstreamer/recette/recette.scm, api/gstreamer/src/Clib/bglgst.c,
+	api/gstreamer/src/Clib/bglgst.h,
+	api/gstreamer/src/Clib/bglgst_config.h.in,
+	api/gstreamer/src/Clib/bglgst_plugin.h,
+	api/gstreamer/src/Clib/bglgst_thread.c,
+	api/gstreamer/src/Llib/gst.sch, api/gstreamer/src/Llib/gstbin.scm,
+	api/gstreamer/src/Llib/gstbuffer.scm,
+	api/gstreamer/src/Llib/gstbus.scm,
+	api/gstreamer/src/Llib/gstcaps.scm,
+	api/gstreamer/src/Llib/gstelement.scm,
+	api/gstreamer/src/Llib/gstelementfactory.scm,
+	api/gstreamer/src/Llib/gsterror.scm,
+	api/gstreamer/src/Llib/gstghostpad.scm,
+	api/gstreamer/src/Llib/gstmessage.scm,
+	api/gstreamer/src/Llib/gstmm-music.scm,
+	api/gstreamer/src/Llib/gstobject.scm,
+	api/gstreamer/src/Llib/gstpad.scm,
+	api/gstreamer/src/Llib/gstpadtemplate.scm,
+	api/gstreamer/src/Llib/gstparse.scm,
+	api/gstreamer/src/Llib/gstpipeline.scm,
+	api/gstreamer/src/Llib/gstplugin-bglports.scm,
+	api/gstreamer/src/Llib/gstplugin.scm,
+	api/gstreamer/src/Llib/gstpluginfeature.scm,
+	api/gstreamer/src/Llib/gstreamer.scm,
+	api/gstreamer/src/Llib/gstregistry.scm,
+	api/gstreamer/src/Llib/gststructure.scm,
+	api/gstreamer/src/Llib/gsttypefind.scm, api/gstreamer/src/Makefile,
+	api/gstreamer/src/Misc/gstreamer.init.in,
+	api/gstreamer/src/Misc/make-lib.scm,
+	api/gstreamer/src/Plugin/bglgst_port.c,
+	api/gstreamer/src/Plugin/bglgst_port.h,
+	api/gstreamer/src/Plugin/bglgst_portsink.c,
+	api/gstreamer/src/Plugin/bglgst_portsrc.c,
+	api/gstreamer/src/Plugin/gstbigloo.h, api/mail/Makefile,
+	api/mail/README, api/mail/src/Llib/imap.bgl,
+	api/mail/src/Llib/imap.stk, api/mail/src/Llib/mailbox.scm,
+	api/mail/src/Llib/maildir.scm, api/mail/src/Llib/rfc2045.scm,
+	api/mail/src/Llib/rfc2047.scm, api/mail/src/Llib/rfc2822.scm,
+	api/mail/src/Llib/vcard.scm, api/mail/src/Makefile,
+	api/mail/src/Misc/mail.init, api/mail/src/Misc/make-lib.scm,
+	api/multimedia/Makefile, api/multimedia/README,
+	api/multimedia/examples/Makefile,
+	api/multimedia/examples/musicplay.scm,
+	api/multimedia/src/Llib/color.scm, api/multimedia/src/Llib/exif.scm,
+	api/multimedia/src/Llib/id3.scm, api/multimedia/src/Llib/m3u.scm,
+	api/multimedia/src/Llib/mixer.scm, api/multimedia/src/Llib/mp3.scm,
+	api/multimedia/src/Llib/mpc.scm, api/multimedia/src/Llib/mpd.scm,
+	api/multimedia/src/Llib/mpg123.scm,
+	api/multimedia/src/Llib/mplayer.scm,
+	api/multimedia/src/Llib/music.scm,
+	api/multimedia/src/Llib/musicloop.scm,
+	api/multimedia/src/Llib/musicproc.scm,
+	api/multimedia/src/Llib/soundcard.scm, api/multimedia/src/Makefile,
+	api/multimedia/src/Misc/make-lib.scm,
+	api/multimedia/src/Misc/multimedia.init,
+	api/multimedia/src/Unix/bglmixer.c, api/packrat/Makefile,
+	api/packrat/README, api/packrat/recette/Makefile,
+	api/packrat/recette/recette.scm, api/packrat/src/Llib/json.scm,
+	api/packrat/src/Llib/packrat.sch, api/packrat/src/Llib/packrat.scm,
+	api/packrat/src/Makefile, api/packrat/src/Misc/make-lib.scm,
+	api/packrat/src/Misc/packrat.init.in, api/pkgcomp/Makefile,
+	api/pkgcomp/README, api/pkgcomp/src/Llib/class.sch,
+	api/pkgcomp/src/Llib/configure.sch,
+	api/pkgcomp/src/Llib/configure.scm,
+	api/pkgcomp/src/Llib/configure.scm.in,
+	api/pkgcomp/src/Llib/expanders.sch,
+	api/pkgcomp/src/Llib/interface.sch,
+	api/pkgcomp/src/Llib/interface.scm, api/pkgcomp/src/Llib/srfi89.sch,
+	api/pkgcomp/src/Makefile, api/pkgcomp/src/Misc/make-lib.scm,
+	api/pkgcomp/src/Misc/pkgcomp.init.in, api/pkglib/Makefile,
+	api/pkglib/README, api/pkglib/src/Llib/database.scm,
+	api/pkglib/src/Llib/interface.scm, api/pkglib/src/Llib/misc.scm,
+	api/pkglib/src/Llib/package.scm, api/pkglib/src/Llib/param.sch,
+	api/pkglib/src/Llib/param.scm, api/pkglib/src/Llib/repo.scm,
+	api/pkglib/src/Makefile, api/pkglib/src/Misc/make-lib.scm,
+	api/pkglib/src/Misc/pkglib.init, api/pthread/Makefile,
+	api/pthread/README, api/pthread/recette/Makefile,
+	api/pthread/recette/recette.scm, api/pthread/recette2/Makefile,
+	api/pthread/recette2/recette.scm,
+	api/pthread/src/DotNet/bglpcondvar.cs,
+	api/pthread/src/DotNet/bglpdynamic.cs,
+	api/pthread/src/DotNet/bglpmutex.cs,
+	api/pthread/src/DotNet/bglpthread.cs,
+	api/pthread/src/Java/bglpcondvar.java,
+	api/pthread/src/Java/bglpdynamic.java,
+	api/pthread/src/Java/bglpmutex.java,
+	api/pthread/src/Java/bglpthread.java,
+	api/pthread/src/Llib/pbackend.scm, api/pthread/src/Llib/pcondvar.sch,
+	api/pthread/src/Llib/pcondvar.scm, api/pthread/src/Llib/pmutex.sch,
+	api/pthread/src/Llib/pmutex.scm, api/pthread/src/Llib/pthread.sch,
+	api/pthread/src/Llib/pthread.scm, api/pthread/src/Makefile,
+	api/pthread/src/Misc/make-lib.scm,
+	api/pthread/src/Misc/pthread.init.in,
+	api/pthread/src/Posix/bglbmem.c, api/pthread/src/Posix/bglpcondvar.c,
+	api/pthread/src/Posix/bglpmutex.c,
+	api/pthread/src/Posix/bglpthread.c,
+	api/pthread/src/Posix/bglpthread.h, api/pthread/src/Posix/bglsetup.c,
+	api/sqlite/Makefile, api/sqlite/README, api/sqlite/recette/Makefile,
+	api/sqlite/recette/recette.scm, api/sqlite/src/Llib/engine.scm,
+	api/sqlite/src/Llib/lexer.scm, api/sqlite/src/Llib/parser.scm,
+	api/sqlite/src/Llib/sqlite.sch, api/sqlite/src/Llib/sqlite.scm,
+	api/sqlite/src/Llib/sqltiny.scm, api/sqlite/src/Makefile,
+	api/sqlite/src/Misc/make-lib.scm, api/sqlite/src/Misc/sqlite.init.in,
+	api/sqlite/src/Posix/bglsqlite.c, api/srfi1/Makefile,
+	api/srfi1/README, api/srfi1/recette/Makefile,
+	api/srfi1/recette/recette.scm, api/srfi1/src/Llib/srfi1.bgl,
+	api/srfi1/src/Llib/srfi1.srfi, api/srfi1/src/Makefile,
+	api/srfi1/src/Misc/make-lib.scm, api/srfi1/src/Misc/srfi1.init,
+	api/srfi27/Makefile, api/srfi27/README, api/srfi27/recette/Makefile,
+	api/srfi27/recette/recette.scm, api/srfi27/src/Llib/mrg32k3a-c.srfi,
+	api/srfi27/src/Llib/mrg32k3a.srfi, api/srfi27/src/Llib/srfi27.bgl,
+	api/srfi27/src/Llib/srfi27.sch, api/srfi27/src/Makefile,
+	api/srfi27/src/Misc/make-lib.scm, api/srfi27/src/Misc/srfi27.init,
+	api/ssl/Makefile, api/ssl/README, api/ssl/lib/commons-ssl.zip,
+	api/ssl/src/C/bglssl.c, api/ssl/src/C/bglssl.h.in,
+	api/ssl/src/Java/certificate.java, api/ssl/src/Java/private_key.java,
+	api/ssl/src/Java/ssl_client_socket.java,
+	api/ssl/src/Java/ssl_client_socket13.java,
+	api/ssl/src/Java/ssl_client_socket15.java,
+	api/ssl/src/Java/ssl_server_socket.java,
+	api/ssl/src/Java/ssl_server_socket13.java,
+	api/ssl/src/Java/ssl_server_socket15.java, api/ssl/src/Llib/ssl.scm,
+	api/ssl/src/Makefile, api/ssl/src/Misc/make-lib.scm,
+	api/ssl/src/Misc/ssl.init.in, api/text/Makefile, api/text/README,
+	api/text/src/Llib/bibtex.scm, api/text/src/Makefile,
+	api/text/src/Misc/make-lib.scm, api/text/src/Misc/text.init,
+	api/web/Makefile, api/web/README, api/web/src/Llib/atom.scm,
+	api/web/src/Llib/cgi.scm, api/web/src/Llib/css-ast.scm,
+	api/web/src/Llib/css-lexer.scm, api/web/src/Llib/css-parser.scm,
+	api/web/src/Llib/css.scm, api/web/src/Llib/date.scm,
+	api/web/src/Llib/feeds.scm, api/web/src/Llib/html.scm,
+	api/web/src/Llib/rss.scm, api/web/src/Llib/webdav.scm,
+	api/web/src/Llib/xml.scm, api/web/src/Makefile,
+	api/web/src/Misc/make-lib.scm, api/web/src/Misc/web.init,
+	autoconf/Makefile, autoconf/alignment, autoconf/alloca,
+	autoconf/allocah, autoconf/ascpp, autoconf/bcopy, autoconf/bigendian,
+	autoconf/bigloo_config.h.in, autoconf/bigloo_gc.h.in,
+	autoconf/ccdiv0, autoconf/ccoptim, autoconf/ccpic, autoconf/ccpic2,
+	autoconf/ccprof, autoconf/ccstrip, autoconf/cctest,
+	autoconf/checkinclude, autoconf/checkmember, autoconf/cnstalign,
+	autoconf/configure.cs.in, autoconf/configure.java.in,
+	autoconf/cygwindospath, autoconf/dbus, autoconf/dirname,
+	autoconf/dlopen, autoconf/dotnettest, autoconf/doubleprec,
+	autoconf/emacsbrand, autoconf/emacslisppath,
+	autoconf/enforcedcnstalign, autoconf/fcntl, autoconf/gcflags,
+	autoconf/gchavedoblocking, autoconf/gchavestartblocking,
+	autoconf/gcstd, autoconf/gcversion, autoconf/getaddrinfo,
+	autoconf/getcwd, autoconf/getprotoent, autoconf/getuid,
+	autoconf/getwd, autoconf/gmaketest, autoconf/gmp, autoconf/gstreamer,
+	autoconf/gstreameraudio, autoconf/indent, autoconf/inet_aton,
+	autoconf/inet_pton, autoconf/info, autoconf/installinfo,
+	autoconf/installinfodir, autoconf/jartest, autoconf/javatest,
+	autoconf/labs, autoconf/ldextraopt, autoconf/ldpreload,
+	autoconf/ldshare, autoconf/ldsharedopt, autoconf/ldsoname,
+	autoconf/ldstaticopt, autoconf/limbs, autoconf/llabs,
+	autoconf/longlong, autoconf/macosx, autoconf/maemo.arm,
+	autoconf/mmap, autoconf/openssl, autoconf/openssl-dtls, autoconf/os,
+	autoconf/oscharset, autoconf/pipe, autoconf/posixfileops,
+	autoconf/processor, autoconf/pthread, autoconf/pthreadlocalstorage,
+	autoconf/pthreadlock, autoconf/ptrsize, autoconf/ranlib,
+	autoconf/rdynamic, autoconf/readline, autoconf/select,
+	autoconf/sendfile, autoconf/setjmp, autoconf/setjmp.sparc,
+	autoconf/setsockopt, autoconf/sigaction, autoconf/sigchld,
+	autoconf/signbit, autoconf/sigpipe, autoconf/sigprocmask,
+	autoconf/sigsetmask, autoconf/sigsetmask.ucb, autoconf/sleep,
+	autoconf/socket, autoconf/socklen, autoconf/sqlite,
+	autoconf/stackdown, autoconf/stacksize, autoconf/stdint,
+	autoconf/stdlibint, autoconf/strip, autoconf/strtoll,
+	autoconf/strtoull, autoconf/termio, autoconf/termios,
+	autoconf/thread, autoconf/timeval, autoconf/timezone,
+	autoconf/unistdint, autoconf/unix, autoconf/unixsocket,
+	autoconf/user, autoconf/winreg, autoconf/xemacsbin,
+	autoconf/xemacspath, autoconf/ziptest, bdb/Makefile,
+	bdb/bdb/Bee/binvoke.scm, bdb/bdb/Bee/etags.scm,
+	bdb/bdb/Command/all-cmd.scm, bdb/bdb/Command/backtrace.scm,
+	bdb/bdb/Command/break.scm, bdb/bdb/Command/command.scm,
+	bdb/bdb/Command/display.scm, bdb/bdb/Command/explore.scm,
+	bdb/bdb/Command/expr.scm, bdb/bdb/Command/file.scm,
+	bdb/bdb/Command/help.scm, bdb/bdb/Command/info.scm,
+	bdb/bdb/Command/mangle.scm, bdb/bdb/Command/parse.scm,
+	bdb/bdb/Command/print.scm, bdb/bdb/Command/quit.scm,
+	bdb/bdb/Command/run.scm, bdb/bdb/Command/set.scm,
+	bdb/bdb/Command/whatis.scm, bdb/bdb/Engine/engine.scm,
+	bdb/bdb/Engine/hooks.sch, bdb/bdb/Engine/param.scm,
+	bdb/bdb/Engine/repl.scm, bdb/bdb/Gdb/annotate.scm,
+	bdb/bdb/Gdb/autoconf.scm, bdb/bdb/Gdb/ginvoke.scm,
+	bdb/bdb/Gdb/gread.scm, bdb/bdb/Gdb/proc.scm, bdb/bdb/Gdb/tools.scm,
+	bdb/bdb/Init/main.scm, bdb/bdb/Init/parse-args.scm,
+	bdb/bdb/Init/setrc.scm, bdb/bdb/Makefile,
+	bdb/bdb/Patient/mangling.scm, bdb/bdb/Patient/pinvoke.scm,
+	bdb/bdb/Patient/server.scm, bdb/bdb/Patient/value.scm,
+	bdb/bdb/Tools/date.scm, bdb/bdb/Tools/error.scm,
+	bdb/bdb/Tools/io.scm, bdb/bdb/Tools/speek.scm,
+	bdb/bdb/Tools/tools.scm, bdb/bdb/Tools/tty.c,
+	bdb/bdb/Tools/version.scm, bdb/blib/Makefile, bdb/blib/bdb.scm,
+	bdb/blib/env.scm, bdb/blib/make-lib.scm, bdb/blib/stat.c,
+	bdb/blib/table.c, bde/Makefile, bde/afile/afile.scm,
+	bde/bdepend/bdepend.scm, bde/bmake/bmake.scm,
+	bde/bmake/makefile.appli, bde/bmake/makefile.library,
+	bde/bmake/template.scm, bde/bmem/Makefile, bde/bmem/bmem/bmem.scm,
+	bde/bmem/bmem/function.scm, bde/bmem/bmem/gc.scm,
+	bde/bmem/bmem/html-private.sch, bde/bmem/bmem/html.sch,
+	bde/bmem/bmem/html.scm, bde/bmem/bmem/param.scm,
+	bde/bmem/bmem/thread.scm, bde/bmem/bmem/tools.scm,
+	bde/bmem/bmem/type.scm, bde/bmem/etc/bmem.css,
+	bde/bmem/etc/bmemrun.in, bde/bmem/example/Makefile,
+	bde/bmem/example/example.scm, bde/bmem/example/number.scm,
+	bde/bmem/lib/alloc.c, bde/bmem/lib/bmem.h, bde/bmem/lib/esymbol.h,
+	bde/bmem/lib/gchook.c, bde/bmem/lib/init.c, bde/bmem/lib/list.c,
+	bde/bmem/lib/symbol.c, bde/bmem/lib/thread.c, bde/bmem/lib/trace.c,
+	bde/bpp/README, bde/bpp/bpp.scm, bde/bpp/reader.scm,
+	bde/bprof/bprof.scm, bde/btags/btags.scm, bde/jas/jas.scm,
+	bde/jas/jas.tex, bde/jfile/jfile.scm, bde/mco/mco.scm, bdl/Makefile,
+	bdl/README, bdl/example/Makefile, bdl/example/README,
+	bdl/example/bdlex.scm, bdl/src/Makefile, bdl/src/bdl.init,
+	bdl/src/env.scm, bdl/src/etags.scm, bdl/src/make-lib.scm,
+	bdl/src/misc.scm, bdl/src/prgm.scm, bdl/src/types.scm,
+	bench/Makefile, bench/Makefile.bench, bench/bague/Makefile,
+	bench/bague/bague.scm, bench/byte/Makefile, bench/byte/byte.scm,
+	bench/conform/Makefile, bench/conform/conform.scm,
+	bench/earley/Makefile, bench/earley/earley.scm, bench/fft/Makefile,
+	bench/fft/fft.scm, bench/leval/Makefile, bench/leval/leval.scm,
+	bench/maze/Makefile, bench/maze/maze.scm, bench/peval/Makefile,
+	bench/peval/peval.scm, bench/pseudoknot/Makefile,
+	bench/pseudoknot/pseudoknot.scm, bench/queens/Makefile,
+	bench/queens/queens.scm, bench/rgc/Makefile, bench/rgc/rgc.scm,
+	bench/run.sh, bglpkg/Makefile, bglpkg/README, bglpkg/action.scm,
+	bglpkg/chicken.scm, bglpkg/configure.scm.in, bglpkg/etc/Makefile,
+	bglpkg/etc/init, bglpkg/etc/make-lib.scm, bglpkg/extract.scm,
+	bglpkg/install.scm, bglpkg/main.scm, bglpkg/makefile.sch,
+	bglpkg/man.scm, bglpkg/mzscheme.scm, bglpkg/package.scm,
+	bglpkg/param.sch, bglpkg/param.scm, bglpkg/parseargs.scm,
+	bglpkg/snow.scm, bglpkg/testing.scm, bglpkg/tuning.scm,
+	bglpkg/utils.scm, bigloo.lsm, bigloo.spec, bmacs/Makefile,
+	bmacs/README, bmacs/bee/bee-about-icon.el, bmacs/bee/bee-autoload.el,
+	bmacs/bee/bee-bdb.el, bmacs/bee/bee-browse.el,
+	bmacs/bee/bee-config.el, bmacs/bee/bee-doc.el,
+	bmacs/bee/bee-expand.el, bmacs/bee/bee-flock.el,
+	bmacs/bee/bee-ibuilder.el, bmacs/bee/bee-indent.el,
+	bmacs/bee/bee-kbdb.el, bmacs/bee/bee-keymap.el,
+	bmacs/bee/bee-mode.el, bmacs/bee/bee-module.el,
+	bmacs/bee/bee-profile.el, bmacs/bee/bee-repl.el,
+	bmacs/bee/bee-tags.el, bmacs/bee/bee-toolbar.el,
+	bmacs/bee/bee-usage.el, bmacs/bmacs-config.el,
+	bmacs/bmacs-gnu-emacs.el, bmacs/bmacs-xemacs.el, bmacs/bmacs.el,
+	bmacs/bug/bug-args.el, bmacs/bug/bug-autoload.el,
+	bmacs/bug/bug-breakpoint.el, bmacs/bug/bug-class.el,
+	bmacs/bug/bug-config.el, bmacs/bug/bug-connect.el,
+	bmacs/bug/bug-custom.el, bmacs/bug/bug-filter.el,
+	bmacs/bug/bug-gnu-emacs.el, bmacs/bug/bug-hooking.el,
+	bmacs/bug/bug-images.el, bmacs/bug/bug-mode.el,
+	bmacs/bug/bug-process.el, bmacs/bug/bug-source.el,
+	bmacs/bug/bug-stack.el, bmacs/bug/bug-toolbar.el,
+	bmacs/bug/bug-xemacs.el, bmacs/bug/bug.el, bmacs/cee/cee-autoload.el,
+	bmacs/cee/cee-config.el, bmacs/cee/cee-flock.el,
+	bmacs/cee/cee-gdb.el, bmacs/cee/cee-hook.el, bmacs/cee/cee-indent.el,
+	bmacs/cee/cee-kbdb.el, bmacs/cee/cee-keymap.el,
+	bmacs/cee/cee-profile.el, bmacs/cee/cee-tags.el,
+	bmacs/cee/cee-toolbar.el, bmacs/dbg/dbg-about-icon.el,
+	bmacs/dbg/dbg-args.el, bmacs/dbg/dbg-autoload.el,
+	bmacs/dbg/dbg-breakpoint.el, bmacs/dbg/dbg-complete.el,
+	bmacs/dbg/dbg-config.el, bmacs/dbg/dbg-connect.el,
+	bmacs/dbg/dbg-console.el, bmacs/dbg/dbg-display.el,
+	bmacs/dbg/dbg-docline.el, bmacs/dbg/dbg-filter.el,
+	bmacs/dbg/dbg-locals.el, bmacs/dbg/dbg-mode.el,
+	bmacs/dbg/dbg-process.el, bmacs/dbg/dbg-source.el,
+	bmacs/dbg/dbg-stack.el, bmacs/dbg/dbg-toolbar.el, bmacs/dbg/dbg.el,
+	bmacs/lee/lee-autoload.el, bmacs/lee/lee-config.el,
+	bmacs/lee/lee-flock.el, bmacs/lee/lee-hook.el,
+	bmacs/lee/lee-indent.el, bmacs/lee/lee-keymap.el,
+	bmacs/lee/lee-tags.el, bmacs/lee/lee-toolbar.el,
+	bmacs/ude/etags-add.el, bmacs/ude/id-select.el, bmacs/ude/plugin.el,
+	bmacs/ude/ude-about.el, bmacs/ude/ude-autoload.el,
+	bmacs/ude/ude-balloon.el, bmacs/ude/ude-compile.el,
+	bmacs/ude/ude-config.el, bmacs/ude/ude-custom.el,
+	bmacs/ude/ude-docline.el, bmacs/ude/ude-error.el,
+	bmacs/ude/ude-icon.el, bmacs/ude/ude-ident.el, bmacs/ude/ude-info.el,
+	bmacs/ude/ude-makefile.el, bmacs/ude/ude-mouse.el,
+	bmacs/ude/ude-paren.el, bmacs/ude/ude-profile.el,
+	bmacs/ude/ude-repl.el, bmacs/ude/ude-root.el, bmacs/ude/ude-sui.el,
+	bmacs/ude/ude-tools.el, bmacs/ude/ude-version.el,
+	bmacs/xemacs-etags.el, cigloo/.afile, cigloo/Engine/engine.scm,
+	cigloo/Engine/param.scm, cigloo/Engine/translate.scm,
+	cigloo/Example/Makefile, cigloo/Example/b-file.scm,
+	cigloo/Example/c-file.c, cigloo/Example/c-file.h,
+	cigloo/Init/main.scm, cigloo/Init/parse-args.scm,
+	cigloo/Init/setrc.scm, cigloo/Makefile, cigloo/Parser/coord.sch,
+	cigloo/Parser/cpp.scm, cigloo/Parser/lexer.scm,
+	cigloo/Parser/parser.scm, cigloo/Parser/tools.scm, cigloo/README,
+	cigloo/Tools/date.scm, cigloo/Tools/error.scm,
+	cigloo/Tools/speek.scm, cigloo/Tools/union.sch,
+	cigloo/Translate/ast.sch, cigloo/Translate/decl.scm,
+	cigloo/Translate/declaration.scm, cigloo/Translate/eval.scm,
+	cigloo/Translate/expr.scm, cigloo/Translate/function.sch,
+	cigloo/Translate/function.scm, cigloo/Translate/ident.scm,
+	cigloo/Translate/tspec.scm, cigloo/Translate/type.sch,
+	cigloo/Translate/type.scm, cigloo/Write/version.scm,
+	comptime/Ast/alphatize.scm, comptime/Ast/app.scm,
+	comptime/Ast/apply.scm, comptime/Ast/build.scm,
+	comptime/Ast/check-init.scm, comptime/Ast/check-sharing.scm,
+	comptime/Ast/dump.scm, comptime/Ast/exit.scm,
+	comptime/Ast/find-gdefs.scm, comptime/Ast/glo-decl.scm,
+	comptime/Ast/glo-def.scm, comptime/Ast/hrtype.scm,
+	comptime/Ast/ident.scm, comptime/Ast/init.scm,
+	comptime/Ast/labels.scm, comptime/Ast/let.scm,
+	comptime/Ast/local.scm, comptime/Ast/lvtype.scm,
+	comptime/Ast/node.sch, comptime/Ast/node.scm, comptime/Ast/occur.scm,
+	comptime/Ast/pragma.scm, comptime/Ast/private.scm,
+	comptime/Ast/remove.scm, comptime/Ast/sexp.scm,
+	comptime/Ast/shrinkify.scm, comptime/Ast/substitute.scm,
+	comptime/Ast/toccur.scm, comptime/Ast/unit.sch,
+	comptime/Ast/unit.scm, comptime/Ast/var.scm, comptime/Ast/venv.scm,
+	comptime/BackEnd/backend.scm, comptime/BackEnd/bvm.scm,
+	comptime/BackEnd/c-emit.scm, comptime/BackEnd/c-main.scm,
+	comptime/BackEnd/c-proto.scm, comptime/BackEnd/c.scm,
+	comptime/BackEnd/cplib.scm, comptime/BackEnd/cvm.scm,
+	comptime/BackEnd/dotnet-class.scm, comptime/BackEnd/dotnet.scm,
+	comptime/BackEnd/init.scm, comptime/BackEnd/jvm-class.scm,
+	comptime/BackEnd/jvm.scm, comptime/BackEnd/lib.scm,
+	comptime/BackEnd/walk.scm, comptime/Bdb/bdb-emit.scm,
+	comptime/Bdb/bdb-initialize.scm, comptime/Bdb/setting.scm,
+	comptime/Bdb/spread-obj.scm, comptime/Bdb/walk.scm,
+	comptime/Beta/walk.scm, comptime/Callcc/walk.scm, comptime/Cc/cc.scm,
+	comptime/Cc/exec.scm, comptime/Cc/indent.scm, comptime/Cc/ld.scm,
+	comptime/Cfa/app.scm, comptime/Cfa/approx.scm,
+	comptime/Cfa/arithmetic.scm, comptime/Cfa/box.scm,
+	comptime/Cfa/cfa.scm, comptime/Cfa/cinfo.scm,
+	comptime/Cfa/cinfo2.scm, comptime/Cfa/cinfo3.scm,
+	comptime/Cfa/closure.scm, comptime/Cfa/collect.scm,
+	comptime/Cfa/funcall.scm, comptime/Cfa/iterate.scm,
+	comptime/Cfa/loose.scm, comptime/Cfa/ltype.scm,
+	comptime/Cfa/procedure.scm, comptime/Cfa/set.scm,
+	comptime/Cfa/setup.scm, comptime/Cfa/show.scm,
+	comptime/Cfa/specialize.scm, comptime/Cfa/struct.scm,
+	comptime/Cfa/tvector.scm, comptime/Cfa/type.scm,
+	comptime/Cfa/vector.scm, comptime/Cfa/walk.scm,
+	comptime/Cgen/capp.scm, comptime/Cgen/cgen.scm,
+	comptime/Cgen/compile.scm, comptime/Cgen/cop.scm,
+	comptime/Cgen/emit-cop.scm, comptime/Cnst/alloc.scm,
+	comptime/Cnst/cache.scm, comptime/Cnst/initialize.scm,
+	comptime/Cnst/node.scm, comptime/Cnst/walk.scm,
+	comptime/Coerce/app.scm, comptime/Coerce/apply.scm,
+	comptime/Coerce/coerce.scm, comptime/Coerce/convert.scm,
+	comptime/Coerce/funcall.scm, comptime/Coerce/pproto.scm,
+	comptime/Coerce/walk.scm, comptime/Effect/cgraph.scm,
+	comptime/Effect/effect.scm, comptime/Effect/feffect.scm,
+	comptime/Effect/spread.scm, comptime/Effect/walk.scm,
+	comptime/Engine/compiler.scm, comptime/Engine/configure.scm,
+	comptime/Engine/engine.scm, comptime/Engine/heap.scm,
+	comptime/Engine/interp.scm, comptime/Engine/link.scm,
+	comptime/Engine/param.scm, comptime/Engine/pass.sch,
+	comptime/Engine/pass.scm, comptime/Engine/signals.scm,
+	comptime/Expand/assert.scm, comptime/Expand/case.scm,
+	comptime/Expand/define.scm, comptime/Expand/eps.scm,
+	comptime/Expand/exit.scm, comptime/Expand/expander.sch,
+	comptime/Expand/expander.scm, comptime/Expand/farith.scm,
+	comptime/Expand/garith.scm, comptime/Expand/iarith.scm,
+	comptime/Expand/if.scm, comptime/Expand/initial.scm,
+	comptime/Expand/lambda.scm, comptime/Expand/let.scm,
+	comptime/Expand/map.scm, comptime/Expand/mvalue.scm,
+	comptime/Expand/object.scm, comptime/Expand/struct.scm,
+	comptime/Fail/walk.scm, comptime/Foreign/access.scm,
+	comptime/Foreign/calias.scm, comptime/Foreign/cenum.scm,
+	comptime/Foreign/cfun.scm, comptime/Foreign/copaque.scm,
+	comptime/Foreign/cptr.scm, comptime/Foreign/cstruct.scm,
+	comptime/Foreign/ctype.scm, comptime/Foreign/jtype.scm,
+	comptime/Foreign/library.scm, comptime/Globalize/clocto.scm,
+	comptime/Globalize/escape.scm, comptime/Globalize/free.scm,
+	comptime/Globalize/ginfo.scm, comptime/Globalize/globalize.scm,
+	comptime/Globalize/gloclo.scm, comptime/Globalize/gn.scm,
+	comptime/Globalize/integration.scm,
+	comptime/Globalize/integration28c.scm,
+	comptime/Globalize/kapture.scm, comptime/Globalize/loc2glo.scm,
+	comptime/Globalize/new-body.scm, comptime/Globalize/node.scm,
+	comptime/Globalize/walk.scm, comptime/Heap/make.scm,
+	comptime/Heap/restore.scm, comptime/Hgen/walk.scm,
+	comptime/Init/extend.scm, comptime/Init/main.scm,
+	comptime/Init/parse-args.scm, comptime/Init/setrc.scm,
+	comptime/Inline/app.scm, comptime/Inline/inline.scm,
+	comptime/Inline/loop.scm, comptime/Inline/recursion.scm,
+	comptime/Inline/simple.scm, comptime/Inline/size.scm,
+	comptime/Inline/variant.scm, comptime/Inline/walk.scm,
+	comptime/Integrate/a.scm, comptime/Integrate/ctn.scm,
+	comptime/Integrate/cto.scm, comptime/Integrate/definition.scm,
+	comptime/Integrate/free.scm, comptime/Integrate/g.scm,
+	comptime/Integrate/iinfo.scm, comptime/Integrate/kaptured.scm,
+	comptime/Integrate/kk.scm, comptime/Integrate/let-fun.scm,
+	comptime/Integrate/loc2glo.scm, comptime/Integrate/node.scm,
+	comptime/Integrate/u.scm, comptime/Integrate/walk.scm,
+	comptime/Jas/as.scm, comptime/Jas/classfile.scm,
+	comptime/Jas/labels.scm, comptime/Jas/lib.scm,
+	comptime/Jas/opcode.scm, comptime/Jas/peep.scm,
+	comptime/Jas/produce.scm, comptime/Jas/profile.scm,
+	comptime/Jas/stack.scm, comptime/Jas/wide.scm, comptime/Makefile,
+	comptime/Module/alibrary.scm, comptime/Module/checksum.scm,
+	comptime/Module/class.scm, comptime/Module/eval.scm,
+	comptime/Module/foreign.scm, comptime/Module/impuse.scm,
+	comptime/Module/include.scm, comptime/Module/java.scm,
+	comptime/Module/library.scm, comptime/Module/load.scm,
+	comptime/Module/main.scm, comptime/Module/module.scm,
+	comptime/Module/option.scm, comptime/Module/pragma.scm,
+	comptime/Module/prototype.scm, comptime/Module/statexp.scm,
+	comptime/Module/type.scm, comptime/Module/with.scm,
+	comptime/Object/class.scm, comptime/Object/coercion.scm,
+	comptime/Object/creator.scm, comptime/Object/generic.scm,
+	comptime/Object/getter.scm, comptime/Object/java-access.scm,
+	comptime/Object/method.scm, comptime/Object/nil.scm,
+	comptime/Object/plain-access.scm, comptime/Object/predicate.scm,
+	comptime/Object/slots.scm, comptime/Object/struct.scm,
+	comptime/Object/tools.scm, comptime/Object/wide-access.scm,
+	comptime/Prof/prof-emit.scm, comptime/Prof/unit.scm,
+	comptime/Read/access.scm, comptime/Read/include.scm,
+	comptime/Read/inline.scm, comptime/Read/jvm.scm,
+	comptime/Read/load.scm, comptime/Read/reader.scm,
+	comptime/Read/src.scm, comptime/Reduce/1occ.scm,
+	comptime/Reduce/cond.scm, comptime/Reduce/copy.scm,
+	comptime/Reduce/cse.scm, comptime/Reduce/ftypec.scm,
+	comptime/Reduce/same.scm, comptime/Reduce/sbeta.scm,
+	comptime/Reduce/typec.scm, comptime/Reduce/walk.scm,
+	comptime/SawC/code.scm, comptime/SawC/compile.scm,
+	comptime/SawJvm/code.scm, comptime/SawJvm/compile.scm,
+	comptime/SawJvm/funcall.scm, comptime/SawJvm/inline.scm,
+	comptime/SawJvm/jld.scm, comptime/SawJvm/names.scm,
+	comptime/SawJvm/out.scm, comptime/SawJvm/type.scm,
+	comptime/SawMill/InlineReturn.scm, comptime/SawMill/blockorder.scm,
+	comptime/SawMill/cast.scm, comptime/SawMill/collapse.scm,
+	comptime/SawMill/defs.scm, comptime/SawMill/elsewhere.scm,
+	comptime/SawMill/expr.scm, comptime/SawMill/gotos.scm,
+	comptime/SawMill/lib.scm, comptime/SawMill/node2rtl.scm,
+	comptime/SawMill/procedures.scm, comptime/SawMill/regalloc.scm,
+	comptime/SawMill/regset.scm, comptime/SawMill/remove.scm,
+	comptime/SawMill/rtl.scm, comptime/SawMill/woodcutter.scm,
+	comptime/SawMsil/code.scm, comptime/SawMsil/compile.scm,
+	comptime/SawMsil/dnld.scm, comptime/SawMsil/funcall.scm,
+	comptime/SawMsil/inline.scm, comptime/SawMsil/maxstack.scm,
+	comptime/SawMsil/names.scm, comptime/SawMsil/out.scm,
+	comptime/SawMsil/type.scm, comptime/Tailc/walk.scm,
+	comptime/Tools/args.scm, comptime/Tools/date.scm,
+	comptime/Tools/dsssl.scm, comptime/Tools/error.scm,
+	comptime/Tools/fprint.sch, comptime/Tools/license.scm,
+	comptime/Tools/location.sch, comptime/Tools/location.scm,
+	comptime/Tools/misc.scm, comptime/Tools/progn.scm,
+	comptime/Tools/shape.scm, comptime/Tools/speek.scm,
+	comptime/Tools/trace.sch, comptime/Tools/trace.scm,
+	comptime/Tools/verbose.sch, comptime/Trace/walk.scm,
+	comptime/Tvector/access.scm, comptime/Tvector/cnst.scm,
+	comptime/Tvector/tvector.sch, comptime/Tvector/tvector.scm,
+	comptime/Type/cache.scm, comptime/Type/coercer.sch,
+	comptime/Type/coercion.scm, comptime/Type/misc.scm,
+	comptime/Type/pptype.scm, comptime/Type/tenv.scm,
+	comptime/Type/tools.scm, comptime/Type/type.scm,
+	comptime/Type/typeof.scm, comptime/User/user.scm,
+	comptime/Write/ast.scm, comptime/Write/expanded.scm,
+	comptime/Write/scheme.scm, comptime/Write/version.scm, configure,
+	doc/Makefile, doc/README.aix, doc/README.aix.html, doc/README.alpha,
+	doc/README.athlon, doc/README.benchmark, doc/README.finalizer,
+	doc/README.fp, doc/README.hppa, doc/README.icc, doc/README.jvm,
+	doc/README.macosx, doc/README.mingw, doc/README.mingw.html,
+	doc/README.net, doc/README.openbsd, doc/README.pentium,
+	doc/README.ppc, doc/README.sgi, doc/README.sparc-linux,
+	doc/README.win32, etc/Makefile, etc/bigloo.el, etc/emacs.icon,
+	etc/gram.scm, examples/ClientServer/Makefile,
+	examples/ClientServer/client.scm, examples/ClientServer/server.scm,
+	examples/DNet/Makefile, examples/DNet/README, examples/DNet/lib.cs,
+	examples/Demangle/Makefile, examples/Demangle/README,
+	examples/Demangle/demangle.scm, examples/Depend/Makefile,
+	examples/Depend/README, examples/Depend/args.sch,
+	examples/Depend/depend.scm, examples/Dload/Makefile,
+	examples/Dload/README, examples/Dload/c-loader.c,
+	examples/Dload/loaded.scm, examples/Dload/loader.scm,
+	examples/Dsssl/Makefile, examples/Dsssl/README,
+	examples/Dsssl/dsssl.scm, examples/Dsssl/main.scm,
+	examples/Embedded/Makefile, examples/Embedded/c-main.c,
+	examples/Embedded/fib.scm, examples/Embedded/scm-main.scm,
+	examples/Fib/Makefile, examples/Fib/README, examples/Fib/fib.scm,
+	examples/Foreign/Makefile, examples/Foreign/README,
+	examples/Foreign/el.c, examples/Foreign/el.h,
+	examples/Foreign/foreign.scm, examples/Foreign/foreign2.scm,
+	examples/Fork/Makefile, examples/Fork/README, examples/Fork/fork.scm,
+	examples/Grep/Makefile, examples/Grep/README, examples/Grep/grep.scm,
+	examples/Jarray/Makefile, examples/Jarray/README,
+	examples/Jarray/bar.java, examples/Jarray/main.scm,
+	examples/Jawt/Makefile, examples/Jawt/README,
+	examples/Jawt/README.jvm, examples/Jawt/Utils.java,
+	examples/Jawt/awt.scm, examples/Jclass/Intf.java,
+	examples/Jclass/Makefile, examples/Jclass/Point.java,
+	examples/Jclass/README, examples/Jclass/main.scm,
+	examples/Lib/Makefile, examples/Lib/example.scm,
+	examples/Lib/make-lib.scm, examples/Lib/point.c,
+	examples/Lib/point.h, examples/Lib/point.init,
+	examples/Lib/scm-point.scm, examples/Lower/Makefile,
+	examples/Lower/README, examples/Lower/lower.scm, examples/Makefile,
+	examples/Match/Makefile, examples/Match/README,
+	examples/Match/match.scm, examples/Maze/Makefile,
+	examples/Maze/README, examples/Maze/README.jvm,
+	examples/Maze/maze.scm, examples/Object/Makefile,
+	examples/Object/README, examples/Object/object.scm,
+	examples/Pragma/Makefile, examples/Pragma/README,
+	examples/Pragma/pragma.scm, examples/Process/Makefile,
+	examples/Process/README, examples/Process/process.scm,
+	examples/Process/the-proc.c, examples/Repl/Makefile,
+	examples/Repl/README, examples/Repl/repl.scm,
+	examples/Roman/Makefile, examples/Roman/README,
+	examples/Roman/roman.scm, examples/Runtime/Makefile,
+	examples/Runtime/README, examples/Runtime/runtime.scm,
+	examples/Server/Makefile, examples/Server/server.scm,
+	examples/Socket/Makefile, examples/Socket/socket.scm,
+	examples/Sqltiny/Makefile, examples/Sqltiny/README,
+	examples/Sqltiny/sqltiny.scm, examples/Yacc2bigloo/Makefile,
+	examples/Yacc2bigloo/README, examples/Yacc2bigloo/gram.y,
+	examples/Yacc2bigloo/yacc2bigloo.scm, gc/Makefile,
+	gc/gc-6.5-gentoo.patch, gc/gc-6.6-gentoo-ulibc.patch,
+	gc/gc-7.0.patch, gc/gc-7.1.patch, gc/gc-7.1.tar.gz,
+	gc/gc-7.1alpha2.patch, gc/gc-7.1alpha3-080220.patch,
+	gc/gc-forward/Makefile, gc/gc-forward/forward.c, gc/install-gc-7.0,
+	gc/install-gc-7.1, gc/install-gc-7.1alpha2,
+	gc/install-gc-7.1alpha3-080220, gc/sparc_linux_mach_dep.c,
+	jigloo/Makefile, jigloo/README, jigloo/jigloo.java,
+	macosx/Info.plist, macosx/Info.plist.bee, macosx/Makefile,
+	macosx/Makefile.macosx, macosx/dmg/Readme-bee.txt,
+	macosx/dmg/Readme.txt, manuals/Makefile, manuals/bdb.texi,
+	manuals/bee.texi, manuals/bglafile.man, manuals/bgldepend.man,
+	manuals/bgljfile.man, manuals/bglmake.man, manuals/bglmco.man,
+	manuals/bglpp.man, manuals/bglprof.man, manuals/bgltags.man,
+	manuals/bigloo.man, manuals/bigloo.texi, manuals/bit.texi,
+	manuals/cmdline.texi, manuals/compiler.texi, manuals/core.texi,
+	manuals/cryptography.texi, manuals/custom.texi,
+	manuals/database.texi, manuals/date.texi, manuals/digest.texi,
+	manuals/dsssl.texi, manuals/error.texi, manuals/eval.texi,
+	manuals/extension.texi, manuals/foreign.texi, manuals/fthread.texi,
+	manuals/hash.texi, manuals/internet.texi, manuals/io.texi,
+	manuals/java.texi, manuals/lalr.texi, manuals/library.texi,
+	manuals/macro.texi, manuals/mail.texi, manuals/match.texi,
+	manuals/modules.texi, manuals/multimedia.texi, manuals/object.texi,
+	manuals/oldtexinfo.texi, manuals/params.texi, manuals/pregexp.texi,
+	manuals/process.texi, manuals/pthread.texi, manuals/r5rs.texi,
+	manuals/rgc.texi, manuals/search.texi, manuals/serialization.texi,
+	manuals/socket.texi, manuals/sqlite.texi, manuals/srfi.texi,
+	manuals/ssl.texi, manuals/stdlib.texi, manuals/struct.texi,
+	manuals/system.texi, manuals/thread.texi, manuals/typing.texi,
+	manuals/weakptr.texi, pnet2ms/Makefile, pnet2ms/bigloo.dotnetkey,
+	pnet2ms/pnet2ms.scm, pnet2ms/win32-base.scm,
+	pnet2ms/win32-helpers.scm, pnet2ms/win32-registry.scm,
+	recette/0cfa.scm, recette/ArrayTest.cs, recette/ArrayTest.java,
+	recette/Intf.cs, recette/Intf.java, recette/Makefile,
+	recette/Point.cs, recette/Point.java, recette/alias-aux.scm,
+	recette/alias.scm, recette/apply.scm, recette/bchar.scm,
+	recette/bexit.scm, recette/big-file.scm, recette/bignum.scm,
+	recette/bool.scm, recette/bps.scm, recette/c-file.c,
+	recette/c-file.h, recette/callcc.scm, recette/case.scm,
+	recette/cell.scm, recette/cfa2.scm, recette/crypto.scm,
+	recette/cse.scm, recette/date.scm, recette/define.scm,
+	recette/dsssl.scm, recette/error.scm, recette/eval.scm,
+	recette/external-c.scm, recette/external.scm, recette/filtre.scm,
+	recette/flonum.scm, recette/foo.cs, recette/fringe.scm,
+	recette/globalis.scm, recette/hash.scm, recette/hygiene.scm,
+	recette/import1.scm, recette/import2.scm, recette/include.sch,
+	recette/include.scm, recette/include2.sch, recette/inline.scm,
+	recette/kapture.scm, recette/kwote.scm, recette/lalr.scm,
+	recette/letrec.scm, recette/list.scm, recette/macro.scm,
+	recette/main.scm, recette/match.scm, recette/mmap.scm,
+	recette/module.scm, recette/number.scm, recette/object.scm,
+	recette/object1.scm, recette/object2.scm, recette/object3.scm,
+	recette/object4.scm, recette/object5.scm, recette/optim.scm,
+	recette/patch.il, recette/peek.scm, recette/port.scm,
+	recette/pregexp.scm, recette/print.scm, recette/process.scm,
+	recette/read.scm, recette/rgc-eval.scm, recette/rgc-jm.scm,
+	recette/rgc-trap.scm, recette/rgc.scm, recette/sqic.scm,
+	recette/srfi4.scm, recette/string.scm, recette/struct.scm,
+	recette/sua.scm, recette/system.scm, recette/tail.scm,
+	recette/test.sch, recette/unicode.scm, recette/vararity.scm,
+	recette/vector.scm, recette/vital.scm, recette/weakptr.scm,
+	recette/wind.scm, runtime/CSlib/BigInteger.cs,
+	runtime/CSlib/bbool.cs, runtime/CSlib/bchar.cs,
+	runtime/CSlib/belong.cs, runtime/CSlib/bexception.cs,
+	runtime/CSlib/bgldynamic.cs, runtime/CSlib/bignum.cs,
+	runtime/CSlib/binary_port.cs, runtime/CSlib/bint.cs,
+	runtime/CSlib/bllong.cs, runtime/CSlib/bucs2.cs,
+	runtime/CSlib/buffer.cs, runtime/CSlib/callback.cs,
+	runtime/CSlib/callcc.cs, runtime/CSlib/cell.cs,
+	runtime/CSlib/client_socket.cs, runtime/CSlib/cnst.cs,
+	runtime/CSlib/cobj.cs, runtime/CSlib/condvar.cs,
+	runtime/CSlib/constant.cs, runtime/CSlib/custom.cs,
+	runtime/CSlib/date.cs, runtime/CSlib/dlopen.cs, runtime/CSlib/eof.cs,
+	runtime/CSlib/exit.cs, runtime/CSlib/extended_pair.cs,
+	runtime/CSlib/f32vector.cs, runtime/CSlib/f64vector.cs,
+	runtime/CSlib/flusher.cs, runtime/CSlib/foreign.cs,
+	runtime/CSlib/generic.cs, runtime/CSlib/hvector.cs,
+	runtime/CSlib/input_console_port.cs,
+	runtime/CSlib/input_file_port.cs, runtime/CSlib/input_gzip_port.cs,
+	runtime/CSlib/input_pipe_port.cs, runtime/CSlib/input_port.cs,
+	runtime/CSlib/input_procedure_port.cs,
+	runtime/CSlib/input_socket_port.cs,
+	runtime/CSlib/input_string_port.cs, runtime/CSlib/key.cs,
+	runtime/CSlib/keyword.cs, runtime/CSlib/magic.cs,
+	runtime/CSlib/mmap.cs, runtime/CSlib/mutex.cs, runtime/CSlib/nil.cs,
+	runtime/CSlib/numeral.cs, runtime/CSlib/obj.cs,
+	runtime/CSlib/object.cs, runtime/CSlib/optional.cs,
+	runtime/CSlib/os.cs, runtime/CSlib/output_port.cs,
+	runtime/CSlib/output_procedure_port.cs,
+	runtime/CSlib/output_socket_port.cs,
+	runtime/CSlib/output_stream_port.cs,
+	runtime/CSlib/output_string_port.cs, runtime/CSlib/pair.cs,
+	runtime/CSlib/procedure.cs, runtime/CSlib/process.cs,
+	runtime/CSlib/real.cs, runtime/CSlib/rest.cs,
+	runtime/CSlib/s16vector.cs, runtime/CSlib/s32vector.cs,
+	runtime/CSlib/s64vector.cs, runtime/CSlib/s8vector.cs,
+	runtime/CSlib/server_socket.cs, runtime/CSlib/socket.cs,
+	runtime/CSlib/stack_trace.cs, runtime/CSlib/stackwriter.cs,
+	runtime/CSlib/struct.cs, runtime/CSlib/symbol.cs,
+	runtime/CSlib/u16vector.cs, runtime/CSlib/u32vector.cs,
+	runtime/CSlib/u64vector.cs, runtime/CSlib/u8vector.cs,
+	runtime/CSlib/ucs2string.cs, runtime/CSlib/unspecified.cs,
+	runtime/CSlib/weakptr.cs, runtime/Clib/callcc.c,
+	runtime/Clib/capply.c, runtime/Clib/cbignum.c,
+	runtime/Clib/cbinary.c, runtime/Clib/ccontrol.c,
+	runtime/Clib/ccustom.c, runtime/Clib/cdate.c, runtime/Clib/cdlopen.c,
+	runtime/Clib/cdsssl.c, runtime/Clib/cerror.c, runtime/Clib/ceval.c,
+	runtime/Clib/cforeign.c, runtime/Clib/chash.c,
+	runtime/Clib/cinit-obj.c, runtime/Clib/cmain.c, runtime/Clib/cmmap.c,
+	runtime/Clib/cports.c, runtime/Clib/cprocess.c, runtime/Clib/crgc.c,
+	runtime/Clib/csleep.c, runtime/Clib/csocket.c, runtime/Clib/csrfi4.c,
+	runtime/Clib/cstring.c, runtime/Clib/cstruct.c,
+	runtime/Clib/csymbol.c, runtime/Clib/csystem.c,
+	runtime/Clib/cthread.c, runtime/Clib/ctrace.c, runtime/Clib/cucs2.c,
+	runtime/Clib/cunicode.c, runtime/Clib/cvector.c,
+	runtime/Clib/cweakptr.c, runtime/Clib/cwriter.c,
+	runtime/Clib/inline-alloc.c, runtime/Clib/non-inline-alloc.c,
+	runtime/Eval/byte-code.sch, runtime/Eval/eval.scm,
+	runtime/Eval/evcompile.scm, runtime/Eval/evenv.scm,
+	runtime/Eval/everror.scm, runtime/Eval/evmeaning.scm,
+	runtime/Eval/evmodule.scm, runtime/Eval/evobject.scm,
+	runtime/Eval/evprimop.scm, runtime/Eval/expand.scm,
+	runtime/Eval/expanders.scm, runtime/Eval/expdargs.scm,
+	runtime/Eval/expdbool.scm, runtime/Eval/expdcase.scm,
+	runtime/Eval/expddefine.scm, runtime/Eval/expddo.scm,
+	runtime/Eval/expdlet.scm, runtime/Eval/expdquote.scm,
+	runtime/Eval/expdrecord.scm, runtime/Eval/expdsrfi0.scm,
+	runtime/Eval/expdstruct.scm, runtime/Eval/expdtrace.scm,
+	runtime/Eval/expdtry.scm, runtime/Eval/library.scm,
+	runtime/Eval/macro.scm, runtime/Eval/progn.scm,
+	runtime/Ieee/bignum.sch, runtime/Ieee/boolean.scm,
+	runtime/Ieee/char.scm, runtime/Ieee/control.scm,
+	runtime/Ieee/control5.scm, runtime/Ieee/equiv.scm,
+	runtime/Ieee/fixnum.scm, runtime/Ieee/flonum.scm,
+	runtime/Ieee/input.scm, runtime/Ieee/number.scm,
+	runtime/Ieee/output.scm, runtime/Ieee/pairlist.scm,
+	runtime/Ieee/port.scm, runtime/Ieee/string.scm,
+	runtime/Ieee/symbol.scm, runtime/Ieee/vector.scm,
+	runtime/Ilib/realcallback.il, runtime/Include/bigloo.h,
+	runtime/Jlib/JDK.java, runtime/Jlib/JDK13.java,
+	runtime/Jlib/JDK14.java, runtime/Jlib/JDK15.java,
+	runtime/Jlib/JDK16.java, runtime/Jlib/bbool.java,
+	runtime/Jlib/bchar.java, runtime/Jlib/belong.java,
+	runtime/Jlib/bexception.java, runtime/Jlib/bgldynamic.java,
+	runtime/Jlib/bignum.java, runtime/Jlib/binary_port.java,
+	runtime/Jlib/bint.java, runtime/Jlib/bllong.java,
+	runtime/Jlib/bucs2.java, runtime/Jlib/buffer.java,
+	runtime/Jlib/callcc.java, runtime/Jlib/cell.java,
+	runtime/Jlib/client_socket.java, runtime/Jlib/cnst.java,
+	runtime/Jlib/cobj.java, runtime/Jlib/condvar.java,
+	runtime/Jlib/constant.java, runtime/Jlib/custom.java,
+	runtime/Jlib/date.java, runtime/Jlib/dlopen.java,
+	runtime/Jlib/eof.java, runtime/Jlib/exit.java,
+	runtime/Jlib/extended_pair.java, runtime/Jlib/f32vector.java,
+	runtime/Jlib/f64vector.java, runtime/Jlib/flusher.java,
+	runtime/Jlib/foreign.java, runtime/Jlib/generic.java,
+	runtime/Jlib/hvector.java, runtime/Jlib/input_console_port.java,
+	runtime/Jlib/input_file_port.java, runtime/Jlib/input_gzip_port.java,
+	runtime/Jlib/input_pipe_port.java, runtime/Jlib/input_port.java,
+	runtime/Jlib/input_procedure_port.java,
+	runtime/Jlib/input_resource_port.java,
+	runtime/Jlib/input_socket_port.java,
+	runtime/Jlib/input_string_port.java, runtime/Jlib/key.java,
+	runtime/Jlib/keyword.java, runtime/Jlib/magic.java,
+	runtime/Jlib/mmap.java, runtime/Jlib/mutex.java,
+	runtime/Jlib/nil.java, runtime/Jlib/numeral.java,
+	runtime/Jlib/obj.java, runtime/Jlib/object.java,
+	runtime/Jlib/optional.java, runtime/Jlib/os.java,
+	runtime/Jlib/output_buffered_port.java,
+	runtime/Jlib/output_pipe_port.java, runtime/Jlib/output_port.java,
+	runtime/Jlib/output_procedure_port.java,
+	runtime/Jlib/output_string_port.java, runtime/Jlib/pair.java,
+	runtime/Jlib/procedure.java, runtime/Jlib/process.java,
+	runtime/Jlib/real.java, runtime/Jlib/rest.java,
+	runtime/Jlib/s16vector.java, runtime/Jlib/s32vector.java,
+	runtime/Jlib/s64vector.java, runtime/Jlib/s8vector.java,
+	runtime/Jlib/server_socket.java, runtime/Jlib/socket.java,
+	runtime/Jlib/stack_trace.java, runtime/Jlib/stackwriter.java,
+	runtime/Jlib/struct.java, runtime/Jlib/symbol.java,
+	runtime/Jlib/u16vector.java, runtime/Jlib/u32vector.java,
+	runtime/Jlib/u64vector.java, runtime/Jlib/u8vector.java,
+	runtime/Jlib/ucs2string.java, runtime/Jlib/unspecified.java,
+	runtime/Jlib/weakptr.java, runtime/Lalr/driver.scm,
+	runtime/Lalr/gen.scm, runtime/Lalr/global.scm, runtime/Lalr/lalr.sch,
+	runtime/Lalr/lalr.scm, runtime/Lalr/rewrite.scm,
+	runtime/Lalr/util.scm, runtime/Llib/bconfigure.scm,
+	runtime/Llib/bexit.scm, runtime/Llib/bigloo.scm,
+	runtime/Llib/binary.scm, runtime/Llib/bit.scm,
+	runtime/Llib/custom.scm, runtime/Llib/date.scm,
+	runtime/Llib/dsssl.scm, runtime/Llib/error.scm,
+	runtime/Llib/foreign.scm, runtime/Llib/hash.sch,
+	runtime/Llib/hash.scm, runtime/Llib/make-lib.scm,
+	runtime/Llib/mmap.scm, runtime/Llib/module.scm,
+	runtime/Llib/object.scm, runtime/Llib/os.scm, runtime/Llib/param.scm,
+	runtime/Llib/pregexp.scm, runtime/Llib/process.scm,
+	runtime/Llib/socket.scm, runtime/Llib/srfi4.scm,
+	runtime/Llib/struct.scm, runtime/Llib/thread.scm,
+	runtime/Llib/trace.scm, runtime/Llib/tvector.scm,
+	runtime/Llib/type.scm, runtime/Llib/ucs2.scm,
+	runtime/Llib/unicode.scm, runtime/Llib/weakhash.scm,
+	runtime/Llib/weakptr.scm, runtime/Makefile,
+	runtime/Match/compiler.scm, runtime/Match/descr.scm,
+	runtime/Match/mexpand.scm, runtime/Match/normalize.scm,
+	runtime/Match/s2cfun.scm, runtime/Mlib/mach_dep.c,
+	runtime/Mlib/sparc_sunos4_mach_dep.s,
+	runtime/Mlib/sparc_sunos5_mach_dep.s, runtime/Pp/circle.scm,
+	runtime/Pp/pp.scm, runtime/R5rs/hygiene.scm, runtime/R5rs/syntax.scm,
+	runtime/Read/reader.scm, runtime/Rgc/rgc-node.sch,
+	runtime/Rgc/rgc.scm, runtime/Rgc/rgccompile.scm,
+	runtime/Rgc/rgcconfig.scm, runtime/Rgc/rgcdfa.scm,
+	runtime/Rgc/rgcexpand.scm, runtime/Rgc/rgcposix.scm,
+	runtime/Rgc/rgcrules.scm, runtime/Rgc/rgcset.scm,
+	runtime/Rgc/rgctree.scm, runtime/Unsafe/aes.scm,
+	runtime/Unsafe/base64.scm, runtime/Unsafe/bignumber.scm,
+	runtime/Unsafe/crc16.scm, runtime/Unsafe/gunzip.scm,
+	runtime/Unsafe/hmac.scm, runtime/Unsafe/http.scm,
+	runtime/Unsafe/intext.scm, runtime/Unsafe/kmp.scm,
+	runtime/Unsafe/md5.scm, runtime/Unsafe/rsa.scm,
+	runtime/Unsafe/sha1.scm, runtime/Unsafe/tar.scm,
+	runtime/Unsafe/url.scm, srfi/Makefile, srfi/README, tools/Makefile,
+	tools/basm, tools/copyright.c, tools/if_mach.c, tools/if_not_there.c,
+	tools/libcversion.c, win32/Makefile, win32/install.bat,
+	win32/uninstall.bat, www/Makefile, www/applications.skb,
+	www/benchmark.skb, www/bigloo.css, www/bigloo.skb, www/changelog.skr,
+	www/contribs.skb, www/documentation.skb, www/download.skb,
+	www/features.skb, www/ide.skb, www/libraries.skb, www/log.skb,
+	www/old-bigloo.skb, www/screenshots/bee-bdb.gif,
+	www/screenshots/bee-error.gif, www/screenshots/bee-online.gif,
+	www/screenshots/bee-plain.gif, www/src/c.scm, www/src/exception.scm,
+	www/src/io.scm, www/src/jvm.scm, www/src/library.scm,
+	www/src/object.scm, www/src/process.scm, www/src/socket.scm,
+	www/src/thread.scm, www/technical.skb, xlib/Makefile, xlib/README,
+	xlib/xlib-macro.sch:
+	Initial mercurial version for Bigloo (3.2c alpha).
+	[785dd3a1754f]
+

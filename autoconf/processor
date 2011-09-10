@@ -1,0 +1,38 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/processor                   */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Thu Jan 14 15:12:37 1999                          */
+#*    Last change :  Tue Aug 27 20:08:14 2002 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Checking the processor type                                      */
+#*=====================================================================*/
+
+cpuinfo=/proc/cpuinfo
+
+if [ ! -f $cpuinfo ]; then
+  echo ""
+else
+  m=`grep "model name" $cpuinfo 2> /dev/null | grep -i "pentium III"`
+  if [ "$m " != " " ]; then
+    echo -n "pIII"
+  else
+    m=`grep "model name" $cpuinfo 2> /dev/null | grep -i "pentium IV"`
+    if [ "$m " != " " ]; then
+      echo -n "pIV"
+    else
+      m=`grep "model name" $cpuinfo 2> /dev/null | grep -i "athlon"`
+      if [ "$m " != " " ]; then
+        echo -n "athlon"
+      else
+        m=`grep "model name" $cpuinfo 2> /dev/null | grep -i "k6"`
+        if [ "$m " != " "  ]; then
+          echo -n "k6"
+        else
+          echo ""
+        fi
+      fi
+    fi
+  fi
+fi

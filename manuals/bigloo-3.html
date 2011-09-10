@@ -1,0 +1,288 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>2. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Overview of Bigloo</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center29065'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29055" align="center" colspan="1"><font color="#ffffff"><strong id='bold29053'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29062" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc29058" align="left" valign="top" colspan="1"><strong id='bold29057'
+>top:</strong></td><td id="tc29059" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center29075'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29069" align="center" colspan="1"><font color="#ffffff"><strong id='bold29067'
+>Overview of Bigloo</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29072" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">2.1</td><td colspan="4" width="100%"><a href="bigloo-3.html#SRFI">SRFI</a></td></tr>
+ <tr><td valign="top" align="left">2.2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Separate-compilation">Separate compilation</a></td></tr>
+ <tr><td valign="top" align="left">2.3</td><td colspan="4" width="100%"><a href="bigloo-3.html#C-interface">C interface</a></td></tr>
+ <tr><td valign="top" align="left">2.4</td><td colspan="4" width="100%"><a href="bigloo-3.html#Java-interface">Java interface</a></td></tr>
+ <tr><td valign="top" align="left">2.5</td><td colspan="4" width="100%"><a href="bigloo-3.html#Object-language">Object language</a></td></tr>
+ <tr><td valign="top" align="left">2.6</td><td colspan="4" width="100%"><a href="bigloo-3.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">2.7</td><td colspan="4" width="100%"><a href="bigloo-3.html#SQL">SQL</a></td></tr>
+ <tr><td valign="top" align="left">2.8</td><td colspan="4" width="100%"><a href="bigloo-3.html#Type-annotations">Type annotations</a></td></tr>
+ <tr><td valign="top" align="left">2.9</td><td colspan="4" width="100%"><a href="bigloo-3.html#Unicode-support">Unicode support</a></td></tr>
+ <tr><td valign="top" align="left">2.10</td><td colspan="4" width="100%"><a href="bigloo-3.html#DSSSL">DSSSL</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center29085'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc29079" align="center" colspan="1"><font color="#ffffff"><strong id='bold29077'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc29082" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Overview" class="mark"></a><a name="g1150" class="mark"></a>
+Bigloo is an implementation of an extended version of the Scheme
+programming language. Without its extensions Bigloo does not entirely
+conform to Scheme as defined in the Revised(5) Report on on the
+Algorithmic Language Scheme (henceforth R5RS) (see info-file `r5rs.info', ).
+The two reasons are:<br/><br/><ul class="itemize" id='itemize1160'
+><li>Bigloo produces C files. C code uses the C stack, so some
+programs can't be properly tail recursive. Nevertheless all
+simple tail recursions are compiled without stack consumption.<br/><br/></li>
+<li>Alternatively, Bigloo may produce JVM (Java Virtual Machine byte code)
+class files. These classes may use regular Java classes.<br/><br/></li>
+<li>Bigloo can also produce .NET class files. These classes may use 
+regular .NET machines such as mono.<br/><br/></li>
+<li>Bigloo is a module compiler. It compiles
+modules into `.o', `.class', or `.obj' files that must be linked together to 
+produce stand alone executable programs, JVM jar files, or .NET programs.
+</li>
+</ul>
+However, we designed Bigloo to be as close as possible to the
+R5RS. Hence, when Bigloo includes a feature that is extracted from
+Scheme and implemented as normal, this feature is only mentioned in this
+document and not fully described.<br/><br/><!-- SRFI -->
+<a name="SRFI"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.1 SRFI</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+The Bigloo version 3.6a supports the following SRFIs:<br/><br/><ul class="itemize" id='itemize1182'
+><li><code id='code1163'
+>srfi-0</code> (conditional execution).
+</li>
+<li><code id='code1165'
+>srfi-2</code> (AND-LET*: an AND with local bindings, a guarded LET* special form).
+</li>
+<li><code id='code1167'
+>srfi-6</code> (Basic String Ports).
+</li>
+<li><code id='code1169'
+>srfi-8</code> (Binding to multiple values).
+</li>
+<li><code id='code1171'
+>srfi-9</code> (<em id='emph1172'
+>Records</em> specification).
+</li>
+<li><code id='code1174'
+>srfi-18</code> (Multithreading support). 
+</li>
+<li><code id='code1176'
+>srfi-22</code> (script interpreter invocation). 
+</li>
+<li><code id='code1178'
+>srfi-28</code> (Basic Format Strings). 
+</li>
+<li><code id='code1180'
+>srfi-30</code> (Multi-line comments).
+</li>
+</ul>
+</div><br>
+<!-- Separate compilation -->
+<a name="Separate-compilation"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.2 Separate compilation</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+To allow and stimulate separate compilation, Bigloo compiles
+modules instead of entire programs. A module is composed of
+a module declaration and a module body, where a module body can be
+thought of as an incomplete Scheme program. <br/><br/>Bigloo strictly enforces variable bindings. That is, it is illegal in a
+body to refer to unbound variables.<br/><br/>In a module declaration, some variables can be declared to be
+immutable functions. For such variables, the compiler can then check
+if the number of arguments for some function calls are correct or
+not. When an arity mismatch is detected, Bigloo signals an error and
+aborts the compilation process.<br/><br/></div><br>
+<!-- C interface -->
+<a name="C-interface"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.3 C interface</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+The goal of the design of Bigloo is to allow the merging of high and low
+level programming. This means that Bigloo is designed to be fully connected
+to the already existing outside world of C.<br/><br/>This connection has two components: a function call interface and a data
+storage interface. Bigloo code is able to call C code and vice versa; Bigloo
+data storage is accessible from C and vice versa. There are no frontiers
+between the Bigloo and C worlds.<br/><br/></div><br>
+<!-- Java interface -->
+<a name="Java-interface"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.4 Java interface</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Since release 2.3, Bigloo is able to produce Java Virtual Machine byte
+codes in addition to C code. By producing class files, it is possible
+to connect Scheme code and Java code in the same spirit as the Scheme and
+C connection.<br/><br/>This connection has two components: a function call interface and a data
+storage interface. Bigloo code is able to call Java code and vice versa;
+Bigloo data storage is accessible from Java and vice versa. There are no
+frontiers between the Bigloo and Java worlds.<br/><br/></div><br>
+<!-- Object language -->
+<a name="Object-language"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.5 Object language</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Since release 1.9, Bigloo has included an object system. This
+system belongs to the <span class="sc">Clos</span> [Bobrow et al. 88] object
+system family but whose design has been mainly inspired by
+C. Queinnec's <span class="sc">Meroon</span> [Queinnec93]. It
+is based on <em id='emph1192'
+>ad-hoc</em> polymorphism (generic functions and methods),
+uses single inheritance and mono-dispatch, and provides the user with
+introspection facilities.<br/><br/></div><br>
+<!-- Threads -->
+<a name="Threads"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.6 Threads</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Since release 2.4d, Bigloo has included a thread library. Bigloo
+supports Fair threads that are cooperative threads run by a fair
+scheduler which gives them equal access to the processor. Fair threads
+can communicate using broadcast events and their semantics does not
+depends on the executing platform. Fine control over fair threads
+execution is possible allowing the programming of specific
+user-defined scheduling strategies.<br/><br/></div><br>
+<!-- SQL -->
+<a name="SQL"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.7 SQL</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Since release 2.7b, Bigloo includes a SQL binding. Namely, the C Bigloo
+runtime system can access the facilities offered by SQLite
+(<a href="http://www.sqlite.org/">http://www.sqlite.org/</a>).<br/><br/><br/></div><br>
+<!-- Type annotations -->
+<a name="Type-annotations"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.8 Type annotations</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Type information, related to variable or function definitions, can be added
+to the source code. If no type information is provided, runtime checks will
+be introduced by the compiler to ensure normal execution, provided that the
+user has not used compilation flags to prevents this. If type information is
+added, the compiler statically type checks the program and refuses ones that
+prove to be incorrect.<br/><br/></div><br>
+<!-- Unicode support -->
+<a name="Unicode-support"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.9 Unicode support</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Bigloo supports UCS-2 Character encoding and also provides conversion
+functions between UTF-8 and UCS-2. It still maintains traditional
+ISO-LATIN1 characters and strings.<br/><br/></div><br>
+<!-- DSSSL -->
+<a name="DSSSL"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">2.10 DSSSL</font>
+</h3></td></tr></table>
+</div><div class="section">
+
+Bigloo helps the DSSSL programmer by supporting keywords, named constants
+and keyword functions.<br/><br/>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph29091'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it29089'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

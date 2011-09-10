@@ -1,0 +1,76 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/pmutex.scm,96
+(module __pth_mutex15,963
+(define (mutex-specific25,1325
+(define (mutex-specific-set!31,1600
+
+Llib/pcondvar.scm,124
+(module __pth_condvar15,963
+(define (condition-variable-specific25,1359
+(define (condition-variable-specific-set!31,1649
+
+Llib/pthread.scm,1873
+(module __pth_thread15,963
+(define (pthread?23,1113
+(define (make-pthread23,1113
+(define (fill-pthread!23,1113
+   (export (class pthread23,1113
+(define (pthread-body::procedure25,1172
+(define (pthread-detachedp::bool-set!27,1240
+(define (pthread-detachedp::bool27,1240
+(define (pthread-end-result-set!29,1313
+(define (pthread-end-result29,1313
+(define (pthread-end-exception-set!31,1404
+(define (pthread-end-exception31,1404
+(define (pthread-$builtin::$pthread-set!33,1485
+(define (pthread-$builtin::$pthread33,1485
+(define (&thread-error?35,1540
+(define (make-&thread-error35,1540
+(define (fill-&thread-error!35,1540
+	   (class &thread-error35,1540
+(define (uncaught-exception?37,1579
+(define (make-uncaught-exception37,1579
+(define (fill-uncaught-exception!37,1579
+	   (class uncaught-exception37,1579
+(define (uncaught-exception-reason::obj38,1621
+(define (terminated-thread-exception?40,1654
+(define (make-terminated-thread-exception40,1654
+(define (fill-terminated-thread-exception!40,1654
+	   (class terminated-thread-exception40,1654
+(define-method (object-write o::uncaught-exception . port47,1961
+(define-method (object-display o::uncaught-exception . port53,2303
+(define-method (object-print o::uncaught-exception port print-slot59,2649
+(define-method (%user-thread-yield! o::pthread65,3005
+(define-method (thread-initialize! o::pthread71,3303
+(define-method (thread-start! t::pthread . scd111,4712
+(define-method (thread-start-joinable! t::pthread119,5069
+(define-method (thread-join! t::pthread . timeout127,5429
+(define-method (thread-terminate! t::pthread142,6020
+(define-method (thread-get-specific t::pthread151,6461
+(define-method (thread-set-specific! t::pthread v157,6777
+(define-method (thread-get-cleanup t::pthread164,7108
+(define-method (thread-set-cleanup! t::pthread p170,7422
+(define ($pthread-nil180,7859
+
+Llib/pbackend.scm,424
+(module __pth_backend15,963
+(define (pthread-backend?21,1046
+(define (make-pthread-backend21,1046
+(define (fill-pthread-backend!21,1046
+   (static (class pthread-backend21,1046
+(define *pthread-backend*29,1389
+(define (pthread-setup-backend!34,1652
+(define (get-pthread-backend45,2170
+(define-method (tb-make-thread tb::pthread-backend body name51,2445
+(define-method (tb-current-thread tb::pthread-backend59,2793

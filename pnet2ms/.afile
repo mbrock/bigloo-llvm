@@ -1,0 +1,11 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/pnet2ms
+;; Mon Jan 24 14:32:22 2011
+
+(
+  (pnet2ms "pnet2ms.scm")
+  (win32-base "win32_base.scm")
+  (win32-helpers "win32_helpers.scm")
+  (win32-registry "win32_registry.scm")
+)
+

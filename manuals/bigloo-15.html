@@ -1,0 +1,253 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>14. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Command Line Parsing</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center31725'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc31715" align="center" colspan="1"><font color="#ffffff"><strong id='bold31713'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc31722" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc31718" align="left" valign="top" colspan="1"><strong id='bold31717'
+>top:</strong></td><td id="tc31719" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center31735'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc31729" align="center" colspan="1"><font color="#ffffff"><strong id='bold31727'
+>Command Line Parsing</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc31732" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center31745'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc31739" align="center" colspan="1"><font color="#ffffff"><strong id='bold31737'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc31742" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Command-Line-Parsing" class="mark"></a><a name="g18397" class="mark"></a><a name="g18399" class="mark"></a>
+Bigloo supports command line argument parsing. That is, when an
+application is spawn from an Unix shell, the <code id='code18401'
+>main</code> function
+ is called and its argument is bound to the list of the command line
+arguments, See <a href="bigloo-4.html#Modules" class="inbound">Module declaration</a>. The
+<code id='code18402'
+>args-parse</code> form may be used to parse these.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g18405" class="mark"></a><a name="args-parse" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc18409" align="left" colspan="1"><strong id='bold18407'
+>args-parse</strong><em id='it18408'
+> list rules [null-rule] [else-rule] ...</em></td><td id="tc18410" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+
+The argument <code id='code18414'
+><em id='it18413'
+>list</em></code> is a list of strings. <code id='code18416'
+><em id='it18415'
+>Rules</em></code> is defined by
+the following grammar:<br/><br/><center id='center18426'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog18424'
+>&lt;rule&gt;      ==&gt; (<code id='code18418'
+>section</code> &lt;string&gt;)
+              | ((&lt;option&gt; &lt;help&gt;) &lt;s-expression&gt;)
+              | ((&lt;option&gt;) &lt;s-expression&gt;)
+              | ((&lt;flag&gt; &lt;var&gt; &lt;var&gt; ...) &lt;s-expression&gt;)
+              | ((&lt;flag&gt; &lt;var&gt; &lt;var&gt; ... &lt;help&gt;) &lt;s-expression&gt;)
+&lt;null-rule&gt; ==&gt; (<code id='code18419'
+>()</code> &lt;s-expression&gt;)
+&lt;else-rule&gt; ==&gt; (<code id='code18420'
+>else</code> &lt;s-expression&gt;)
+&lt;option&gt;    ==&gt; &lt;flag&gt;
+              | &lt;string&gt;&lt;var&gt;
+&lt;flag&gt;      ==&gt; &lt;string&gt;
+              | (&lt;string&gt;+)
+&lt;var&gt;       ==&gt; an identifier leaded by the <code id='code18421'
+>?</code> character
+&lt;help&gt;      ==&gt; (<code id='code18422'
+>help</code> &lt;s-expression&gt;)
+              | (<code id='code18423'
+>help</code> &lt;string&gt; &lt;s-expression&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Each elements of <code id='code18428'
+><em id='it18427'
+>list</em></code> are match against the <code id='code18430'
+><em id='it18429'
+>rules</em></code>. If one
+of these matches, <code id='code18431'
+>args-parse</code> proceeds as follows:<br/><br/><ol class="enumerate" id='enumerate18441'
+><li>The matched argument elements of <code id='code18434'
+><em id='it18433'
+>list</em></code> are removed from the list.
+</li>
+<li>The <code id='code18436'
+>&lt;s-expression&gt;</code> associated to the matching rule
+      is evaluated in an environment where the rule variables are bound. 
+</li>
+<li>The argument parsing is resumed with the rest of <code id='code18439'
+><em id='it18438'
+>list</em></code>.
+</li>
+</ol></td></tr>
+</tbody></table><br/>
+In addition to parsing the command line arguments, <code id='code18444'
+>args-parse</code> enables
+help message printing. <br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g18447" class="mark"></a><a name="args-parse-usage" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc18451" align="left" colspan="1"><strong id='bold18449'
+>args-parse-usage</strong><em id='it18450'
+> fmt</em></td><td id="tc18452" align="right" colspan="1">bigloo procedure</td></tr>
+</tbody></table>
+This is a procedure of one argument, an boolean. <code id='code18455'
+>Args-parse-usage</code>
+constructs an help message from all the option described in a <code id='code18456'
+>args-parse</code>
+form. <code id='code18457'
+>Args-parse-usage</code> is only defined in the <code id='code18458'
+>&lt;s-expression&gt;</code>
+of an <code id='code18459'
+>args-parse</code> form.
+</td></tr>
+</tbody></table><br/>
+At last, if no rule matches an argument and if the <code id='code18462'
+>args-parse</code>
+form contains an <code id='code18463'
+>else</code> rule, this is evaluated. In the
+<code id='code18464'
+>&lt;s-expression&gt;</code> part of that rule, the pseudo-variable
+<code id='code18465'
+>else</code> is bound to the first unmatched argument and the pseudo-variable
+<code id='code18466'
+>rest</code> is bound to all the unmatched arguments.<br/><br/>Here is an example of argument parsing deploying all the possible rules:<br/><br/><center id='center18493'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog18491'
+>(<font color="#1919af"><strong id='bold31746'
+>module</strong></font> <font color="#1919af"><strong id='bold31748'
+>args-example</strong></font>
+   (main main))<br/><br/>(<font color="#6959cf"><strong id='bold31750'
+>define</strong></font> (<font color="#6959cf"><strong id='bold31752'
+>main</strong></font> argv)
+   (args-parse (cdr argv)
+      (section <font color="red">&quot;Help&quot;</font>)
+      ((<font color="red">&quot;?&quot;</font>)
+       (args-parse-usage #f))
+      (((<font color="red">&quot;-h&quot;</font> <font color="red">&quot;--help&quot;</font>) (help <font color="red">&quot;?,-h,--help&quot;</font> <font color="red">&quot;This help message&quot;</font>))
+       (args-parse-usage #f))
+      (section <font color="red">&quot;Misc&quot;</font>)
+      (((<font color="red">&quot;-v&quot;</font> <font color="red">&quot;--version&quot;</font>) (help <font color="red">&quot;Version number&quot;</font>))
+       (print *version*))
+      ((<font color="red">&quot;-o&quot;</font> ?file (help <font color="red">&quot;The output file&quot;</font>))
+       (<strong id='bold31766'
+>set!</strong> *dest* file))
+      ((<font color="red">&quot;--input=?file&quot;</font> (help <font color="red">&quot;The input file&quot;</font>))
+       (<strong id='bold31769'
+>set!</strong> *input* file))
+      (else
+       (print <font color="red">&quot;Illegal argument `&quot;</font> else <font color="red">&quot;'. Usage:&quot;</font>)
+       (args-parse-usage #f))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Invoking the compiled <code id='code18494'
+>args-example</code> module could produce:<br/><br/><center id='center18500'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog18498'
+>&gt; bigloo.new args.scm
+args.scm:
+&gt; a.out toto        
+Illegal argument `toto'. Usage:<br/><br/>Help:
+   ?,-h,--help    --  This help message<br/><br/>Misc:
+   -v,--version   --  Version number
+   -o &lt;file&gt;      --  The output file
+   --input=&lt;file&gt; --  The input file
+</pre>
+</td></tr>
+</tbody></table></center>
+<br/><br/>
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph31777'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it31775'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

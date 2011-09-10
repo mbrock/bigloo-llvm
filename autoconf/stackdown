@@ -1,0 +1,94 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/stackdown                   */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Aug  9 13:27:23 1995                          */
+#*    Last change :  Sun Sep  6 20:51:48 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Give the ptr size on the current architecture                    */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+cflags=
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --cflags=*|-cflags=*)
+      cflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+file=$TMP/actest$USER
+aout=$TMP/Xactest$USER
+
+#*---------------------------------------------------------------------*/
+#*    compile                                                          */
+#*---------------------------------------------------------------------*/
+compile="$CC $cflags $file.c -o $aout >/dev/null"
+
+#*---------------------------------------------------------------------*/
+#*    The test C file                                                  */
+#*---------------------------------------------------------------------*/
+if( test -f $file.c ); then
+   rm -f $file.c || exit $?
+fi
+
+rm -f $aout 2> /dev/null
+rm -f $aout.exe 2> /dev/null
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*---------------------------------------------------------------------*/
+cat > $file.c <<EOF
+void direction( new_addr )
+int new_addr;
+{
+   static int *old_addr;
+   static int flag = 0;
+
+   if( !flag )
+   {
+      old_addr = &new_addr;
+      flag = 1;
+      direction( 2 );
+   }
+   else
+   {
+      old_addr > &new_addr ? puts( "1" ) : puts( "0" );
+   }
+}
+
+main( argc, argv )
+int   argc;
+char *argv[];
+{
+   direction( 1 );
+}
+EOF
+
+#*---------------------------------------------------------------------*/
+#*    Compilation test                                                 */
+#*---------------------------------------------------------------------*/
+if eval "$BUILDSH $compile"; then
+   \rm -f $file.*
+   eval "$HOSTSH $aout"
+else
+   \rm -f $file.*
+   exit 1
+fi
+
+rm -f $aout
+rm -f $aout*

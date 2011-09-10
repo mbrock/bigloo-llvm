@@ -1,0 +1,21 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/multimedia/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__multimedia-color "Llib/color.scm")
+  (__multimedia-exif "Llib/exif.scm")
+  (__multimedia-id3 "Llib/id3.scm")
+  (__multimedia-m3u "Llib/m3u.scm")
+  (__multimedia-mixer "Llib/mixer.scm")
+  (__multimedia-mp3 "Llib/mp3.scm")
+  (__multimedia-mpc "Llib/mpc.scm")
+  (__multimedia-mpd "Llib/mpd.scm")
+  (__multimedia-mpg123 "Llib/mpg123.scm")
+  (__multimedia-mplayer "Llib/mplayer.scm")
+  (__multimedia-music "Llib/music.scm")
+  (__multimedia-music-event-loop "Llib/musicloop.scm")
+  (__multimedia-musicproc "Llib/musicproc.scm")
+  (__multimedia-soundcard "Llib/soundcard.scm")
+)
+

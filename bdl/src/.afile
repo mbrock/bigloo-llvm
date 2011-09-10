@@ -1,0 +1,12 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/bdl/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__bdl_env "./env.scm")
+  (__bdl_etags "./etags.scm")
+  (__bdl_misc "./misc.scm")
+  (__bdl_prgm "./prgm.scm")
+  (__bdl_types "./types.scm")
+)
+

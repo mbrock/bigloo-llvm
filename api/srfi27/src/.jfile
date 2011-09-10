@@ -1,0 +1,8 @@
+;; /tmp/bigloo/api/srfi27/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__srfi27 "bigloo.srfi27.srfi27")
+  (__srfi27_makelib "bigloo.srfi27.make_lib")
+)
+

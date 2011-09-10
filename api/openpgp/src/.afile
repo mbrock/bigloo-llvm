@@ -1,0 +1,21 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/openpgp/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__openpgp-algo "Llib/pgp_algo.scm")
+  (__openpgp-composition "Llib/pgp_composition.scm")
+  (__openpgp-conversion "Llib/pgp_conversion.scm")
+  (__openpgp-decode "Llib/pgp_decode.scm")
+  (__openpgp-encode "Llib/pgp_encode.scm")
+  (__openpgp-enums "Llib/pgp_enums.scm")
+  (__openpgp-facade "Llib/pgp_facade.scm")
+  (__openpgp-human "Llib/pgp_human.scm")
+  (__openpgp-key-manager "Llib/pgp_key_manager.scm")
+  (__openpgp-logic "Llib/pgp_logic.scm")
+  (__openpgp-packets "Llib/pgp_packets.scm")
+  (__openpgp-s2k "Llib/pgp_s2k.scm")
+  (__openpgp-port-util "Llib/port_util.scm")
+  (__openpgp-util "Llib/util.scm")
+)
+

@@ -1,0 +1,329 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>32. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Cross Compilation</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center34951'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34941" align="center" colspan="1"><font color="#ffffff"><strong id='bold34939'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34948" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc34944" align="left" valign="top" colspan="1"><strong id='bold34943'
+>top:</strong></td><td id="tc34945" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center34961'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34955" align="center" colspan="1"><font color="#ffffff"><strong id='bold34953'
+>Cross Compilation</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34958" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">32.1</td><td colspan="4" width="100%"><a href="bigloo-33.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left">32.2</td><td colspan="4" width="100%"><a href="bigloo-33.html#Building-the-Bigloo-library-for-the-host-platform">Building the Bigloo library for the host-platform</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.2.1</td><td colspan="3" width="100%"><a href="bigloo-33.html#Hostsh">Hostsh</a></td></tr>
+ <tr><td></td><td valign="top" align="left">32.2.2</td><td colspan="3" width="100%"><a href="bigloo-33.html#Building">Building</a></td></tr>
+ <tr><td valign="top" align="left">32.3</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compiling-Bigloo-Programs">Cross Compiling Bigloo Programs</a></td></tr>
+ <tr><td valign="top" align="left">32.4</td><td colspan="4" width="100%"><a href="bigloo-33.html#Caveats">Caveats</a></td></tr>
+ <tr><td valign="top" align="left">32.5</td><td colspan="4" width="100%"><a href="bigloo-33.html#Examples">Examples</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center34971'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34965" align="center" colspan="1"><font color="#ffffff"><strong id='bold34963'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34968" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Cross-Compilation" class="mark"></a><a name="g28430" class="mark"></a>
+Bigloo is very portable and can be cross-compiled for most
+Posix-platforms. As long as there exists a C (cross-)compiler for the
+platform and the garbage collector is supported on the targeted
+platform there is a good chance that Bigloo or Bigloo-compiled
+programs will run on the platform.<br/><br/>This chapter describes how to cross-compile Bigloo with a C
+cross-compiler. Following established conventions we will call the
+platform where the compiled programs should run the <em id='emph28433'
+>Host</em>
+platform and we will call the build platform where we actually compile
+the programs the <em id='emph28434'
+>Build</em> platform.<br/><br/><!-- Introduction -->
+<a name="Introduction"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">32.1 Introduction</font>
+</h3></td></tr></table>
+</div><div class="section">
+We assume that the host- and build-system are not the same, and that
+there exists a C cross-compiler <code id='code28436'
+>CC</code> running on the build system
+producing executables for the host system.<br/><br/>In order to execute programs on the host, it is however not sufficient
+to simply compile Bigloo-produced programs with this compiler. Indeed,
+these programs depend on the Bigloo-library which thus has to exist
+on the host-platform.<br/><br/>Building a cross-compilation environment is done in two phases:
+<ul class="itemize" id='itemize28441'
+><li>Build a Bigloo for the build-platform. Usually this is a given.
+</li>
+<li>Build the Bigloo library for the host-platform. At the same time
+one might want to build the Bigloo-executable (for the host-platform)
+too, but this is not a requirement.
+</li>
+</ul>
+Programs can then be cross-compiled simply by telling Bigloo to use
+the host-library.<br/><br/>Note: if the cross-compiled executable uses shared libraries, then
+Bigloo's cross-compiled libraries have to be copied to the host
+platform. Static executables are self-contained and can be run without
+modification on the host.<br/><br/></div><br>
+<!-- Building the Bigloo library for the host-platform -->
+<a name="Building-the-Bigloo-library-for-the-host-platform"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">32.2 Building the Bigloo library for the host-platform</font>
+</h3></td></tr></table>
+</div><div class="section">
+We assume that we have a C cross-compiler <code id='code28444'
+>CC</code> and an empty
+Bigloo source tree. As a first step the configuration script must be
+executed. However, Bigloo's configure script requires some
+runtime-information from the host and thus needs access to the
+host-machine. This is accomplished by passing a hostsh-script to
+configure.<br/><br/><!-- Hostsh -->
+<a name="Hostsh"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">32.2.1 Hostsh</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+A <em id='emph28446'
+>hostsh</em> script is passed to Bigloo's configuration script and
+is invoked whenever a command should be executed on the host-side.<br/><br/>There are already three example scripts inside Bigloo's source
+tree.
+<ul class="itemize" id='itemize28454'
+><li>one asks (using KDE's kdialog) to execute the command by hand on
+the host-side and to report the result.
+</li>
+<li>another one copies the file by <code id='code28449'
+>ssh</code> and executes it then
+on the other side. Note: there exists an Ipod/Iphone version that
+automatically signs on jail-broken devices.
+</li>
+<li>and finally, as last resort, there exists a <code id='code28451'
+>netcat</code>
+version if no <code id='code28452'
+>ssh</code> is available. This one can be used on devices
+that only have telnet access, and where ssh is not available. Its only
+requirement is a running netcat on the host-side (which should be
+easily achievable since there exists a working cross compiler).
+</li>
+</ul>
+</div>
+<!-- Building -->
+<a name="Building"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">32.2.2 Building</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+Armed with a working cross-compiler <code id='code28455'
+>CC</code> and a script
+<code id='code28456'
+>HOSTSH</code> that invokes commands and executables on the host side
+the configure invocation is simple:<br/><br/><center id='center28460'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28458'
+>./configure --prefix=[PREFIX_PATH_ON_TARGET] --hostsh=[HOSTSH] --cc=[CC]
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Other configuration options are of course possible too.<br/><br/>Once the configuration has finished one can build Bigloo (and its
+library) simply by calling <code id='code28462'
+>make</code>. This will build the libraries
+as well as the binaries.<br/><br/>If shared libraries are needed on the host platform one still needs to
+install them. The easiest way is probably to install them temporary on
+a build system inside a special directory and then copy them from
+there to the host system.<br/><br/><center id='center28467'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28465'
+>make DESTDIR=[temporary-directory] install
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Only the <code id='code28468'
+>lib</code> directory is needed on the host side.<br/><br/></div>
+</div><br>
+<!-- Cross Compiling Bigloo Programs -->
+<a name="Cross-Compiling-Bigloo-Programs"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">32.3 Cross Compiling Bigloo Programs</font>
+</h3></td></tr></table>
+</div><div class="section">
+Once the host-library exists cross compilation is straightforward.
+Using the <code id='code28470'
+>-lib-dir</code> compilation flag one simply has to pass the
+library-directory to Bigloo.<br/><br/><center id='center28474'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28472'
+>bigloo -lib-dir [path-to-cross-compiled-library] ....
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Bigloo will automatically use the same C cross-compiler and
+compilation flags that have been used to build the library.<br/><br/></div><br>
+<!-- Caveats -->
+<a name="Caveats"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">32.4 Caveats</font>
+</h3></td></tr></table>
+</div><div class="section">
+In general Bigloo's cross-compilation works fine, but developers
+should be aware of some limitations:<br/><br/><ul class="itemize" id='itemize28484'
+><li>Macros will be executed on the build platform. The
+macro-environment (and in particular its integer types) might not be
+the same. For instance an <code id='code28477'
+>elong</code> on the build-system might be of
+different size than an <code id='code28478'
+>elong</code> on the host-system.
+</li>
+<li>Bigloo will read numbers on the build system and adapt the
+container size accordingly. Suppose for instance that the build system
+features 64bit longs, but the host system only allows for 32bit
+longs. The number 2^35 fits easily into a long on the build-system but
+will overflow on the host-system. The container will however be
+determined on the build system and thus a long will be used. This is
+only a problem for big integer literals.
+</li>
+<li>A cross-compiled Bigloo uses (by default) the same C compiler
+that has been used to compile the Bigloo. Once the executable has been
+transferred to the host-system the C cross-compiler does very likely
+not exist anymore. Therefore Bigloo will need to be invoked with the
+<code id='code28481'
+>-cc</code> flag on the host-system (under the assumption that there
+exists a C compiler).<br/><br/>This drawback can be eliminated by directly
+compiling Bigloo on the host (since there exists a C compiler).
+</li>
+</ul>
+</div><br>
+<!-- Examples -->
+<a name="Examples"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">32.5 Examples</font>
+</h3></td></tr></table>
+</div><div class="section">
+In this example we will show how to compile for a host-machine that
+has ssh-access.<br/><br/>We assume
+<ul class="itemize" id='itemize28492'
+><li>a working Bigloo (should be the same version as the one
+that is going to be compiled for the host) in the PATH.
+</li>
+<li>ssh access to the host. This access should be without password
+(using keys). The system should be accessible by <code id='code28487'
+>ssh [host]</code>
+(where <code id='code28488'
+>[host]</code> should be replaced with the correct address).
+</li>
+<li>a C cross-compiler <code id='code28490'
+>CC</code> running on the build-system and
+compiling for the host.
+</li>
+</ul>
+With these preconditions satisfied we can first build Bigloo for the host-system:
+<center id='center28495'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28493'
+>$ ./configure --hostsh=&quot;$PWD/examples/hostsh/ssh/ssh-copy.sh [host]&quot; --cc=[CC]
+$ make
+$ make DESTDIR=[TMP] install
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Now let's compile a simple hello-world for the host.<br/><br/><center id='center28500'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28498'
+>$ cat &gt; /tmp/hello.scm &lt;&lt;EOF
+(module hello (main main))
+(define (main args) (print &quot;hello world&quot;))
+EOF<br/><br/>$ bigloo -static-all-bigloo -lib-dir [TMP]/lib/3.2c/ -o /tmp/hello /tmp/hello.scm
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The generated executable should be able to run on the host.
+
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph34977'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it34975'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

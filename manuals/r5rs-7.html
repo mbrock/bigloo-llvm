@@ -1,0 +1,1541 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>4. R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Expressions</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center7683'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7673" align="center" colspan="1"><font color="#ffffff"><strong id='bold7671'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7680" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc7676" align="left" valign="top" colspan="1"><strong id='bold7675'
+>top:</strong></td><td id="tc7677" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7693'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7687" align="center" colspan="1"><font color="#ffffff"><strong id='bold7685'
+>Expressions</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7690" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">4.1</td><td colspan="4" width="100%"><a href="r5rs-7.html#Primitive-expression-types">Primitive expression types</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1.1</td><td colspan="3" width="100%"><a href="r5rs-7.html#Variable-references">Variable references</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1.2</td><td colspan="3" width="100%"><a href="r5rs-7.html#Literal-expressions">Literal expressions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1.3</td><td colspan="3" width="100%"><a href="r5rs-7.html#Procedure-calls">Procedure calls</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1.4</td><td colspan="3" width="100%"><a href="r5rs-7.html#Procedures">Procedures</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1.5</td><td colspan="3" width="100%"><a href="r5rs-7.html#Conditionals">Conditionals</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.1.6</td><td colspan="3" width="100%"><a href="r5rs-7.html#Assignments">Assignments</a></td></tr>
+ <tr><td valign="top" align="left">4.2</td><td colspan="4" width="100%"><a href="r5rs-7.html#Derived-expression-types">Derived expression types</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.2.1</td><td colspan="3" width="100%"><a href="r5rs-7.html#Conditionals">Conditionals</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.2.2</td><td colspan="3" width="100%"><a href="r5rs-7.html#Binding-constructs">Binding constructs</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.2.3</td><td colspan="3" width="100%"><a href="r5rs-7.html#Sequencing">Sequencing</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.2.4</td><td colspan="3" width="100%"><a href="r5rs-7.html#Iteration">Iteration</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.2.5</td><td colspan="3" width="100%"><a href="r5rs-7.html#Delayed-evaluation">Delayed evaluation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.2.6</td><td colspan="3" width="100%"><a href="r5rs-7.html#Quasiquotation">Quasiquotation</a></td></tr>
+ <tr><td valign="top" align="left">4.3</td><td colspan="4" width="100%"><a href="r5rs-7.html#Macros">Macros</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.3.1</td><td colspan="3" width="100%"><a href="r5rs-7.html#Binding-constructs-for-syntactic-keywords">Binding constructs for syntactic keywords</a></td></tr>
+ <tr><td></td><td valign="top" align="left">4.3.2</td><td colspan="3" width="100%"><a href="r5rs-7.html#Pattern-language">Pattern language</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7703'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7697" align="center" colspan="1"><font color="#ffffff"><strong id='bold7695'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7700" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Expressions" class="mark"></a>
+
+
+
+Expression types are categorized as <em id='emph1671'
+>primitive</em> or <em id='emph1672'
+>derived</em>.
+Primitive expression types include variables and procedure calls.
+Derived expression types are not semantically primitive, but can instead
+be defined as macros.
+With the exception of <samp id='samp1673'
+>quasiquote</samp>, whose macro definition is complex,
+the derived expressions are classified as library features.
+Suitable definitions are given in section <a href="r5rs-7.html#Derived-expression-types" class="inbound">Derived expression types</a>.<br/><br/><!-- Primitive expression types -->
+<a name="Primitive-expression-types"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">4.1 Primitive expression types</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Primitive-expression-types" class="mark"></a>
+
+<!-- Variable references -->
+<a name="Variable-references"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.1.1 Variable references</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Variable-references" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1676" align="left" colspan="1"><em id='it1675'
+>&lt;variable&gt;</em></td><td id="tc1677" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+An expression consisting of a variable
+<a name="g1681" class="mark"></a>(section <a href="r5rs-6.html#Variables;-syntactic-keywords;-and-regions" class="inbound">Variables; syntactic keywords; and regions</a>) is a variable reference.  The value of
+the variable reference is the value stored in the location to which the
+variable is bound.  It is an error to reference an
+unbound variable.
+<a name="g1684" class="mark"></a>
+<center id='center1689'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1687'
+>(<font color="#6959cf"><strong id='bold7704'
+>define</strong></font> <font color="#6959cf"><strong id='bold7706'
+>x</strong></font> 28)
+x                                      =&gt;  28
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Literal expressions -->
+<a name="Literal-expressions"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.1.2 Literal expressions</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Literal-expressions" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1693" class="mark"></a><a name="quote" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1697" align="left" colspan="1"><strong id='bold1695'
+>quote</strong><em id='it1696'
+>  &lt;datum&gt;</em></td><td id="tc1698" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1703" align="left" colspan="1"><em id='it1702'
+><tt id='tt1701'
+>'</tt>&lt;datum&gt;</em></td><td id="tc1704" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1708" align="left" colspan="1"><em id='it1707'
+>&lt;constant&gt;</em></td><td id="tc1709" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+<samp id='samp1712'
+>(quote &lt;datum&gt;)</samp> evaluates to &lt;datum&gt;.
+<a name="g1714" class="mark"></a>&lt;Datum&gt;
+may be any external representation of a Scheme object (see
+section <a href="r5rs-6.html#External-representations" class="inbound">External representations</a>).  This notation is used to include literal
+constants in Scheme code.<br/><br/><center id='center1722'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1720'
+>(<strong id='bold7708'
+>quote</strong> a)                              =&gt;  a
+(<strong id='bold7709'
+>quote</strong> #(a b c))                       =&gt;  #(a b c)
+(<strong id='bold7710'
+>quote</strong> (+ 1 2))                        =&gt;  (+ 1 2)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<samp id='samp1723'
+>(quote &lt;datum&gt;)</samp> may be abbreviated as
+<tt id='tt1724'
+>'</tt>&lt;datum&gt;.  The two notations are equivalent in all
+respects.<br/><br/><center id='center1731'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1729'
+>'a                                     =&gt;  a
+'#(a b c)                              =&gt;  #(a b c)
+'()                                    =&gt;  ()
+'(+ 1 2)                               =&gt;  (+ 1 2)
+'(<strong id='bold7711'
+>quote</strong> a)                             =&gt;  (<strong id='bold7712'
+>quote</strong> a)
+''a                                    =&gt;  (<strong id='bold7713'
+>quote</strong> a)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Numerical constants, string constants, character constants, and boolean
+constants evaluate ``to themselves''; they need not be quoted.<br/><br/><center id='center1739'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1737'
+>'<font color="red">&quot;abc&quot;</font>                                 =&gt;  <font color="red">&quot;abc&quot;</font>
+<font color="red">&quot;abc&quot;</font>                                  =&gt;  <font color="red">&quot;abc&quot;</font>
+'145932                                =&gt;  145932
+145932                                 =&gt;  145932
+'#t                                    =&gt;  #t
+#t                                     =&gt;  #t
+</pre>
+</td></tr>
+</tbody></table></center>
+
+As noted in section <a href="r5rs-6.html#Storage-model" class="inbound">Storage model</a>, it is an error to alter a constant
+(i.e. the value of a literal expression) using a mutation procedure like
+<samp id='samp1740'
+>set-car!</samp> or <samp id='samp1741'
+>string-set!</samp>.
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Procedure calls -->
+<a name="Procedure-calls"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.1.3 Procedure calls</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Procedure-calls" class="mark"></a><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1745" align="left" colspan="1"><em id='it1744'
+>&lt;operator&gt; &lt;operand1&gt; ...,</em></td><td id="tc1746" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+
+A procedure call is written by simply enclosing in parentheses
+expressions for the procedure to be called and the arguments to be
+passed to it.  The operator and operand expressions are evaluated (in an
+unspecified order) and the resulting procedure is passed the resulting
+arguments.
+<a name="g1750" class="mark"></a><a name="g1753" class="mark"></a>
+<center id='center1758'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1756'
+>(+ 3 4)                                =&gt;  7
+((<strong id='bold7718'
+>if</strong> #f + *) 3 4)                      =&gt;  12
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A number of procedures are available as the values of variables in the
+initial environment; for example, the addition and multiplication
+procedures in the above examples are the values of the variables <samp id='samp1759'
+>+</samp>
+and <samp id='samp1760'
+>*</samp>.  New procedures are created by evaluating lambda expressions
+(see section <a href="r5rs-7.html#Procedures" class="inbound">Procedures</a>).
+
+
+Procedure calls may return any number of values (see <code id='code1761'
+>values</code> in
+<a name="g1763" class="mark"></a>section <a href="r5rs-9.html#Control-features" class="inbound">Control features</a>).  With the exception of <samp id='samp1765'
+>values</samp>
+the procedures available in the initial environment return one
+value or, for procedures such as <samp id='samp1766'
+>apply</samp>, pass on the values returned
+by a call to one of their arguments.<br/><br/>Procedure calls are also called <em id='emph1768'
+>combinations</em>.<br/><br/><a name="g1771" class="mark"></a>
+<font size="-1"><em id='emph1773'
+>Note:</em> In contrast to other dialects of Lisp, the order of
+evaluation is unspecified, and the operator expression and the operand
+expressions are always evaluated with the same evaluation rules.
+</font>
+<font size="-1"><em id='emph1775'
+>Note:</em>
+Although the order of evaluation is otherwise unspecified, the effect of
+any concurrent evaluation of the operator and operand expressions is
+constrained to be consistent with some sequential order of evaluation.
+The order of evaluation may be chosen differently for each procedure call.
+</font>
+<font size="-1"><em id='emph1777'
+>Note:</em> In many dialects of Lisp, the empty combination, <tt id='tt1778'
+>()</tt>, is a legitimate expression.  In Scheme, combinations must have at
+least one subexpression, so <tt id='tt1779'
+>()</tt> is not a syntactically valid
+expression.  
+</font>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Procedures -->
+<a name="Procedures"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.1.4 Procedures</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Procedures" class="mark"></a><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1784" class="mark"></a><a name="lambda" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1788" align="left" colspan="1"><strong id='bold1786'
+>lambda</strong><em id='it1787'
+>  &lt;formals&gt; &lt;body&gt;</em></td><td id="tc1789" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+
+<em id='emph1792'
+>Syntax:</em>
+&lt;Formals&gt; should be a formal arguments list as described below,
+and &lt;body&gt; should be a sequence of one or more expressions.<br/><br/><em id='emph1794'
+>Semantics:</em>
+A lambda expression evaluates to a procedure.  The environment in
+effect when the lambda expression was evaluated is remembered as part of the
+procedure.  When the procedure is later called with some actual
+arguments, the environment in which the lambda expression was evaluated will
+be extended by binding the variables in the formal argument list to
+fresh locations, the corresponding actual argument values will be stored
+in those locations, and the expressions in the body of the lambda expression
+will be evaluated sequentially in the extended environment.
+The result(s) of the last expression in the body will be returned as
+the result(s) of the procedure call.<br/><br/><center id='center1807'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1805'
+>(<strong id='bold7719'
+>lambda</strong> (x) (+ x x))                   =&gt;  a procedure
+((<strong id='bold7720'
+>lambda</strong> (x) (+ x x)) 4)               =&gt;  8<br/><br/>(<font color="#6959cf"><strong id='bold7721'
+>define</strong></font> <font color="#6959cf"><strong id='bold7723'
+>reverse-subtract</strong></font>
+  (<strong id='bold7725'
+>lambda</strong> (x y) (- y x)))
+(reverse-subtract 7 10)                =&gt;  3<br/><br/>(<font color="#6959cf"><strong id='bold7726'
+>define</strong></font> <font color="#6959cf"><strong id='bold7728'
+>add4</strong></font>
+  (<strong id='bold7730'
+>let</strong> ((x 4))
+    (<strong id='bold7731'
+>lambda</strong> (y) (+ x y))))
+(add4 6)                               =&gt;  10
+</pre>
+</td></tr>
+</tbody></table></center>
+
+&lt;Formals&gt; should have one of the following forms:<br/><br/><ul class="itemize" id='itemize1818'
+><li><tt id='tt1809'
+>(&lt;variable1&gt; ...,)</tt>:
+The procedure takes a fixed number of arguments; when the procedure is
+called, the arguments will be stored in the bindings of the
+corresponding variables.<br/><br/></li>
+<li>&lt;variable&gt;:
+The procedure takes any number of arguments; when the procedure is
+called, the sequence of actual arguments is converted into a newly
+allocated list, and the list is stored in the binding of the
+&lt;variable&gt;.<br/><br/></li>
+<li><tt id='tt1815'
+>(&lt;variable1&gt; ..., &lt;variable_n&gt; <strong id='bold1814'
+>.</strong>
+&lt;variable_n+1&gt;)</tt>:
+If a space-delimited period precedes the last variable, then
+the procedure takes n or more arguments, where n is the
+number of formal arguments before the period (there must
+be at least one).
+The value stored in the binding of the last variable will be a
+newly allocated
+list of the actual arguments left over after all the other actual
+arguments have been matched up against the other formal arguments.<br/><br/></li>
+</ul>
+It is an error for a &lt;variable&gt; to appear more than once in
+&lt;formals&gt;.<br/><br/><center id='center1824'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1822'
+>((<strong id='bold7732'
+>lambda</strong> x x) 3 4 5 6)                 =&gt;  (3 4 5 6)
+((<strong id='bold7733'
+>lambda</strong> (x y . z) z)
+ 3 4 5 6)                              =&gt;  (5 6)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Each procedure created as the result of evaluating a lambda expression is
+(conceptually) tagged
+with a storage location, in order to make <code id='code1825'
+>eqv?</code> and
+<a name="g1827" class="mark"></a><code id='code1829'
+>eq?</code> work on procedures (see section <a href="r5rs-9.html#Equivalence-predicates" class="inbound">Equivalence predicates</a>).
+<a name="g1831" class="mark"></a></td></tr>
+</tbody></table><br/>
+</div>
+<!-- Conditionals -->
+<a name="Conditionals"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.1.5 Conditionals</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Conditionals" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1836" class="mark"></a><a name="if" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1840" align="left" colspan="1"><strong id='bold1838'
+>if</strong><em id='it1839'
+>  &lt;test&gt; &lt;consequent&gt; &lt;alternate&gt;</em></td><td id="tc1841" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1846" align="left" colspan="1"><strong id='bold1844'
+>if</strong><em id='it1845'
+>  &lt;test&gt; &lt;consequent&gt;  </em></td><td id="tc1847" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+
+<em id='emph1850'
+>Syntax:</em>
+&lt;Test&gt;, &lt;consequent&gt;, and &lt;alternate&gt; may be arbitrary
+expressions.<br/><br/><em id='emph1852'
+>Semantics:</em>
+An <samp id='samp1853'
+>if</samp> expression is evaluated as follows: first,
+&lt;test&gt; is evaluated.  If it yields a true value (see
+<a name="g1855" class="mark"></a>section <a href="r5rs-9.html#Booleans" class="inbound">Booleans</a>), then &lt;consequent&gt; is evaluated and
+its value(s) is(are) returned.  Otherwise &lt;alternate&gt; is evaluated and its
+value(s) is(are) returned.  If &lt;test&gt; yields a false value and no
+&lt;alternate&gt; is specified, then the result of the expression is
+unspecified.<br/><br/><center id='center1863'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1861'
+>(<strong id='bold7734'
+>if</strong> (&gt; 3 2) 'yes 'no)                  =&gt;  yes
+(<strong id='bold7735'
+>if</strong> (&gt; 2 3) 'yes 'no)                  =&gt;  no
+(<strong id='bold7736'
+>if</strong> (&gt; 3 2)
+    (- 3 2)
+    (+ 3 2))                           =&gt;  1
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Assignments -->
+<a name="Assignments"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.1.6 Assignments</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Assignments" class="mark"></a><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1867" class="mark"></a><a name="set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1871" align="left" colspan="1"><strong id='bold1869'
+>set!</strong><em id='it1870'
+>  &lt;variable&gt; &lt;expression&gt;</em></td><td id="tc1872" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+
+&lt;Expression&gt; is evaluated, and the resulting value is stored in
+the location to which &lt;variable&gt; is bound.  &lt;Variable&gt; must
+be bound either in some region enclosing the <samp id='samp1875'
+>set!</samp> expression
+<a name="g1877" class="mark"></a>or at top level.  The result of the <samp id='samp1879'
+>set!</samp> expression is
+unspecified.<br/><br/><center id='center1886'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1884'
+>(<font color="#6959cf"><strong id='bold7737'
+>define</strong></font> <font color="#6959cf"><strong id='bold7739'
+>x</strong></font> 2)
+(+ x 1)                                =&gt;  3
+(<strong id='bold7741'
+>set!</strong> x 4)                             =&gt;  <em id='emph1881'
+>unspecified</em>
+(+ x 1)                                =&gt;  5
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div>
+</div><br>
+<!-- Derived expression types -->
+<a name="Derived-expression-types"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">4.2 Derived expression types</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Derived-expression-types" class="mark"></a>
+
+The constructs in this section are hygienic, as discussed in
+section <a href="r5rs-7.html#Macros" class="inbound">Macros</a>.
+For reference purposes, section <a href="r5rs-7.html#Derived-expression-types" class="inbound">Derived expression types</a> gives macro definitions
+that will convert most of the constructs described in this section 
+into the primitive constructs described in the previous section.<br/><br/>
+<!-- Conditionals -->
+<a name="Conditionals"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.2.1 Conditionals</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Conditional" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1891" class="mark"></a><a name="cond" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1895" align="left" colspan="1"><strong id='bold1893'
+>cond</strong><em id='it1894'
+>  &lt;clause1&gt; &lt;clause2&gt; ...,</em></td><td id="tc1896" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+<em id='emph1899'
+>Syntax:</em>
+Each &lt;clause&gt; should be of the form<br/><br/><center id='center1903'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1901'
+>(&lt;test&gt; &lt;expression1&gt; ...,)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+where &lt;test&gt; is any expression.  Alternatively, a &lt;clause&gt; may be
+of the form<br/><br/><center id='center1907'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1905'
+>(&lt;test&gt; =&gt; &lt;expression&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The last &lt;clause&gt; may be
+an ``else clause,'' which has the form<br/><br/><center id='center1911'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1909'
+>(else &lt;expression1&gt; &lt;expression2&gt; ...,).
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<a name="g1913" class="mark"></a><a name="g1916" class="mark"></a>
+<em id='emph1918'
+>Semantics:</em>
+A <samp id='samp1919'
+>cond</samp> expression is evaluated by evaluating the &lt;test&gt;
+expressions of successive &lt;clause&gt;s in order until one of them
+evaluates to a true value (see
+<a name="g1921" class="mark"></a>section <a href="r5rs-9.html#Booleans" class="inbound">Booleans</a>).  When a &lt;test&gt; evaluates to a true
+value, then the remaining &lt;expression&gt;s in its &lt;clause&gt; are
+evaluated in order, and the result(s) of the last &lt;expression&gt; in the
+&lt;clause&gt; is(are) returned as the result(s) of the entire <samp id='samp1923'
+>cond</samp>
+expression.  If the selected &lt;clause&gt; contains only the
+&lt;test&gt; and no &lt;expression&gt;s, then the value of the
+&lt;test&gt; is returned as the result.  If the selected &lt;clause&gt; uses the
+<code id='code1924'
+>=&gt;</code> alternate form, then the &lt;expression&gt; is evaluated.
+<a name="g1926" class="mark"></a>Its value must be a procedure that accepts one argument; this procedure is then
+called on the value of the &lt;test&gt; and the value(s) returned by this
+procedure is(are) returned by the <samp id='samp1928'
+>cond</samp> expression.
+If all &lt;test&gt;s evaluate
+to false values, and there is no else clause, then the result of
+the conditional expression is unspecified; if there is an else
+clause, then its &lt;expression&gt;s are evaluated, and the value(s) of
+the last one is(are) returned.<br/><br/><center id='center1937'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1935'
+>(<strong id='bold7742'
+>cond</strong> ((&gt; 3 2) 'greater)
+      ((&lt; 3 2) 'less))                 =&gt;  greater<br/><br/>(<strong id='bold7743'
+>cond</strong> ((&gt; 3 3) 'greater)
+      ((&lt; 3 3) 'less)
+      (else 'equal))                   =&gt;  equal<br/><br/>(<strong id='bold7744'
+>cond</strong> ((assv 'b '((a 1) (b 2))) =&gt; cadr)
+      (else #f))                       =&gt;  2
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1941" class="mark"></a><a name="case" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1945" align="left" colspan="1"><strong id='bold1943'
+>case</strong><em id='it1944'
+>  &lt;key&gt; &lt;clause1&gt; &lt;clause2&gt; ...,</em></td><td id="tc1946" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+<em id='emph1949'
+>Syntax:</em>
+&lt;Key&gt; may be any expression.  Each &lt;clause&gt; should have
+the form<br/><br/><center id='center1953'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1951'
+>((&lt;datum1&gt; ...,) &lt;expression1&gt; &lt;expression2&gt; ...,),
+</pre>
+</td></tr>
+</tbody></table></center>
+
+where each &lt;datum&gt; is an external representation of some object.
+All the &lt;datum&gt;s must be distinct.
+The last &lt;clause&gt; may be an ``else clause,'' which has the form<br/><br/><center id='center1957'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1955'
+>(else &lt;expression1&gt; &lt;expression2&gt; ...,).
+</pre>
+</td></tr>
+</tbody></table></center>
+<a name="g1958" class="mark"></a>
+<em id='emph1960'
+>Semantics:</em>
+A <samp id='samp1961'
+>case</samp> expression is evaluated as follows.  &lt;Key&gt; is
+evaluated and its result is compared against each &lt;datum&gt;.  If the
+result of evaluating &lt;key&gt; is equivalent (in the sense of
+<samp id='samp1962'
+>eqv?</samp>; see section <a href="r5rs-9.html#Equivalence-predicates" class="inbound">Equivalence predicates</a>) to a &lt;datum&gt;, then the
+expressions in the corresponding &lt;clause&gt; are evaluated from left
+to right and the result(s) of the last expression in the &lt;clause&gt; is(are)
+returned as the result(s) of the <samp id='samp1963'
+>case</samp> expression.  If the result of
+evaluating &lt;key&gt; is different from every &lt;datum&gt;, then if
+there is an else clause its expressions are evaluated and the
+result(s) of the last is(are) the result(s) of the <samp id='samp1964'
+>case</samp> expression;
+otherwise the result of the <samp id='samp1965'
+>case</samp> expression is unspecified.<br/><br/><center id='center1973'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1971'
+>(<strong id='bold7745'
+>case</strong> (* 2 3)
+  ((2 3 5 7) 'prime)
+  ((1 4 6 8 9) 'composite))            =&gt;  composite
+(<strong id='bold7746'
+>case</strong> (car '(c d))
+  ((a) 'a)
+  ((b) 'b))                            =&gt;  <em id='emph1967'
+>unspecified</em>
+(<strong id='bold7747'
+>case</strong> (car '(c d))
+  ((a e i o u) 'vowel)
+  ((w y) 'semivowel)
+  (else 'consonant))                   =&gt;  consonant
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1977" class="mark"></a><a name="and" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1981" align="left" colspan="1"><strong id='bold1979'
+>and</strong><em id='it1980'
+>  &lt;test1&gt; ...,</em></td><td id="tc1982" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+The &lt;test&gt; expressions are evaluated from left to right, and the
+value of the first expression that evaluates to a false value (see
+section <a href="r5rs-9.html#Booleans" class="inbound">Booleans</a>) is returned.  Any remaining expressions
+are not evaluated.  If all the expressions evaluate to true values, the
+value of the last expression is returned.  If there are no expressions
+then <tt id='tt1985'
+>#t</tt> is returned.<br/><br/><center id='center1989'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1987'
+>(and (= 2 2) (&gt; 2 1))                  =&gt;  #t
+(and (= 2 2) (&lt; 2 1))                  =&gt;  #f
+(and 1 2 'c '(f g))                    =&gt;  (f g)
+(and)                                  =&gt;  #t
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g1993" class="mark"></a><a name="or" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1997" align="left" colspan="1"><strong id='bold1995'
+>or</strong><em id='it1996'
+>  &lt;test1&gt; ...,</em></td><td id="tc1998" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+The &lt;test&gt; expressions are evaluated from left to right, and the value of the
+first expression that evaluates to a true value (see
+section <a href="r5rs-9.html#Booleans" class="inbound">Booleans</a>) is returned.  Any remaining expressions
+are not evaluated.  If all expressions evaluate to false values, the
+value of the last expression is returned.  If there are no
+expressions then <tt id='tt2001'
+>#f</tt> is returned.<br/><br/><center id='center2005'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2003'
+>(or (= 2 2) (&gt; 2 1))                   =&gt;  #t
+(or (= 2 2) (&lt; 2 1))                   =&gt;  #t
+(or #f #f #f)                          =&gt;  #f
+(or (memq 'b '(a b c)) 
+    (/ 3 0))                           =&gt;  (b c)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Binding constructs -->
+<a name="Binding-constructs"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.2.2 Binding constructs</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Binding-constructs" class="mark"></a>
+The three binding constructs <samp id='samp2008'
+>let</samp>, <samp id='samp2009'
+>let*</samp>, and <samp id='samp2010'
+>letrec</samp>
+give Scheme a block structure, like Algol 60.  The syntax of the three
+constructs is identical, but they differ in the regions they establish
+<a name="g2012" class="mark"></a>for their variable bindings.  In a <samp id='samp2014'
+>let</samp> expression, the initial
+values are computed before any of the variables become bound; in a
+<samp id='samp2015'
+>let*</samp> expression, the bindings and evaluations are performed
+sequentially; while in a <samp id='samp2016'
+>letrec</samp> expression, all the bindings are in
+effect while their initial values are being computed, thus allowing
+mutually recursive definitions.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2019" class="mark"></a><a name="let" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2023" align="left" colspan="1"><strong id='bold2021'
+>let</strong><em id='it2022'
+>  &lt;bindings&gt; &lt;body&gt;</em></td><td id="tc2024" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+<em id='emph2027'
+>Syntax:</em>
+&lt;Bindings&gt; should have the form<br/><br/><center id='center2031'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2029'
+>((&lt;variable1&gt; &lt;init1&gt;) ...,),
+</pre>
+</td></tr>
+</tbody></table></center>
+
+where each &lt;init&gt; is an expression, and &lt;body&gt; should be a
+sequence of one or more expressions.  It is
+an error for a &lt;variable&gt; to appear more than once in the list of variables
+being bound.<br/><br/><em id='emph2033'
+>Semantics:</em>
+The &lt;init&gt;s are evaluated in the current environment (in some
+unspecified order), the &lt;variable&gt;s are bound to fresh locations
+holding the results, the &lt;body&gt; is evaluated in the extended
+environment, and the value(s) of the last expression of &lt;body&gt;
+is(are) returned.  Each binding of a &lt;variable&gt; has &lt;body&gt; as its
+region.
+<a name="g2035" class="mark"></a>
+<center id='center2043'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2041'
+>(<strong id='bold7748'
+>let</strong> ((x 2) (y 3))
+  (* x y))                             =&gt;  6<br/><br/>(<strong id='bold7749'
+>let</strong> ((x 2) (y 3))
+  (<strong id='bold7750'
+>let</strong> ((x 7)
+        (z (+ x y)))
+    (* z x)))                          =&gt;  35
+</pre>
+</td></tr>
+</tbody></table></center>
+See also named <samp id='samp2044'
+>let</samp>, section <a href="r5rs-7.html#Iteration" class="inbound">Iteration</a>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2048" class="mark"></a><a name="let*" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2052" align="left" colspan="1"><strong id='bold2050'
+>let*</strong><em id='it2051'
+>  &lt;bindings&gt; &lt;body&gt;</em></td><td id="tc2053" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+<em id='emph2056'
+>Syntax:</em>
+&lt;Bindings&gt; should have the form<br/><br/><center id='center2060'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2058'
+>((&lt;variable1&gt; &lt;init1&gt;) ...,),
+</pre>
+</td></tr>
+</tbody></table></center>
+
+and &lt;body&gt; should be a sequence of
+one or more expressions.<br/><br/><em id='emph2062'
+>Semantics:</em>
+<samp id='samp2063'
+>Let*</samp> is similar to <samp id='samp2064'
+>let</samp>, but the bindings are performed
+sequentially from left to right, and the region of a binding indicated
+<a name="g2066" class="mark"></a>by <samp id='samp2068'
+>(&lt;variable&gt; &lt;init&gt;)</samp> is that part of the <samp id='samp2069'
+>let*</samp>
+expression to the right of the binding.  Thus the second binding is done
+in an environment in which the first binding is visible, and so on.<br/><br/><center id='center2075'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2073'
+>(<strong id='bold7751'
+>let</strong> ((x 2) (y 3))
+  (<strong id='bold7752'
+>let*</strong> ((x 7)
+         (z (+ x y)))
+    (* z x)))                          =&gt;  70
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2079" class="mark"></a><a name="letrec" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2083" align="left" colspan="1"><strong id='bold2081'
+>letrec</strong><em id='it2082'
+>  &lt;bindings&gt; &lt;body&gt;</em></td><td id="tc2084" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+<em id='emph2087'
+>Syntax:</em>
+&lt;Bindings&gt; should have the form<br/><br/><center id='center2091'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2089'
+>((&lt;variable1&gt; &lt;init1&gt;) ...,),
+</pre>
+</td></tr>
+</tbody></table></center>
+
+and &lt;body&gt; should be a sequence of
+one or more expressions. It is an error for a &lt;variable&gt; to appear more
+than once in the list of variables being bound.<br/><br/><em id='emph2093'
+>Semantics:</em>
+The &lt;variable&gt;s are bound to fresh locations holding undefined
+values, the &lt;init&gt;s are evaluated in the resulting environment (in
+some unspecified order), each &lt;variable&gt; is assigned to the result
+of the corresponding &lt;init&gt;, the &lt;body&gt; is evaluated in the
+resulting environment, and the value(s) of the last expression in
+&lt;body&gt; is(are) returned.  Each binding of a &lt;variable&gt; has the
+entire <samp id='samp2094'
+>letrec</samp> expression as its region, making it possible to
+<a name="g2096" class="mark"></a>define mutually recursive procedures.<br/><br/><center id='center2106'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2104'
+>(<strong id='bold7753'
+>letrec</strong> ((even?
+          (<strong id='bold7754'
+>lambda</strong> (n)
+            (<strong id='bold7755'
+>if</strong> (zero? n)
+                #t
+                (odd? (- n 1)))))
+         (odd?
+          (<strong id='bold7756'
+>lambda</strong> (n)
+            (<strong id='bold7757'
+>if</strong> (zero? n)
+                #f
+                (even? (- n 1))))))
+  (even? 88))   
+                                       =&gt;  #t
+</pre>
+</td></tr>
+</tbody></table></center>
+
+One restriction on <samp id='samp2107'
+>letrec</samp> is very important: it must be possible
+to evaluate each &lt;init&gt; without assigning or referring to the value of any
+&lt;variable&gt;.  If this restriction is violated, then it is an error.  The
+restriction is necessary because Scheme passes arguments by value rather than by
+name.  In the most common uses of <samp id='samp2108'
+>letrec</samp>, all the &lt;init&gt;s are
+lambda expressions and the restriction is satisfied automatically.<br/><br/>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Sequencing -->
+<a name="Sequencing"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.2.3 Sequencing</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Sequencing" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2113" class="mark"></a><a name="begin" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2117" align="left" colspan="1"><strong id='bold2115'
+>begin</strong><em id='it2116'
+>  &lt;expression1&gt; &lt;expression2&gt; ...,</em></td><td id="tc2118" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+The &lt;expression&gt;s are evaluated sequentially from left to right,
+and the value(s) of the last &lt;expression&gt; is(are) returned.  This
+expression type is used to sequence side effects such as input and
+output.<br/><br/><center id='center2133'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2131'
+>(<font color="#6959cf"><strong id='bold7758'
+>define</strong></font> <font color="#6959cf"><strong id='bold7760'
+>x</strong></font> 0)<br/><br/>(<strong id='bold7762'
+>begin</strong> (<strong id='bold7763'
+>set!</strong> x 5)
+       (+ x 1))                        =&gt;  6<br/><br/>(<strong id='bold7764'
+>begin</strong> (display <font color="red">&quot;4 plus 1 equals &quot;</font>)
+       (display (+ 4 1)))              =&gt;  <em id='emph2124'
+>unspecified</em>
+          <em id='emph2125'
+>and prints</em>  4 plus 1 equals 5
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Iteration -->
+<a name="Iteration"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.2.4 Iteration</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Iteration" class="mark"></a>
+
+
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2137" class="mark"></a><a name="do" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2142" align="left" colspan="1"><strong id='bold2139'
+>do</strong><em id='it2141'
+> ((&lt;variable1&gt; &lt;init1&gt; &lt;step1&gt;) <tt id='tt2140'
+> ...,) (&lt;test&gt; &lt;expression&gt; ...,) &lt;command&gt; ...,)</tt></em></td><td id="tc2143" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+<a name="g2147" class="mark"></a>
+<samp id='samp2149'
+>Do</samp> is an iteration construct.  It specifies a set of variables to
+be bound, how they are to be initialized at the start, and how they are
+to be updated on each iteration.  When a termination condition is met,
+the loop exits after evaluating the &lt;expression&gt;s.<br/><br/><samp id='samp2151'
+>Do</samp> expressions are evaluated as follows:
+The &lt;init&gt; expressions are evaluated (in some unspecified order),
+the &lt;variable&gt;s are bound to fresh locations, the results of the
+&lt;init&gt; expressions are stored in the bindings of the
+&lt;variable&gt;s, and then the iteration phase begins.<br/><br/>Each iteration begins by evaluating &lt;test&gt;; if the result is
+false (see section <a href="r5rs-9.html#Booleans" class="inbound">Booleans</a>), then the &lt;command&gt;
+expressions are evaluated in order for effect, the &lt;step&gt;
+expressions are evaluated in some unspecified order, the
+&lt;variable&gt;s are bound to fresh locations, the results of the
+&lt;step&gt;s are stored in the bindings of the
+&lt;variable&gt;s, and the next iteration begins.<br/><br/>If &lt;test&gt; evaluates to a true value, then the
+&lt;expression&gt;s are evaluated from left to right and the value(s) of
+the last &lt;expression&gt; is(are) returned.  If no &lt;expression&gt;s
+are present, then the value of the <samp id='samp2154'
+>do</samp> expression is unspecified.<br/><br/>The region of the binding of a &lt;variable&gt;
+<a name="g2157" class="mark"></a>consists of the entire <samp id='samp2159'
+>do</samp> expression except for the &lt;init&gt;s.
+It is an error for a &lt;variable&gt; to appear more than once in the
+list of <samp id='samp2160'
+>do</samp> variables.<br/><br/>A &lt;step&gt; may be omitted, in which case the effect is the
+same as if <samp id='samp2162'
+>(&lt;variable&gt; &lt;init&gt; &lt;variable&gt;)</samp> had
+been written instead of <samp id='samp2163'
+>(&lt;variable&gt; &lt;init&gt;)</samp>.<br/><br/><center id='center2169'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2167'
+>(do ((vec (make-vector 5))
+     (i 0 (+ i 1)))
+    ((= i 5) vec)
+  (vector-set! vec i i))               =&gt;  #(0 1 2 3 4)<br/><br/>(<strong id='bold7766'
+>let</strong> ((x '(1 3 5 7 9)))
+  (do ((x x (cdr x))
+       (sum 0 (+ sum (car x))))
+      ((null? x) sum)))                =&gt;  25
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2172" align="left" colspan="1"><strong id='bold2170'
+>let</strong><em id='it2171'
+>  &lt;variable&gt; &lt;bindings&gt; &lt;body&gt;</em></td><td id="tc2173" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+``Named <samp id='samp2176'
+>let</samp>'' is a variant on the syntax of <code id='code2177'
+>let</code> which provides
+<a name="g2179" class="mark"></a>a more general looping construct than <samp id='samp2181'
+>do</samp> and may also be used to express
+recursions.
+It has the same syntax and semantics as ordinary <samp id='samp2182'
+>let</samp>
+except that &lt;variable&gt; is bound within &lt;body&gt; to a procedure
+whose formal arguments are the bound variables and whose body is
+&lt;body&gt;.  Thus the execution of &lt;body&gt; may be repeated by
+invoking the procedure named by &lt;variable&gt;.<br/><br/><center id='center2188'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2186'
+>(<strong id='bold7767'
+>let</strong> loop ((numbers '(3 -2 1 6 -5))
+           (nonneg '())
+           (neg '()))
+  (<strong id='bold7768'
+>cond</strong> ((null? numbers) (list nonneg neg))
+        ((&gt;= (car numbers) 0)
+         (loop (cdr numbers)
+               (cons (car numbers) nonneg)
+               neg))
+        ((&lt; (car numbers) 0)
+         (loop (cdr numbers)
+               nonneg
+               (cons (car numbers) neg)))))   
+          =&gt;  ((6 1 3) (-5 -2))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/><br/><br/></div>
+<!-- Delayed evaluation -->
+<a name="Delayed-evaluation"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.2.5 Delayed evaluation</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Delayed-evaluation" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2193" class="mark"></a><a name="delay" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2197" align="left" colspan="1"><strong id='bold2195'
+>delay</strong><em id='it2196'
+>  &lt;expression&gt;</em></td><td id="tc2198" align="right" colspan="1">library syntax</td></tr>
+</tbody></table>
+
+
+The <samp id='samp2201'
+>delay</samp> construct is used together with the procedure <code id='code2202'
+>force</code> to
+<a name="g2204" class="mark"></a>implement &quot;lazy evaluation&quot; or &quot;call by need&quot;.
+<a name="g2207" class="mark"></a><a name="g2210" class="mark"></a><tt id='tt2212'
+>(delay &lt;expression&gt;)</tt> returns an object called a
+&quot;promise&quot; which at some point in the future may be asked (by
+<a name="g2214" class="mark"></a>the <samp id='samp2216'
+>force</samp> procedure) 
+ to evaluate
+&lt;expression&gt;, and deliver the resulting value.
+The effect of &lt;expression&gt; returning multiple values
+is unspecified.<br/><br/>See the description of <samp id='samp2218'
+>force</samp> (section <a href="r5rs-9.html#Control-features" class="inbound">Control features</a>) for a
+more complete description of <samp id='samp2219'
+>delay</samp>.<br/><br/></td></tr>
+</tbody></table><br/>
+</div>
+<!-- Quasiquotation -->
+<a name="Quasiquotation"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.2.6 Quasiquotation</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Quasiquotation" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2224" class="mark"></a><a name="quasiquote" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2228" align="left" colspan="1"><strong id='bold2226'
+>quasiquote</strong><em id='it2227'
+>  &lt;qq template&gt; </em></td><td id="tc2229" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+<table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2234" align="left" colspan="1"><em id='it2233'
+><tt id='tt2232'
+>`</tt>&lt;qq template&gt;</em></td><td id="tc2235" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+
+``Backquote'' or ``quasiquote'' expressions are useful
+<a name="g2239" class="mark"></a>for constructing a list or vector structure when most but not all of the
+desired structure is known in advance.  If no
+commas appear within the &lt;qq template&gt;, the result of
+<a name="g2242" class="mark"></a>evaluating
+<tt id='tt2244'
+>`</tt>&lt;qq template&gt; is equivalent to the result of evaluating
+<tt id='tt2245'
+>'</tt>&lt;qq template&gt;.  If a comma appears within the
+<a name="g2247" class="mark"></a>&lt;qq template&gt;, however, the expression following the comma is
+evaluated (``unquoted'') and its result is inserted into the structure
+instead of the comma and the expression.  If a comma appears followed
+immediately by an at-sign (&#x40;), then the following
+<a name="g2250" class="mark"></a>expression must evaluate to a list; the opening and closing parentheses
+of the list are then ``stripped away'' and the elements of the list are
+inserted in place of the comma at-sign expression sequence.  A comma
+at-sign should only appear within a list or vector &lt;qq template&gt;.<br/><br/>
+<center id='center2258'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2256'
+>`(list ,(+ 1 2) 4)                     =&gt;  (list 3 4)
+(<strong id='bold7769'
+>let</strong> ((name 'a)) `(list ,name ',name))           
+          =&gt;  (list a (<strong id='bold7770'
+>quote</strong> a))
+`(a ,(+ 1 2) ,&#x40;(map abs '(4 -5 6)) b)           
+          =&gt;  (a 3 4 5 6 b)
+`((<samp id='samp2253'
+>foo</samp> ,(- 10 3)) ,&#x40;(cdr '(c)) . ,(car '(cons)))           
+          =&gt;  ((foo 7) . cons)
+`#(10 5 ,(sqrt 4) ,&#x40;(map sqrt '(16 9)) 8)           
+          =&gt;  #(10 5 2 4 3 8)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Quasiquote forms may be nested.  Substitutions are made only for
+unquoted components appearing at the same nesting level
+as the outermost backquote.  The nesting level increases by one inside
+each successive quasiquotation, and decreases by one inside each
+unquotation.<br/><br/><center id='center2263'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2261'
+>`(a `(b ,(+ 1 2) ,(foo ,(+ 1 3) d) e) f)           
+          =&gt;  (a `(b ,(+ 1 2) ,(foo 4 d) e) f)
+(<strong id='bold7771'
+>let</strong> ((name1 'x)
+      (name2 'y))
+  `(a `(b ,,name1 ,',name2 d) e))           
+          =&gt;  (a `(b ,x ,'y d) e)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The two notations
+ <tt id='tt2264'
+>`</tt>&lt;qq template&gt; and <tt id='tt2265'
+>(quasiquote &lt;qq template&gt;)</tt>
+ are identical in all respects.
+ <samp id='samp2266'
+>,&lt;expression&gt;</samp> is identical to <samp id='samp2267'
+>(unquote &lt;expression&gt;)</samp>,
+ and
+ <samp id='samp2268'
+>,&#x40;&lt;expression&gt;</samp> is identical to <samp id='samp2269'
+>(unquote-splicing &lt;expression&gt;)</samp>.
+The external syntax generated by <code id='code2270'
+>write</code> for two-element lists whose
+<a name="g2272" class="mark"></a>car is one of these symbols may vary between implementations.<br/><br/><a name="g2276" class="mark"></a>
+<center id='center2280'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2278'
+>(quasiquote (list (unquote (+ 1 2)) 4))           
+          =&gt;  (list 3 4)
+'(quasiquote (list (unquote (+ 1 2)) 4))           
+          =&gt;  `(list ,(+ 1 2) 4)
+     i.e., (quasiquote (list (unquote (+ 1 2)) 4))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Unpredictable behavior can result if any of the symbols
+<code id='code2281'
+>quasiquote</code>, <code id='code2282'
+>unquote</code>, or <code id='code2283'
+>unquote-splicing</code> appear in
+<a name="g2285" class="mark"></a><a name="g2288" class="mark"></a><a name="g2291" class="mark"></a>positions within a &lt;qq template&gt; otherwise than as described above.
+</td></tr>
+</tbody></table><br/>
+</div>
+</div><br>
+<!-- Macros -->
+<a name="Macros"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">4.3 Macros</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Macros" class="mark"></a>
+
+Scheme programs can define and use new derived expression types,
+ called <em id='emph2295'
+>macros</em>.
+<a name="g2297" class="mark"></a>Program-defined expression types have the syntax<br/><br/><center id='center2302'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2300'
+>(&lt;keyword&gt; &lt;datum&gt; ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+where &lt;keyword&gt; is an identifier that uniquely determines the
+expression type.  This identifier is called the <em id='emph2303'
+>syntactic
+keyword</em>, or simply <em id='emph2304'
+>keyword</em>, of the macro.  The
+<a name="g2306" class="mark"></a><a name="g2309" class="mark"></a><a name="g2312" class="mark"></a>number of the &lt;datum&gt;s, and their syntax, depends on the
+expression type.<br/><br/>Each instance of a macro is called a <em id='emph2315'
+>use</em>
+<a name="g2317" class="mark"></a>of the macro.
+The set of rules that specifies
+how a use of a macro is transcribed into a more primitive expression
+is called the <em id='emph2319'
+>transformer</em>
+<a name="g2321" class="mark"></a>of the macro.<br/><br/>The macro definition facility consists of two parts:<br/><br/><ul class="itemize" id='itemize2329'
+><li>A set of expressions used to establish that certain identifiers
+are macro keywords, associate them with macro transformers, and control
+the scope within which a macro is defined, and<br/><br/></li>
+<li>a pattern language for specifying macro transformers.<br/><br/></li>
+</ul>
+The syntactic keyword of a macro may shadow variable bindings, and local
+variable bindings may shadow keyword bindings.    All macros
+<a name="g2331" class="mark"></a>defined using the pattern language  are ``hygienic'' and ``referentially
+transparent'' and thus preserve Scheme's lexical scoping [Kohlbecker86], [
+hygienic], [Bawden88], [macrosthatwork], [syntacticabstraction]:<br/><br/><a name="g2335" class="mark"></a>
+<a name="g2338" class="mark"></a>
+<ul class="itemize" id='itemize2345'
+><li>If a macro transformer inserts a binding for an identifier
+(variable or keyword), the identifier will in effect be renamed
+throughout its scope to avoid conflicts with other identifiers.
+Note that a <code id='code2340'
+>define</code> at top level may or may not introduce a binding;
+see section <a href="r5rs-8.html#Definitions" class="inbound">Definitions</a>.<br/><br/></li>
+<li>If a macro transformer inserts a free reference to an
+identifier, the reference refers to the binding that was visible
+where the transformer was specified, regardless of any local
+bindings that may surround the use of the macro.<br/><br/></li>
+</ul>
+<a name="g2347" class="mark"></a>
+
+
+<!-- Binding constructs for syntactic keywords -->
+<a name="Binding-constructs-for-syntactic-keywords"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.3.1 Binding constructs for syntactic keywords</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Binding-constructs-for-syntactic-keywords" class="mark"></a>
+<samp id='samp2349'
+>Let-syntax</samp> and <samp id='samp2350'
+>letrec-syntax</samp> are
+analogous to <samp id='samp2351'
+>let</samp> and <samp id='samp2352'
+>letrec</samp>, but they bind
+syntactic keywords to macro transformers instead of binding variables
+to locations that contain values.  Syntactic keywords may also be
+bound at top level; see section <a href="r5rs-8.html#Syntax-definitions" class="inbound">Syntax definitions</a>.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2355" class="mark"></a><a name="let-syntax" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2359" align="left" colspan="1"><strong id='bold2357'
+>let-syntax</strong><em id='it2358'
+>  &lt;bindings&gt; &lt;body&gt;</em></td><td id="tc2360" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+<em id='emph2363'
+>Syntax:</em>
+&lt;Bindings&gt; should have the form<br/><br/><center id='center2367'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2365'
+>((&lt;keyword&gt; &lt;transformer spec&gt;) ...,)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Each &lt;keyword&gt; is an identifier,
+each &lt;transformer spec&gt; is an instance of <samp id='samp2368'
+>syntax-rules</samp>, and
+&lt;body&gt; should be a sequence of one or more expressions.  It is an error
+for a &lt;keyword&gt; to appear more than once in the list of keywords
+being bound.<br/><br/><em id='emph2370'
+>Semantics:</em>
+The &lt;body&gt; is expanded in the syntactic environment
+obtained by extending the syntactic environment of the
+<samp id='samp2371'
+>let-syntax</samp> expression with macros whose keywords are
+the &lt;keyword&gt;s, bound to the specified transformers.
+Each binding of a &lt;keyword&gt; has &lt;body&gt; as its region.<br/><br/><center id='center2385'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2383'
+>(let-syntax ((when (<strong id='bold7772'
+>syntax-rules</strong> ()
+                     ((when test stmt1 stmt2 ...)
+                      (<strong id='bold7773'
+>if</strong> test
+                          (<strong id='bold7774'
+>begin</strong> stmt1
+                                 stmt2 ...))))))
+  (<strong id='bold7775'
+>let</strong> ((<strong id='bold7776'
+>if</strong> #t))
+    (when if (<strong id='bold7777'
+>set!</strong> if 'now))
+    if))                               =&gt;  now<br/><br/>(<strong id='bold7778'
+>let</strong> ((x 'outer))
+  (let-syntax ((m (<strong id='bold7779'
+>syntax-rules</strong> () ((m) x))))
+    (<strong id='bold7780'
+>let</strong> ((x 'inner))
+      (m))))                           =&gt;  outer
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2389" class="mark"></a><a name="letrec-syntax" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2393" align="left" colspan="1"><strong id='bold2391'
+>letrec-syntax</strong><em id='it2392'
+>  &lt;bindings&gt; &lt;body&gt;</em></td><td id="tc2394" align="right" colspan="1">syntax</td></tr>
+</tbody></table>
+
+<em id='emph2397'
+>Syntax:</em>
+Same as for <samp id='samp2398'
+>let-syntax</samp>.<br/><br/><em id='emph2400'
+>Semantics:</em>
+ The &lt;body&gt; is expanded in the syntactic environment obtained by
+extending the syntactic environment of the <samp id='samp2401'
+>letrec-syntax</samp>
+expression with macros whose keywords are the
+&lt;keyword&gt;s, bound to the specified transformers.
+Each binding of a &lt;keyword&gt; has the &lt;bindings&gt;
+as well as the &lt;body&gt; within its region,
+so the transformers can
+transcribe expressions into uses of the macros
+introduced by the <samp id='samp2402'
+>letrec-syntax</samp> expression.<br/><br/><center id='center2414'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2412'
+>(letrec-syntax
+  ((my-or (<strong id='bold7781'
+>syntax-rules</strong> ()
+            ((my-or) #f)
+            ((my-or e) e)
+            ((my-or e1 e2 ...)
+             (<strong id='bold7782'
+>let</strong> ((temp e1))
+               (<strong id='bold7783'
+>if</strong> temp
+                   temp
+                   (my-or e2 ...)))))))
+  (<strong id='bold7784'
+>let</strong> ((x #f)
+        (y 7)
+        (temp 8)
+        (<strong id='bold7785'
+>let</strong> odd?)
+        (<strong id='bold7786'
+>if</strong> even?))
+    (my-or x
+           (<strong id='bold7787'
+>let</strong> temp)
+           (<strong id='bold7788'
+>if</strong> y)
+           y)))                        =&gt;  7
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Pattern language -->
+<a name="Pattern-language"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">4.3.2 Pattern language</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Pattern-language" class="mark"></a>
+A &lt;transformer spec&gt; has the following form:<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g2419" class="mark"></a><a name="syntax-rules" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc2423" align="left" colspan="1"><strong id='bold2421'
+>syntax-rules</strong><em id='it2422'
+>  &lt;literals&gt; &lt;syntax rule&gt; ...,</em></td><td id="tc2424" align="right" colspan="1"></td></tr>
+</tbody></table>
+
+<em id='emph2427'
+>Syntax:</em>
+&lt;Literals&gt; is a list of identifiers and each &lt;syntax rule&gt;
+should be of the form<br/><br/><center id='center2431'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2429'
+>(&lt;pattern&gt; &lt;template&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The &lt;pattern&gt; in a &lt;syntax rule&gt; is a list &lt;pattern&gt;
+that begins with the keyword for the macro.<br/><br/>A &lt;pattern&gt; is either an identifier, a constant, or one of the
+following<br/><br/><center id='center2436'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2434'
+>(&lt;pattern&gt; ...)
+(&lt;pattern&gt; &lt;pattern&gt; ... . &lt;pattern&gt;)
+(&lt;pattern&gt; ... &lt;pattern&gt; &lt;ellipsis&gt;)
+#(&lt;pattern&gt; ...)
+#(&lt;pattern&gt; ... &lt;pattern&gt; &lt;ellipsis&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+and a template is either an identifier, a constant, or one of the following<br/><br/><center id='center2440'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2438'
+>(&lt;element&gt; ...)
+(&lt;element&gt; &lt;element&gt; ... . &lt;template&gt;)
+#(&lt;element&gt; ...)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+where an &lt;element&gt; is a &lt;template&gt; optionally
+followed by an &lt;ellipsis&gt; and
+an &lt;ellipsis&gt; is the identifier ``<samp id='samp2441'
+>...</samp>'' (which cannot be used as
+an identifier in either a template or a pattern).
+<a name="g2442" class="mark"></a>
+<br/><em id='emph2445'
+>Semantics:</em> An instance of <samp id='samp2446'
+>syntax-rules</samp> produces a new macro
+transformer by specifying a sequence of hygienic rewrite rules.  A use
+of a macro whose keyword is associated with a transformer specified by
+<samp id='samp2447'
+>syntax-rules</samp> is matched against the patterns contained in the
+&lt;syntax rule&gt;s, beginning with the leftmost &lt;syntax rule&gt;.
+When a match is found, the macro use is transcribed hygienically
+according to the template.<br/><br/>An identifier that appears in the pattern of a &lt;syntax rule&gt; is
+a <em id='emph2449'
+>pattern variable</em>, unless it is the keyword that begins the pattern,
+is listed in &lt;literals&gt;, or is the identifier ``<samp id='samp2450'
+>...</samp>''.
+Pattern variables match arbitrary input elements and
+are used to refer to elements of the input in the template.  It is an
+error for the same pattern variable to appear more than once in a
+&lt;pattern&gt;.<br/><br/>The keyword at the beginning of the pattern in a
+&lt;syntax rule&gt; is not involved in the matching and
+is not considered a pattern variable or literal identifier.<br/><br/><br/><em id='emph2454'
+>Rationale:</em><br/><br/>The scope of the keyword is determined by the expression or syntax
+definition that binds it to the associated macro transformer.
+If the keyword were a pattern variable or literal
+identifier, then
+the template that follows the pattern would be within its scope
+regardless of whether the keyword were bound by <samp id='samp2456'
+>let-syntax</samp>
+or by <samp id='samp2457'
+>letrec-syntax</samp>.<br/><br/>Identifiers that appear in &lt;literals&gt; are interpreted as literal
+identifiers to be matched against corresponding subforms of the input.
+A subform
+in the input matches a literal identifier if and only if it is an
+identifier
+and either both its occurrence in the macro expression and its
+occurrence in the macro definition have the same lexical binding, or
+the two identifiers are equal and both have no lexical binding.<br/><br/>
+A subpattern followed by <samp id='samp2460'
+>...</samp> can match zero or more elements of the
+input.  It is an error for <samp id='samp2461'
+>...</samp> to appear in &lt;literals&gt;.
+Within a pattern the identifier <samp id='samp2462'
+>...</samp> must follow the last element of
+a nonempty sequence of subpatterns.<br/><br/>More formally, an input form F matches a pattern P if and only if:<br/><br/><ul class="itemize" id='itemize2489'
+><li>P is a non-literal identifier; or<br/><br/></li>
+<li>P is a literal identifier and F is an identifier with the same
+binding; or<br/><br/></li>
+<li>P is a list <samp id='samp2469'
+>(P_1 ... P_n)</samp> and F is a
+list of n
+forms that match P_1 through P_n, respectively; or<br/><br/></li>
+<li>P is an improper list
+<samp id='samp2472'
+>(P_1 P_2 ... P_n . P_n+1)</samp>
+and F is a list or
+improper list of n or more forms that match P_1 through P_n,
+respectively, and whose nth ``cdr'' matches P_n+1; or<br/><br/></li>
+<li>P is of the form
+<samp id='samp2475'
+>(P_1 ... P_n P_n+1 &lt;ellipsis&gt;)</samp>
+where &lt;ellipsis&gt; is the identifier <samp id='samp2476'
+>...</samp>
+and F is
+a proper list of at least n forms, the first n of which match
+P_1 through P_n, respectively, and each remaining element of F
+matches P_n+1; or<br/><br/></li>
+<li>P is a vector of the form <samp id='samp2479'
+>#(P_1 ... P_n)</samp>
+and F is a vector
+of n forms that match P_1 through P_n; or<br/><br/></li>
+<li>P is of the form
+<samp id='samp2482'
+>#(P_1 ... P_n P_n+1 &lt;ellipsis&gt;)</samp>
+where &lt;ellipsis&gt; is the identifier <samp id='samp2483'
+>...</samp>
+and F is a vector of n
+or more forms the first n of which match
+P_1 through P_n, respectively, and each remaining element of F
+matches P_n+1; or<br/><br/></li>
+<li>P is a datum and F is equal to P in the sense of
+the <samp id='samp2486'
+>equal?</samp> procedure.<br/><br/></li>
+</ul>
+It is an error to use a macro keyword, within the scope of its
+binding, in an expression that does not match any of the patterns.<br/><br/>When a macro use is transcribed according to the template of the
+matching &lt;syntax rule&gt;, pattern variables that occur in the
+template are replaced by the subforms they match in the input.
+Pattern variables that occur in subpatterns followed by one or more
+instances of the identifier
+<samp id='samp2491'
+>...</samp> are allowed only in subtemplates that are
+followed by as many instances of <samp id='samp2492'
+>...</samp>.
+They are replaced in the
+output by all of the subforms they match in the input, distributed as
+indicated.  It is an error if the output cannot be built up as
+specified.<br/><br/>
+Identifiers that appear in the template but are not pattern variables
+or the identifier
+<samp id='samp2494'
+>...</samp> are inserted into the output as literal identifiers.  If a
+literal identifier is inserted as a free identifier then it refers to the
+binding of that identifier within whose scope the instance of
+<samp id='samp2495'
+>syntax-rules</samp> appears.
+If a literal identifier is inserted as a bound identifier then it is
+in effect renamed to prevent inadvertent captures of free identifiers.<br/><br/>As an example, if <code id='code2497'
+>let</code> and <code id='code2498'
+>cond</code> are defined as in
+<a name="g2500" class="mark"></a><a name="g2503" class="mark"></a>section <a href="r5rs-7.html#Derived-expression-types" class="inbound">Derived expression types</a> then they are hygienic (as required) and
+the following is not an error.<br/><br/><center id='center2510'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2508'
+>(<strong id='bold7789'
+>let</strong> ((=&gt; #f))
+  (<strong id='bold7790'
+>cond</strong> (#t =&gt; 'ok)))                  =&gt; ok
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The macro transformer for <samp id='samp2511'
+>cond</samp> recognizes <samp id='samp2512'
+>=&gt;</samp>
+as a local variable, and hence an expression, and not as the
+top-level identifier <samp id='samp2513'
+>=&gt;</samp>, which the macro transformer treats
+as a syntactic keyword.  Thus the example expands into<br/><br/><center id='center2520'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2518'
+>(<strong id='bold7791'
+>let</strong> ((=&gt; #f))
+  (<strong id='bold7792'
+>if</strong> #t (<strong id='bold7793'
+>begin</strong> =&gt; 'ok)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+instead of<br/><br/><center id='center2527'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2525'
+>(<strong id='bold7794'
+>let</strong> ((=&gt; #f))
+  (<strong id='bold7795'
+>let</strong> ((temp #t))
+    (<strong id='bold7796'
+>if</strong> temp ('ok temp))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+which would result in an invalid procedure call.<br/><br/></td></tr>
+</tbody></table><br/>         
+
+</div>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph7802'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it7800'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

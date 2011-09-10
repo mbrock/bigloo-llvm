@@ -1,0 +1,20 @@
+;; /tmp/bigloo/api/fthread/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__ft_async "bigloo.fthread.async")
+  (__ft_%pthread "bigloo.fthread._pthread")
+  (__ft_time "bigloo.fthread.time")
+  (__ft_env2d "bigloo.fthread.env2d")
+  (__ft_%env "bigloo.fthread._env")
+  (__ft_env "bigloo.fthread.env")
+  (__ft_signal "bigloo.fthread.signal")
+  (__ft_%scheduler "bigloo.fthread._scheduler")
+  (__ft_scheduler "bigloo.fthread.scheduler")
+  (__ft_%thread "bigloo.fthread._thread")
+  (__ft_thread "bigloo.fthread.thread")
+  (__ft_%types "bigloo.fthread._types")
+  (__ft_types "bigloo.fthread.types")
+  (__fthread_makelib "bigloo.fthread.make_lib")
+)
+

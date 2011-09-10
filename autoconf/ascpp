@@ -1,0 +1,97 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/ascpp                       */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Wed Oct 22 11:07:08 1997                          */
+#*    Last change :  Fri Sep  4 20:25:44 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Checking for as. We search for an as that invokes cpp            */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+as=as
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --as=*|-as=*)
+      as="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --name=*|-name=*)
+      name="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+obj=`basename $name`
+
+#*---------------------------------------------------------------------*/
+#*    We create the file                                               */
+#*---------------------------------------------------------------------*/
+(cd $TMP;
+
+\rm -f $name.s;
+\rm -f $name.o;
+
+cat > $name.s <<EOF
+#define dummy
+dummy
+EOF
+)
+
+#*---------------------------------------------------------------------*/
+#*    We try to compile it                                             */
+#*---------------------------------------------------------------------*/
+(cd $TMP; 
+ compile="$as $name.s -o $obj.o > /dev/null";
+ if eval "$BUILDSH $compile" > /dev/null; then
+   \rm -f $TMP/$name.s
+   echo $as
+ else
+   compile="$as -P $name.s -o $obj.o > /dev/null";
+   if eval "$BUILDSH $compile" > /dev/null; then
+     \rm -f $TMP/$name.s
+     echo "$as -P"
+   else
+     compile="as $name.s -o $obj.o > /dev/null";
+     if eval "$BUILDSH $compile" > /dev/null; then
+       \rm -f $TMP/$name.s
+       echo as
+     else
+       compile="as -P $name.s -o $obj.o > /dev/null";
+       if eval "$BUILDSH $compile" > /dev/null; then
+         \rm -f $TMP/$name.s
+         echo "as -P"
+       else
+         compile="$CC $name.s -o $obj.o > /dev/null";
+         if eval "$BUILDSH $compile" > /dev/null; then
+           \rm -f $TMP/$name.s
+           echo $CC
+         else
+           compile="$CC -c -x assembler-with-cpp $name.s -o $obj.o > /dev/null";
+           if eval "$BUILDSH $compile" > /dev/null; then
+             \rm -f $TMP/$name.s
+             echo "$CC -c -x assembler-with-cpp"
+           else
+             compile="gcc -c -x assembler-with-cpp $name.s -o $obj.o > /dev/null";
+             if eval "$BUILDSH $compile" > /dev/null; then
+               \rm -f $TMP/$name.s
+               echo "gcc -c -x assembler-with-cpp"
+             fi
+           fi
+         fi
+       fi
+     fi
+   fi
+ fi)

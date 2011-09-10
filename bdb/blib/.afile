@@ -1,0 +1,9 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/bdb/blib
+;; Mon Jan 24 14:32:18 2011
+
+(
+  (__bdb "bdb.scm")
+  (__bdb_env "env.scm")
+)
+

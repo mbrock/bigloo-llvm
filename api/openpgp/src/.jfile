@@ -1,0 +1,21 @@
+;; /tmp/bigloo/api/openpgp/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__openpgp-util "bigloo.openpgp.util")
+  (__openpgp-port-util "bigloo.openpgp.port_util")
+  (__openpgp-s2k "bigloo.openpgp.pgp_s2k")
+  (__openpgp-packets "bigloo.openpgp.pgp_packets")
+  (__openpgp-logic "bigloo.openpgp.pgp_logic")
+  (__openpgp-key-manager "bigloo.openpgp.pgp_key_manager")
+  (__openpgp-human "bigloo.openpgp.pgp_human")
+  (__openpgp-facade "bigloo.openpgp.pgp_facade")
+  (__openpgp-enums "bigloo.openpgp.pgp_enums")
+  (__openpgp-encode "bigloo.openpgp.pgp_encode")
+  (__openpgp-decode "bigloo.openpgp.pgp_decode")
+  (__openpgp-conversion "bigloo.openpgp.pgp_conversion")
+  (__openpgp-composition "bigloo.openpgp.pgp_composition")
+  (__openpgp-algo "bigloo.openpgp.pgp_algo")
+  (__openpgp-makelib "bigloo.openpgp.make_lib")
+)
+

@@ -1,0 +1,9 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/packrat/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__packrat_json "Llib/json.scm")
+  (__packrat "Llib/packrat.scm")
+)
+

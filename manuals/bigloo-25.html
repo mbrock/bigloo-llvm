@@ -1,0 +1,284 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>24. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Parameters</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center33825'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33815" align="center" colspan="1"><font color="#ffffff"><strong id='bold33813'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33822" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc33818" align="left" valign="top" colspan="1"><strong id='bold33817'
+>top:</strong></td><td id="tc33819" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33835'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33829" align="center" colspan="1"><font color="#ffffff"><strong id='bold33827'
+>Parameters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33832" align="center" colspan="1"></td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33845'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33839" align="center" colspan="1"><font color="#ffffff"><strong id='bold33837'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33842" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Parameters" class="mark"></a><a name="g25578" class="mark"></a>
+The Bigloo parameters drive the global behavior programs. A parameter
+is accessed via a pair of functions: a reader and a setter. The type of 
+the value is given, in this documentation, by the name of the parameter of 
+the setter.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25582" class="mark"></a><a name="bigloo-strict-r5rs-strings" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25586" align="left" colspan="1"><strong id='bold25584'
+>bigloo-strict-r5rs-strings</strong><em id='it25585'
+></em></td><td id="tc25587" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25591" class="mark"></a><a name="bigloo-strict-r5rs-strings-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25595" align="left" colspan="1"><strong id='bold25593'
+>bigloo-strict-r5rs-strings-set!</strong><em id='it25594'
+> boolean</em></td><td id="tc25596" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25599" class="mark"></a>
+Traditional syntax conforms to the Revised Report if the parameter
+<code id='code25601'
+>bigloo-strict-r5rs-strings</code> is not <code id='code25602'
+>#f</code>. Otherwise
+constant strings specified by the <code id='code25603'
+>&quot;([^&quot;]|\&quot;)*&quot;</code> are considered
+as foreign strings.<br/><br/><br/>For example, after reading the expression 
+<code id='code25605'
+>&quot;1\n23\t4\&quot;5&quot;</code>, the following string is built, which is equal to
+<code id='code25606'
+>(string #\1 #\n #\2 #\3 #\t #\4 #\&quot; #\5)</code> if 
+<code id='code25607'
+>(bigloo-strict-r5rs-strings)</code> is not <code id='code25608'
+>#f</code>. It is 
+<code id='code25609'
+>(string #\1 #\n #\2 #\3 #\tab #\4 #\&quot; #\5)</code> otherwise.<br/><br/>Printing this string will produce: <code id='code25611'
+>1n23t4&quot;5</code>.<br/><br/>
+The new foreign syntax allows C escape sequences to be recognized. For
+example, the expression <code id='code25613'
+>#&quot;1\n23\t4\&quot;5&quot;</code> builds a string equal to:<br/><br/><code id='code25615'
+>(string #\1 #\newline #\2 #\3 #\t #\4 #\&quot; #\5)</code><br/><br/>and printing this string will then produce: <center id='center25619'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog25617'
+>1
+23    4&quot;5
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25623" class="mark"></a><a name="bigloo-compiler-debug" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25627" align="left" colspan="1"><strong id='bold25625'
+>bigloo-compiler-debug</strong><em id='it25626'
+></em></td><td id="tc25628" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25632" class="mark"></a><a name="bigloo-compiler-debug-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25636" align="left" colspan="1"><strong id='bold25634'
+>bigloo-compiler-debug-set!</strong><em id='it25635'
+> integer</em></td><td id="tc25637" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25641" class="mark"></a><a name="bigloo-debug" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25645" align="left" colspan="1"><strong id='bold25643'
+>bigloo-debug</strong><em id='it25644'
+></em></td><td id="tc25646" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25650" class="mark"></a><a name="bigloo-debug-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25654" align="left" colspan="1"><strong id='bold25652'
+>bigloo-debug-set!</strong><em id='it25653'
+> integer</em></td><td id="tc25655" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25659" class="mark"></a><a name="bigloo-warning" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25663" align="left" colspan="1"><strong id='bold25661'
+>bigloo-warning</strong><em id='it25662'
+></em></td><td id="tc25664" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25668" class="mark"></a><a name="bigloo-warning-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25672" align="left" colspan="1"><strong id='bold25670'
+>bigloo-warning-set!</strong><em id='it25671'
+> integer</em></td><td id="tc25673" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+These parameters control the debugging and warning level. 
+The <code id='code25676'
+>bigloo-compiler-debug</code> is automatically controlled by the compiler 
+command line <code id='code25677'
+>-g</code> option (see <a href="bigloo-15.html#Command-Line-Parsing" class="inbound">Command Line Parsing</a>). <br/><br/>When a program is compiled in debug mode <code id='code25680'
+><em id='it25679'
+>lvl</em></code>, the compiler introduces a 
+call to <code id='code25681'
+>(bigloo-debug-set! lvl)</code> before the evaluation of the
+first expression.<br/><br/>The <code id='code25683'
+>bigloo-debug</code> parameter is used to control traces 
+(see <a href="bigloo-17.html#Tracing" class="inbound">Tracing</a>).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25687" class="mark"></a><a name="bigloo-trace-color" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25691" align="left" colspan="1"><strong id='bold25689'
+>bigloo-trace-color</strong><em id='it25690'
+></em></td><td id="tc25692" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25696" class="mark"></a><a name="bigloo-trace-color-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25700" align="left" colspan="1"><strong id='bold25698'
+>bigloo-trace-color-set!</strong><em id='it25699'
+> bool</em></td><td id="tc25701" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+Enables/disables traces coloring (see <a href="bigloo-17.html#Tracing" class="inbound">Tracing</a>).
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25707" class="mark"></a><a name="bigloo-trace-stack-depth" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25711" align="left" colspan="1"><strong id='bold25709'
+>bigloo-trace-stack-depth</strong><em id='it25710'
+></em></td><td id="tc25712" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25716" class="mark"></a><a name="bigloo-trace-stack-depth-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25720" align="left" colspan="1"><strong id='bold25718'
+>bigloo-trace-stack-depth-set!</strong><em id='it25719'
+> integer</em></td><td id="tc25721" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+Controls the depth of the stack trace to be displayed on errors. With
+systems that supports shell variables (such as Unix) this parameters
+is dynamically adjusted according to the value of the SHELL variable
+<code id='code25725'
+><em id='it25724'
+>BIGLOOSTACKDEPTH</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25729" class="mark"></a><a name="bigloo-eval-strict-module" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25733" align="left" colspan="1"><strong id='bold25731'
+>bigloo-eval-strict-module</strong><em id='it25732'
+></em></td><td id="tc25734" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25738" class="mark"></a><a name="bigloo-eval-strict-module-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25742" align="left" colspan="1"><strong id='bold25740'
+>bigloo-eval-strict-module-set!</strong><em id='it25741'
+> bool</em></td><td id="tc25743" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+When set to <code id='code25746'
+>#t</code> enables eval optimization that inlines operators
+calls. This optimization reduces the memory footprint of an application
+and it reduces the execution time.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25750" class="mark"></a><a name="bigloo-dns-enable-cache" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25754" align="left" colspan="1"><strong id='bold25752'
+>bigloo-dns-enable-cache</strong><em id='it25753'
+></em></td><td id="tc25755" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25759" class="mark"></a><a name="bigloo-dns-enable-cache-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25763" align="left" colspan="1"><strong id='bold25761'
+>bigloo-dns-enable-cache-set!</strong><em id='it25762'
+> bool</em></td><td id="tc25764" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+
+Enable/disable DNS name caching.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25770" class="mark"></a><a name="bigloo-dns-cache-validity-timeout" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25774" align="left" colspan="1"><strong id='bold25772'
+>bigloo-dns-cache-validity-timeout</strong><em id='it25773'
+></em></td><td id="tc25775" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+<a name="g25779" class="mark"></a><a name="bigloo-dns-cache-validity-timeout-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25783" align="left" colspan="1"><strong id='bold25781'
+>bigloo-dns-cache-validity-timeout-set!</strong><em id='it25782'
+> integer</em></td><td id="tc25784" align="right" colspan="1">bigloo function</td></tr>
+</tbody></table>
+
+Get/set the validity period for the DNS cache entries. It is expressed
+in seconds.
+</td></tr>
+</tbody></table><br/>
+
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph33851'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it33849'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

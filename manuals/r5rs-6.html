@@ -1,0 +1,442 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>3. R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Basic concepts</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center7640'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7630" align="center" colspan="1"><font color="#ffffff"><strong id='bold7628'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7637" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc7633" align="left" valign="top" colspan="1"><strong id='bold7632'
+>top:</strong></td><td id="tc7634" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7650'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7644" align="center" colspan="1"><font color="#ffffff"><strong id='bold7642'
+>Basic concepts</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7647" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">3.1</td><td colspan="4" width="100%"><a href="r5rs-6.html#Variables;-syntactic-keywords;-and-regions">Variables; syntactic keywords; and regions</a></td></tr>
+ <tr><td valign="top" align="left">3.2</td><td colspan="4" width="100%"><a href="r5rs-6.html#Disjointness-of-types">Disjointness of types</a></td></tr>
+ <tr><td valign="top" align="left">3.3</td><td colspan="4" width="100%"><a href="r5rs-6.html#External-representations">External representations</a></td></tr>
+ <tr><td valign="top" align="left">3.4</td><td colspan="4" width="100%"><a href="r5rs-6.html#Storage-model">Storage model</a></td></tr>
+ <tr><td valign="top" align="left">3.5</td><td colspan="4" width="100%"><a href="r5rs-6.html#Proper-tail-recursion">Proper tail recursion</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7660'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7654" align="center" colspan="1"><font color="#ffffff"><strong id='bold7652'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7657" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Basic-concepts" class="mark"></a>
+
+<!-- Variables; syntactic keywords; and regions -->
+<a name="Variables;-syntactic-keywords;-and-regions"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.1 Variables; syntactic keywords; and regions</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Variables;-syntactic-keywords;-and-regions" class="mark"></a>
+An identifier may name a type of syntax, or it may name
+<a name="g1447" class="mark"></a>a location where a value can be stored.  An identifier that names a type
+of syntax is called a <em id='emph1449'
+>syntactic keyword</em>
+<a name="g1451" class="mark"></a>and is said to be <em id='emph1453'
+>bound</em> to that syntax.  An identifier that names a
+location is called a <em id='emph1454'
+>variable</em> and is said to be
+<a name="g1456" class="mark"></a><em id='emph1458'
+>bound</em> to that location.  The set of all visible
+bindings in effect at some point in a program is
+<a name="g1460" class="mark"></a>known as the <em id='emph1462'
+>environment</em> in effect at that point.  The value
+stored in the location to which a variable is bound is called the
+variable's value.  By abuse of terminology, the variable is sometimes
+said to name the value or to be bound to the value.  This is not quite
+accurate, but confusion rarely results from this practice.<br/><br/>
+
+Certain expression types are used to create new kinds of syntax
+and bind syntactic keywords to those new syntaxes, while other
+expression types create new locations and bind variables to those
+locations.  These expression types are called <em id='emph1464'
+>binding constructs</em>.<br/><br/><a name="g1467" class="mark"></a>Those that bind syntactic keywords are listed in section <a href="r5rs-7.html#Macros" class="inbound">Macros</a>.
+The most fundamental of the variable binding constructs is the
+<samp id='samp1469'
+>lambda</samp> expression, because all other variable binding constructs
+can be explained in terms of <samp id='samp1470'
+>lambda</samp> expressions.  The other
+variable binding constructs are <samp id='samp1471'
+>let</samp>, <samp id='samp1472'
+>let*</samp>, <samp id='samp1473'
+>letrec</samp>,
+and <samp id='samp1474'
+>do</samp> expressions (see sections <a href="r5rs-7.html#Procedures" class="inbound">Procedures</a>, <a href="r5rs-7.html#Binding-constructs" class="inbound">Binding constructs</a>, and
+<a href="r5rs-7.html#Iteration" class="inbound">Iteration</a>).<br/><br/>
+Like Algol and Pascal, and unlike most other dialects of Lisp
+except for Common Lisp, Scheme is a statically scoped language with
+block structure.  To each place where an identifier is bound in a program
+there corresponds a &quot;region&quot; of the program text within which
+<a name="g1477" class="mark"></a>the binding is visible.  The region is determined by the particular
+binding construct that establishes the binding; if the binding is
+established by a <samp id='samp1479'
+>lambda</samp> expression, for example, then its region
+is the entire <samp id='samp1480'
+>lambda</samp> expression.  Every mention of an identifier
+refers to the binding of the identifier that established the
+innermost of the regions containing the use.  If there is no binding of
+the identifier whose region contains the use, then the use refers to the
+binding for the variable in the top level environment, if any
+(chapters <a href="r5rs-7.html#Expressions" class="inbound">Expressions</a> and <a href="r5rs-9.html#Standard-procedures" class="inbound">Standard procedures</a>); if there is no
+binding for the identifier,
+it is said to be &quot;unbound&quot;.
+<a name="g1482" class="mark"></a><a name="g1485" class="mark"></a><a name="g1488" class="mark"></a>
+
+
+
+</div><br>
+<!-- Disjointness of types -->
+<a name="Disjointness-of-types"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.2 Disjointness of types</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Disjointness-of-types" class="mark"></a>
+No object satisfies more than one of the following predicates:<br/><br/><center id='center1493'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1491'
+>boolean?          pair?
+symbol?           number?
+char?             string?
+vector?           port?
+procedure?
+</pre>
+</td></tr>
+</tbody></table></center>
+
+These predicates define the types <em id='emph1494'
+>boolean</em>, <em id='emph1495'
+>pair</em>, <em id='emph1496'
+>symbol</em>, <em id='emph1497'
+>number</em>, <em id='emph1498'
+>char</em> (or <em id='emph1499'
+>character</em>), <em id='emph1500'
+>string</em>, <em id='emph1501'
+>vector</em>, <em id='emph1502'
+>port</em>, and <em id='emph1503'
+>procedure</em>.  The empty list is a special
+object of its own type; it satisfies none of the above predicates.<br/><br/><a name="g1505" class="mark"></a><a name="g1507" class="mark"></a><a name="g1509" class="mark"></a><a name="g1512" class="mark"></a>
+<a name="g1514" class="mark"></a><a name="g1516" class="mark"></a><a name="g1518" class="mark"></a><a name="g1520" class="mark"></a>
+<a name="g1523" class="mark"></a><a name="g1525" class="mark"></a><a name="g1527" class="mark"></a>
+Although there is a separate boolean type,
+any Scheme value can be used as a boolean value for the purpose of a
+conditional test.  As explained in section <a href="r5rs-9.html#Booleans" class="inbound">Booleans</a>, all
+values count as true in such a test except for <tt id='tt1529'
+>#f</tt>.
+This report uses the word ``true'' to refer to any
+Scheme value except <tt id='tt1530'
+>#f</tt>, and the word ``false'' to refer to
+<tt id='tt1531'
+>#f</tt>.  
+<a name="g1533" class="mark"></a><a name="g1536" class="mark"></a>
+</div><br>
+<!-- External representations -->
+<a name="External-representations"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.3 External representations</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="External-representations" class="mark"></a>
+An important concept in Scheme (and Lisp) is that of the <em id='emph1538'
+>external
+representation</em> of an object as a sequence of characters.  For example,
+an external representation of the integer 28 is the sequence of
+characters ``<tt id='tt1539'
+>28</tt>'', and an external representation of a list consisting
+of the integers 8 and 13 is the sequence of characters ``<tt id='tt1540'
+>(8 13)</tt>''.<br/><br/>The external representation of an object is not necessarily unique.  The
+integer 28 also has representations ``<tt id='tt1542'
+>#e28.000</tt>'' and ``<tt id='tt1543'
+>#x1c</tt>'', and the
+list in the previous paragraph also has the representations ``<tt id='tt1544'
+>( 08 13
+)</tt>'' and ``<tt id='tt1545'
+>(8 .: (13 .: ()))</tt>'' (see section <a href="r5rs-9.html#Pairs-and-lists" class="inbound">Pairs and lists</a>).<br/><br/>Many objects have standard external representations, but some, such as
+procedures, do not have standard representations (although particular
+implementations may define representations for them).<br/><br/>An external representation may be written in a program to obtain the
+corresponding object (see <samp id='samp1548'
+>quote</samp>, section <a href="r5rs-7.html#Literal-expressions" class="inbound">Literal expressions</a>).<br/><br/>External representations can also be used for input and output.  The
+procedure <samp id='samp1550'
+>read</samp> (section <a href="r5rs-9.html#Input" class="inbound">Input</a>) parses external
+representations, and the procedure <samp id='samp1551'
+>write</samp> (section <a href="r5rs-9.html#Output" class="inbound">Output</a>)
+generates them.  Together, they provide an elegant and powerful
+input/output facility.<br/><br/>Note that the sequence of characters ``<tt id='tt1553'
+>(+ 2 6)</tt>'' is <em id='emph1554'
+>not</em> an
+external representation of the integer 8, even though it <em id='emph1555'
+>is</em> an
+expression evaluating to the integer 8; rather, it is an external
+representation of a three-element list, the elements of which are the symbol
+<tt id='tt1556'
+>+</tt> and the integers 2 and 6.  Scheme's syntax has the property that
+any sequence of characters that is an expression is also the external
+representation of some object.  This can lead to confusion, since it may
+not be obvious out of context whether a given sequence of characters is
+intended to denote data or program, but it is also a source of power,
+since it facilitates writing programs such as interpreters and
+compilers that treat programs as data (or vice versa).<br/><br/>The syntax of external representations of various kinds of objects
+accompanies the description of the primitives for manipulating the
+objects in the appropriate sections of chapter <a href="r5rs-9.html#Standard-procedures" class="inbound">Standard procedures</a>.<br/><br/></div><br>
+<!-- Storage model -->
+<a name="Storage-model"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.4 Storage model</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Storage-model" class="mark"></a>
+Variables and objects such as pairs, vectors, and strings implicitly
+denote locations or sequences of locations.  A string, for
+<a name="g1560" class="mark"></a>example, denotes as many locations as there are characters in the string. 
+(These locations need not correspond to a full machine word.) A new value may be
+stored into one of these locations using the <tt id='tt1562'
+>string-set!</tt> procedure, but
+the string continues to denote the same locations as before.<br/><br/>An object fetched from a location, by a variable reference or by
+a procedure such as <samp id='samp1564'
+>car</samp>, <samp id='samp1565'
+>vector-ref</samp>, or <samp id='samp1566'
+>string-ref</samp>, is
+equivalent in the sense of <code id='code1567'
+>eqv?</code> 
+(section <a href="r5rs-9.html#Equivalence-predicates" class="inbound">Equivalence predicates</a>)
+<a name="g1569" class="mark"></a>to the object last stored in the location before the fetch.<br/><br/>Every location is marked to show whether it is in use.
+No variable or object ever refers to a location that is not in use.
+Whenever this report speaks of storage being allocated for a variable
+or object, what is meant is that an appropriate number of locations are
+chosen from the set of locations that are not in use, and the chosen
+locations are marked to indicate that they are now in use before the variable
+or object is made to denote them.<br/><br/>In many systems it is desirable for constants (i.e. the values of
+<a name="g1574" class="mark"></a>literal expressions) to reside in read-only-memory.  To express this, it is
+convenient to imagine that every object that denotes locations is associated
+with a flag telling whether that object is mutable or
+<a name="g1577" class="mark"></a>immutable.  In such systems literal constants and the strings
+<a name="g1580" class="mark"></a>returned by <code id='code1582'
+>symbol-&gt;string</code> are immutable objects, while all objects
+<a name="g1584" class="mark"></a>created by the other procedures listed in this report are mutable.  It is an
+error to attempt to store a new value into a location that is denoted by an
+immutable object.<br/><br/></div><br>
+<!-- Proper tail recursion -->
+<a name="Proper-tail-recursion"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.5 Proper tail recursion</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Proper-tail-recursion" class="mark"></a>
+Implementations of Scheme are required to be
+<em id='emph1587'
+>properly tail-recursive</em>.
+<a name="g1589" class="mark"></a>Procedure calls that occur in certain syntactic
+contexts defined below are `tail calls'.  A Scheme implementation is
+properly tail-recursive if it supports an unbounded number of active
+tail calls.  A call is <em id='emph1591'
+>active</em> if the called procedure may still
+return.  Note that this includes calls that may be returned from either
+by the current continuation or by continuations captured earlier by
+<samp id='samp1592'
+>call-with-current-continuation</samp> that are later invoked.
+In the absence of captured continuations, calls could
+return at most once and the active calls would be those that had not
+yet returned.
+A formal definition of proper tail recursion can be found
+in [propertailrecursion].<br/><br/><br/><em id='emph1595'
+>Rationale:</em><br/><br/>Intuitively, no space is needed for an active tail call because the
+continuation that is used in the tail call has the same semantics as the
+continuation passed to the procedure containing the call.  Although an improper
+implementation might use a new continuation in the call, a return
+to this new continuation would be followed immediately by a return
+to the continuation passed to the procedure.  A properly tail-recursive
+implementation returns to that continuation directly.<br/><br/>Proper tail recursion was one of the central ideas in Steele and
+Sussman's original version of Scheme.  Their first Scheme interpreter
+implemented both functions and actors.  Control flow was expressed using
+actors, which differed from functions in that they passed their results
+on to another actor instead of returning to a caller.  In the terminology
+of this section, each actor finished with a tail call to another actor.<br/><br/>Steele and Sussman later observed that in their interpreter the code
+for dealing with actors was identical to that for functions and thus
+there was no need to include both in the language.<br/><br/>A <em id='emph1600'
+>tail call</em> is a procedure call that occurs
+<a name="g1602" class="mark"></a>in a <em id='emph1604'
+>tail context</em>.  Tail contexts are defined inductively.  Note
+that a tail context is always determined with respect to a particular lambda
+expression.<br/><br/><ul class="itemize" id='itemize1633'
+><li>The last expression within the body of a lambda expression,
+shown as &lt;tail expression&gt; below, occurs in a tail context.<br/><br/><center id='center1610'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1608'
+><tt id='tt1607'
+>(lambda &lt;formals&gt;
+  &lt;definition&gt;* &lt;expression&gt;* &lt;tail expression&gt;)
+</tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</li>
+<li>If one of the following expressions is in a tail context,
+then the subexpressions shown as &lt;tail expression&gt; are in a tail context.
+These were derived from rules in the grammar given in
+chapter <a href="r5rs-10.html#Formal-syntax-and-semantics" class="inbound">Formal syntax and semantics</a> by replacing some occurrences of &lt;expression&gt;
+with &lt;tail expression&gt;.  Only those rules that contain tail contexts
+are shown here.<br/><br/><center id='center1622'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1620'
+>(if &lt;expression&gt; &lt;tail expression&gt; &lt;tail expression&gt;)
+(if &lt;expression&gt; &lt;tail expression&gt;)<br/><br/>(cond &lt;cond clause&gt;+)
+(cond &lt;cond clause&gt;* (else &lt;tail sequence&gt;))<br/><br/>(case &lt;expression&gt;
+  &lt;case clause&gt;+)
+(case &lt;expression&gt;
+  &lt;case clause&gt;*
+  (else &lt;tail sequence&gt;))<br/><br/>(and &lt;expression&gt;* &lt;tail expression&gt;)
+(or &lt;expression&gt;* &lt;tail expression&gt;)<br/><br/>(let (&lt;binding spec&gt;*) &lt;tail body&gt;)
+(let &lt;variable&gt; (&lt;binding spec&gt;*) &lt;tail body&gt;)
+(let* (&lt;binding spec&gt;*) &lt;tail body&gt;)
+(letrec (&lt;binding spec&gt;*) &lt;tail body&gt;)<br/><br/>(let-syntax (&lt;syntax spec&gt;*) &lt;tail body&gt;)
+(letrec-syntax (&lt;syntax spec&gt;*) &lt;tail body&gt;)<br/><br/>(begin &lt;tail sequence&gt;)<br/><br/>(do (&lt;iteration spec&gt;*)
+    (&lt;test&gt; &lt;tail sequence&gt;)
+  &lt;expression&gt;*)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<br/>where<br/><br/><center id='center1628'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog1626'
+>&lt;cond clause&gt; --&gt; (&lt;test&gt; &lt;tail sequence&gt;)
+&lt;case clause&gt; --&gt; ((&lt;datum&gt;*) &lt;tail sequence&gt;)<br/><br/>&lt;tail body&gt; --&gt; &lt;definition&gt;* &lt;tail sequence&gt;
+&lt;tail sequence&gt; --&gt; &lt;expression&gt;* &lt;tail expression&gt;
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</li>
+<li>If a <samp id='samp1630'
+>cond</samp> expression is in a tail context, and has a clause of
+the form <samp id='samp1631'
+>(&lt;expression1&gt; =&gt; &lt;expression2&gt;)</samp>
+then the (implied) call to
+the procedure that results from the evaluation of &lt;expression2&gt; is in a
+tail context.  &lt;expression2&gt; itself is not in a tail context.
+</li>
+</ul>
+Certain built-in procedures are also required to perform tail calls.
+The first argument passed to <code id='code1634'
+>apply</code> and to
+<a name="g1636" class="mark"></a><code id='code1638'
+>call-with-current-continuation</code>, and the second argument passed to
+<a name="g1640" class="mark"></a><code id='code1642'
+>call-with-values</code>, must be called via a tail call.
+<a name="g1644" class="mark"></a>Similarly, <code id='code1646'
+>eval</code> must evaluate its argument as if it
+<a name="g1648" class="mark"></a>were in tail position within the <code id='code1650'
+>eval</code> procedure.
+<a name="g1652" class="mark"></a>
+In the following example the only tail call is the call to <samp id='samp1654'
+>f</samp>.
+None of the calls to <samp id='samp1655'
+>g</samp> or <samp id='samp1656'
+>h</samp> are tail calls.  The reference to
+<samp id='samp1657'
+>x</samp> is in a tail context, but it is not a call and thus is not a
+tail call.<br/><br/><center id='center1664'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1662'
+>(<strong id='bold7661'
+>lambda</strong> ()
+  (<strong id='bold7662'
+>if</strong> (g)
+      (<strong id='bold7663'
+>let</strong> ((x (h)))
+        x)
+      (and (g) (f))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<em id='emph1665'
+>Note:</em>
+Implementations are allowed, but not required, to
+recognize that some non-tail calls, such as the call to <samp id='samp1666'
+>h</samp>
+above, can be evaluated as though they were tail calls.
+In the example above, the <samp id='samp1667'
+>let</samp> expression could be compiled
+as a tail call to <samp id='samp1668'
+>h</samp>. (The possibility of <samp id='samp1669'
+>h</samp> returning
+an unexpected number of values can be ignored, because in that
+case the effect of the <samp id='samp1670'
+>let</samp> is explicitly unspecified and
+implementation-dependent.)
+       
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph7669'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it7667'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

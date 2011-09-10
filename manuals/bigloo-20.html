@@ -1,0 +1,1203 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>19. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Multimedia</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center33196'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33186" align="center" colspan="1"><font color="#ffffff"><strong id='bold33184'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33193" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc33189" align="left" valign="top" colspan="1"><strong id='bold33188'
+>top:</strong></td><td id="tc33190" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33206'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33200" align="center" colspan="1"><font color="#ffffff"><strong id='bold33198'
+>Multimedia</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33203" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">19.1</td><td colspan="4" width="100%"><a href="bigloo-20.html#Photography">Photography</a></td></tr>
+ <tr><td valign="top" align="left">19.2</td><td colspan="4" width="100%"><a href="bigloo-20.html#Music">Music</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.2.1</td><td colspan="3" width="100%"><a href="bigloo-20.html#Metadata-and-Playlist">Metadata and Playlist</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.2.2</td><td colspan="3" width="100%"><a href="bigloo-20.html#Mixer">Mixer</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.2.3</td><td colspan="3" width="100%"><a href="bigloo-20.html#Playback">Playback</a></td></tr>
+ <tr><td></td><td valign="top" align="left">19.2.4</td><td colspan="3" width="100%"><a href="bigloo-20.html#Music-Player-Daemon">Music Player Daemon</a></td></tr>
+ <tr><td valign="top" align="left">19.3</td><td colspan="4" width="100%"><a href="bigloo-20.html#Color">Color</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33216'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33210" align="center" colspan="1"><font color="#ffffff"><strong id='bold33208'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33213" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Multimedia" class="mark"></a><a name="g22956" class="mark"></a>
+Bigloo provides various facilities for programming multimedia
+applications. It provides functions for parsing images and sounds and
+functions for controlling music players. All the functions, variables,
+and classes presented in the document are accessible via the
+<code id='code22958'
+>multimedia</code> library. Here is an example of module that uses this
+library:<br/><br/><center id='center22969'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog22967'
+><font color="#ffa600"><em id='it33217'
+>;; Extract the thumbnail of a digital photography.</em></font>
+(<font color="#1919af"><strong id='bold33219'
+>module</strong></font> <font color="#1919af"><strong id='bold33221'
+>thumbnail</strong></font>
+   (<font color="#1919af"><strong id='bold33223'
+>library</strong></font> <font color="#1919af"><strong id='bold33225'
+>multimedia</strong></font>)
+   (main main))<br/><br/>(<font color="#6959cf"><strong id='bold33227'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33229'
+>main</strong></font> argv)
+   (when (and (pair? (cdr argv)) (file-exists? (cadr argv)))
+      (<strong id='bold33231'
+>let</strong> ((ex (jpeg-exif (cadr argv))))
+          (when (exif? ex)
+             (display (exif-thumbnail ex))))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+
+<!-- Photography -->
+<a name="Photography"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">19.1 Photography</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Photography" class="mark"></a><a name="g22970" class="mark"></a>
+The multimedia library provides functions for accessing the metadata
+generated by digital camera.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g22974" class="mark"></a><a name="jpeg-exif" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc22978" align="left" colspan="1"><strong id='bold22976'
+>jpeg-exif</strong><em id='it22977'
+> file-name</em></td><td id="tc22979" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+The function <code id='code22982'
+>jpeg-exif</code> extracts the EXIF 
+(<a href="http://en.wikipedia.org/wiki/Exif">http://en.wikipedia.org/wiki/Exif</a>) metadata of a JPEG file as created
+by digital camera. The argument <code id='code22984'
+><em id='it22983'
+>file-name</em></code> is the name of the JPEG 
+file. If the file contains an EXIF section it is returned as an instance
+of the <code id='code22985'
+>exif</code> class. Otherwise, this function returns <code id='code22986'
+>#f</code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g22990" class="mark"></a><a name="jpeg-exif-comment-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc22994" align="left" colspan="1"><strong id='bold22992'
+>jpeg-exif-comment-set!</strong><em id='it22993'
+> file-name text</em></td><td id="tc22995" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+
+Set the comment of the EXIF metadata section of the file file-name
+to <code id='code22999'
+><em id='it22998'
+>text</em></code>.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23003" class="mark"></a><a name="exif" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23007" align="left" colspan="1"><strong id='bold23005'
+>exif</strong><em id='it23006'
+></em></td><td id="tc23008" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23014'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23012'
+>(<strong id='bold33232'
+>class</strong> exif
+   (version (default #f))
+   (jpeg-encoding (default #f))
+   (jpeg-compress (default #f))
+   (comment (default #f))
+   (commentpos (default #f))
+   (commentlen (default #f))
+   (date (default #f))
+   (make (default #f))
+   (model (default #f))
+   (orientation (default 'landscape))
+   (width (default #f))
+   (height (default #f))
+   (ewidth (default #f))
+   (eheight (default #f))
+   (xresolution (default #f))
+   (yresolution (default #f))
+   (resolution-unit (default #f))
+   (focal-length (default #f))
+   (flash (default #f))
+   (fnumber (default #f))
+   (iso (default #f))
+   (shutter-speed-value (default #f))
+   (exposure-time (default #f))
+   (exposure-bias-value (default #f))
+   (aperture (default #f))
+   (metering-mode (default #f))
+   (cdd-width (default #f))
+   (focal-plane-xres (default #f))
+   (focal-plane-units (default #f))
+   (thumbnail (default #f))
+   (thumbnail-path (default #f))
+   (thumbnail-offset (default #f))
+   (thumbnail-length (default #f)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The instance of the <code id='code23015'
+>exif</code> class maps the EXIF metadata found in JPEG
+files into Bigloo objects. Since all fields are optional they are untyped.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23019" class="mark"></a><a name="exif-date->date" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23023" align="left" colspan="1"><strong id='bold23021'
+>exif-date-&gt;date</strong><em id='it23022'
+></em></td><td id="tc23024" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+Parses an exif date, i.e., a string of characters, and returns 
+corresponding date. Raises an <code id='code23028'
+><em id='it23027'
+>&amp;io-parse-error</em></code> if the string does
+not represents an exif date whose syntax is given by the following regular
+expression:<br/><br/><center id='center23032'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23030'
+>  [0-9][0-9][0-9]:[0-9][0-9]:[0-9][0-9] :[0-9][0-9]:[0-9][0-9]:[0-9][0-9]
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- Music -->
+<a name="Music"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">19.2 Music</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Music" class="mark"></a><a name="g23035" class="mark"></a>
+The multimedia library provides an extensive set of functions for dealing
+with music. It provides functions for accessing the metadata of certain
+music file formats, it provides functions for controlling the volume
+of the hardware mixers and it provides functions for playing and controlling
+music playback.<br/><br/>
+<!-- Metadata and Playlist -->
+<a name="Metadata-and-Playlist"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">19.2.1 Metadata and Playlist</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Metadata-and-Playlist" class="mark"></a><a name="g23038" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23041" class="mark"></a><a name="read-m3u" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23045" align="left" colspan="1"><strong id='bold23043'
+>read-m3u</strong><em id='it23044'
+> input-port</em></td><td id="tc23046" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23050" class="mark"></a><a name="write-m3u" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23054" align="left" colspan="1"><strong id='bold23052'
+>write-m3u</strong><em id='it23053'
+> list output-port</em></td><td id="tc23055" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+
+The function <code id='code23058'
+>read-m3u</code> reads a playlist expressed in the M3U
+format from <code id='code23060'
+><em id='it23059'
+>input-port</em></code> and returns a list of songs. The function
+<code id='code23061'
+>write-m3u</code> encode such a list encoded in the M3U format to an
+output port.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23065" class="mark"></a><a name="file-musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23069" align="left" colspan="1"><strong id='bold23067'
+>file-musictag</strong><em id='it23068'
+> file-name</em></td><td id="tc23070" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23074" class="mark"></a><a name="mp3-musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23078" align="left" colspan="1"><strong id='bold23076'
+>mp3-musictag</strong><em id='it23077'
+> file-name</em></td><td id="tc23079" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23083" class="mark"></a><a name="ogg-musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23087" align="left" colspan="1"><strong id='bold23085'
+>ogg-musictag</strong><em id='it23086'
+> file-name</em></td><td id="tc23088" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23092" class="mark"></a><a name="flac-musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23096" align="left" colspan="1"><strong id='bold23094'
+>flac-musictag</strong><em id='it23095'
+> file-name</em></td><td id="tc23097" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+These functions extract the metadata of a music file named <code id='code23101'
+><em id='it23100'
+>file-name</em></code>.<br/><br/>The function <code id='code23103'
+>mp3-musictag</code> returns the ID3 tag section if it
+exists. Otherwise, it returns <code id='code23104'
+>#f</code>. The function <code id='code23105'
+>ogg-musictag</code>
+and <code id='code23106'
+>flac-musictag</code> returns the vorbis comment if it exists.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23110" class="mark"></a><a name="musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23114" align="left" colspan="1"><strong id='bold23112'
+>musictag</strong><em id='it23113'
+></em></td><td id="tc23115" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23129'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23127'
+>(abstract-class musictag
+   (title<font color="#00cf00"><strong id='bold33233'
+>::bstring</strong></font> read-only)
+   (artist<font color="#00cf00"><strong id='bold33235'
+>::bstring</strong></font> read-only)
+   (orchestra<font color="#00cf00"><strong id='bold33237'
+>::obj</strong></font> read-only (default #f))
+   (interpret<font color="#00cf00"><strong id='bold33239'
+>::obj</strong></font> read-only (default #f))
+   (album<font color="#00cf00"><strong id='bold33241'
+>::bstring</strong></font> read-only)
+   (year<font color="#00cf00"><strong id='bold33243'
+>::int</strong></font> read-only)
+   (comment<font color="#00cf00"><strong id='bold33245'
+>::bstring</strong></font> read-only)
+   (genre<font color="#00cf00"><strong id='bold33247'
+>::bstring</strong></font> read-only)
+   (track<font color="#00cf00"><strong id='bold33249'
+>::int</strong></font> (default -1)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This class is used as the base class of music tag formats.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23133" class="mark"></a><a name="id3::musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23137" align="left" colspan="1"><strong id='bold23135'
+>id3::musictag</strong><em id='it23136'
+></em></td><td id="tc23138" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23149'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23147'
+>(<strong id='bold33251'
+>class</strong> id3<font color="#00cf00"><strong id='bold33252'
+>::musictag</strong></font>
+   version<font color="#00cf00"><strong id='bold33254'
+>::bstring</strong></font>
+   (orchestra<font color="#00cf00"><strong id='bold33256'
+>::obj</strong></font> read-only (default #f))
+   (conductor<font color="#00cf00"><strong id='bold33258'
+>::obj</strong></font> read-only (default #f))
+   (recording read-only (default #f))
+   (cd<font color="#00cf00"><strong id='bold33260'
+>::obj</strong></font> (default #f)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This class is used to reify the ID3 metadata used in the MP3 format.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23153" class="mark"></a><a name="vorbis::musictag" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23157" align="left" colspan="1"><strong id='bold23155'
+>vorbis::musictag</strong><em id='it23156'
+></em></td><td id="tc23158" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23165'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23163'
+>(<strong id='bold33262'
+>class</strong> vorbis<font color="#00cf00"><strong id='bold33263'
+>::musictag</strong></font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This class is used to reify the Vorbis comments of OGG and Flac files.
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Mixer -->
+<a name="Mixer"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">19.2.2 Mixer</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Mixer" class="mark"></a><a name="g23168" class="mark"></a>
+Bigloo proposes various functions and classes for controlling the
+audio volume of sound cards.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23172" class="mark"></a><a name="mixer" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23176" align="left" colspan="1"><strong id='bold23174'
+>mixer</strong><em id='it23175'
+></em></td><td id="tc23177" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23184'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23182'
+>(<strong id='bold33265'
+>class</strong> mixer
+   (devices<font color="#00cf00"><strong id='bold33266'
+>::pair-nil</strong></font> (default '())))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The field <code id='code23186'
+><em id='it23185'
+>devices</em></code> is a list of available channels.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23190" class="mark"></a><a name="mixer-close" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23194" align="left" colspan="1"><strong id='bold23192'
+>mixer-close</strong><em id='it23193'
+> mix</em></td><td id="tc23195" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+Closes a mixer. The argument <code id='code23199'
+><em id='it23198'
+>mix</em></code> must be an instance of
+the <code id='code23200'
+>mixer</code> class.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23204" class="mark"></a><a name="mixer-volume-get" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23208" align="left" colspan="1"><strong id='bold23206'
+>mixer-volume-get</strong><em id='it23207'
+> mix channel</em></td><td id="tc23209" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23213" class="mark"></a><a name="mixer-volume-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23217" align="left" colspan="1"><strong id='bold23215'
+>mixer-volume-set!</strong><em id='it23216'
+> mix channel leftv rightv</em></td><td id="tc23218" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+The function <code id='code23222'
+><em id='it23221'
+>mixer-volume-get</em></code> returns the left and right volume
+levels (two values) of the <code id='code23224'
+><em id='it23223'
+>channel</em></code> of the mixer <code id='code23226'
+><em id='it23225'
+>mix</em></code>. The 
+<code id='code23228'
+><em id='it23227'
+>channel</em></code> is denoted by its name and is represented as a string of
+characters. The argument <code id='code23230'
+><em id='it23229'
+>mix</em></code> is an instance of the <code id='code23231'
+>mixer</code> class.<br/><br/>The function <code id='code23234'
+><em id='it23233'
+>mixer-volume-set!</em></code> changes the audio level of a mixer
+channel.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23238" class="mark"></a><a name="soundcard::mixer" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23242" align="left" colspan="1"><strong id='bold23240'
+>soundcard::mixer</strong><em id='it23241'
+></em></td><td id="tc23243" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23251'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23249'
+>(<strong id='bold33268'
+>class</strong> soundcard<font color="#00cf00"><strong id='bold33269'
+>::mixer</strong></font>
+   (device<font color="#00cf00"><strong id='bold33271'
+>::bstring</strong></font> read-only))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The instances of the class <code id='code23252'
+>soundcard</code>, a subclass of the
+<code id='code23253'
+>mixer</code> class, are used to access physical soundcard as supported
+by operating systems. The class field <code id='code23255'
+><em id='it23254'
+>device</em></code> stands for the name
+of the system device (e.g., <code id='code23256'
+>&quot;/dev/mixer&quot;</code> for the Linux
+OS). During the initialization of the instance, the device is opened
+and initialized.
+</td></tr>
+</tbody></table><br/>
+</div>
+<!-- Playback -->
+<a name="Playback"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">19.2.3 Playback</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Playback" class="mark"></a>
+Bigloo supports various functions for playing music. These functions
+rely on two data structure: <em id='emph23259'
+>music players</em> and <em id='emph23260'
+>music status</em>.
+The first ones are used to control player back-ends. The second ones are
+used to get information about the music being played. The following 
+example shows how a simple music player using either MPlayer, MPG123, or
+MPC can be programmed with Bigloo.<br/><br/><center id='center23314'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23312'
+>(<font color="#1919af"><strong id='bold33273'
+>module</strong></font> <font color="#1919af"><strong id='bold33275'
+>musicplay</strong></font>
+   (<font color="#1919af"><strong id='bold33277'
+>library</strong></font> <font color="#1919af"><strong id='bold33279'
+>multimedia</strong></font>)
+   (main main))<br/><br/>(<font color="#6959cf"><strong id='bold33281'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33283'
+>main</strong></font> args)
+   (<strong id='bold33285'
+>let</strong> ((files '())
+	 (backend 'mplayer)
+	 (command #f))
+      (args-parse (cdr args)
+	 ((<font color="red">&quot;--mpg123&quot;</font> (help <font color="red">&quot;Select the mpg123 back-end&quot;</font>))
+	  (<strong id='bold33288'
+>set!</strong> backend 'mpg123))
+	 ((<font color="red">&quot;--mpc&quot;</font> (help <font color="red">&quot;Select the mpc back-end&quot;</font>))
+	  (<strong id='bold33291'
+>set!</strong> backend 'mpc))
+	 ((<font color="red">&quot;--mplayer&quot;</font> (help <font color="red">&quot;Select the mplayer back-end&quot;</font>))
+	  (<strong id='bold33294'
+>set!</strong> backend 'mplayer))
+	 ((<font color="red">&quot;--command&quot;</font> ?cmd (help <font color="red">&quot;Set the command path&quot;</font>))
+	  (<strong id='bold33297'
+>set!</strong> command cmd))
+	 ((<font color="red">&quot;--help&quot;</font> (help <font color="red">&quot;This help&quot;</font>))
+	  (print <font color="red">&quot;usage: music [options] file ...&quot;</font>)
+	  (args-parse-usage #f)
+	  (exit 0))
+	 (else
+	  (<strong id='bold33301'
+>set!</strong> files (cons else files))))
+      <font color="#ffa600"><em id='it33302'
+>;; create a music player</em></font>
+      (<strong id='bold33304'
+>let</strong> ((player (<strong id='bold33305'
+>case</strong> backend
+		       ((mpg123)
+			(<strong id='bold33306'
+>if</strong> command
+			    (<strong id='bold33307'
+>instantiate</strong><font color="#00cf00"><strong id='bold33308'
+>::mpg123</strong></font>
+			       (path command))
+			    (<strong id='bold33310'
+>instantiate</strong><font color="#00cf00"><strong id='bold33311'
+>::mpg123</strong></font>)))
+		       ((mplayer)
+			(<strong id='bold33313'
+>if</strong> command
+			    (<strong id='bold33314'
+>instantiate</strong><font color="#00cf00"><strong id='bold33315'
+>::mplayer</strong></font>
+			       (path command))
+			    (<strong id='bold33317'
+>instantiate</strong><font color="#00cf00"><strong id='bold33318'
+>::mplayer</strong></font>)))
+		       ((mpc)
+			(<strong id='bold33320'
+>instantiate</strong><font color="#00cf00"><strong id='bold33321'
+>::mpc</strong></font>)))))
+         <font color="#ffa600"><em id='it33323'
+>;; fill the music play list</em></font>
+	 (for-each (<strong id='bold33325'
+>lambda</strong> (p) (music-playlist-add! player p)) (reverse files))
+         <font color="#ffa600"><em id='it33326'
+>;; start playing</em></font>
+	 (music-play player)
+         <font color="#ffa600"><em id='it33328'
+>;; run an event loop with call-backs associated to some events</em></font>
+	 (music-event-loop player
+            <strong id='bold33330'
+>:onstate</strong> (<strong id='bold33332'
+>lambda</strong> (status)
+                        (<strong id='bold33333'
+>with-access</strong><font color="#00cf00"><strong id='bold33334'
+>::musicstatus</strong></font> status (state song volume)
+                           (print <font color="red">&quot;state   : &quot;</font> state)
+                           (print <font color="red">&quot;song    : &quot;</font> song)))
+	    <strong id='bold33338'
+>:onmeta</strong> (<strong id='bold33340'
+>lambda</strong> (meta)
+		       (print <font color="red">&quot;meta    : &quot;</font> meta))
+	    <strong id='bold33342'
+>:onvolume</strong> (<strong id='bold33344'
+>lambda</strong> (volume)
+		       (print <font color="red">&quot;volume  : &quot;</font> volume))))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23316" class="mark"></a><a name="music" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23320" align="left" colspan="1"><strong id='bold23318'
+>music</strong><em id='it23319'
+></em></td><td id="tc23321" align="right" colspan="1">Bigloo Multimedia abstract class</td></tr>
+</tbody></table>
+<center id='center23327'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23325'
+>(abstract-class music
+   (frequency<font color="#00cf00"><strong id='bold33346'
+>::long</strong></font> (default 2000000))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This abstract class is the root class of all music players.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23331" class="mark"></a><a name="musicproc::music" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23335" align="left" colspan="1"><strong id='bold23333'
+>musicproc::music</strong><em id='it23334'
+></em></td><td id="tc23336" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23344'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23342'
+>(<strong id='bold33348'
+>class</strong> musicproc<font color="#00cf00"><strong id='bold33349'
+>::music</strong></font>
+   (charset<font color="#00cf00"><strong id='bold33351'
+>::symbol</strong></font> (default 'ISO-LATIN-1)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+This class is used to reify player that are run in an external process.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23348" class="mark"></a><a name="mplayer::musicproc" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23352" align="left" colspan="1"><strong id='bold23350'
+>mplayer::musicproc</strong><em id='it23351'
+></em></td><td id="tc23353" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23370'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23368'
+>(<strong id='bold33353'
+>class</strong> mplayer<font color="#00cf00"><strong id='bold33354'
+>::musicproc</strong></font>
+   (path<font color="#00cf00"><strong id='bold33356'
+>::bstring</strong></font> read-only (default <font color="red">&quot;mplayer&quot;</font>))
+   (args<font color="#00cf00"><strong id='bold33359'
+>::pair-nil</strong></font> read-only (default '(<font color="red">&quot;-vo&quot;</font> <font color="red">&quot;null&quot;</font> <font color="red">&quot;-quiet&quot;</font> <font color="red">&quot;-slave&quot;</font> <font color="red">&quot;-idle&quot;</font>)))
+   (ao<font color="#00cf00"><strong id='bold33366'
+>::obj</strong></font> read-only (default #unspecified))
+   (ac<font color="#00cf00"><strong id='bold33368'
+>::obj</strong></font> read-only (default #unspecified)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A player based on the external software <code id='code23371'
+>MPlayer</code>. Creating such a player
+spawns in background a MPlayer process.<br/><br/></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23376" class="mark"></a><a name="mpg123::musicproc" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23380" align="left" colspan="1"><strong id='bold23378'
+>mpg123::musicproc</strong><em id='it23379'
+></em></td><td id="tc23381" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23392'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23390'
+>(<strong id='bold33370'
+>class</strong> mpg123<font color="#00cf00"><strong id='bold33371'
+>::musicproc</strong></font>
+   (path<font color="#00cf00"><strong id='bold33373'
+>::bstring</strong></font> read-only (default <font color="red">&quot;mpg123&quot;</font>))
+   (args<font color="#00cf00"><strong id='bold33376'
+>::pair-nil</strong></font> read-only (default '(<font color="red">&quot;--remote&quot;</font>))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A player based on the external software <code id='code23393'
+>mpg123</code>.<br/><br/></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23398" class="mark"></a><a name="mpc::music" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23402" align="left" colspan="1"><strong id='bold23400'
+>mpc::music</strong><em id='it23401'
+></em></td><td id="tc23403" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23411'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23409'
+>(<strong id='bold33379'
+>class</strong> mpc<font color="#00cf00"><strong id='bold33380'
+>::music</strong></font>
+   (hello read-only (default #f))
+   (host read-only (default <font color="red">&quot;localhost&quot;</font>))
+   (port read-only (default 6600))
+   (timeout read-only (default 10008993))
+   (prefix (default #f)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A MPC client.<br/><br/><ul class="itemize" id='itemize23418'
+><li><code id='code23413'
+>hello</code>: an optional string written when the connection
+is establish with the MPD server.
+</li>
+<li><code id='code23415'
+>prefix</code>: an optional path prefix to be removed from music 
+playlist. This is needed because MPD can only play music files registered
+in is private database. The file names used by MPD are relative a 
+root directory used to fill the database. The <code id='code23416'
+>prefix</code> field allows
+programmer to write portable code that manages play list file names 
+independently of the player selected.
+</li>
+</ul></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23422" class="mark"></a><a name="musicstatus" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23426" align="left" colspan="1"><strong id='bold23424'
+>musicstatus</strong><em id='it23425'
+></em></td><td id="tc23427" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23446'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23444'
+>(<strong id='bold33383'
+>class</strong> musicstatus
+   (state<font color="#00cf00"><strong id='bold33384'
+>::symbol</strong></font> (default 'stop))
+   (volume<font color="#00cf00"><strong id='bold33386'
+>::obj</strong></font> (default -1))
+   (repeat<font color="#00cf00"><strong id='bold33388'
+>::bool</strong></font> (default #f))
+   (random<font color="#00cf00"><strong id='bold33390'
+>::bool</strong></font> (default #f))
+   (playlistid<font color="#00cf00"><strong id='bold33392'
+>::int</strong></font> (default -1))
+   (playlistlength<font color="#00cf00"><strong id='bold33394'
+>::int</strong></font> (default 0))
+   (xfade<font color="#00cf00"><strong id='bold33396'
+>::int</strong></font> (default 0))
+   (song<font color="#00cf00"><strong id='bold33398'
+>::int</strong></font> (default 0))
+   (songid<font color="#00cf00"><strong id='bold33400'
+>::int</strong></font> (default 0))
+   (songpos (default 0))
+   (songlength<font color="#00cf00"><strong id='bold33402'
+>::int</strong></font> (default 0))
+   (bitrate<font color="#00cf00"><strong id='bold33404'
+>::int</strong></font> (default 0))
+   (khz<font color="#00cf00"><strong id='bold33406'
+>::int</strong></font> (default 0))
+   (err<font color="#00cf00"><strong id='bold33408'
+>::obj</strong></font> (default #f)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The instances of the class <code id='code23447'
+>musicstatus</code> denote that state of a 
+player.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23451" class="mark"></a><a name="music-close" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23455" align="left" colspan="1"><strong id='bold23453'
+>music-close</strong><em id='it23454'
+> music</em></td><td id="tc23456" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23460" class="mark"></a><a name="music-reset!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23464" align="left" colspan="1"><strong id='bold23462'
+>music-reset!</strong><em id='it23463'
+> music</em></td><td id="tc23465" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23469" class="mark"></a><a name="music-closed?" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23473" align="left" colspan="1"><strong id='bold23471'
+>music-closed?</strong><em id='it23472'
+> music</em></td><td id="tc23474" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+Closes, resets, and tests the state of a music player.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23480" class="mark"></a><a name="music-playlist-get" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23484" align="left" colspan="1"><strong id='bold23482'
+>music-playlist-get</strong><em id='it23483'
+> music</em></td><td id="tc23485" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23489" class="mark"></a><a name="music-playlist-add!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23493" align="left" colspan="1"><strong id='bold23491'
+>music-playlist-add!</strong><em id='it23492'
+> music song</em></td><td id="tc23494" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23498" class="mark"></a><a name="music-playlist-delete!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23502" align="left" colspan="1"><strong id='bold23500'
+>music-playlist-delete!</strong><em id='it23501'
+> music int</em></td><td id="tc23503" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23507" class="mark"></a><a name="music-playlist-clear!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23511" align="left" colspan="1"><strong id='bold23509'
+>music-playlist-clear!</strong><em id='it23510'
+> music</em></td><td id="tc23512" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+These functions controls the playlist used by a player. <br/><br/>Note: The <code id='code23517'
+><em id='it23516'
+>song</em></code> argument is an UTF8 encoded string (see
+Section <a href="bigloo-7.html#Unicode-(UCS-2)-Strings" class="inbound">Unicode (UCS-2) Strings</a>) <em id='emph23518'
+>whatever</em> the local file
+system encoding is. The function <code id='code23519'
+>music-playlist-get</code> returns a
+list of UTF8 encoded names.<br/><br/><ul class="itemize" id='itemize23531'
+><li><code id='code23521'
+>music-playlist-get</code>: returns the list of songs (UTF8 names) 
+ of the current playlist.
+</li>
+<li><code id='code23523'
+>music-playlist-add!</code>: adds an extra song (UTF8 name) at the end 
+ of the playlist.
+</li>
+<li><code id='code23525'
+>music-delete!</code>: removes the song number <code id='code23527'
+><em id='it23526'
+>int</em></code> from the playlist.
+</li>
+<li><code id='code23529'
+>music-clear!</code>: erases the whole playlist.
+</li>
+</ul></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23535" class="mark"></a><a name="music-play" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23539" align="left" colspan="1"><strong id='bold23537'
+>music-play</strong><em id='it23538'
+> music [song]</em></td><td id="tc23540" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23544" class="mark"></a><a name="music-seek" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23548" align="left" colspan="1"><strong id='bold23546'
+>music-seek</strong><em id='it23547'
+> music time [song]</em></td><td id="tc23549" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23553" class="mark"></a><a name="music-stop" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23557" align="left" colspan="1"><strong id='bold23555'
+>music-stop</strong><em id='it23556'
+> music</em></td><td id="tc23558" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23562" class="mark"></a><a name="music-pause" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23566" align="left" colspan="1"><strong id='bold23564'
+>music-pause</strong><em id='it23565'
+> music</em></td><td id="tc23567" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23571" class="mark"></a><a name="music-next" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23575" align="left" colspan="1"><strong id='bold23573'
+>music-next</strong><em id='it23574'
+> music</em></td><td id="tc23576" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23580" class="mark"></a><a name="music-prev" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23584" align="left" colspan="1"><strong id='bold23582'
+>music-prev</strong><em id='it23583'
+> music</em></td><td id="tc23585" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+These functions changes the state of the music player. The function
+<code id='code23588'
+>music-seek</code> seeks the playback position to the position <code id='code23590'
+><em id='it23589'
+>time</em></code>, 
+which is an integer denoting a number of seconds.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23594" class="mark"></a><a name="music-crossfade" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23598" align="left" colspan="1"><strong id='bold23596'
+>music-crossfade</strong><em id='it23597'
+> music int</em></td><td id="tc23599" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23603" class="mark"></a><a name="music-random-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23607" align="left" colspan="1"><strong id='bold23605'
+>music-random-set!</strong><em id='it23606'
+> music bool</em></td><td id="tc23608" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23612" class="mark"></a><a name="music-repeat-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23616" align="left" colspan="1"><strong id='bold23614'
+>music-repeat-set!</strong><em id='it23615'
+> music bool</em></td><td id="tc23617" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+These functions controls how songs playback should follow each other.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23623" class="mark"></a><a name="music-volume-get" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23627" align="left" colspan="1"><strong id='bold23625'
+>music-volume-get</strong><em id='it23626'
+> music</em></td><td id="tc23628" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23632" class="mark"></a><a name="music-volume-set!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23636" align="left" colspan="1"><strong id='bold23634'
+>music-volume-set!</strong><em id='it23635'
+> music vol</em></td><td id="tc23637" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+Get and set the audio volume of a player. Some player use the native mixer
+supported by the operating system some others use a software mixer unrelated
+to the hardware.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23643" class="mark"></a><a name="music-status" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23647" align="left" colspan="1"><strong id='bold23645'
+>music-status</strong><em id='it23646'
+> music</em></td><td id="tc23648" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23652" class="mark"></a><a name="music-update-status!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23656" align="left" colspan="1"><strong id='bold23654'
+>music-update-status!</strong><em id='it23655'
+> music status</em></td><td id="tc23657" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+The function <code id='code23660'
+>music-status</code> returns an instance of the <code id='code23661'
+>musicstatus</code>
+class which denotes the state of the player. The function 
+<code id='code23662'
+>music-update-status!</code> updates this status.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23666" class="mark"></a><a name="music-song" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23670" align="left" colspan="1"><strong id='bold23668'
+>music-song</strong><em id='it23669'
+> music</em></td><td id="tc23671" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23675" class="mark"></a><a name="music-songpos" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23679" align="left" colspan="1"><strong id='bold23677'
+>music-songpos</strong><em id='it23678'
+> music</em></td><td id="tc23680" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+These two functions return the number of the song being played and the 
+position in the song. These functions are somehow redundant with the
+function <code id='code23683'
+>music-status</code> because the status also contains information
+about the playback song and playback position. However, for some players
+getting the music song and the playback position is cheaper than getting
+the whole player status.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23687" class="mark"></a><a name="music-meta" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23691" align="left" colspan="1"><strong id='bold23689'
+>music-meta</strong><em id='it23690'
+> music</em></td><td id="tc23692" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+Returns the metadata the current song.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23698" class="mark"></a><a name="music-reset-error!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23702" align="left" colspan="1"><strong id='bold23700'
+>music-reset-error!</strong><em id='it23701'
+> music</em></td><td id="tc23703" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+Reset the previous errors detected by a player.
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23709" class="mark"></a><a name="music-event-loop" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23713" align="left" colspan="1"><strong id='bold23711'
+>music-event-loop</strong><em id='it23712'
+> music [:onstate] [:onmeta] [:onerror] [:onvolume]</em></td><td id="tc23714" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+
+The function <code id='code23717'
+>music-event-loop</code> enable event notifications when the state
+of a player changes. The keyword arguments are:<br/><br/><ul class="itemize" id='itemize23728'
+><li><code id='code23719'
+>:onstate</code>, a function of one parameter. When the player state 
+changes, this function is called with an instance of <code id='code23720'
+>musicstatus</code> 
+as first actual parameter.
+</li>
+<li><code id='code23722'
+>:onmeta</code>, a function of two parameters. This function is
+called when a metadata is detected in the music currently played.
+</li>
+<li><code id='code23724'
+>:onerror</code>, a function of one parameter, invoked when an error
+is detected.
+</li>
+<li><code id='code23726'
+>:onvolume</code>, a function of one parameter, invoked when the volume
+changes.
+</li>
+</ul>
+</td></tr>
+</tbody></table><br/><br/><br/></div>
+<!-- Music Player Daemon -->
+<a name="Music-Player-Daemon"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">19.2.4 Music Player Daemon</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="MPD" class="mark"></a>
+Music Player Daemon (MPD in short) allows remote access for playing
+music <a href="http://www.musicpd.org">http://www.musicpd.org</a>. MPD is designed for integrating a
+computer into a stereo system that provides control for music playback
+over a local network. The Bigloo class <code id='code23732'
+>mpc</code> implements a <code id='code23733'
+>mpd</code>
+client. All Bigloo players can be access via the MPD protocol, using the<br/><br/>The following example shows how to access a MPlayer music player using the
+MPD protocol with a simple Bigloo program:<br/><br/><center id='center23757'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23755'
+>(<font color="#1919af"><strong id='bold33410'
+>module</strong></font> <font color="#1919af"><strong id='bold33412'
+>mpd</strong></font>
+   (<font color="#1919af"><strong id='bold33414'
+>library</strong></font> <font color="#1919af"><strong id='bold33416'
+>multimedia</strong></font> pthread)
+   (main main))
+   
+(<font color="#6959cf"><strong id='bold33418'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33420'
+>main</strong></font> argv)
+   (<strong id='bold33422'
+>let</strong> ((db (<strong id='bold33423'
+>instantiate</strong><font color="#00cf00"><strong id='bold33424'
+>::mpd-database</strong></font>
+		(directories (cdr argv))))
+	 (serv (make-server-socket 6600))
+	 (music (<strong id='bold33426'
+>instantiate</strong><font color="#00cf00"><strong id='bold33427'
+>::mplayer</strong></font>)))
+      (<strong id='bold33429'
+>let</strong> loop ()
+	 (<font color="#ad4386"><strong id='bold33430'
+>thread-start!</strong></font> (make-mpd-connection-thread music db sock))
+	 (loop))))<br/><br/>(<font color="#6959cf"><strong id='bold33432'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33434'
+>make-mpd-connection-thread</strong></font> music db sock)
+   (<strong id='bold33436'
+>instantiate</strong><font color="#00cf00"><strong id='bold33437'
+>::pthread</strong></font>
+      (body (<strong id='bold33439'
+>lambda</strong> ()
+	       (<strong id='bold33440'
+>let</strong> ((pi (socket-input sock))
+		     (po (socket-output sock)))
+		  (input-timeout-set! pi 10000)
+		  (output-timeout-set! po 10000)
+		  (<font color="red"><strong id='bold33441'
+>unwind-protect</strong></font>
+		     (mpd music pi po db)
+		     (socket-close sock)))))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23759" class="mark"></a><a name="mpd" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23763" align="left" colspan="1"><strong id='bold23761'
+>mpd</strong><em id='it23762'
+> music input-port output-port database [:log]</em></td><td id="tc23764" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+The function <code id='code23767'
+>mpd</code> implements a MPD server. It reads commands from the
+<code id='code23769'
+><em id='it23768'
+>input-port</em></code> and write results to <code id='code23771'
+><em id='it23770'
+>output-port</em></code>. The argument
+<code id='code23773'
+><em id='it23772'
+>database</em></code>, an instance of the <code id='code23774'
+>mpd-database</code> class, describes the
+music material that can be delivered by this player.<br/><br/></td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23779" class="mark"></a><a name="mpd-database" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23783" align="left" colspan="1"><strong id='bold23781'
+>mpd-database</strong><em id='it23782'
+></em></td><td id="tc23784" align="right" colspan="1">Bigloo Multimedia class</td></tr>
+</tbody></table>
+<center id='center23791'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23789'
+>(<strong id='bold33443'
+>class</strong> mpd-database
+   (directories<font color="#00cf00"><strong id='bold33444'
+>::pair-nil</strong></font> read-only)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The field <code id='code23792'
+>directories</code> contains the list of the directories that contains
+music files.
+</td></tr>
+</tbody></table><br/>
+</div>
+</div><br>
+<!-- Color -->
+<a name="Color"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">19.3 Color</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Color" class="mark"></a><a name="g23795" class="mark"></a>
+The multimedia library provides functions for dealing with colors.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g23799" class="mark"></a><a name="hsv->rgb" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23803" align="left" colspan="1"><strong id='bold23801'
+>hsv-&gt;rgb</strong><em id='it23802'
+> h s v</em></td><td id="tc23804" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23808" class="mark"></a><a name="hsl->rgb" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23812" align="left" colspan="1"><strong id='bold23810'
+>hsl-&gt;rgb</strong><em id='it23811'
+> h s l</em></td><td id="tc23813" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23817" class="mark"></a><a name="rgb-hsv" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23821" align="left" colspan="1"><strong id='bold23819'
+>rgb-hsv</strong><em id='it23820'
+> r g b</em></td><td id="tc23822" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+<a name="g23826" class="mark"></a><a name="rgb-hsl" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc23830" align="left" colspan="1"><strong id='bold23828'
+>rgb-hsl</strong><em id='it23829'
+> r g b</em></td><td id="tc23831" align="right" colspan="1">Bigloo Multimedia procedure</td></tr>
+</tbody></table>
+These procedures converts from and to HSV, HSL, and RGB representations.
+The argument <code id='code23835'
+><em id='it23834'
+>h</em></code> is an integer in the range <code id='code23836'
+>[0..360]</code>, 
+the arguments <code id='code23838'
+><em id='it23837'
+>s</em></code>, <code id='code23840'
+><em id='it23839'
+>v</em></code>, and <code id='code23842'
+><em id='it23841'
+>l</em></code> in the range <code id='code23843'
+>[0..100]</code>. The
+arguments <code id='code23845'
+><em id='it23844'
+>r</em></code>, <code id='code23847'
+><em id='it23846'
+>g</em></code>, and <code id='code23849'
+><em id='it23848'
+>b</em></code> are in the range <code id='code23850'
+>[0..255]</code>.
+These procedures returns multiple-values.<br/><br/><center id='center23854'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog23852'
+>(multiple-value-bind (r g b)
+   (hsv-&gt;rgb 340 34 56)
+   (list r g b)) =&gt; (143 94 110)
+(multiple-value-bind (h s v)
+   (rgb-&gt;hsv 255 0 0)
+   (list h s v)) =&gt; (0 100 100)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/><br/><br/> 
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph33451'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it33449'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

@@ -1,0 +1,821 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>7. R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Formal syntax and semantics</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center8171'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc8161" align="center" colspan="1"><font color="#ffffff"><strong id='bold8159'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc8168" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc8164" align="left" valign="top" colspan="1"><strong id='bold8163'
+>top:</strong></td><td id="tc8165" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center8181'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc8175" align="center" colspan="1"><font color="#ffffff"><strong id='bold8173'
+>Formal syntax and semantics</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc8178" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">7.1</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax">Formal syntax</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1.1</td><td colspan="3" width="100%"><a href="r5rs-10.html#Lexical-structure">Lexical structure</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1.2</td><td colspan="3" width="100%"><a href="r5rs-10.html#External-representations">External representations</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1.3</td><td colspan="3" width="100%"><a href="r5rs-10.html#Expressions">Expressions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1.4</td><td colspan="3" width="100%"><a href="r5rs-10.html#Quasiquotations">Quasiquotations</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1.5</td><td colspan="3" width="100%"><a href="r5rs-10.html#Transformers">Transformers</a></td></tr>
+ <tr><td></td><td valign="top" align="left">7.1.6</td><td colspan="3" width="100%"><a href="r5rs-10.html#Programs-and-definitions">Programs and definitions</a></td></tr>
+ <tr><td valign="top" align="left">7.2</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-semantics">Formal semantics</a></td></tr>
+ <tr><td valign="top" align="left">7.3</td><td colspan="4" width="100%"><a href="r5rs-10.html#Derived-expression-types">Derived expression types</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center8191'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc8185" align="center" colspan="1"><font color="#ffffff"><strong id='bold8183'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc8188" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Formal-syntax-and-semantics" class="mark"></a>
+
+This chapter provides formal descriptions of what has already been
+described informally in previous chapters of this report.<br/><br/>
+<!-- Formal syntax -->
+<a name="Formal-syntax"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">7.1 Formal syntax</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Formal-syntax" class="mark"></a>
+
+This section provides a formal syntax for Scheme written in an extended
+BNF.<br/><br/>All spaces in the grammar are for legibility.  Case is insignificant;
+for example, <samp id='samp6784'
+>#x1A</samp> and <samp id='samp6785'
+>#X1a</samp> are equivalent.  &lt;empty&gt;
+stands for the empty string.<br/><br/>The following extensions to BNF are used to make the description more
+concise:  &lt;thing&gt;* means zero or more occurrences of
+&lt;thing&gt;; and &lt;thing&gt;+ means at least one
+&lt;thing&gt;.<br/><br/><!-- Lexical structure -->
+<a name="Lexical-structure"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">7.1.1 Lexical structure</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Lexical-structure" class="mark"></a>
+This section describes how individual tokens (identifiers,
+<a name="g6789" class="mark"></a>numbers, etc.) are formed from sequences of characters.  The following
+sections describe how expressions and programs are formed from sequences
+of tokens.<br/><br/>&lt;Intertoken space&gt; may occur on either side of any token, but not
+within a token.<br/><br/>Tokens which require implicit termination (identifiers, numbers,
+characters, and dot) may be terminated by any &lt;delimiter&gt;, but not
+necessarily by anything else.<br/><br/>The following five characters are reserved for future extensions to the
+language: <tt id='tt6794'
+>[ ] { } |</tt><br/><br/><br/><center id='center6809'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6807'
+><tt id='tt6805'
+>&lt;token&gt; --&gt; &lt;identifier&gt; | &lt;boolean&gt; | &lt;number&gt;
+<a name="g6797" class="mark"></a>     | &lt;character&gt; | &lt;string&gt;
+     | ( | ) | #( | <tt id='tt6799'
+>'</tt> | <tt id='tt6800'
+>`</tt> | , | ,&#x40; | <strong id='bold6801'
+>.</strong>
+&lt;delimiter&gt; --&gt; &lt;whitespace&gt; | ( | ) | &quot; | ;
+&lt;whitespace&gt; --&gt; &lt;space or newline&gt;
+&lt;comment&gt; --&gt; ;  &lt;all subsequent characters up to a
+                 line break&gt;
+<a name="g6803" class="mark"></a>&lt;atmosphere&gt; --&gt; &lt;whitespace&gt; | &lt;comment&gt;
+&lt;intertoken space&gt; --&gt; &lt;atmosphere&gt;*</tt><br/><br/>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+
+<center id='center6828'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6826'
+><tt id='tt6825'
+>&lt;identifier&gt; --&gt; &lt;initial&gt; &lt;subsequent&gt;*
+     | &lt;peculiar identifier&gt;
+&lt;initial&gt; --&gt; &lt;letter&gt; | &lt;special initial&gt;
+&lt;letter&gt; --&gt; a | b | c | ... | z<br/><br/>&lt;special initial&gt; --&gt; ! | $ | % | &amp; | * | / | : | &lt; | =
+     | &gt; | ? | ^ | _ | ~
+&lt;subsequent&gt; --&gt; &lt;initial&gt; | &lt;digit&gt;
+     | &lt;special subsequent&gt;
+&lt;digit&gt; --&gt; 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+&lt;special subsequent&gt; --&gt; + | - | .: | &#x40;
+&lt;peculiar identifier&gt; --&gt; + | - | ...
+&lt;syntactic keyword&gt; --&gt; &lt;expression keyword&gt;
+<a name="g6812" class="mark"></a><a name="g6815" class="mark"></a>     | else | =&gt; | define 
+     | unquote | unquote-splicing
+&lt;expression keyword&gt; --&gt; quote | lambda | if
+     | set! | begin | cond | and | or | case
+     | let | let* | letrec | do | delay
+     | quasiquote<br/><br/><strong id='bold6819'
+><samp id='samp6818'
+>&lt;variable&gt; =&gt; &lt;</samp></strong>any &lt;identifier&gt; that isn't
+<a name="g6821" class="mark"></a>       <strong id='bold6823'
+>         also a &lt;syntactic keyword&gt;&gt;</strong><br/><br/>&lt;boolean&gt; --&gt; #t | #f
+&lt;character&gt; --&gt; #\ &lt;any character&gt;
+     | #\ &lt;character name&gt;
+&lt;character name&gt; --&gt; space | newline
+
+&lt;string&gt; --&gt; &quot; &lt;string element&gt;* &quot;
+&lt;string element&gt; --&gt; &lt;any character other than &quot; or \&gt;
+     | \&quot; | \\ </tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6832'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6830'
+><tt id='tt6829'
+>&lt;number&gt; --&gt; &lt;num 2&gt;| &lt;num 8&gt;
+     | &lt;num 10&gt;| &lt;num 16&gt;
+</tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The following rules for &lt;num R&gt;, &lt;complex R&gt;, &lt;real
+R&gt;, &lt;ureal R&gt;, &lt;uinteger R&gt;, and &lt;prefix R&gt;
+should be replicated for <strong id='bold6833'
+>R = 2, 8, 10,</strong>
+and 16.  There are no rules for &lt;decimal 2&gt;, &lt;decimal
+8&gt;, and &lt;decimal 16&gt;, which means that numbers containing
+decimal points or exponents must be in decimal radix.
+
+<center id='center6837'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6835'
+><tt id='tt6834'
+>&lt;num R&gt; --&gt; &lt;prefix R&gt; &lt;complex R&gt;
+&lt;complex R&gt; --&gt; &lt;real R&gt; | &lt;real R&gt; &#x40; &lt;real R&gt;
+    | &lt;real R&gt; + &lt;ureal R&gt; i | &lt;real R&gt; - &lt;ureal R&gt; i
+    | &lt;real R&gt; + i | &lt;real R&gt; - i
+    | + &lt;ureal R&gt; i | - &lt;ureal R&gt; i | + i | - i
+&lt;real R&gt; --&gt; &lt;sign&gt; &lt;ureal R&gt;
+&lt;ureal R&gt; --&gt; &lt;uinteger R&gt;
+    | &lt;uinteger R&gt; / &lt;uinteger R&gt;
+    | &lt;decimal R&gt;
+&lt;decimal 10&gt; --&gt; &lt;uinteger 10&gt; &lt;suffix&gt;
+    | . &lt;digit 10&gt;+ #* &lt;suffix&gt;
+    | &lt;digit 10&gt;+ . &lt;digit 10&gt;* #* &lt;suffix&gt;
+    | &lt;digit 10&gt;+ #+ . #* &lt;suffix&gt;
+&lt;uinteger R&gt; --&gt; &lt;digit R&gt;+ #*
+&lt;prefix R&gt; --&gt; &lt;radix R&gt; &lt;exactness&gt;
+    | &lt;exactness&gt; &lt;radix R&gt;
+</tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6851'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6849'
+><tt id='tt6848'
+>&lt;suffix&gt; --&gt; &lt;empty&gt; 
+    | &lt;exponent marker&gt; &lt;sign&gt; &lt;digit 10&gt;+
+&lt;exponent marker&gt; --&gt; e | s | f | d | l
+&lt;sign&gt; --&gt; &lt;empty&gt;  | + |  -
+&lt;exactness&gt; --&gt; &lt;empty&gt; | #i | #e
+<a name="g6838" class="mark"></a><a name="g6840" class="mark"></a>&lt;radix 2&gt; --&gt; #b
+<a name="g6842" class="mark"></a>&lt;radix 8&gt; --&gt; #o
+<a name="g6844" class="mark"></a>&lt;radix 10&gt; --&gt; &lt;empty&gt; | #d
+&lt;radix 16&gt; --&gt; #x
+<a name="g6846" class="mark"></a>&lt;digit 2&gt; --&gt; 0 | 1
+&lt;digit 8&gt; --&gt; 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+&lt;digit 10&gt; --&gt; &lt;digit&gt;
+&lt;digit 16&gt; --&gt; &lt;digit 10&gt; | a | b | c | d | e | f </tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+
+</div>
+<!-- External representations -->
+<a name="External-representations"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">7.1.2 External representations</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="External-representation" class="mark"></a>
+&lt;Datum&gt; is what the <code id='code6852'
+>read</code> procedure (section <a href="r5rs-9.html#Input" class="inbound">Input</a>)
+<a name="g6854" class="mark"></a>successfully parses.  Note that any string that parses as an
+&lt;expression&gt; will also parse as a &lt;datum&gt;.  <br/><br/><center id='center6860'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6858'
+><tt id='tt6857'
+>&lt;datum&gt; --&gt; &lt;simple datum&gt; | &lt;compound datum&gt;
+&lt;simple datum&gt; --&gt; &lt;boolean&gt; | &lt;number&gt;
+     | &lt;character&gt; | &lt;string&gt; |  &lt;symbol&gt;
+&lt;symbol&gt; --&gt; &lt;identifier&gt;
+&lt;compound datum&gt; --&gt; &lt;list&gt; | &lt;vector&gt;
+&lt;list&gt; --&gt; (&lt;datum&gt;*) | (&lt;datum&gt;+ .: &lt;datum&gt;)
+       | &lt;abbreviation&gt;
+&lt;abbreviation&gt; --&gt; &lt;abbrev prefix&gt; &lt;datum&gt;
+&lt;abbrev prefix&gt; --&gt; ' | ` | , | ,&#x40;
+&lt;vector&gt; --&gt; #(&lt;datum&gt;*) </tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div>
+<!-- Expressions -->
+<a name="Expressions"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">7.1.3 Expressions</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Expression" class="mark"></a>
+<center id='center6873'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6871'
+><tt id='tt6870'
+>&lt;expression&gt; --&gt; &lt;variable&gt;
+     | &lt;literal&gt;
+     | &lt;procedure call&gt;
+     | &lt;lambda expression&gt;
+     | &lt;conditional&gt;
+     | &lt;assignment&gt;
+     | &lt;derived expression&gt;
+     | &lt;macro use&gt;
+     | &lt;macro block&gt;<br/><br/>&lt;literal&gt; --&gt; &lt;quotation&gt; | &lt;self-evaluating&gt;
+&lt;self-evaluating&gt; --&gt; &lt;boolean&gt; | &lt;number&gt;
+     | &lt;character&gt; | &lt;string&gt;
+&lt;quotation&gt; --&gt; '&lt;datum&gt; | (quote &lt;datum&gt;)
+&lt;procedure call&gt; --&gt; (&lt;operator&gt; &lt;operand&gt;*)
+&lt;operator&gt; --&gt; &lt;expression&gt;
+&lt;operand&gt; --&gt; &lt;expression&gt;<br/><br/>&lt;lambda expression&gt; --&gt; (lambda &lt;formals&gt; &lt;body&gt;)
+&lt;formals&gt; --&gt; (&lt;variable&gt;*) | &lt;variable&gt;
+     | (&lt;variable&gt;+ .: &lt;variable&gt;)
+&lt;body&gt; --&gt; &lt;definition&gt;* &lt;sequence&gt;
+&lt;sequence&gt; --&gt; &lt;command&gt;* &lt;expression&gt;
+&lt;command&gt; --&gt; &lt;expression&gt;<br/><br/>&lt;conditional&gt; --&gt; (if &lt;test&gt; &lt;consequent&gt; &lt;alternate&gt;)
+&lt;test&gt; --&gt; &lt;expression&gt;
+&lt;consequent&gt; --&gt; &lt;expression&gt;
+&lt;alternate&gt; --&gt; &lt;expression&gt; | &lt;empty&gt;<br/><br/>&lt;assignment&gt; --&gt; (set! &lt;variable&gt; &lt;expression&gt;)<br/><br/>&lt;derived expression&gt; --&gt;
+       (cond &lt;cond clause&gt;+)
+     | (cond &lt;cond clause&gt;* (else &lt;sequence&gt;))
+     | (case &lt;expression&gt;
+         &lt;case clause&gt;+)
+     | (case &lt;expression&gt;
+         &lt;case clause&gt;*
+         (else &lt;sequence&gt;))
+     | (and &lt;test&gt;*)
+     | (or &lt;test&gt;*)
+     | (let (&lt;binding spec&gt;*) &lt;body&gt;)
+     | (let &lt;variable&gt; (&lt;binding spec&gt;*) &lt;body&gt;)
+     | (let* (&lt;binding spec&gt;*) &lt;body&gt;)
+     | (letrec (&lt;binding spec&gt;*) &lt;body&gt;)
+     | (begin &lt;sequence&gt;)
+     | (do (&lt;iteration spec&gt;*)
+           (&lt;test&gt; &lt;do result&gt;)
+         &lt;command&gt;*)
+     | (delay &lt;expression&gt;)
+     | &lt;quasiquotation&gt;<br/><br/>&lt;cond clause&gt; --&gt; (&lt;test&gt; &lt;sequence&gt;)
+      | (&lt;test&gt;)
+      | (&lt;test&gt; =&gt; &lt;recipient&gt;)
+&lt;recipient&gt; --&gt; &lt;expression&gt;
+&lt;case clause&gt; --&gt; ((&lt;datum&gt;*) &lt;sequence&gt;)
+&lt;binding spec&gt; --&gt; (&lt;variable&gt; &lt;expression&gt;)
+&lt;iteration spec&gt; --&gt; (&lt;variable&gt; &lt;init&gt; &lt;step&gt;)
+    | (&lt;variable&gt; &lt;init&gt;)
+&lt;init&gt; --&gt; &lt;expression&gt;
+&lt;step&gt; --&gt; &lt;expression&gt;
+&lt;do result&gt; --&gt; &lt;sequence&gt; | &lt;empty&gt;<br/><br/>&lt;macro use&gt; --&gt; (&lt;keyword&gt; &lt;datum&gt;*)
+&lt;keyword&gt; --&gt; &lt;identifier&gt;<br/><br/>&lt;macro block&gt; --&gt;
+     (let-syntax (&lt;syntax spec&gt;*) &lt;body&gt;)
+     | (letrec-syntax (&lt;syntax spec&gt;*) &lt;body&gt;)
+&lt;syntax spec&gt; --&gt; (&lt;keyword&gt; &lt;transformer spec&gt;)<br/><br/></tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div>
+<!-- Quasiquotations -->
+<a name="Quasiquotations"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">7.1.4 Quasiquotations</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Quasiquotations" class="mark"></a>
+The following grammar for quasiquote expressions is not context-free.
+It is presented as a recipe for generating an infinite number of
+production rules.  Imagine a copy of the following rules for D = 1, 2,3, ....  D keeps track of the nesting depth.<br/><br/><center id='center6878'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6876'
+><tt id='tt6875'
+>&lt;quasiquotation&gt; --&gt; &lt;quasiquotation 1&gt;
+&lt;qq template 0&gt; --&gt; &lt;expression&gt;
+&lt;quasiquotation D&gt; --&gt; `&lt;qq template D&gt;
+       | (quasiquote &lt;qq template D&gt;)
+&lt;qq template D&gt; --&gt; &lt;simple datum&gt;
+       | &lt;list qq template D&gt;
+       | &lt;vector qq template D&gt;
+       | &lt;unquotation D&gt;
+&lt;list qq template D&gt; --&gt; (&lt;qq template or splice D&gt;*)
+       | (&lt;qq template or splice D&gt;+ .: &lt;qq template D&gt;)
+       | '&lt;qq template D&gt;
+       | &lt;quasiquotation D+1&gt;
+&lt;vector qq template D&gt; --&gt; #(&lt;qq template or splice D&gt;*)
+&lt;unquotation D&gt; --&gt; ,&lt;qq template D-1&gt;
+       | (unquote &lt;qq template D-1&gt;)
+&lt;qq template or splice D&gt; --&gt; &lt;qq template D&gt;
+       | &lt;splicing unquotation D&gt;
+&lt;splicing unquotation D&gt; --&gt; ,&#x40;&lt;qq template D-1&gt;
+       | (unquote-splicing &lt;qq template D-1&gt;) </tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+In &lt;quasiquotation&gt;s, a &lt;list qq template D&gt; can sometimes
+be confused with either an &lt;unquotation D&gt; or a &lt;splicing
+unquotation D&gt;.  The interpretation as an
+&lt;unquotation&gt; or &lt;splicing
+unquotation D&gt; takes precedence.<br/><br/></div>
+<!-- Transformers -->
+<a name="Transformers"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">7.1.5 Transformers</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Transformers" class="mark"></a>
+<center id='center6885'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6883'
+><tt id='tt6882'
+>&lt;transformer spec&gt; --&gt;
+    (syntax-rules (&lt;identifier&gt;*) &lt;syntax rule&gt;*)
+&lt;syntax rule&gt; --&gt; (&lt;pattern&gt; &lt;template&gt;)
+&lt;pattern&gt; --&gt; &lt;pattern identifier&gt;
+     | (&lt;pattern&gt;*)
+     | (&lt;pattern&gt;+ . &lt;pattern&gt;)
+     | (&lt;pattern&gt;* &lt;pattern&gt; &lt;ellipsis&gt;)
+     | #(&lt;pattern&gt;*)
+     | #(&lt;pattern&gt;* &lt;pattern&gt; &lt;ellipsis&gt;)
+     | &lt;pattern datum&gt;
+&lt;pattern datum&gt; --&gt; &lt;string&gt;
+     | &lt;character&gt;
+     | &lt;boolean&gt;
+     | &lt;number&gt;
+&lt;template&gt; --&gt; &lt;pattern identifier&gt;
+     | (&lt;template element&gt;*)
+     | (&lt;template element&gt;+ . &lt;template&gt;)
+     | #(&lt;template element&gt;*)
+     | &lt;template datum&gt;
+&lt;template element&gt; --&gt; &lt;template&gt;
+     | &lt;template&gt; &lt;ellipsis&gt;
+&lt;template datum&gt; --&gt; &lt;pattern datum&gt;
+&lt;pattern identifier&gt; --&gt; &lt;any identifier except <samp id='samp6880'
+>...</samp>&gt;
+&lt;ellipsis&gt; --&gt; &lt;the identifier <samp id='samp6881'
+>...</samp>&gt;
+</tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div>
+<!-- Programs and definitions -->
+<a name="Programs-and-definitions"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">7.1.6 Programs and definitions</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Programs-and-definitions" class="mark"></a>
+<center id='center6889'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog6887'
+><tt id='tt6886'
+>&lt;program&gt; --&gt; &lt;command or definition&gt;*
+&lt;command or definition&gt; --&gt; &lt;command&gt;
+    | &lt;definition&gt;
+    | &lt;syntax definition&gt;
+    | (begin &lt;command or definition&gt;+)
+&lt;definition&gt; --&gt; (define &lt;variable&gt; &lt;expression&gt;)
+      | (define (&lt;variable&gt; &lt;def formals&gt;) &lt;body&gt;)
+      | (begin &lt;definition&gt;*)
+&lt;def formals&gt; --&gt; &lt;variable&gt;*
+      | &lt;variable&gt;* .: &lt;variable&gt;
+&lt;syntax definition&gt; --&gt;
+     (define-syntax &lt;keyword&gt; &lt;transformer spec&gt;)
+</tt>
+</pre>
+</td></tr>
+</tbody></table></center>
+       
+</div>
+</div><br>
+<!-- Formal semantics -->
+<a name="Formal-semantics"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">7.2 Formal semantics</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Formal-semantics" class="mark"></a>
+This section provides a formal denotational semantics for the primitive
+expressions of Scheme and selected built-in procedures.  The concepts
+and notation used here are described in <span class="sc">[Stoy77]</span>.<br/><br/><font size="-1"><em id='emph6892'
+>Note:</em> The formal semantics section was written in LaTeX which
+is incompatible with TeXinfo.  See the Formal semantics section of
+the original document from which this was derived.
+</font>        
+</div><br>
+<!-- Derived expression types -->
+<a name="Derived-expression-types"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">7.3 Derived expression types</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Derived-expression-type" class="mark"></a>
+This section gives macro definitions for the derived expression types in
+terms of the primitive expression types (literal, variable, call, <samp id='samp6894'
+>lambda</samp>,
+<samp id='samp6895'
+>if</samp>, <samp id='samp6896'
+>set!</samp>).  See section <a href="r5rs-9.html#Control-features" class="inbound">Control features</a> for a possible
+definition of <samp id='samp6897'
+>delay</samp>.<br/><br/><center id='center6924'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6922'
+>(<font color="#6959cf"><strong id='bold8192'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8194'
+>cond</strong></font>
+  (<strong id='bold8196'
+>syntax-rules</strong> (else =&gt;)
+    ((<strong id='bold8197'
+>cond</strong> (else result1 result2 ...))
+     (<strong id='bold8198'
+>begin</strong> result1 result2 ...))
+    ((<strong id='bold8199'
+>cond</strong> (test =&gt; result))
+     (<strong id='bold8200'
+>let</strong> ((temp test))
+       (<strong id='bold8201'
+>if</strong> temp (result temp))))
+    ((<strong id='bold8202'
+>cond</strong> (test =&gt; result) clause1 clause2 ...)
+     (<strong id='bold8203'
+>let</strong> ((temp test))
+       (<strong id='bold8204'
+>if</strong> temp
+           (result temp)
+           (<strong id='bold8205'
+>cond</strong> clause1 clause2 ...))))
+    ((<strong id='bold8206'
+>cond</strong> (test)) test)
+    ((<strong id='bold8207'
+>cond</strong> (test) clause1 clause2 ...)
+     (<strong id='bold8208'
+>let</strong> ((temp test))
+       (<strong id='bold8209'
+>if</strong> temp
+           temp
+           (<strong id='bold8210'
+>cond</strong> clause1 clause2 ...))))
+    ((<strong id='bold8211'
+>cond</strong> (test result1 result2 ...))
+     (<strong id='bold8212'
+>if</strong> test (<strong id='bold8213'
+>begin</strong> result1 result2 ...)))
+    ((<strong id='bold8214'
+>cond</strong> (test result1 result2 ...)
+           clause1 clause2 ...)
+     (<strong id='bold8215'
+>if</strong> test
+         (<strong id='bold8216'
+>begin</strong> result1 result2 ...)
+         (<strong id='bold8217'
+>cond</strong> clause1 clause2 ...)))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6941'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6939'
+>(<font color="#6959cf"><strong id='bold8218'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8220'
+>case</strong></font>
+  (<strong id='bold8222'
+>syntax-rules</strong> (else)
+    ((<strong id='bold8223'
+>case</strong> (key ...)
+       clauses ...)
+     (<strong id='bold8224'
+>let</strong> ((atom-key (key ...)))
+       (<strong id='bold8225'
+>case</strong> atom-key clauses ...)))
+    ((<strong id='bold8226'
+>case</strong> key
+       (else result1 result2 ...))
+     (<strong id='bold8227'
+>begin</strong> result1 result2 ...))
+    ((<strong id='bold8228'
+>case</strong> key
+       ((atoms ...) result1 result2 ...))
+     (<strong id='bold8229'
+>if</strong> (memv key '(atoms ...))
+         (<strong id='bold8230'
+>begin</strong> result1 result2 ...)))
+    ((<strong id='bold8231'
+>case</strong> key
+       ((atoms ...) result1 result2 ...)
+       clause clauses ...)
+     (<strong id='bold8232'
+>if</strong> (memv key '(atoms ...))
+         (<strong id='bold8233'
+>begin</strong> result1 result2 ...)
+         (<strong id='bold8234'
+>case</strong> key clause clauses ...)))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6947'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6945'
+>(<font color="#6959cf"><strong id='bold8235'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8237'
+>and</strong></font>
+  (<strong id='bold8239'
+>syntax-rules</strong> ()
+    ((and) #t)
+    ((and test) test)
+    ((and test1 test2 ...)
+     (<strong id='bold8240'
+>if</strong> test1 (and test2 ...) #f))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6954'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6952'
+>(<font color="#6959cf"><strong id='bold8241'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8243'
+>or</strong></font>
+  (<strong id='bold8245'
+>syntax-rules</strong> ()
+    ((or) #f)
+    ((or test) test)
+    ((or test1 test2 ...)
+     (<strong id='bold8246'
+>let</strong> ((x test1))
+       (<strong id='bold8247'
+>if</strong> x x (or test2 ...))))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6964'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6962'
+>(<font color="#6959cf"><strong id='bold8248'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8250'
+>let</strong></font>
+  (<strong id='bold8252'
+>syntax-rules</strong> ()
+    ((<strong id='bold8253'
+>let</strong> ((name val) ...) body1 body2 ...)
+     ((<strong id='bold8254'
+>lambda</strong> (name ...) body1 body2 ...)
+      val ...))
+    ((<strong id='bold8255'
+>let</strong> tag ((name val) ...) body1 body2 ...)
+     ((<strong id='bold8256'
+>letrec</strong> ((tag (<strong id='bold8257'
+>lambda</strong> (name ...)
+                      body1 body2 ...)))
+        tag)
+      val ...))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center6974'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6972'
+>(<font color="#6959cf"><strong id='bold8258'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8260'
+>let*</strong></font>
+  (<strong id='bold8262'
+>syntax-rules</strong> ()
+    ((<strong id='bold8263'
+>let*</strong> () body1 body2 ...)
+     (<strong id='bold8264'
+>let</strong> () body1 body2 ...))
+    ((<strong id='bold8265'
+>let*</strong> ((name1 val1) (name2 val2) ...)
+       body1 body2 ...)
+     (<strong id='bold8266'
+>let</strong> ((name1 val1))
+       (<strong id='bold8267'
+>let*</strong> ((name2 val2) ...)
+         body1 body2 ...)))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The following <samp id='samp6975'
+>letrec</samp> macro uses the symbol <samp id='samp6976'
+>&lt;undefined&gt;</samp>
+in place of an expression which returns something that when stored in
+a location makes it an error to try to obtain the value stored in the
+location (no such expression is defined in Scheme).
+A trick is used to generate the temporary names needed to avoid
+specifying the order in which the values are evaluated.
+This could also be accomplished by using an auxiliary macro.<br/><br/><center id='center6994'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6992'
+>(<font color="#6959cf"><strong id='bold8268'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8270'
+>letrec</strong></font>
+  (<strong id='bold8272'
+>syntax-rules</strong> ()
+    ((<strong id='bold8273'
+>letrec</strong> ((var1 init1) ...) body ...)
+     (<strong id='bold8274'
+>letrec</strong> <font color="red">&quot;generate temp names&quot;</font>
+       (var1 ...)
+       ()
+       ((var1 init1) ...)
+       body ...))
+    ((<strong id='bold8276'
+>letrec</strong> <font color="red">&quot;generate temp names&quot;</font>
+       ()
+       (temp1 ...)
+       ((var1 init1) ...)
+       body ...)
+     (<strong id='bold8278'
+>let</strong> ((var1 &lt;undefined&gt;) ...)
+       (<strong id='bold8279'
+>let</strong> ((temp1 init1) ...)
+         (<strong id='bold8280'
+>set!</strong> var1 temp1)
+         ...
+         body ...)))
+    ((<strong id='bold8281'
+>letrec</strong> <font color="red">&quot;generate temp names&quot;</font>
+       (x y ...)
+       (temp ...)
+       ((var1 init1) ...)
+       body ...)
+     (<strong id='bold8283'
+>letrec</strong> <font color="red">&quot;generate temp names&quot;</font>
+       (y ...)
+       (newtemp temp ...)
+       ((var1 init1) ...)
+       body ...))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+<center id='center7001'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog6999'
+>(<font color="#6959cf"><strong id='bold8285'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8287'
+>begin</strong></font>
+  (<strong id='bold8289'
+>syntax-rules</strong> ()
+    ((<strong id='bold8290'
+>begin</strong> exp ...)
+     ((<strong id='bold8291'
+>lambda</strong> () exp ...)))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The following alternative expansion for <samp id='samp7002'
+>begin</samp> does not make use of
+the ability to write more than one expression in the body of a lambda
+expression.  In any case, note that these rules apply only if the body
+of the <samp id='samp7003'
+>begin</samp> contains no definitions.<br/><br/><center id='center7013'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7011'
+>(<font color="#6959cf"><strong id='bold8292'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8294'
+>begin</strong></font>
+  (<strong id='bold8296'
+>syntax-rules</strong> ()
+    ((<strong id='bold8297'
+>begin</strong> exp)
+     exp)
+    ((<strong id='bold8298'
+>begin</strong> exp1 exp2 ...)
+     (<strong id='bold8299'
+>let</strong> ((x exp1))
+       (<strong id='bold8300'
+>begin</strong> exp2 ...)))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The following definition
+of <samp id='samp7014'
+>do</samp> uses a trick to expand the variable clauses.
+As with <samp id='samp7015'
+>letrec</samp> above, an auxiliary macro would also work.
+The expression <samp id='samp7016'
+>(if #f #f)</samp> is used to obtain an unspecific
+value.<br/><br/><center id='center7031'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog7029'
+>(<font color="#6959cf"><strong id='bold8301'
+>define-syntax</strong></font> <font color="#6959cf"><strong id='bold8303'
+>do</strong></font>
+  (<strong id='bold8305'
+>syntax-rules</strong> ()
+    ((do ((var init step ...) ...)
+         (test expr ...)
+         command ...)
+     (<strong id='bold8306'
+>letrec</strong>
+       ((loop
+         (<strong id='bold8307'
+>lambda</strong> (var ...)
+           (<strong id='bold8308'
+>if</strong> test
+               (<strong id='bold8309'
+>begin</strong>
+                 (<strong id='bold8310'
+>if</strong> #f #f)
+                 expr ...)
+               (<strong id='bold8311'
+>begin</strong>
+                 command
+                 ...
+                 (loop (do <font color="red">&quot;step&quot;</font> var step ...)
+                       ...))))))
+       (loop init ...)))
+    ((do <font color="red">&quot;step&quot;</font> x)
+     x)
+    ((do <font color="red">&quot;step&quot;</font> x y)
+     y)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+         
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph8320'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it8318'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

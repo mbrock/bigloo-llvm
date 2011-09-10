@@ -1,0 +1,44 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    /misc/virtual/android/BGL/bigloo3.3b/autoconf/android            */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Marcos Dione                                      */
+#*    Creation    :  Wed Aug  9 13:27:23 1995                          */
+#*    Last change :  Wed Feb  3 16:38:03 2010 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Detect if we are compiling for Android                           */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*    -------------------------------------------------------------    */
+#*    We assume that we are under Android                              */
+#*---------------------------------------------------------------------*/
+
+
+if [ "$HOSTCPU " = "arm " ]; then
+  build_id=`$HOSTSH getprop ro.build.version.release`
+  if [ "$build_id " = "2.0 " -o "$build_id " = "2.0.1 " -o \
+       "$build_id " = "ECLAIR " -o "$build_id " = "2.1 " -o \
+       "$build_id " = "2.1-update1 " ]; then
+    echo "yes"
+  else
+    echo "wrong version: $build_id"
+  fi
+else
+  echo "no"
+fi

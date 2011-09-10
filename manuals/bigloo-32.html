@@ -1,0 +1,1258 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>31. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Compiler description</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center34859'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34849" align="center" colspan="1"><font color="#ffffff"><strong id='bold34847'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34856" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc34852" align="left" valign="top" colspan="1"><strong id='bold34851'
+>top:</strong></td><td id="tc34853" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center34869'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34863" align="center" colspan="1"><font color="#ffffff"><strong id='bold34861'
+>Compiler description</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34866" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">31.1</td><td colspan="4" width="100%"><a href="bigloo-32.html#C-requirement">C requirement</a></td></tr>
+ <tr><td valign="top" align="left">31.2</td><td colspan="4" width="100%"><a href="bigloo-32.html#JVM-requirement">JVM requirement</a></td></tr>
+ <tr><td valign="top" align="left">31.3</td><td colspan="4" width="100%"><a href="bigloo-32.html#Running-.NET-programs-on-Microsoft-.NET-platforms">Running .NET programs on Microsoft .NET platforms</a></td></tr>
+ <tr><td valign="top" align="left">31.4</td><td colspan="4" width="100%"><a href="bigloo-32.html#Linking">Linking</a></td></tr>
+ <tr><td valign="top" align="left">31.5</td><td colspan="4" width="100%"><a href="bigloo-32.html#The-compiler-environment-and-options">The compiler environment and options</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5.1</td><td colspan="3" width="100%"><a href="bigloo-32.html#Efficiency">Efficiency</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5.2</td><td colspan="3" width="100%"><a href="bigloo-32.html#Stack-allocation">Stack allocation</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5.3</td><td colspan="3" width="100%"><a href="bigloo-32.html#Genericity-of-arithmetic-procedures">Genericity of arithmetic procedures</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5.4</td><td colspan="3" width="100%"><a href="bigloo-32.html#Safety">Safety</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5.5</td><td colspan="3" width="100%"><a href="bigloo-32.html#The-runtime-command-file">The runtime-command file</a></td></tr>
+ <tr><td></td><td valign="top" align="left">31.5.6</td><td colspan="3" width="100%"><a href="bigloo-32.html#The-Bigloo-command-line">The Bigloo command line</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center34879'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34873" align="center" colspan="1"><font color="#ffffff"><strong id='bold34871'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34876" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Compiler-Description" class="mark"></a><a name="g28295" class="mark"></a>
+<!-- C requirement -->
+<a name="C-requirement"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">31.1 C requirement</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28297" class="mark"></a>
+Instead of producing assembly code, Bigloo produces C code.
+This C code is ISO-C compliant [IsoC]. So, it is necessary
+to have an ISO-C compiler. The current version has been
+developed with <code id='code28299'
+>gcc</code> [Stallman95].<br/><br/></div><br>
+<!-- JVM requirement -->
+<a name="JVM-requirement"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">31.2 JVM requirement</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28301" class="mark"></a>
+In order to compile the Bigloo JVM back-end, you have to be provided
+with a JDK 1.2 or more recent (available at <code id='code28303'
+>http://www.javasoft.com</code>).
+The JVM must support for <code id='code28304'
+>-noverify</code> option because, by default,
+Bigloo produces JVM code that is not conform to the rules enforced by
+the Java byte code verifiers.<br/><br/></div><br>
+<!-- Running .NET programs on Microsoft .NET platforms -->
+<a name="Running-.NET-programs-on-Microsoft-.NET-platforms"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">31.3 Running .NET programs on Microsoft .NET platforms</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28306" class="mark"></a>
+Bigloo uses Portable.NET assembler and linker to produce .NET binaries.  As
+such, produced binaries are linked and signed against Portable.NET runtime
+libraries and are rejected by Microsoft .NET platforms.  In order to run
+Bigloo .NET binaries on Microsoft .NET platforms, binaries must first be
+disassembled and then reassembled and linked against Microsoft runtime
+libraries.<br/><br/>The pnet2ms utility automates this process. Before the first use of
+pnet2ms, a public+private key pair must first be registered to the
+&quot;Bigloo&quot; container. You may either use the provided pair in the
+bigloo.dotnetkey file or generate your own using:
+<center id='center28311'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28309'
+>          sn -k bigloo.dotnetkey
+</pre>
+</td></tr>
+</tbody></table></center>
+The pair must be registered using:
+<center id='center28314'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28312'
+>          sn -i bigloo.dotnetkey Bigloo
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The pnet2ms program can be ran with:
+<center id='center28317'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28315'
+>  pnet2ms myprogram.exe
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Additional command-line options are:
+<center id='center28320'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28318'
+>  -initlocals     force all local variables to be initialized to their
+                  default value upon function entrance 
+                  (for PEVerify to succeed)
+  -k              Keep intermediate files
+  -register       Register DLLs in the Global Assembly Cache
+  -v              Enable verbose mode
+  -v2             Enable very verbose mode
+  -v3             Enable very very verbose mode
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div><br>
+<!-- Linking -->
+<a name="Linking"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">31.4 Linking</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28321" class="mark"></a>
+It is easier to use Bigloo for linking object files which have been
+compiled by Bigloo. An easy way to perform this operation is, after
+having compiled all the files using the <code id='code28323'
+>-c</code> option, to invoke
+Bigloo with the name of the compiled files.<br/><br/>When Bigloo is only given object file name as argument, it
+searches in the current directory and the directory named in the
+<code id='code28325'
+>*load-path*</code> list the Scheme source file in order to
+perform a correct link. Scheme source files are supposed to be
+ended by the suffix <code id='code28326'
+>.scm</code>. Additional suffixes can be added
+using the <code id='code28327'
+>-suffix</code> option. Hence, if source files are named
+foo1.sc and foo2.sc, a link command line could look like:<br/><br/><center id='center28331'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28329'
+>bigloo -suffix sc foo1.o foo2.o -o foo
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Note: In order to understand how the Bigloo linkers operates and which
+libraries it uses, it might be useful to  use the <code id='code28332'
+>-v2</code> option
+which unveil all the details of the compilation and the link.<br/><br/></div><br>
+<!-- The compiler environment and options -->
+<a name="The-compiler-environment-and-options"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">31.5 The compiler environment and options</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28334" class="mark"></a>
+There are four ways to change the behaviour of Bigloo. Flags on the
+command line, the <code id='code28336'
+>option</code> module clause runtime-command file and
+environment variables See <a href="bigloo-4.html#Modules" class="inbound">Modules</a>. When the compiler is invoked, it
+first gets the environment variables, then it scans the
+runtime-command file and, at end, it parses the command line.  If the
+same option is set many times, Bigloo uses the last one.<br/><br/><!-- Efficiency -->
+<a name="Efficiency"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">31.5.1 Efficiency</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="g28338" class="mark"></a>
+In order to get maximum speed, compile with the <code id='code28340'
+>-Obench</code> option.
+This will enable all compiler optimization options and disable dynamic
+type checks. To improve arithmetic performance see next section.<br/><br/></div>
+<!-- Stack allocation -->
+<a name="Stack-allocation"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">31.5.2 Stack allocation</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="g28342" class="mark"></a>
+When the <code id='code28344'
+>-fstack</code> flag is enabled, the compiler may automatically
+replace some heap allocations with stack allocations. This may improve
+performance because stack allocations are handled more efficiently than
+heap allocations. On some cases, <code id='code28345'
+>-fstack</code> may also cause slow down
+or memory extra retentions. In this last case, when compile 
+using <code id='code28346'
+>-fstack</code> the program will consume more memory. Unfortunately,
+this is nasty phenomenon is unpredictable (it depends on the nature of
+the source file).<br/><br/></div>
+<!-- Genericity of arithmetic procedures -->
+<a name="Genericity-of-arithmetic-procedures"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">31.5.3 Genericity of arithmetic procedures</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="g28348" class="mark"></a>
+By default, arithmetic procedures are generic. This means that it is
+allowed to use them with flonum and fixnum. This feature, of course,
+implies performances penalty. To improve performance, you may use
+specialized procedures (such as <code id='code28350'
+>+fx</code>, <code id='code28351'
+>=fx</code>, ... or
+<code id='code28352'
+>+fl</code>, <code id='code28353'
+>=fl</code>, ...) but, it is possible to suppress the
+genericity and to make all generic arithmetic procedures (<code id='code28354'
+>=</code> for
+example) fixnum ones. For this you must use the compiler option
+<code id='code28355'
+>-farithmetic</code>, or add the following module clause <code id='code28356'
+>(option
+(set! *genericity* #f))</code> in your module declaration.<br/><br/></div>
+<!-- Safety -->
+<a name="Safety"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">31.5.4 Safety</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="g28358" class="mark"></a>
+It is possible to generate <em id='emph28360'
+>safe</em> or <em id='emph28361'
+>unsafe</em> code. 
+The safety's scope is <code id='code28362'
+>type</code>, <code id='code28363'
+>arity</code>, <code id='code28364'
+>version</code> and
+<code id='code28365'
+>range</code>.
+Let's see an example: <br/><br/><center id='center28370'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28368'
+>(<font color="#6959cf"><strong id='bold34880'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34882'
+>foo</strong></font> f v indice)
+   (car (f (vector-ref v indice))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+In safe mode, the result of the compilation will be:<br/><br/><center id='center28384'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28382'
+>(<font color="#6959cf"><strong id='bold34884'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34886'
+>foo</strong></font> f v indice)
+  (<strong id='bold34888'
+>let</strong> ((pair 
+        (<strong id='bold34889'
+>if</strong> (and (procedure? f)
+              <font color="#ffa600"><em id='it34890'
+>;; type check</em></font>
+              (= (procedure-arity f) 1))
+              <font color="#ffa600"><em id='it34892'
+>;; arity check</em></font>
+           (<strong id='bold34894'
+>if</strong> (vector? v)
+              <font color="#ffa600"><em id='it34895'
+>;; type check</em></font>
+              (<strong id='bold34897'
+>if</strong> (and (integer? k)
+                    <font color="#ffa600"><em id='it34898'
+>;; type check</em></font>
+                    (&gt;= k 0)
+                    <font color="#ffa600"><em id='it34900'
+>;; range check</em></font>
+                    (&lt; k (vector-length v)))
+                    <font color="#ffa600"><em id='it34902'
+>;; range check</em></font>
+                (f (vector-ref v indice))
+                (<font color="red"><strong id='bold34904'
+>error</strong></font> ...))
+              (<font color="red"><strong id='bold34906'
+>error</strong></font> ...))
+           (<font color="red"><strong id='bold34908'
+>error</strong></font> ...))))
+    (<strong id='bold34910'
+>if</strong> (pair? pair)
+       <font color="#ffa600"><em id='it34911'
+>;; type check</em></font>
+       (car pair)
+       (<font color="red"><strong id='bold34913'
+>error</strong></font> ...))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+It is possible to remove some or all safe checks. For example, here is
+the result of the compilation where safe check on types have been removed:<br/><br/><center id='center28394'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28392'
+>(<font color="#6959cf"><strong id='bold34915'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34917'
+>foo</strong></font> f v indice)
+  (<strong id='bold34919'
+>let</strong> ((pair (<strong id='bold34920'
+>if</strong> (= (procedure-arity f) 1)
+             <font color="#ffa600"><em id='it34921'
+>;; arity check</em></font>
+             (<strong id='bold34923'
+>if</strong> (and (&gt;= k 0)
+                   <font color="#ffa600"><em id='it34924'
+>;; range check</em></font>
+                   (&lt; k (vector-length v)))
+                   <font color="#ffa600"><em id='it34926'
+>;; range check</em></font>
+                (f (vector-ref v indice))
+                (<font color="red"><strong id='bold34928'
+>error</strong></font> ...))
+             (<font color="red"><strong id='bold34930'
+>error</strong></font> ...))))
+     (car pair)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div>
+<!-- The runtime-command file -->
+<a name="The-runtime-command-file"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">31.5.5 The runtime-command file</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="g28395" class="mark"></a><a name="g28397" class="mark"></a>
+Each Bigloo's user can use a special configuration file. This file must
+be named ``<code id='code28399'
+>.bigloorc</code>'' or ``<code id='code28400'
+>~/.bigloorc</code>''. Bigloo tries to
+load one of these in this order. This file is a Scheme file. Bigloo
+exports variables which allow the user to change the behavior of the
+compiler.  All these variables can be checked using the -help2 option.<br/><br/>The Bigloo's runtime command file is read before the arguments are parsed.
+</div>
+<!-- The Bigloo command line -->
+<a name="The-Bigloo-command-line"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">31.5.6 The Bigloo command line</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="g28402" class="mark"></a>
+If no input file is specified, Bigloo enters its interpreter.
+Here is the exhaustive list of Bigloo options and configuration variables:<br/><br/><center id='center28429'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28427'
+>usage: bigloo [options] [name.suf]<br/><br/><br/>Misc:
+   -                           Read source code on current input channel
+   -help,--help                This help message
+   -help2                      The exhaustive help message
+   -help-manual                The help message formatted for the manual
+   -o FILE                     Name the output FILE
+   --to-stdout                 Write C code on current output channel
+   -c                          Suppress linking and produce a .o file
+   -suffix SUFFIX              Recognize suffix as Scheme source
+   -afile FILE                 Name of the access file
+   -access MODULE FILE         Set access between module and file
+   -jfile FILE                 Name of the Jvm package file
+   -jadd MODULE QTYPE          Set JVM qualifed type name for module
+   -main FUN                   Set the main function
+   -with MODULE                Import addition module
+   -multiple-inclusion         Enables multiple inclusions of the Bigloo includes
+   -library LIBRARY            Compile/link with additional Bigloo library
+   -srfi SRFI                  Declares srfi support
+   -dload-sym                  Emit a Bigloo dynamic loading entry point
+   -dload-init-sym NAME        Emit a Bigloo dynamic loading entry point, named NAME
+   -heapsize SIZE              Set the initial heap size value (in megabyte)<br/><br/>Configuration and path:
+   -version                    The current release
+   -revision                   The current release (short format)
+   -query                      Dump the current configuration
+   -q                          Do not load any rc file
+   -eval STRING                Evaluate STRING before compiling
+   -load FILE                  Load FILE before compiling
+   -I DIR                      Add DIR to the load path
+   -lib-dir DIR                Set lib-path to DIR
+   -L NAME                     Set additional library path
+   -lib-version VERSION        Set the Bigloo library version
+   -libgc-version VERSION      Set the Bigloo GC library version
+   -libgc GC                   Use the given GC library<br/><br/>Back-end:
+   -native                     Compile module to native object file (via C)
+   -jvm                        Compile module to JVM .class files
+   -dotnet                     Compile module to .NET object files
+   -saw                        Cut the AST in the saw-mill
+   -no-saw                     Disable saw back-ends
+   -i                          Interprete module<br/><br/>Dialect:
+   -snow                       Compiles a snow source code
+   -scmpkg,-spi                Compiles a ScmPkg source code
+   -nil                        Evaluate '() as #f in `if' expression
+   -call/cc                    Enable call/cc function
+   -hygien                     Obsolete (R5rs macros are always supported)
+   -fno-reflection             Disable reflection code production
+   +fno-reflection             Enable reflection code production
+   -fclass-nil                 Enables generation of &quot;class-nil&quot; function
+   -fno-class-nil              Disables generation of &quot;class-nil&quot; function
+   -farithmetic                Suppress genericity of arithmetic operators
+   -fcase-sensitive            Case sensitive reader (default)
+   -fcase-insensitive          Case insensitive reader (downcase symbols)
+   -fallow-type-redefinition   allow type redifinition<br/><br/>Optimization:
+   -Obench                     Benchmarking mode
+   -O[2..6]                    Optimization modes
+   -fcfa-arithmetic            Enable arithmetic spec. (fixum and flonum)
+   -fno-cfa-arithmetic         Disable arithmetic spec.
+   -fcfa-arithmetic-fixnum     Enable fixnum arithmetic spec.
+   -fno-cfa-arithmetic-fixnum  Disable fixnum arithmetic spec.
+   -fcfa-arithmetic-flonum     Enable flonum arithmetic spec. (enabled from -O2)
+   -fno-cfa-arithmetic-flonum  Disable flonum arithmetic spec. 
+   -funroll-loop               Enable loop unrolling (enabled from -O3)
+   -fno-unroll-loop            Disable loop unrolling
+   -fno-loop-inlining          Disable loop inlining
+   -floop-inlining             Enable loop inlining (default)
+   -fno-inlining               Disable inline optimization
+   -fno-user-inlining          Disable user inline optimization
+   -fbeta-reduce               Enable simple beta reduction (enabled from -O2)
+   -fno-beta-reduce            Disable simple beta reduction
+   -fdataflow                  Enable dataflow optimizations (enabled from -O)
+   -fno-dataflow               Disable dataflow optimizations
+   -fdataflow-for-errors       Enable dataflow optimizations for improviing type error messages
+   -fno-dataflow-for-errors    Disable dataflow optimizations for improviing type error messages
+   -fdataflow-types            Enable type dataflow optimizations (enabled from -O2)
+   -fno-dataflow-types         Disable type dataflow optimizations
+   -fO-macro                   Enable Optimization macro (default)
+   -fno-O-macro                Disable Optimization macro
+   -fglobal-tailc              Enable global tail-call optimization
+   -fno-global-tailc           Disable global tail-call optimization
+   -fold-closure-integration   Enable old closure integration technique
+   -fsaw-realloc               Enable saw register re-allocation
+   -fsaw-regalloc              Enable saw register allocation
+   -fno-saw-regalloc           Disable saw register allocation
+   -fsaw-regalloc-msize SIZE   Set the register allocation body size limit
+   -fsaw-regalloc-fun NAME     Allocate registers on this very function
+   -fno-saw-regalloc-fun NAME  Don't allocate registers on this very function
+   -fsaw-regalloc-onexpr       Allocate registers on expressions
+   -fno-saw-regalloc-onexpr    Don't allocate registers on expressions<br/><br/>Safety:
+   -unsafe[atrsvleh]           Don't check [type/arity/range/struct/version/library/eval/heap]
+   -safe[atrsvle]              Enforce check [type/arity/range/struct/version/library/eval]<br/><br/>Debug:
+   -glines                     Emit # line directives
+   -gbdb-no-line               Don't emit # line directives
+   -gbdb[23]                   Compile with bdb debug informations
+   -gself                      Enables self compiler debug options
+   -gmodule                    Debug module initialization
+   -gerror-localization        Localize error calls in the source code
+   -gno-error-localization     Don't localize error calls in the source code
+   -gjvm                       Annote JVM classes for debug
+   -gtrace[12]                 Producing stack traces
+   -g[234]                     Produce Bigloo debug informations
+   -cg                         Compile C files with debug option
+   -export-all                 Eval export-all all routines
+   -export-exports             Eval export-exports all routines
+   -export-mutable             Enables Eval redefinition of all &quot;::obj&quot; routines<br/><br/>Profiling:
+   -p[2]                       Compile files for profiling
+   -pg                         Compile files with profiling option
+   -pmem                       Compile files for memory profiling
+   -pmem2                      Compile files for memory profiling<br/><br/>Verbosity:
+   -s                          Be silent and inhibit all warning messages
+   -v[23]                      Be verbose
+   -hello                      Say hello
+   -no-hello                   Dont' say hello even in verbose mode
+   -w                          Inhibit all warning messages
+   -wslots                     Inhibit overriden slots warning messages
+   -Wvariables                 Enable overriden variable warning messages
+   -Wall                       warn about all possible type errors<br/><br/>Compilation modes:
+   &lt;-/+&gt;rm                     Don't or force removing .c or .il files
+   -extend NAME                Extend the compiler
+   -fsharing                   Attempt to share constant data
+   -fno-sharing                Do not attempt to share constant data
+   -fmco                       Produce an .mco file
+   -fmco-include-path DIR      Add dir to mco C include path<br/><br/>Native specific options:
+   -cc COMPILER                Specify the C compiler
+   -stdc                       Generate strict ISO C code
+   -copt STRING                Invoke cc with STRING
+   -cheader STRING             C header
+   -cfoot STRING               C foot
+   -ldopt STRING               Invoke ld with STRING
+   -ldpostopt STRING           Invoke ld with STRING (end of arguments)
+   --force-cc-o                Force the C compiler to use -o instead of mv
+   -ld-relative                Link using -l notation for libraries (default)
+   -ld-absolute                Link using absolute path names for libraries
+   -static-bigloo              Link with the static bigloo library
+   -static-all-bigloo          Link with static version of all bigloo libraries
+   -ld-libs1                   Add once user libraries when linking
+   -ld-libs2                   Add twice user libraries when linking (default)
+   -lLIBRARY                   Link with host library<br/><br/>Jvm specific options:
+   -jvm-shell SHELL            Shell for JVM scripts (&quot;sh&quot;, &quot;msdos&quot;)
+   -jvm-purify                 Produce byte code verifier compliant JVM code (default)
+   -no-jvm-purify              Don't care about JVM code verifier
+   -jvm-mainclass CLASS        JVM main class
+   -jvm-classpath PATH         JVM application classpath
+   -jvm-bigloo-classpath P     JVM Bigloo rts classpath
+   -jvm-path-separator SEP     Set the JVM classpath separator
+   -jvm-directory NAME         Directory where to store class files.
+   -jvm-catch-errors           Catch internal JVM errors
+   -no-jvm-catch-errors        Don't catch internal JVM errors
+   -jvm-jarpath NAME           Set the JVM classpath for the produced jar file
+   -jvm-cinit-module           Enable JVM class constructors to initiliaze bigloo modules
+   -no-jvm-cinit-module        Disable JVM class constructors to initiliaze bigloo modules
+   -jvm-char-info              Generate char info for the debugger (in addition to line info)
+   -no-jvm-char-info           Do not generate char info for the debugger
+   -fjvm-inlining              Enable JVM back-end inlining
+   -fjvm-constr-inlining       Enable JVM back-end inlining for constructors
+   -fno-jvm-inlining           Disable JVM back-end inlining
+   -fno-jvm-constr-inlining    Disable JVM back-end inlining for constructors
+   -fjvm-peephole              Enable JVM back-end peephole
+   -fno-jvm-peephole           Disable JVM back-end peephole
+   -fjvm-branch                Enable JVM back-end branch
+   -fno-jvm-branch             Disable JVM back-end branch
+   -fjvm-fasteq                EQ? no longer works on integers (use =FX)
+   -fno-jvm-fasteq             Disable JVM back-end fasteq transformation
+   -jvm-env VAR                Make the shell variable visible to GETENV
+   -jvm-jar                    Enable JVM jar files generation
+   -no-jvm-jar                 Disable JVM jar files generation (default)
+   -jvm-java FILE              Use FILE as JVM
+   -jvm-opt STRING             JVM invocation option<br/><br/>.NET specific options:
+   -dotnet-managed             Produce byte code verifier compliant .NET code (default)
+   -dotnet-unmanaged           Don't care about .NET code verifier
+   -dotnet-linux-mono          Compile for Mono on a Linux
+   -dotnet-clr FILE            Use FILE as .NET CLR
+   -dotnet-clr-style STYLE     Use CLR invokation style
+   -dotnet-clr-opt S           Set the .NET CLR options
+   -dotnet-ld FILE             Use FILE as .NET LD
+   -dotnet-ld-style STYLE      Use LD invokation style
+   -dotnet-dll-path NAME       Set the .NET DLL search path
+   -dotnet-external-asm        Enable external assembler (default)
+   -no-dotnet-external-asm     Disable external assembler
+   -ilasm ASM                  Specify external IL assembler
+   -fdotnet-tailc              Flag tail calls for inside module calls
+   -fno-dotnet-tailc           Don't flag tail calls
+   -fdotnet-tailc-full         Flag tail calls everywhere
+   -fdotnet-tailc-module       Flag tail calls across modules
+   -fno-dotnet-tailc-module    Don't flag tail calls across modules
+   -fdotnet-tailc-funcall      Flag tail calls for funcalls
+   -fno-dotnet-tailc-funcall   Don't flag tail call for funcalls
+   -dotnet-mono-workaround     Workaround Mono .NET buts (switch)
+   -no-dotnet-mono-workaround  Disable workaround Mono .NET buts (switch)
+   -dotnet-pnet-workaround     Workaround pnet swich bug
+   -no-dotnet-pnet-workaround  Disable Workaround pnet swich bug<br/><br/>Traces:
+   -t[2|3|4]                   Generate a trace file (*)
+   +tPASS                      Force pass to be traced
+   -shape[mktTalun]            Some debugging tools (private)<br/><br/>Compilation stages:
+   -mco                        Stop after .mco production
+   -syntax                     Stop after the syntax stage (see -hygiene)
+   -expand                     Stop after the preprocessing stage
+   -expand-module              Produce the expanded module clause
+   -ast                        Stop after the ast construction stage
+   -bdb-spread-obj             Stop after the bdb obj spread stage
+   -trace                      Stop after the trace pass
+   -callcc                     Stop after the callcc pass
+   -bivalue                    Stop after the bivaluation stage
+   -inline                     Stop after the inlining stage
+   -inline+                    Stop after the 2nd inlining stage
+   -beta                       Stop after the constant beta reduction stage
+   -fail                       Stop after the failure replacement stage
+   -abound                     Stop after the array bound checking stage
+   -dataflow                   Stop after the type dataflow stage
+   -dataflow+                  Stop after the second type dataflow stage
+   -fuse                       Stop after the fuse stage
+   -user                       Stop after the user pass
+   -coerce                     Stop after the type coercing stage
+   -effect                     Stop after the effect stage
+   -effect+                    Stop after the 2nd effect stage
+   -reduce                     Stop after the reduction opt. stage
+   -reduce+                    Stop after the 2nd reduction opt. stage
+   -reduce-                    Stop after the very first reduction stage
+   -assert                     Stop after the assertions stage
+   -cfa                        Stop after the cfa stage
+   -closure                    Stop after the globalization stage
+   -recovery                   Stop after the type recovery stage
+   -bdb                        Stop after the Bdb code production
+   -cnst                       Stop after the constant allocation
+   -integrate                  Stop after the integration stage
+   -tailc                      Stop after the tailc stage
+   -init                       Stop after the initialization construction stage
+   -egen                       Produce an include file for effects (requires -saw)
+   -hgen                       Produce a C header file with class definitions
+   -cgen                       Do not C compile and produce a .c file
+   -indent                     Produce an indented .c file
+   -jvmas                      Produce a JVM .jas file
+   -il                         Produce a .NET .asm file<br/><br/>Constant initialization:
+   -init-[lib|read|intern]     Constants initialization mode
+   init-object-[legacy|staged] Object system initialization<br/><br/>Bootstrap and setup:
+   -mklib                      Compile a library module
+   -mkaddlib                   Compile an additional library module
+   -mkheap                     Build an heap file
+   -mkaddheap                  Build an additional heap file
+   -mkdistrib                  Compile a main file for a distribution
+   --license                   Display the Bigloo license and exit
+   -LICENSE                    Add the license to the generated C files
+   -heap NAME                  Specify an heap file (or #f to not load heap)
+   -heap-library LIB           The library the heap belongs to
+   -dump-heap NAME             Dump the content of a heap
+   -addheap NAME               Specify an additional heap file
+   -fread-internal             Read source from binary interned file
+   -fread-internal-src         Read source only from binary interned file
+   -fread-plain                Read source from plain text file
+   -target LANG                DON'T USE, (see -native, -jvm, -dotnet)<br/><br/>Shell Variables:
+   - TMPDIR
+     temporary directory (default &quot;/tmp&quot;)
+   - BIGLOOLIB
+     libraries' directory
+   - BIGLOOHEAP
+     the initial heap size in megabytes (4 MB by default)
+   - BIGLOOSTACKDEPTH
+     the error stack depth printing
+   - BIGLOOLIVEPROCESS
+     the maximum number of Bigloo live processes<br/><br/>Runtime Command file:
+   - ~/.bigloorc<br/><br/><br/>------------
+ * : only available in developing mode
+ . : option enabled from -O3 mode<br/><br/><br/>Bigloo Control Variables:
+   All the Bigloo control variables can be changed from the
+   interpreter, by the means of the `-eval' option, or using
+   the module clause `option'. For instance the option
+   &quot;-eval '(set! *strip* #t)'&quot; will set the variable
+   `*strip*' to the value `#t'.
+   These variables are:<br/><br/>   - *access-file-default* : 
+     The default access file name
+     default: &quot;.afile&quot;
+   - *access-files* : 
+     The access file names
+     default: ()
+   - *additional-bigloo-libraries* : 
+     The user extra Bigloo libraries
+     default: ()
+   - *additional-bigloo-zips* : 
+     The user extra Bigloo Zip files
+     default: ()
+   - *additional-heap-name* : 
+     A name of an additional heap file name to be build
+     default: #f
+   - *additional-heap-names* : 
+     A list of Bigloo additional heap file name
+     default: ()
+   - *additional-include-foreign* : 
+     The additional C included files
+     default: ()
+   - *allow-type-redefinition* : 
+     If true, allow type redefinitions
+     default: #f
+   - *ast-case-sensitive* : 
+     Case sensitivity
+     default: #t
+   - *auto-mode* : 
+     auto-mode (extend mode) list
+     default: ((&quot;ml&quot; . &quot;caml&quot;) (&quot;mli&quot; . &quot;caml&quot;) (&quot;oon&quot; . &quot;meroon&quot;) (&quot;snow&quot; . &quot;snow&quot;) (&quot;spi&quot; . &quot;pkgcomp&quot;))
+   - *bdb-debug* : 
+     Bdb debugging mode
+     default: 0
+   - *bigloo-abort?* : 
+     Do we have the bigloo-abort function in executables?
+     default: #f
+   - *bigloo-lib* : 
+     The Bigloo library
+     default: bigloo
+   - *bigloo-libraries-c-setup* : 
+     A list of C functions to be called when starting the application
+     default: ()
+   - *bigloo-licensing?* : 
+     Add the Bigloo license ?
+     default: #f
+   - *bigloo-name* : 
+     The Bigloo name
+     default: &quot;Bigloo (3.6a)&quot;
+   - *bigloo-specific-version* : 
+     The Bigloo specific version
+     default: &quot;&quot;
+   - *bigloo-tmp* : 
+     The tmp directory name
+     default: &quot;/tmp&quot;
+   - *bigloo-user-lib* : 
+     The user extra C libraries
+     default: (&quot;-ldl&quot; &quot;-lgmp&quot; &quot;-lm&quot;)
+   - *bigloo-version* : 
+     The Bigloo major release number
+     default: &quot;3.6a&quot;
+   - *bmem-profiling* : 
+     Instrument code for bmem profiling
+     default: #f
+   - *c-debug* : 
+     C debugging mode?
+     default: #f
+   - *c-debug-lines-info* : 
+     Emit # line directives
+     default: #f
+   - *c-debug-option* : 
+     cc debugging option
+     default: &quot;-g&quot;
+   - *c-files* : 
+     The C source files
+     default: ()
+   - *c-object-file-extension* : 
+     The C object file extension
+     default: &quot;o&quot;
+   - *c-split-string* : 
+     C split long strings
+     default: #f
+   - *c-suffix* : 
+     C legal suffixes
+     default: (&quot;c&quot;)
+   - *c-user-foot* : 
+     C foot
+     default: ()
+   - *c-user-header* : 
+     C header
+     default: ()
+   - *call/cc?* : 
+     Shall we enable call/cc?
+     default: #f
+   - *cc* : 
+     The C compiler
+     default: &quot;gcc&quot;
+   - *cc-move* : 
+     Use mv instead of -o when C compiling
+     default: #t
+   - *cc-o-option* : 
+     The C compiler -o option
+     default: &quot;-o &quot;
+   - *cc-options* : 
+     cc options
+     default: &quot; -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG&quot;
+   - *cc-style* : 
+     The C compiler style
+     default: &quot;gcc&quot;
+   - *cflags* : 
+     The C compiler option
+     default: &quot; -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG&quot;
+   - *cflags-optim* : 
+     The C compiler optimization option
+     default: &quot;-O3  -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG&quot;
+   - *cflags-prof* : 
+     The C compiler profiling option
+     default: &quot;-pg -fno-inline  -Wpointer-arith -Wswitch -Wtrigraphs -DBGL_BOOTCONFIG&quot;
+   - *class-nil?* : 
+     Shall we produce class-nil function for classes
+     default: #t
+   - *compiler-debug* : 
+     Debugging level
+     default: 0
+   - *compiler-debug-trace* : 
+     Debugging trace level
+     default: 0
+   - *compiler-sharing-debug?* : 
+     Compiler self sharing debug
+     default: #f
+   - *csharp-suffix* : 
+     C# legal suffixes
+     default: (&quot;cs&quot;)
+   - *debug-module* : 
+     Module initilazation debugging
+     default: 0
+   - *default-lib-dir* : 
+     The default lib dir path (without version)
+     default: &quot;/users/serrano/prgm/project/bigloo/lib/3.6a&quot;
+   - *dest* : 
+     The target name
+     default: #f
+   - *dlopen-init* : 
+     Emit a standard Bigloo dynamic loading init entry point
+     default: #f
+   - *dotnet-clr* : 
+     CLR to be used to run .NET programs
+     default: &quot;mono&quot;
+   - *dotnet-clr-opt* : 
+     CLR extra options to be used to run .NET programs
+     default: &quot;&quot;
+   - *dotnet-clr-style* : 
+     CLR style to be used to run .NET programs
+     default: &quot;mono&quot;
+   - *dotnet-dll-path* : 
+     Bigloo.dll path
+     default: #f
+   - *dotnet-external-asm* : 
+     Force using and external assembler for .NET code
+     default: &quot;ilasm.pnet&quot;
+   - *dotnet-external-asm-style* : 
+     Force using and external assembler for .NET code
+     default: pnet
+   - *dotnet-ld* : 
+     .NET object file linker
+     default: &quot;cscc&quot;
+   - *dotnet-ld-style* : 
+     .NET object file linker style
+     default: &quot;mono&quot;
+   - *dotnet-mono-workaround-switch* : 
+     Workaround mono 0.23..0.30 bug
+     default: #t
+   - *dotnet-pnet-workaround-switch* : 
+     Workaround pnet switch bug
+     default: #t
+   - *dotnet-shell* : 
+     .NET object file linker
+     default: &quot;sh&quot;
+   - *dotnet-tail* : 
+     Enable/disable tail call generations
+     default: #f
+   - *dotnet-tail-across-modules* : 
+     Enable/disable tail call generations across modules
+     default: #f
+   - *dotnet-tail-funcall* : 
+     Enable/disable tail call generations for funcall
+     default: #f
+   - *dotnet-use-external-asm* : 
+     Force using and external assembler for .NET code
+     default: #t
+   - *double-ld-libs?* : 
+     Do we include the additional user libraries twice?
+     default: #t
+   - *error-localization* : 
+     Localize error calls in the source code
+     default: #f
+   - *eval-options* : 
+     A user variable to store dynamic command line options
+     default: ()
+   - *extend-entry* : 
+     Extend entry
+     default: #f
+   - *garbage-collector* : 
+     The garbage collector
+     default: boehm
+   - *gc-custom?* : 
+     Are we using a custom GC library?
+     default: #t
+   - *gc-lib* : 
+     The Gc library
+     default: bigloogc
+   - *global-tail-call?* : 
+     Do we apply the self-global-tail-call stage?
+     default: #f
+   - *globalize-integrate-28c* : 
+     Enable the old closure integration technique (deprecated)
+     default: #f
+   - *heap-base-name* : 
+     The Bigloo heap base name
+     default: &quot;bigloo&quot;
+   - *heap-dump-names* : 
+     The name of the heap to be dumped
+     default: ()
+   - *heap-jvm-name* : 
+     The Bigloo heap file name for the JVM backend
+     default: &quot;bigloo.jheap&quot;
+   - *heap-library* : 
+     The library the heap belongs to
+     default: bigloo
+   - *heap-name* : 
+     The Bigloo heap file name
+     default: &quot;bigloo.heap&quot;
+   - *hello* : 
+     Say hello (when verbose)
+     default: #f
+   - *include-foreign* : 
+     The C included files
+     default: (&quot;bigloo.h&quot;)
+   - *include-multiple* : 
+     Enable/disable multiple inclusion of same file
+     default: #f
+   - *indent* : 
+     The name of the C beautifier
+     default: &quot;indent -npro -bap -bad -nbc -bl -ncdb -nce -nfc1 -ip0 -nlp -npcs -nsc -nsob -cli0.5 -di0 -l80 -d1 -c0 -ts2 -st&quot;
+   - *init-mode* : 
+     Module initialization mode
+     default: read
+   - *inlining-kfactor* : 
+     Inlining growth factor
+     default: #&lt;procedure:8109530.1&gt;
+   - *inlining-reduce-kfactor* : 
+     Inlinine growth factor reductor
+     default: #&lt;procedure:8109440.1&gt;
+   - *inlining?* : 
+     Inlining optimization
+     default: #t
+   - *interpreter* : 
+     Shall we interprete the source file?
+     default: #f
+   - *jvm-bigloo-classpath* : 
+     JVM Bigloo classpath
+     default: #f
+   - *jvm-catch* : 
+     Catch internal errors
+     default: #t
+   - *jvm-cinit-module* : 
+     Enable JVM class constructors to initiliaze bigloo modules
+     default: #f
+   - *jvm-classpath* : 
+     JVM classpath
+     default: &quot;.&quot;
+   - *jvm-debug* : 
+     JVM debugging mode?
+     default: #f
+   - *jvm-directory* : 
+     JVM object directory
+     default: #f
+   - *jvm-env* : 
+     List of environment variables to be available in the compiled code
+     default: ()
+   - *jvm-foreign-class-id* : 
+     The identifier of the Jlib foreign class
+     default: foreign
+   - *jvm-foreign-class-name* : 
+     The name of the Jlib foreign class
+     default: &quot;bigloo.foreign&quot;
+   - *jvm-jar?* : 
+     Enable/disable a JAR file production for the JVM back-end
+     default: #f
+   - *jvm-jarpath* : 
+     JVM jarpath
+     default: #f
+   - *jvm-java* : 
+     JVM to be used to run Java programs
+     default: &quot;java&quot;
+   - *jvm-mainclass* : 
+     JVM main class
+     default: #f
+   - *jvm-options* : 
+     JVM options
+     default: &quot;&quot;
+   - *jvm-path-separator* : 
+     JVM classpath
+     default: #f
+   - *jvm-shell* : 
+     Shell to be used when producing JVM run scripts
+     default: &quot;sh&quot;
+   - *ld-debug-option* : 
+     The C linker debugging option
+     default: &quot;-g &quot;
+   - *ld-library-dir* : 
+     The ld lib dir path (without version)
+     default: &quot;/users/serrano/prgm/project/bigloo/lib&quot;
+   - *ld-o-option* : 
+     The C linker -o option
+     default: &quot;-o &quot;
+   - *ld-optim-flags* : 
+     The C linker optimization flags
+     default: &quot;&quot;
+   - *ld-options* : 
+     ld options
+     default: &quot;&quot;
+   - *ld-post-options* : 
+     ld post options
+     default: &quot;&quot;
+   - *ld-relative* : 
+     Relative or absolute path names for libraries
+     default: #t
+   - *ld-style* : 
+     ld style
+     default: &quot;gcc&quot;
+   - *lib-dir* : 
+     The lib dir path
+     default: (&quot;.&quot; &quot;/users/serrano/prgm/project/bigloo/lib/3.6a&quot;)
+   - *lib-mode* : 
+     Lib-mode compilation?
+     default: #f
+   - *lib-src-dir* : 
+     The lib dir path
+     default: &quot;runtime&quot;
+   - *load-path* : 
+     The load path
+     default: (&quot;.&quot; &quot;/users/serrano/prgm/project/bigloo/lib/3.6a&quot;)
+   - *max-c-foreign-arity* : 
+     Max C function arity
+     default: 16
+   - *max-c-token-length* : 
+     Max C token length
+     default: 1024
+   - *mco-include-path* : 
+     Module checksum C include path
+     default: (&quot;.&quot;)
+   - *mco-suffix* : 
+     Module checksum object legal suffixes
+     default: (&quot;mco&quot;)
+   - *module-checksum-object?* : 
+     Produce a module checksum object (.mco)
+     default: #f
+   - *multi-threaded-gc?* : 
+     Are we using a multi-threaded GC?
+     default: #f
+   - *o-files* : 
+     The additional obect files
+     default: ()
+   - *obj-suffix* : 
+     Object legal suffixes
+     default: (&quot;o&quot; &quot;a&quot; &quot;so&quot;)
+   - *object-init-mode* : 
+     Object initialization mode
+     default: stagged
+   - *optim* : 
+     Optimization level
+     default: 0
+   - *optim-O-macro?* : 
+     Enable optimization by macro-expansion
+     default: #f
+   - *optim-cfa-fixnum-arithmetic?* : 
+     Enable refined fixnum arithmetic specialization
+     default: #f
+   - *optim-cfa-flonum-arithmetic?* : 
+     Enable refined flonum arithmetic specialization
+     default: #f
+   - *optim-dataflow-for-errors?* : 
+     Enable simple dataflow optimization for eliminating bad error messages
+     default: #t
+   - *optim-dataflow-types?* : 
+     Enable dataflow optimization for types
+     default: #f
+   - *optim-dataflow?* : 
+     Enable simple dataflow optimization
+     default: #f
+   - *optim-integrate?* : 
+     Enable function integration (closure analysis)
+     default: #t
+   - *optim-jvm* : 
+     Enable optimization by inlining jvm code
+     default: 0
+   - *optim-jvm-branch* : 
+     Enable JVM branch tensioning
+     default: 0
+   - *optim-jvm-constructor-inlining* : 
+     Enable JVM inlining for constructors
+     default: 0
+   - *optim-jvm-fasteq* : 
+     EQ? no longer works on integers (use =FX instead)
+     default: #f
+   - *optim-jvm-inlining* : 
+     Enable JVM inlining
+     default: 0
+   - *optim-jvm-peephole* : 
+     Enable JVM peephole optimization
+     default: 0
+   - *optim-loop-inlining?* : 
+     Loop inlining optimization
+     default: #t
+   - *optim-reduce-beta?* : 
+     Enable simple beta reduction
+     default: #f
+   - *optim-symbol-case* : 
+     Optimize case forms descrimining on symbols only
+     default: #f
+   - *optim-unroll-loop?* : 
+     Loop unrolling optimization
+     default: #unspecified
+   - *pass* : 
+     Stop after the pass
+     default: ld
+   - *pre-processor* : 
+     An optional function that pre-processes the source file
+     default: #&lt;procedure:81093c0.1&gt;
+   - *prof-table-name* : 
+     Bprof translation table file name
+     default: &quot;bmon.out&quot;
+   - *profile-library* : 
+     Use the profiled library version
+     default: #f
+   - *profile-mode* : 
+     Bigloo profile mode
+     default: 0
+   - *purify* : 
+     Produce byte code verifier compliant JVM code
+     default: #t
+   - *qualified-type-file* : 
+     The qualifed-type association file name
+     default: #f
+   - *qualified-type-file-default* : 
+     The qualifed-type association file name
+     default: &quot;.jfile&quot;
+   - *reader* : 
+     The way the reader reads input file ('plain or 'intern)
+     default: plain
+   - *reflection?* : 
+     Shall we produce reflection code for classes
+     default: #t
+   - *rm-tmp-files* : 
+     Shall the .c and .il produced files be removed?
+     default: #t
+   - *saw* : 
+     Do we go to the saw-mill?
+     default: #f
+   - *saw-no-register-allocation-functions* : 
+     The list of functions disabling register allocation
+     default: ()
+   - *saw-register-allocation-functions* : 
+     The list of functions allowing register allocation
+     default: ()
+   - *saw-register-allocation-max-size* : 
+     Max function size for optimizing the register allocation
+     default: 4000
+   - *saw-register-allocation-onexpression?* : 
+     Enable/disable saw register allocation on expression
+     default: #f
+   - *saw-register-allocation?* : 
+     Enable/disable saw register allocation
+     default: #f
+   - *saw-register-reallocation?* : 
+     Enable/disable saw register re-allocation
+     default: #f
+   - *shared-cnst?* : 
+     Shared constant compilation?
+     default: #t
+   - *shell* : 
+     The shell to exec C compilations
+     default: &quot;/bin/sh&quot;
+   - *src-files* : 
+     The sources files
+     default: ()
+   - *src-suffix* : 
+     Scheme legal suffixes
+     default: (&quot;scm&quot; &quot;bgl&quot;)
+   - *startup-file* : 
+     A startup file for the interpreter
+     default: #f
+   - *static-all-bigloo?* : 
+     Do we use the static version of all Bigloo libraries?
+     default: #f
+   - *static-bigloo?* : 
+     Do we use the static Bigloo library
+     default: #f
+   - *stdc* : 
+     Shall we produce ISO C?
+     default: #f
+   - *strip* : 
+     Shall we strip the executable?
+     default: #t
+   - *target-language* : 
+     The target language (either c, c-saw, jvm, or .net)
+     default: native
+   - *trace-name* : 
+     Trace file name
+     default: &quot;trace&quot;
+   - *trace-write-length* : 
+     Trace dumping max level
+     default: 80
+   - *unsafe-arity* : 
+     Runtime type arity safety
+     default: #f
+   - *unsafe-eval* : 
+     Disable type checking for eval functions
+     default: #f
+   - *unsafe-heap* : 
+     Disable heap version checking
+     default: #f
+   - *unsafe-library* : 
+     Use the unsafe library version
+     default: #f
+   - *unsafe-range* : 
+     Runtime range safety
+     default: #f
+   - *unsafe-struct* : 
+     Runtime struct range safety
+     default: #f
+   - *unsafe-type* : 
+     Runtime type safety
+     default: #f
+   - *unsafe-version* : 
+     Module version safety
+     default: #f
+   - *user-heap-size* : 
+     Heap size (in MegaByte) or #f for default value
+     default: 0
+   - *user-inlining?* : 
+     User inlining optimization
+     default: #t
+   - *user-pass* : 
+     The user specific compilation pass
+     default: #unspecified
+   - *verbose* : 
+     The verbosity level
+     default: 0
+   - *warning-overriden-slots* : 
+     Set to #t to warn about virtual slot overriding
+     default: #t
+   - *warning-overriden-variables* : 
+     Set to #t to warn about variable overriding
+     default: #f
+   - *with-files* : 
+     The additional modules
+     default: ()
+</pre>
+</td></tr>
+</tbody></table></center>
+
+
+
+</div>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph34937'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it34935'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

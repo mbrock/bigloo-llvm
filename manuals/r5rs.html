@@ -1,0 +1,175 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="document" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</big></big></big></strong></div><center>
+<table cellpadding="10" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc7367" align="center" valign="top" colspan="3"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+Richard Kelsey, William Clinger, and Jonathan Rees (<em id='it1119'
+>Editors</em>) </i></font>
+</td></tr></tbody></table></td></tr>
+<tr><td id="tc7369" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+H. Abelson </i></font>
+</td></tr></tbody></table></td><td id="tc7370" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+R. K. Dybvig </i></font>
+</td></tr></tbody></table></td><td id="tc7371" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+C. T. Haynes </i></font>
+</td></tr></tbody></table></td></tr>
+<tr><td id="tc7373" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+G. J. Rozas </i></font>
+</td></tr></tbody></table></td><td id="tc7374" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+N. I. Adams IV </i></font>
+</td></tr></tbody></table></td><td id="tc7375" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+D. P. Friedman </i></font>
+</td></tr></tbody></table></td></tr>
+<tr><td id="tc7377" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+E. Kohlbecker </i></font>
+</td></tr></tbody></table></td><td id="tc7378" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+G. L. Steele Jr. </i></font>
+</td></tr></tbody></table></td><td id="tc7379" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+D. H. Bartley </i></font>
+</td></tr></tbody></table></td></tr>
+<tr><td id="tc7381" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+R. Halstead </i></font>
+</td></tr></tbody></table></td><td id="tc7382" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+D. Oxley </i></font>
+</td></tr></tbody></table></td><td id="tc7383" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+G. J. Sussman </i></font>
+</td></tr></tbody></table></td></tr>
+<tr><td id="tc7385" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+G. Brooks </i></font>
+</td></tr></tbody></table></td><td id="tc7386" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+C. Hanson </i></font>
+</td></tr></tbody></table></td><td id="tc7387" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+K. M. Pitman </i></font>
+</td></tr></tbody></table></td></tr>
+<tr><td id="tc7389" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+M. Wand </i></font>
+</td></tr></tbody></table></td><td id="tc7390" align="center" valign="top" colspan="1"><table class="author"><tbody>
+<tr><td align="center"><font size="+2"><i>
+<em id='it1137'
+>Dedicated to the Memory of Robert Hieb</em> </i></font>
+</td></tr></tbody></table></td></tr>
+</tbody></table>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center7406'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7396" align="center" colspan="1"><font color="#ffffff"><strong id='bold7394'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7403" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc7399" align="left" valign="top" colspan="1"><strong id='bold7398'
+>top:</strong></td><td id="tc7400" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7416'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7410" align="center" colspan="1"><font color="#ffffff"><strong id='bold7408'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7413" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+
+
+
+
+   
+
+
+The report gives a defining description of the programming language
+Scheme.  Scheme is a statically scoped and properly tail-recursive
+dialect of the Lisp programming language invented by Guy Lewis
+Steele Jr.: and Gerald Jay Sussman.  It was designed to have an
+exceptionally clear and simple semantics and few different ways to
+form expressions.  A wide variety of programming paradigms, including
+imperative, functional, and message passing styles, find convenient
+expression in Scheme.<br/><br/>The introduction offers a brief history of the language and of
+the report.<br/><br/>The first three chapters present the fundamental ideas of the
+language and describe the notational conventions used for describing the
+language and for writing programs in the language.<br/><br/>Chapters <a href="r5rs-7.html#Expressions" class="inbound">Expressions</a> and <a href="r5rs-8.html#Program-structure" class="inbound">Program structure</a> describe
+the syntax and semantics of expressions, programs, and definitions.<br/><br/>Chapter <a href="r5rs-9.html#Standard-procedures" class="inbound">Standard procedures</a> describes Scheme's built-in
+procedures, which include all of the language's data manipulation and
+input/output primitives.<br/><br/>Chapter <a href="r5rs-10.html#Formal-syntax-and-semantics" class="inbound">Formal syntax and semantics</a> provides a formal syntax for Scheme
+written in extended BNF, along with a formal denotational semantics.
+An example of the use of the language follows the formal syntax and
+semantics.<br/><br/>The report concludes with a list of references and an
+alphabetic index.<br/><br/><br/><br/>
+
+
+
+
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph10170'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it10168'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

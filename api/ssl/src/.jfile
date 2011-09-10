@@ -1,0 +1,8 @@
+;; /tmp/bigloo/api/ssl/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__ssl_ssl "bigloo.ssl.ssl")
+  (__ssl_makelib "bigloo.ssl.make_lib")
+)
+

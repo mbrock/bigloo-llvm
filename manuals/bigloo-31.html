@@ -1,0 +1,588 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>30. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- SRFIs</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center34765'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34755" align="center" colspan="1"><font color="#ffffff"><strong id='bold34753'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34762" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc34758" align="left" valign="top" colspan="1"><strong id='bold34757'
+>top:</strong></td><td id="tc34759" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center34775'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34769" align="center" colspan="1"><font color="#ffffff"><strong id='bold34767'
+>SRFIs</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34772" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">30.1</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFI-0">SRFI 0</a></td></tr>
+ <tr><td valign="top" align="left">30.2</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFI-1">SRFI 1</a></td></tr>
+ <tr><td valign="top" align="left">30.3</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFI-22">SRFI 22</a></td></tr>
+ <tr><td></td><td valign="top" align="left">30.3.1</td><td colspan="3" width="100%"><a href="bigloo-31.html#An-example-of-SRFI-22-script">An example of SRFI-22 script</a></td></tr>
+ <tr><td></td><td valign="top" align="left">30.3.2</td><td colspan="3" width="100%"><a href="bigloo-31.html#Lazy-compilation-with-SRFI-22">Lazy compilation with SRFI-22</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center34785'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc34779" align="center" colspan="1"><font color="#ffffff"><strong id='bold34777'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc34782" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="SRFIs" class="mark"></a><a name="g28028" class="mark"></a>
+Bigloo supports various SRFIs (Scheme Request For Implementation). Some of
+them are integrated in the Bigloo core libraries. Some others are implemented
+by the means of Bigloo libraries (see <a href="bigloo-29.html#Bigloo-Libraries" class="inbound">Bigloo Libraries</a>). Only the
+first ones are described in the manual. 
+Check the Bigloo web page
+(<a href="http://www.inria.fr/indes/fp/Bigloo">http://www.inria.fr/indes/fp/Bigloo</a>).
+
+The current Bigloo core library support the following SRFIs:<br/><br/><ul class="itemize" id='itemize28052'
+><li><code id='code28031'
+>srfi-0</code> (Conditional execution).
+</li>
+<li><code id='code28033'
+>srfi-2</code> (AND-LET*: an AND with local bindings, a guarded LET* special form).
+</li>
+<li><code id='code28035'
+>srfi-6</code> (Basic String Ports).
+</li>
+<li><code id='code28037'
+>srfi-8</code> (Binding to multiple values).
+</li>
+<li><code id='code28039'
+>srfi-9</code> (<em id='emph28040'
+>Records</em> specification).
+</li>
+<li><code id='code28042'
+>srfi-18</code> (Multithreading support). 
+</li>
+<li><code id='code28044'
+>srfi-22</code> (Script interpreter invocation). 
+</li>
+<li><code id='code28046'
+>srfi-28</code> (Basic Format Strings). 
+</li>
+<li><code id='code28048'
+>srfi-30</code> (Multi-line comments).
+</li>
+<li><code id='code28050'
+>srfi-34</code> (Exception Handling for Programs).
+</li>
+</ul>
+<!-- SRFI 0 -->
+<a name="SRFI-0"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">30.1 SRFI 0</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28053" class="mark"></a><a name="g28055" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g28058" class="mark"></a><a name="cond-expand" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc28062" align="left" colspan="1"><strong id='bold28060'
+>cond-expand</strong><em id='it28061'
+> [clause]</em></td><td id="tc28063" align="right" colspan="1">bigloo syntax</td></tr>
+</tbody></table>
+
+The <code id='code28066'
+>cond-expand</code> form tests for the existence of features at
+macro-expansion time. It either expands into the body of one of its
+clauses or signals and error during syntactic
+processing. <code id='code28067'
+>cond-expand</code> expands into the body of the first clause
+whose feature requirement is currently satisfied (the <code id='code28068'
+>else</code>
+clause, if present, is selected if none of the previous clauses is
+selected).<br/><br/>A feature requirement has an obvious interpretation as a logical
+formula, where the variables have meaning <em id='emph28070'
+>true</em> is the feature
+corresponding to the feature identifier, as specified in the <em id='emph28071'
+>SRFI</em>
+registry, is in effect at the location of the <code id='code28072'
+>cond-expand</code> form,
+and <em id='emph28073'
+>false</em> otherwise. A feature requirement is satisfied it its
+formula is true under this interpretation. The formula may make use of
+identifier, <code id='code28074'
+>and</code>, <code id='code28075'
+>or</code> and <code id='code28076'
+>not</code> operators.<br/><br/>Since Bigloo version 3.1b, <code id='code28078'
+>cond-expand</code> formula may use the new
+<code id='code28079'
+>library</code> operator that checks if a library exists and is available.
+Its syntax is: <code id='code28080'
+>(library &lt;libname&gt;)</code>.<br/><br/>Examples: <br/><br/><center id='center28092'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28090'
+>(write (cond-expand
+          (srfi-0 (* 1 2))
+          ((or (<font color="#1919af"><strong id='bold34786'
+>library</strong></font> <font color="#1919af"><strong id='bold34788'
+>fthread</strong></font>) (<font color="#1919af"><strong id='bold34790'
+>library</strong></font> <font color="#1919af"><strong id='bold34792'
+>pthread</strong></font>)) (- 4 1))
+          (else (+ 3 4))))
+   -| 2<br/><br/>(cond-expand 
+   (bigloo (<font color="#6959cf"><strong id='bold34794'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34796'
+>command-line-arguments</strong></font>) (command-line)))
+   (else (<font color="#6959cf"><strong id='bold34798'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34800'
+>command-line-arguments</strong></font>) '())))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The second example assumes that <code id='code28093'
+>bigloo</code> is an alias for the SRFI 
+associated with the specification of Bigloo (i.e. the documentation for that
+Scheme system). <br/><br/>Since Bigloo 3.4b, <code id='code28095'
+>cond-expand</code> formula may use the new 
+<code id='code28096'
+>config</code> operator that checks the value of a configuration entry.
+Its syntax is: <code id='code28097'
+>(config endianeness little-endian)</code>. This
+feature relies on the <code id='code28098'
+>bigloo-config</code> function. See
+<a href="bigloo-7.html#System-Programming" class="inbound">System Programming</a> for additional details.<br/><br/>When writing portable code, the case used for the feature identifier
+should match the one in the SRFI registry. This is to ensure that the
+feature identifier will be correctly recognized whether or not the
+Scheme system is case-sensitive. To support case-insensitive Scheme
+systems, the feature identifiers in the SRFI registry are guaranteed to
+be unique even when ignoring the case.<br/><br/>In order to distinguish Bigloo versions, the following symbols are
+recognized in <code id='code28101'
+>cond-expand</code> forms.<br/><br/><ul class="itemize" id='itemize28111'
+><li><code id='code28103'
+>bigloo</code>
+</li>
+<li><code id='code28105'
+>bigloo&lt;branch-release&gt;</code>
+</li>
+<li><code id='code28107'
+>bigloo&lt;major-release&gt;</code>
+</li>
+<li><code id='code28109'
+>bigloo&lt;major-release&gt;&lt;minor-release&gt;</code>
+</li>
+</ul>
+When finalizers have been configured, the two following symbols are
+recognized by <code id='code28112'
+>cond-expand</code>:<br/><br/><ul class="itemize" id='itemize28118'
+><li><code id='code28114'
+>bigloo-finalizer</code>
+</li>
+<li><code id='code28116'
+>bigloo-weakptr</code>
+</li>
+</ul>
+Bigloo implements differents SRFI for the compiler and the interpreter.
+Thus, their are two Bigloo SRFI registers. One for the compiler and one
+for the interpreter. Bigloo compiler SRFI register contains at least the 
+following symbols: <br/><br/><ul class="itemize" id='itemize28138'
+><li><code id='code28120'
+>srfi-0</code>
+</li>
+<li><code id='code28122'
+>srfi-1</code>
+</li>
+<li><code id='code28124'
+>srfi-2</code>
+</li>
+<li><code id='code28126'
+>srfi-6</code>
+</li>
+<li><code id='code28128'
+>srfi-8</code>
+</li>
+<li><code id='code28130'
+>srfi-9</code>
+</li>
+<li><code id='code28132'
+>srfi-22</code>
+</li>
+<li><code id='code28134'
+>srfi-28</code>
+</li>
+<li><code id='code28136'
+>srfi-30</code>
+</li>
+</ul>
+With respect to the currently used Bigloo back-end, one of these symbols
+is registered:<br/><br/><ul class="itemize" id='itemize28144'
+><li><code id='code28140'
+>bigloo-c</code>
+</li>
+<li><code id='code28142'
+>bigloo-jvm</code>
+</li>
+</ul>
+Bigloo compiler implements the following SRFI:<br/><br/><ul class="itemize" id='itemize28154'
+><li><code id='code28146'
+>bigloo</code>
+</li>
+<li><code id='code28148'
+>bigloo-compile</code> 
+</li>
+<li><code id='code28150'
+>bigloo&lt;major-release&gt;</code>
+</li>
+<li><code id='code28152'
+>bigloo&lt;major-release&gt;&lt;minor-release&gt;</code>
+</li>
+</ul>
+Then the <code id='code28155'
+>-g</code> flag is used, the Bigloo compiler additionally implements
+the SRFI:<br/><br/><ul class="itemize" id='itemize28159'
+><li><code id='code28157'
+>bigloo-debug</code>
+</li>
+</ul><br/><br/>Bigloo interpreter implements the following SRFI: <br/><br/><ul class="itemize" id='itemize28170'
+><li><code id='code28162'
+>bigloo</code>
+</li>
+<li><code id='code28164'
+>bigloo-eval</code> 
+</li>
+<li><code id='code28166'
+>bigloo&lt;major-release&gt;</code>
+</li>
+<li><code id='code28168'
+>bigloo&lt;major-release&gt;&lt;minor-release&gt;</code>
+</li>
+</ul>
+When a library is used, the name of the library is added to the compiler SRFI
+register. That is:<br/><br/><center id='center28179'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28177'
+>(<font color="#1919af"><strong id='bold34802'
+>module</strong></font> <font color="#1919af"><strong id='bold34804'
+>foo</strong></font>
+   (<font color="#1919af"><strong id='bold34806'
+>library</strong></font> <font color="#1919af"><strong id='bold34808'
+>srfi1</strong></font>))<br/><br/>(print (cond-expand (srfi1 'with-srfi1) (else 'nothing)))
+   -| 'with-srfi1
+(print (eval '(cond-expand (srfi1 'with-srfi1) (else 'nothing))))
+   -| 'with-srfi1
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g28183" class="mark"></a><a name="register-eval-srfi!" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc28187" align="left" colspan="1"><strong id='bold28185'
+>register-eval-srfi!</strong><em id='it28186'
+> srfi-name</em></td><td id="tc28188" align="right" colspan="1">bigloo procedure</td></tr>
+</tbody></table>
+This argument <code id='code28192'
+><em id='it28191'
+>srfi-name</em></code> is a symbol. It registers <code id='code28194'
+><em id='it28193'
+>srfi-name</em></code>
+in the Bigloo interpreter SRFI register. This function must only be
+used when implementing a library. The code of that library must contain
+one unique call to <code id='code28195'
+>register-eval-srfi!</code>. Let's suppose, for instance,
+a <code id='code28196'
+>format</code> library. The implementation for that library must contain
+an expression like:<br/><br/><center id='center28200'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28198'
+>(register-eval-srfi! 'format)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Calling <code id='code28201'
+>(register-eval-srfi! name)</code> makes <code id='code28202'
+>name</code> supported
+by interpreted <code id='code28203'
+>cond-expand</code> forms. <br/><br/><em id='emph28205'
+>Note:</em> There is no <code id='code28206'
+>register-compiler-srfi!</code> because the
+compiler automatically registers SRFI when the <code id='code28207'
+>-library</code>
+flags are used. However, it exists several ways to tell the
+compiler that it actually supports some srfis when compiling some modules.<br/><br/><ul class="itemize" id='itemize28224'
+><li>The first way is to insert calls to <code id='code28209'
+>register-eval-srfi!</code> in the
+<code id='code28210'
+>.bigloorc</code> file (see <a href="bigloo-32.html#Compiler-Description" class="inbound">Compiler Description</a>). <br/><br/></li>
+<li>The second, is to use <code id='code28213'
+>option</code> (see <a href="bigloo-4.html#Module-Declaration" class="inbound">Module Declaration</a>) module 
+clause, such as:<br/><br/><center id='center28220'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28218'
+>(<font color="#1919af"><strong id='bold34810'
+>module</strong></font> <font color="#1919af"><strong id='bold34812'
+>example</strong></font>
+   ...
+   (option (register-srfi! 'srfi-foobar)))<br/><br/>...
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</li>
+<li>The last way is to use the command line option <code id='code28222'
+>-srfi</code>
+(see <a href="bigloo-32.html#Compiler-Description" class="inbound">Compiler Description</a>).
+</li>
+</ul>
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- SRFI 1 -->
+<a name="SRFI-1"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">30.2 SRFI 1</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28227" class="mark"></a>
+The SRFI 1 is implemented as a Bigloo library. Hence, in order to use
+the functions it provides, a module must import it.<br/><br/><center id='center28237'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28235'
+>(<font color="#1919af"><strong id='bold34814'
+>module</strong></font> <font color="#1919af"><strong id='bold34816'
+>ex</strong></font>
+   (<font color="#1919af"><strong id='bold34818'
+>library</strong></font> <font color="#1919af"><strong id='bold34820'
+>srfi1</strong></font>))<br/><br/>(print (find-tail even? '(3 1 37 -8 -5 0 0)))
+ =&gt; '(-8 -5 0 0))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div><br>
+<!-- SRFI 22 -->
+<a name="SRFI-22"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">30.3 SRFI 22</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="g28238" class="mark"></a><a name="g28240" class="mark"></a>
+The SRFI 22 describes basic prerequisites for running Scheme programs as
+Unix scripts in a uniform way. A file (henceforth a <em id='emph28242'
+>scipt</em>) conforming
+SRFI 22 has the following syntax:<br/><br/><center id='center28247'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog28245'
+>&lt;script&gt;         ==&gt; &lt;script prelude&gt;? &lt;program&gt;
+&lt;script prelude&gt; ==&gt; <code id='code28244'
+>#!</code> &lt;space&gt; &lt;all but linebreak&gt;* &lt;linebreak&gt;
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A Scheme script interpreter loads the <code id='code28248'
+>&lt;script&gt;</code>. It ignores the
+script prelude and interprets the rest of the file according to the
+language dialect specified by the name of the interpreter.<br/><br/>The Scheme script interpreter may also load a different file after
+making a reasonable check that loading it is semantically equivalent to
+loading <code id='code28250'
+>&lt;script&gt;</code>. For example, the script interpreter may assume
+that a file with a related name (say, with an additional extension) is a
+compiled version of <code id='code28251'
+>&lt;script&gt;</code>.<br/><br/><!-- An example of SRFI-22 script -->
+<a name="An-example-of-SRFI-22-script"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">30.3.1 An example of SRFI-22 script</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+
+Let us consider the following Bigloo script located in a file
+`foo.scm':<br/><br/><center id='center28261'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28259'
+>#! /usr/bin/env ./execute
+(<font color="#1919af"><strong id='bold34822'
+>module</strong></font> <font color="#1919af"><strong id='bold34824'
+>foo</strong></font>
+   (main main))<br/><br/>(<font color="#6959cf"><strong id='bold34826'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34828'
+>main</strong></font> argv)
+   (print <font color="red">&quot;foo: &quot;</font> argv))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Let us consider the following `execute' shell script:<br/><br/><center id='center28265'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28263'
+>$ cat &gt; execute
+#!/bin/sh
+bigloo -i $*
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Provided that `foo.scm' as the execute flag switched on, it is
+possible to <em id='emph28266'
+>execute</em> it:<br/><br/><center id='center28270'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28268'
+>$ chmod u+x foo.scm
+$ ./foo.scm
+  -| foo: (./foo.scm)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The same Bigloo module can be compiled and executed such as:<br/><br/><center id='center28274'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28272'
+>$ bigloo foo.scm
+$ ./a.out
+  -| foo: (a.out)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</div>
+<!-- Lazy compilation with SRFI-22 -->
+<a name="Lazy-compilation-with-SRFI-22"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">30.3.2 Lazy compilation with SRFI-22</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+
+SRFI-22 can be used to implement <em id='emph28275'
+>lazy</em> compilation. For instance,
+let us consider the following shell script:<br/><br/><center id='center28279'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28277'
+>$ cat &gt; bgl
+#!/bin/sh
+SOURCEFILE=$1
+case $SOURCEFILE in
+    *.scm)
+        OUTFILE=${SOURCEFILE%.scm}
+        if ( bigloo -s -o $OUTFILE $SOURCEFILE ); then
+            /bin/rm $OUTFILE.o
+            shift
+            ./$OUTFILE $&#x40;
+        fi
+        ;;
+    *)
+        echo Error: need a \*.scm file!
+        ;;
+esac
+</pre>
+</td></tr>
+</tbody></table></center>
+
+And the following Bigloo script:<br/><br/><center id='center28288'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog28286'
+>#! /usr/bin/env ./bgl
+(<font color="#1919af"><strong id='bold34831'
+>module</strong></font> <font color="#1919af"><strong id='bold34833'
+>foo</strong></font>
+   (main main))<br/><br/>(<font color="#6959cf"><strong id='bold34835'
+>define</strong></font> (<font color="#6959cf"><strong id='bold34837'
+>main</strong></font> argv)
+   (print <font color="red">&quot;foo: &quot;</font> argv))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+When executed in the following way:<br/><br/><center id='center28292'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccffcc"><pre class="prog" id='prog28290'
+>$ chmod u+x foo.scm
+$ ./foo.scm
+  -| foo: (./foo.scm)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The Bigloo module <code id='code28293'
+>foo.scm</code> will first be compiled and then executed.
+Of course, one may consider more complex compiler drivers where it is
+first checked that the module is not already compiled.<br/><br/><br/>
+
+</div>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph34845'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it34843'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>

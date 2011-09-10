@@ -1,0 +1,412 @@
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/api/Makefile.api                     */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Sun Jun 20 06:08:20 2010                          */
+#*    Last change :  Tue Sep 21 13:49:24 2010 (serrano)                */
+#*    Copyright   :  2010 Manuel Serrano                               */
+#*    -------------------------------------------------------------    */
+#*    Generic rules for building and installing libraries              */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    Installation                                                     */
+#*---------------------------------------------------------------------*/
+.PHONY: api-install-init api-install-c api-install-jvm api-install-dotnet \
+  api-uninstall-init api-uninstall-c api-uninstall-jvm api-uninstall-dotnet
+
+# init files
+api-install-init:
+	if [ $(LIBDIR)/$(FILDIR) != $(BOOTLIBDIR) ]; then \
+	  cp $(BOOTLIBDIR)/$(API).init $(LIBDIR)/$(FILDIR)/$(API).init && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/$(API).init; \
+        fi
+
+api-uninstall-init:
+	if [ $(LIBDIR)/$(FILDIR) != $(BOOTLIBDIR) ]; then \
+	  $(RM) -f $(LIBDIR)/$(FILDIR)/$(API).init; \
+        fi
+
+# C installation
+api-install-c:
+	if [ $(LIBDIR)/$(FILDIR) != $(BOOTLIBDIR) ]; then \
+	  cp $(BOOTLIBDIR)/$(API).heap $(LIBDIR)/$(FILDIR)/$(API).heap && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/$(API).heap; \
+        fi
+	$(MAKE) install-lib LIB=libbigloo$(API)_s-$(RELEASE)
+	$(MAKE) install-link-lib LIB=libbigloo$(API)_u-$(RELEASE) \
+             LN=libbigloo$(API)_s-$(RELEASE)
+	$(MAKE) install-lib LIB=libbigloo$(API)_es-$(RELEASE)
+	$(MAKE) install-lib LIB=libbigloo$(API)_eu-$(RELEASE)
+
+api-uninstall-c:
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/$(API).heap
+	-$(MAKE) uninstall-lib LIB=libbigloo$(API)_s-$(RELEASE)
+	-$(MAKE) uninstall-lib LIB=libbigloo$(API)_u-$(RELEASE)
+	-$(MAKE) uninstall-lib LIB=libbigloo$(API)_eu-$(RELEASE)
+	-$(MAKE) uninstall-lib LIB=libbigloo$(API)_es-$(RELEASE)
+
+# JVM installation
+api-install-jvm:
+	if [ $(LIBDIR)/$(FILDIR) != $(BOOTLIBDIR) ]; then \
+	  cp $(BOOTLIBDIR)/$(API).jheap $(LIBDIR)/$(FILDIR)/$(API).jheap && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/$(API).jheap && \
+	  cp $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).zip \
+             $(LIBDIR)/$(FILDIR) && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/bigloo$(API)_s-$(RELEASE).zip && \
+	  cp $(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).zip \
+             $(LIBDIR)/$(FILDIR) && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/bigloo$(API)_es-$(RELEASE).zip; \
+        fi
+	(cd $(LIBDIR)/$(FILDIR) && \
+           $(RM) -f bigloo$(API)_u-$(RELEASE).zip && \
+           $(LN_S) bigloo$(API)_s-$(RELEASE).zip \
+                   bigloo$(API)_u-$(RELEASE).zip)
+	(cd $(LIBDIR)/$(FILDIR) && \
+           $(RM) -f bigloo$(API)_eu-$(RELEASE).zip && \
+           $(LN_S) bigloo$(API)_es-$(RELEASE).zip \
+                   bigloo$(API)_eu-$(RELEASE).zip)
+
+# JVM uninstallation
+api-uninstall-jvm:
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/$(API).jheap
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_s-$(RELEASE).zip
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_u-$(RELEASE).zip
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_es-$(RELEASE).zip
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_eu-$(RELEASE).zip
+
+# Dotnet install
+api-install-dotnet:
+	if [ $(LIBDIR)/$(FILDIR) != $(BOOTLIBDIR) ]; then \
+	  cp $(BOOTLIBDIR)/$(API).jheap $(LIBDIR)/$(FILDIR)/$(API).jheap && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/$(API).jheap && \
+	  cp $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).dll \
+             $(LIBDIR)/$(FILDIR)/bigloo$(API)_s-$(RELEASE).dll && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/bigloo$(API)_s-$(RELEASE).dll && \
+	  cp $(BOOTLIBDIR)/bigloo$(API)_u-$(RELEASE).dll \
+             $(LIBDIR)/$(FILDIR)/bigloo$(API)_u-$(RELEASE).dll && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/bigloo$(API)_u-$(RELEASE).dll && \
+	  cp $(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).dll \
+             $(LIBDIR)/$(FILDIR)/bigloo$(API)_es-$(RELEASE).dll && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/bigloo$(API)_es-$(RELEASE).dll && \
+	  cp $(BOOTLIBDIR)/bigloo$(API)_eu-$(RELEASE).dll \
+             $(LIBDIR)/$(FILDIR)/bigloo$(API)_eu-$(RELEASE).dll && \
+	  chmod $(MODFILE) $(LIBDIR)/$(FILDIR)/bigloo$(API)_es-$(RELEASE).dll; \
+        fi
+
+# Dotnet uninstallation
+api-uninstall-dotnet:
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/$(API).jheap
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_s-$(RELEASE).dll
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_u-$(RELEASE).dll
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_es-$(RELEASE).dll
+	-$(RM) -f $(LIBDIR)/$(FILDIR)/bigloo$(API)_eu-$(RELEASE).dll
+
+#*---------------------------------------------------------------------*/
+#*    Init build                                                       */
+#*---------------------------------------------------------------------*/
+.PHONY: api-init clean-init
+
+api-init: $(BOOTLIBDIR)/$(API).init
+
+$(BOOTLIBDIR)/$(API).init: $(MISC_SRC_DIR)/$(API).init
+	cp $^ $@
+
+clean-init:
+	$(RM) -f $(BOOTLIBDIR)/$(API).init
+
+#*---------------------------------------------------------------------*/
+#*    C build                                                          */
+#*---------------------------------------------------------------------*/
+.PHONY: api-c heap-c api-c-static api-c-shared api-clean-c
+
+api-c: api-init $(TAGS) .afile heap-c
+	mkdir -p objs
+	$(MAKE) api-c-static && $(MAKE) api-c-shared
+
+heap-c: $(BOOTLIBDIR)/$(API).heap
+$(BOOTLIBDIR)/$(API).heap: .afile $(MISC_SRC_DIR)/make_lib.scm
+	$(RM) -f $(BOOTLIBDIR)/$(API).heap
+	$(BIGLOO) $(EFLAGS) $(BFLAGS) $(BHEAPFLAGS) \
+             $(MISC_SRC_DIR)/make_lib.scm -addheap $(BOOTLIBDIR)/$(API).heap
+
+api-c-static: $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a \
+              $(BOOTLIBDIR)/libbigloo$(API)_u-$(RELEASE).a \
+              $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a \
+              $(BOOTLIBDIR)/libbigloo$(API)_eu-$(RELEASE).a
+
+$(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a: .afile $(OBJECTS)
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a
+	$(AR) $(ARFLAGS) $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a $(OBJECTS)
+	$(RANLIB) $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a
+
+$(BOOTLIBDIR)/libbigloo$(API)_u-$(RELEASE).a: $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a
+	cd $(BOOTLIBDIR) && \
+        $(RM) -f libbigloo$(API)_u-$(RELEASE).a && \
+        $(LN_S) libbigloo$(API)_s-$(RELEASE).a libbigloo$(API)_u-$(RELEASE).a
+
+$(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a: .afile $(EOBJECTS)
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a
+	$(AR) $(ARFLAGS) $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a $(EOBJECTS)
+	$(RANLIB) $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a
+
+$(BOOTLIBDIR)/libbigloo$(API)_eu-$(RELEASE).a: $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a
+	cd $(BOOTLIBDIR) && \
+        $(RM) -f libbigloo$(API)_eu-$(RELEASE).a && \
+        $(LN_S) libbigloo$(API)_es-$(RELEASE).a libbigloo$(API)_eu-$(RELEASE).a
+
+api-c-shared:
+	if [ "$(SHAREDLIBRARYSUPPORT)" = "yes" ]; then \
+	  $(MAKE) $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).$(SHAREDSUFFIX) && \
+	  $(MAKE) $(BOOTLIBDIR)/libbigloo$(API)_u-$(RELEASE).$(SHAREDSUFFIX) && \
+          $(MAKE) $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).$(SHAREDSUFFIX) && \
+          $(MAKE) $(BOOTLIBDIR)/libbigloo$(API)_eu-$(RELEASE).$(SHAREDSUFFIX); \
+        fi
+
+$(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).$(SHAREDSUFFIX): .afile $(OBJECTS)
+	$(MAKE) shared-lib \
+           FORCELD=true \
+           LIBDEST=$@ \
+           SONAME=libbigloo$(API)_s-$(RELEASE).$(SHAREDSUFFIX) \
+           EXTRALIBS="$(EXTRALIBS) $(EXTRALIBS_S)" \
+           CLOSELIBS="-lbigloo_s-$(RELEASE)"
+
+$(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).$(SHAREDSUFFIX): .afile $(EOBJECTS)
+	$(MAKE) shared-lib \
+           OBJECTS=$(EOBJECTS) \
+           FORCELD=true \
+           LIBDEST=$@ \
+           SONAME=libbigloo$(API)_es-$(RELEASE).$(SHAREDSUFFIX) \
+           EXTRALIBS="$(EXTRALIBS) $(EXTRALIBS_S)" \
+           LDLIBS="-lbigloo$(API)_s-$(RELEASE) $(LDLIBS)" \
+           CLOSELIBS="-lbigloo$(API)_s-$(RELEASE) -lbigloo_s-$(RELEASE)"
+
+$(BOOTLIBDIR)/libbigloo$(API)_u-$(RELEASE).$(SHAREDSUFFIX): \
+  $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).$(SHAREDSUFFIX)
+	$(MAKE) shared-link-lib \
+           FORCELD=true \
+           LIBDEST=$@ \
+           LIBSRC=$< \
+           SONAME=libbigloo$(API)_s-$(RELEASE).$(SHAREDSUFFIX) \
+           EXTRALIBS="$(EXTRALIBS) $(EXTRALIBS_U)" \
+           CLOSELIBS="-lbigloo_u-$(RELEASE)"
+
+$(BOOTLIBDIR)/libbigloo$(API)_eu-$(RELEASE).$(SHAREDSUFFIX): \
+  $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).$(SHAREDSUFFIX)
+	$(MAKE) shared-link-lib \
+           OBJECTS=$(EOBJECTS) \
+           FORCELD=true \
+           LIBDEST=$@ \
+           LIBSRC=$< \
+           SONAME=libbigloo$(API)_eu-$(RELEASE).$(SHAREDSUFFIX) \
+           EXTRALIBS="$(EXTRALIBS) $(EXTRALIBS_U)" \
+           LDLIBS="-lbigloo$(API)_u-$(RELEASE) $(LDLIBS)" \
+           CLOSELIBS="-lbigloo$(API)_u-$(RELEASE) -lbigloo_u-$(RELEASE)"
+
+
+api-clean-c:
+	$(RM) -rf objs
+	$(RM) -f $(BOOTLIBDIR)/$(API).heap
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).$(SHAREDSUFFIX)
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_u-$(RELEASE).$(SHAREDSUFFIX)
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).$(SHAREDSUFFIX)
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_eu-$(RELEASE).$(SHAREDSUFFIX)
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_s-$(RELEASE).a
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_u-$(RELEASE).a
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_es-$(RELEASE).a
+	$(RM) -f $(BOOTLIBDIR)/libbigloo$(API)_eu-$(RELEASE).a
+
+#*---------------------------------------------------------------------*/
+#*    JVM build                                                        */
+#*---------------------------------------------------------------------*/
+.PHONY: api-jvm heap-jvm api.zip api-clean-jvm
+
+api-jvm: api-init $(TAGS) .jfile heap-jvm
+	mkdir -p $(CLASS_DIR)
+	mkdir -p $(CLASS_EDIR)
+	$(MAKE) api.zip
+
+heap-jvm: $(BOOTLIBDIR)/$(API).jheap
+$(BOOTLIBDIR)/$(API).jheap: .jfile .afile $(MISC_SRC_DIR)/make_lib.scm
+	@ $(RM) -f $(BOOTLIBDIR)/$(API).jheap
+	@ $(BIGLOO) -jvm  $(EFLAGS) $(BFLAGS) $(BHEAPFLAGS) \
+            $(MISC_SRC_DIR)/make_lib.scm -addheap $(BOOTLIBDIR)/$(API).jheap
+
+api.zip: $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).zip \
+         $(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).zip \
+
+$(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).zip: .afile .jfile $(BGL_CLASSES) javac_s
+	@ $(RM) -f $@
+	@ (cd objs/class_s && \
+	  $(ZIP) -q $(ZFLAGS) $@ $(CLASS_DIR:objs/class_s/%=%)/*.class)
+
+javac_s: $(JAVA_CLASSES_SRC)
+	if [ "$(JAVA_CLASSES_SRC:objs/class_s/%=%) " != " " ]; then \
+	  (cd objs/class_s && \
+             $(JAVAC) $(CYGWINJVMPATH) -classpath $(JVMAPIBOOTPATH) $(JAVA_CLASSES_SRC:objs/class_s/%=%)); \
+        fi
+
+$(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).zip: .afile .jfile $(BGL_ECLASSES)
+	@ $(RM) -f $@
+	@ (cd objs/class_es && \
+	  $(ZIP) -q $(ZFLAGS) $@ $(CLASS_EDIR:objs/class_es/%=%)/*.class)
+
+api-clean-jvm:
+	$(RM) -f $(BOOTLIBDIR)/$(API).jheap
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).zip
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).zip
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_u-$(RELEASE).zip
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_eu-$(RELEASE).zip
+	$(RM) -rf $(CLASS_DIR)
+
+#*---------------------------------------------------------------------*/
+#*    Dotnet build                                                     */
+#*---------------------------------------------------------------------*/
+.PHONY: api-dotnet api.dll api-clean-dotnet
+
+api-dotnet: api-init $(TAGS) $(DOTNET_OBJ_DIR) $(DOTNET_OBJ_EDIR) 
+	$(MAKE) api.dll
+
+$(DOTNET_OBJ_DIR):
+	mkdir -p $(DOTNET_OBJ_DIR)
+
+$(DOTNET_OBJ_EDIR):
+	mkdir -p $(DOTNET_OBJ_EDIR)
+
+api.dll: $(TAGS) .jfile heap-jvm
+	@ $(MAKE) $(BOOTLIBDIR)/bigloo$(API)_u-$(RELEASE).dll
+	@ $(MAKE) $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).dll
+	@ $(MAKE) $(BOOTLIBDIR)/bigloo$(API)_eu-$(RELEASE).dll
+	@ $(MAKE) $(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).dll
+
+$(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).dll: .afile $(BGL_DOTNET_OBJ) $(DOTNET_OBJ_SRC)
+	@ $(RM) -f $@
+	@ (cd $(DOTNET_OBJ_DIR) && \
+	  $(DOTNETCSCC) \
+		$(DOTNETFTDLLPATH) $(DOTNETLINKBIGLOODLL) \
+	        $(EXTRALIBS_S) \
+                -shared -o $@ \
+                $(DOTNET_OBJ_SRC:$(DOTNET_OBJ_DIR)/%=%) \
+		$(BGL_DOTNET_OBJ:$(DOTNET_OBJ_DIR)/%=%))
+
+$(BOOTLIBDIR)/bigloo$(API)_u-$(RELEASE).dll: .afile $(BGL_DOTNET_OBJ) $(DOTNET_OBJ_SRC)
+	@ $(RM) -f $@
+	@ (cd $(DOTNET_OBJ_DIR) && \
+	  $(DOTNETCSCC) \
+		$(DOTNETFTDLLPATH) $(DOTNETLINKBIGLOODLL) \
+	        $(EXTRALIBS_U) \
+                -shared -o $@ \
+                $(DOTNET_OBJ_SRC:$(DOTNET_OBJ_DIR)/%=%) \
+		$(BGL_DOTNET_OBJ:$(DOTNET_OBJ_DIR)/%=%))
+
+$(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).dll: .afile $(BGL_DOTNET_EOBJ)
+	@ $(RM) -f $@
+	@ (cd $(DOTNET_OBJ_EDIR) && \
+	  $(DOTNETCSCC) \
+		$(DOTNETFTDLLPATH) $(DOTNETLINKBIGLOODLL) \
+	        $(EXTRALIBS_S) \
+                 -shared -o $@ $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).dll \
+		$(BGL_DOTNET_EOBJ:$(DOTNET_OBJ_EDIR)/%=%))
+
+$(BOOTLIBDIR)/bigloo$(API)_eu-$(RELEASE).dll: .afile $(BGL_DOTNET_EOBJ)
+	@ $(RM) -f $@
+	@ (cd $(DOTNET_OBJ_EDIR) && \
+	  $(DOTNETCSCC) \
+		$(DOTNETFTDLLPATH) $(DOTNETLINKBIGLOODLL) \
+	        $(EXTRALIBS_U) \
+                 -shared -o $@ $(BOOTLIBDIR)/bigloo$(API)_u-$(RELEASE).dll \
+		$(BGL_DOTNET_EOBJ:$(DOTNET_OBJ_EDIR)/%=%))
+
+api-clean-dotnet:
+	$(RM) -f $(BOOTLIBDIR)/$(API).jheap
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_s-$(RELEASE).dll
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_es-$(RELEASE).dll
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_u-$(RELEASE).dll
+	$(RM) -f $(BOOTLIBDIR)/bigloo$(API)_eu-$(RELEASE).dll
+	$(RM) -rf $(DOTNET_OBJ_DIR)
+
+#*---------------------------------------------------------------------*/
+#*    Compilation rules                                                */
+#*---------------------------------------------------------------------*/
+.SUFFIXES:
+.SUFFIXES: .scm .c .java .cs .class .o .obj
+
+objs/%.o: $(BIGLOO_SRC_DIR)/%.scm
+	$(BIGLOO) $(EFLAGS) $(BAPIFLAGS) -copt $(CPICFLAGS) -copt "-I$(C_SRC_DIR)" $< -o $@ -c
+
+objs/%.o: $(MISC_SRC_DIR)/%.scm
+	$(BIGLOO) $(EFLAGS) $(BAPIFLAGS) -copt $(CPICFLAGS) -copt "-I$(C_SRC_DIR)" $< -o $@ -c
+
+objs/%.o: $(C_SRC_DIR)/%.c
+	$(CC) $(CEFLAGS) $(CAPIFLAGS) $(CFLAGS) $(CPICFLAGS) -I. -I $(BOOTLIBDIR) $(GCINCLUDE) -I $(C_SRC_DIR) $< -o $@ -c
+
+$(CLASS_DIR)/%.class: $(BIGLOO_SRC_DIR)/%.scm
+	$(BIGLOO) -jvm  $(EFLAGS) $(BJVMFLAGS) $(BAPIFLAGS) -c -jvm-purify $< -o $@
+
+$(CLASS_DIR)/%.java: $(JAVA_SRC_DIR)/%.java
+	cp $< $@
+
+$(CLASS_EDIR)/%.class: $(MISC_SRC_DIR)/%.scm
+	$(BIGLOO) -jvm  $(EFLAGS) $(BJVMFLAGS) $(BAPIFLAGS) -c -jvm-purify $< -o $@
+
+$(DOTNET_OBJ_DIR)/%.cs: $(DOTNET_SRC_DIR)/%.cs
+	cp $< $@
+
+$(DOTNET_OBJ_DIR)/%.obj: $(BIGLOO_SRC_DIR)/%.scm
+	$(BIGLOO) -dotnet \
+            -dotnet-mono-workaround -dotnet-pnet-workaround \
+             $(EFLAGS) $(BDOTNETFLAGS) $(BAPIFLAGS) -c -dotnet-managed $< -o $@
+
+$(DOTNET_OBJ_EDIR)/%.obj: $(MISC_SRC_DIR)/%.scm
+	$(BIGLOO) -dotnet \
+            -dotnet-mono-workaround -dotnet-pnet-workaround \
+             $(EFLAGS) $(BDOTNETFLAGS) $(BAPIFLAGS) -c -dotnet-managed $< -o $@
+
+#*---------------------------------------------------------------------*/
+#*    ude                                                              */
+#*---------------------------------------------------------------------*/
+.PHONY: ude udeclean dep
+
+ude:
+	@ $(MAKE) -f Makefile .afile .etags .jfile
+
+.afile: $(_BGL_SOURCES)
+	$(RM) -f .afile
+	$(AFILE) -o .afile $(EAFLAGS) $(_BGL_SOURCES)
+
+.jfile: $(_BGL_SOURCES)
+	$(JFILE) -o .jfile $(EAFLAGS) \
+            -I $(BIGLOO_SRC_DIR) -I $(MISC_SRC_DIR) \
+            -pbase bigloo.$(API) \
+            make_lib.scm \
+            $(_BGL_OBJECTS:%=%.scm) \
+            $(_STK_OBJECTS:%=%.bgl) \
+            $(_PKG_OBJECTS:%=%.spi) \
+            $(_SRFI_OBJECTS:%=%.bgl)
+
+.etags: $(_BGL_SOURCES)
+	$(BTAGS) -o .etags $(_BGL_SOURCES)
+
+udeclean:
+	$(RM) -f .afile .etags .jfile
+
+dep:
+	@(num=`grep -n '^#bdepend start' Makefile | awk -F: '{ print $$1}' -`;\
+          head -n `expr $$num - 1` Makefile > /tmp/Makefile.aux)
+	@ $(DEPEND) -fno-mco \
+                    -search-path $(BIGLOO_SRC_DIR) \
+                    -strict-obj-dir objs \
+                    $(_BGL_SOURCES) >> /tmp/Makefile.aux
+	@ mv /tmp/Makefile.aux Makefile
+
+#*---------------------------------------------------------------------*/
+#*    Cleaning                                                         */
+#*---------------------------------------------------------------------*/
+.PHONY: api-clean api-cleanall
+
+api-clean: api-clean-c api-clean-jvm api-clean-dotnet
+	$(RM) -f *~
+	$(RM) -f *.mco
+	$(RM) -f *.ast
+
+api-cleanall: clean udeclean clean-init

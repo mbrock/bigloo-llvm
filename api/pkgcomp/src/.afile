@@ -1,0 +1,9 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/pkgcomp/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (@configure "Llib/configure.scm")
+  (@interface "Llib/interface.scm")
+)
+

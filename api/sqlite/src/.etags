@@ -1,0 +1,168 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/sqlite.scm,1124
+(module __sqlite_sqlite15,963
+(define (sqltiny?35,1444
+(define (make-sqltiny35,1444
+(define (fill-sqltiny!35,1444
+	    (class sqltiny35,1444
+(define (sqltiny-%setup-sqltiny!-set!36,1473
+(define (sqltiny-%setup-sqltiny!36,1473
+(define (sqltiny-sync::symbol37,1499
+(define (sqltiny-$builtin::$sqltiny-set!38,1553
+(define (sqltiny-$builtin::$sqltiny38,1553
+(define-method (object-display o::sqlite . port71,2866
+(define-method (object-write o::sqlite . port80,3317
+(define-method (object-print o::sqlite port print-slot89,3766
+(define (%setup-sqlite!95,4071
+(define (%setup-sqltiny!107,4580
+(define-generic (sqlite-close114,4938
+(define-generic (sqlite-exec128,5480
+(define-macro (sqlite-callback144,6172
+(define-generic (sqlite-eval165,6923
+(define-generic (sqlite-map185,7761
+(define (sqlite-table-informations205,8592
+(define (sqlite-table-number-of-rows213,8946
+(define (sqlite-table-name-of-columns221,9323
+(define (sqlite-name-of-tables227,9633
+(define (sqlite-dump235,9990
+(define-generic (sqlite-dump-table243,10364
+(define (sqlite-format255,10908
+(define (sqlite-last-insert-rowid433,16010
+
+Llib/sqltiny.scm,2722
+(module __sqlite_sqltiny15,963
+(define ($sqltiny?19,1055
+(define (make-$sqltiny19,1055
+(define (fill-$sqltiny!19,1055
+   (export (class $sqltiny19,1055
+(define ($sqltiny-$version::bstring-set!20,1082
+(define ($sqltiny-$version::bstring20,1082
+(define ($sqltiny-path::bstring-set!21,1138
+(define ($sqltiny-path::bstring21,1138
+(define ($sqltiny-sync::symbol22,1159
+(define ($sqltiny-tables::pair-nil-set!23,1212
+(define ($sqltiny-tables::pair-nil23,1212
+(define ($sqltiny-mutex::mutex-set!24,1252
+(define ($sqltiny-mutex::mutex24,1252
+(define ($sqltiny-transaction::bool-set!25,1298
+(define ($sqltiny-transaction::bool25,1298
+(define ($sqltiny-table?26,1339
+(define (make-$sqltiny-table26,1339
+(define (fill-$sqltiny-table!26,1339
+	   (class $sqltiny-table26,1339
+(define ($sqltiny-table-name::bstring27,1365
+(define ($sqltiny-table-mutex::mutex-set!28,1398
+(define ($sqltiny-table-mutex::mutex28,1398
+(define ($sqltiny-table-rowid::long-set!29,1443
+(define ($sqltiny-table-rowid::long29,1443
+(define ($sqltiny-table-removable::bool30,1476
+(define ($sqltiny-table-columns::pair-nil-set!31,1524
+(define ($sqltiny-table-columns::pair-nil31,1524
+(define ($sqltiny-table-*columns::pair-nil-set!32,1565
+(define ($sqltiny-table-*columns::pair-nil32,1565
+(define ($sqltiny-table-rows::pair-nil-set!33,1607
+(define ($sqltiny-table-rows::pair-nil33,1607
+(define ($sqltiny-table-constraints::pair-nil-set!34,1645
+(define ($sqltiny-table-constraints::pair-nil34,1645
+(define ($sqltiny-table-keycheck::procedure-set!35,1690
+(define ($sqltiny-table-keycheck::procedure35,1690
+(define ($sqltiny-table-last-row-pair::pair-nil-set!36,1761
+(define ($sqltiny-table-last-row-pair::pair-nil36,1761
+(define ($sqltiny-column?37,1809
+(define (make-$sqltiny-column37,1809
+(define (fill-$sqltiny-column!37,1809
+	   (class $sqltiny-column37,1809
+(define ($sqltiny-column-name::bstring38,1836
+(define ($sqltiny-column-type::symbol39,1869
+(define ($sqltiny-column-index::int-set!40,1916
+(define ($sqltiny-column-index::int40,1916
+(define ($sqltiny-column-primkey::bool41,1949
+(define ($sqltiny-column-default::obj42,1995
+(define ($sqltiny-version54,2646
+(define-method (object-display o::$sqltiny-table . port60,2908
+(define-method (object-write o::$sqltiny-table . port69,3383
+(define-method (object-print o::$sqltiny-table port print-slot82,3963
+(define ($sqltiny-open88,4276
+(define ($sqltiny-close123,5347
+(define (sqltiny-do134,5820
+(define ($sqltiny-exec148,6356
+(define ($sqltiny-eval155,6717
+(define ($sqltiny-map162,7095
+(define (sqltiny-portable-parse172,7507
+(define (for-list178,7815
+(define (dump-column189,8219
+(define (dump-row205,8799
+(define ($sqltiny-dump-table221,9369
+
+Llib/parser.scm,124
+(module __sqlite_parser15,963
+(define type-default30,1424
+(define (not-implemented37,1708
+(define sqltiny-parser47,2111
+
+Llib/lexer.scm,262
+(module __sqlite_lexer15,963
+(define-struct loc21,1236
+(define *keyword*26,1489
+(define *like*44,2151
+(define *join*50,2307
+(define (the-loc59,2733
+(define (strip-string!67,3181
+(define sqltiny-lexer103,4358
+(define (sqltiny-lexer-error-message179,6918
+
+Llib/engine.scm,1548
+(module __sqlite_engine15,963
+(define *sqltiny-mutex*35,2042
+(define (sqltiny-create-table44,2618
+(define (table-set-columns!76,3731
+(define (sqltiny-compile-key-check87,4284
+(define (compile-simple-key-check105,4989
+(define (compile-multiple-key-check144,6195
+(define (sort-columns195,7730
+(define (index-columns!204,8161
+(define (sqltiny-drop-table216,8616
+(define (sqltiny-get-table241,9583
+(define (sqltiny-insert255,10094
+(define (insert292,11403
+(define (sqltiny-begin-transaction!349,13426
+(define (sqltiny-end-transaction!369,14150
+(define (sqltiny-select389,14864
+(define (sqltiny-update399,15321
+(define (compile-select425,16269
+(define (compile-update504,18749
+(define (filter-iter516,19357
+(define (make-select-result-row530,19797
+(define (make-select-frame536,20121
+(define (compile-order-by550,20671
+(define (select-distinguish584,21711
+(define (select-group-by601,22349
+(define (prod630,23338
+(define (compile-select-results646,23818
+(define (compile-select-result659,24393
+(define (compile-expr718,26089
+(define (like->regexp840,29916
+(define-macro (define-sqltiny-binop871,30860
+(define (sqltinyminmax889,31512
+(define (sqltinymax902,31766
+(define (sqltinymin905,31825
+(define (table-offset-in-list911,32106
+(define (find-column-offset931,32736
+(define (column-offset962,33774
+(define (sqltiny-delete977,34308
+(define (sqltiny-table-info1025,35970
+(define (%sqltiny-flush1042,36718
+(define (sqltiny-vacuum1058,37333
+(define (sqltiny-alter1068,37746
+(define (sqltiny-add-column!1086,38451

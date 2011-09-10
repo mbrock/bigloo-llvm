@@ -1,0 +1,13 @@
+;; automatically generated, don't edit
+;; /tmp/bigloo/api/pkglib/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__pkglib_database "Llib/database.scm")
+  (__pkglib_interface "Llib/interface.scm")
+  (__pkglib_misc "Llib/misc.scm")
+  (__pkglib_package "Llib/package.scm")
+  (__pkglib_param "Llib/param.scm")
+  (__pkglib_repo "Llib/repo.scm")
+)
+

@@ -1,0 +1,123 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/gcstd                       */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Tue Jun 25 16:59:41 2002                          */
+#*    Last change :  Sat Sep  5 05:55:56 2009 (serrano)                */
+#*    Copyright   :  2002-09 Manuel Serrano                            */
+#*    -------------------------------------------------------------    */
+#*    This configure script checks that a standard GC installation     */
+#*    is correct.                                                      */
+#*=====================================================================*/
+
+#*---------------------------------------------------------------------*/
+#*    flags                                                            */
+#*---------------------------------------------------------------------*/
+cflags=
+gcincdir=/usr/include/gc
+gclibdir=/usr/lib
+gclib=gc
+dlopenopt=
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --cflags=*|-cflags=*)
+      cflags="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --gcincdir=*)
+      gcincdir="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --gclibdir=*)
+      gclibdir="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --gclib=*)
+      gclib="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --dlopen=*)
+      dlopen="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+file=$TMP/actest$USER
+aout=$TMP/Xactest$USER
+
+#*---------------------------------------------------------------------*/
+#*    compile                                                          */
+#*---------------------------------------------------------------------*/
+compile="$CC $cflags $file.c -o $aout -I$gcincdir -I$gcincdir/gc -L$gclibdir -l$gclib > /dev/null"
+compile2="$CC $cflags $file.c -o $aout -I$gcincdir -I$gcincdir/gc -L$gclibdir -l$gclib $dlopen >/dev/null"
+
+#*---------------------------------------------------------------------*/
+#*    The test C file                                                  */
+#*---------------------------------------------------------------------*/
+if( test -f $file.c ); then
+   \rm -f $file.c || exit $?
+fi
+
+#*---------------------------------------------------------------------*/
+#*    Test                                                             */
+#*---------------------------------------------------------------------*/
+cat > $file.c <<EOF
+#include <gc.h>
+
+static double *
+make_real( double d ) {
+   double *real;
+
+#if( defined( GC_THREADS ) && defined( THREAD_LOCAL_ALLOC ) )
+   real = (double *)GC_THREAD_MALLOC_ATOMIC( sizeof( double ) );
+#else
+   real = (double *)GC_MALLOC_ATOMIC( sizeof( double ) );
+#endif
+   *real = d;
+   
+   return real;
+}
+
+int main( int argc, char *argv[] ) {
+    double *d1, *d2;
+    int i;
+
+    GC_INIT();
+
+    d1 = make_real( (double)1. );
+    d2 = make_real( (double)3.14 );
+    for( i = 0; i < 10000; i++ ) { 
+       *d2 += *make_real( *d2 );
+    }
+    
+    return (*d1 != 1.);
+}
+EOF
+
+#*---------------------------------------------------------------------*/
+#*    Compilation test                                                 */
+#*---------------------------------------------------------------------*/
+if eval "$BUILDSH $compile"; then
+   sh -c "rm -f $file.*" 2> /dev/null
+   eval "$HOSTSH $aout"
+   \rm -f $aout
+   echo "$gclib"
+else
+   if eval "$BUILDSH $compile2"; then
+      sh -c "rm -f $file.*" 2> /dev/null
+      eval "$HOSTSH $aout"
+      \rm -f $aout
+      echo "$gclib"
+   else
+      sh -c "rm -f $file.*" 2> /dev/null
+      \rm -f $aout
+      echo ""
+   fi
+fi

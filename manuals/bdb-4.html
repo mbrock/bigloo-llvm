@@ -1,0 +1,200 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bdb</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>3. Bdb<br/>The ``Bigloo Debugger''<br/>Nov 1999 -- Running Programs Under BDB</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center1521'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc1511" align="center" colspan="1"><font color="#ffffff"><strong id='bold1509'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc1518" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc1514" align="left" valign="top" colspan="1"><strong id='bold1513'
+>top:</strong></td><td id="tc1515" align="right" valign="top" colspan="1"><a href="bdb.html#Bdb-The-``Bigloo-Debugger''-Nov-1999" class="inbound">Bdb<br/>The ``Bigloo Debugger''<br/>Nov 1999</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center1531'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc1525" align="center" colspan="1"><font color="#ffffff"><strong id='bold1523'
+>Running Programs Under BDB</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc1528" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">3.1</td><td colspan="4" width="100%"><a href="bdb-4.html#Solaris-Run">Solaris Run</a></td></tr>
+ <tr><td valign="top" align="left">3.2</td><td colspan="4" width="100%"><a href="bdb-4.html#Scheme-vs-C">Scheme vs C</a></td></tr>
+ <tr><td valign="top" align="left">3.3</td><td colspan="4" width="100%"><a href="bdb-4.html#Compilation">Compilation</a></td></tr>
+ <tr><td valign="top" align="left">3.4</td><td colspan="4" width="100%"><a href="bdb-4.html#Starting">Starting</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center1541'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc1535" align="center" colspan="1"><font color="#ffffff"><strong id='bold1533'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc1538" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bdb-1.html#Bdb-Copying-Conditions">Bdb Copying Conditions</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bdb-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bdb-3.html#Overview">Overview</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bdb-4.html#Running-Programs-Under-BDB">Running Programs Under BDB</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bdb-5.html#Stopping">Stopping</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bdb-6.html#Continuing-execution-after-a-breakpoint">Continuing execution after a breakpoint</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bdb-7.html#Examining-the-Stack">Examining the Stack</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bdb-8.html#Using-BDB-under-Emacs">Using BDB under Emacs</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bdb-9.html#Bibliography">Bibliography</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bdb-10.html#Index">Index</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Running" class="mark"></a><a name="g1138" class="mark"></a>
+
+Other informations may be found at See info-file ` gdb.info', Gdb.<br/><br/><!-- Solaris Run -->
+<a name="Solaris-Run"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.1 Solaris Run</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Solaris-Run" class="mark"></a>
+On the Solaris platform, the normal initialization process of the Garbage
+Collector is to raise a <code id='code1141'
+>SIGSEGV</code> signal. You can safely ignore
+this signal. Simply emit a |continue| when the execution first stops
+because of that signal.<br/><br/></div><br>
+<!-- Scheme vs C -->
+<a name="Scheme-vs-C"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.2 Scheme vs C</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Scheme-vs-C" class="mark"></a>
+BDB is able to debug both Scheme and C code. Commands to inspect
+variables and code are the same for Scheme and C. The general convention
+adopted by BDB is to represent Scheme symbols in uppercase. This distinction
+is of importance because the BDB treatment is different for a Scheme expression
+and for a C expression. For instance, the command<br/><br/><center id='center1146'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1144'
+>break main
+</pre>
+</td></tr>
+</tbody></table></center>
+
+sets a breakpoint into a C function named <code id='code1147'
+>main</code>. While the command<br/><br/><center id='center1151'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog1149'
+>break MAIN
+</pre>
+</td></tr>
+</tbody></table></center>
+
+sets a breakpoint into a Scheme function named <code id='code1152'
+>main</code>.<br/><br/></div><br>
+<!-- Compilation -->
+<a name="Compilation"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.3 Compilation</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Compilation" class="mark"></a>
+BDB requires special compilation mode for Bigloo and C files. Some of
+the files may not be compiled in that special mode. For those, BDB
+won't be able to step over the code. It is mandatory that, <em id='emph1154'
+>at
+least</em>, the Bigloo module that contains the main entry point is compiled
+with debugging informations 
+
+The two options that tells Bigloo to produce BDB code are <code id='code1155'
+>-gbdb</code> and
+<code id='code1156'
+>-gbdb2</code>. The second delivers more runtime informations but may 
+enlarge the size of the binary file. The option to use when compiling
+C code is the regular debugging option (e.g. <code id='code1157'
+>-g</code>)
+
+There is no need to link programs with static version of the libraries
+although setting up breakpoints in library code is enabled only for
+static libraries. On some platforms linking with static versions of the
+libraries will prevent the debugger from getting confused when loading
+a dynamic library (e.g. it may happen that the debugger <em id='emph1158'
+>steps</em>
+the dynamic code loader).<br/><br/></div><br>
+<!-- Starting -->
+<a name="Starting"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">3.4 Starting</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Starting" class="mark"></a>
+<dl class="description" id='description1169'
+> <dt><code id='code1160'
+>run</code></dt> <dt><code id='code1161'
+>
+</code></dt> <dt><code id='code1162'
+>r</code></dt> <dt><code id='code1163'
+>
+</code></dt><dd><a name="g1164" class="mark"></a>
+Use the <code id='code1166'
+>run</code> command to start your program under BDB. You must
+first specify the program name with an argument to BDB, or by using the
+<code id='code1167'
+>file</code> command 
+</dd>
+</dl> 
+<dl class="description" id='description1179'
+> <dt><em id='emph1170'
+>The arguments.</em></dt> <dt><em id='emph1171'
+>
+</em></dt><dd>Specify the arguments passed to your program as the arguments of the
+<code id='code1172'
+>run</code> command. If no arguments are specified and this run invocation
+is not the first one, previous arguments to the last <code id='code1173'
+>run</code> command
+are used
+
+</dd>
+ <dt><em id='emph1175'
+>The standard input and output.</em></dt> <dt><em id='emph1176'
+>
+</em></dt><dd>The current BDB version is unable to debug interactive programs. This is a
+major flaw remedied by the graphical version of BDB (namely KBDB).<br/><br/></dd>
+</dl>
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph1547'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it1545'
+>Mon Jan 24 14:32:21 2011</em>.</font></p></div>
+</body>
+</html>

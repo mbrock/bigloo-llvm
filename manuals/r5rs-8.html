@@ -1,0 +1,349 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>R5Rs</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>5. R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme -- Program structure</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center7816'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7806" align="center" colspan="1"><font color="#ffffff"><strong id='bold7804'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7813" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc7809" align="left" valign="top" colspan="1"><strong id='bold7808'
+>top:</strong></td><td id="tc7810" align="right" valign="top" colspan="1"><a href="r5rs.html#R5Rs-Scheme-Revised(5)-Report-on-the-Algorithmic-Language-Scheme" class="inbound">R5Rs<br/>Scheme Revised(5) Report on the Algorithmic Language Scheme</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7826'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7820" align="center" colspan="1"><font color="#ffffff"><strong id='bold7818'
+>Program structure</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7823" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">5.1</td><td colspan="4" width="100%"><a href="r5rs-8.html#Programs">Programs</a></td></tr>
+ <tr><td valign="top" align="left">5.2</td><td colspan="4" width="100%"><a href="r5rs-8.html#Definitions">Definitions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">5.2.1</td><td colspan="3" width="100%"><a href="r5rs-8.html#Top-level-definitions">Top level definitions</a></td></tr>
+ <tr><td></td><td valign="top" align="left">5.2.2</td><td colspan="3" width="100%"><a href="r5rs-8.html#Internal-definitions">Internal definitions</a></td></tr>
+ <tr><td valign="top" align="left">5.3</td><td colspan="4" width="100%"><a href="r5rs-8.html#Syntax-definitions">Syntax definitions</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center7836'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc7830" align="center" colspan="1"><font color="#ffffff"><strong id='bold7828'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc7833" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-1.html#Summary">Summary</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-2.html#Introduction">Introduction</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-3.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="r5rs-4.html#Overview-of-Scheme">Overview of Scheme</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="r5rs-5.html#Lexical-conventions">Lexical conventions</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="r5rs-6.html#Basic-concepts">Basic concepts</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="r5rs-7.html#Expressions">Expressions</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="r5rs-8.html#Program-structure">Program structure</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="r5rs-9.html#Standard-procedures">Standard procedures</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="r5rs-10.html#Formal-syntax-and-semantics">Formal syntax and semantics</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="r5rs-11.html#Concepts">Concepts</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="r5rs-12.html#Variables-and-Procedures">Variables and Procedures</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-13.html#Notes">Notes</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-14.html#Additional-material">Additional material</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-15.html#Example">Example</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="r5rs-16.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Program-structure" class="mark"></a>
+
+<!-- Programs -->
+<a name="Programs"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">5.1 Programs</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Programs" class="mark"></a>
+A Scheme program consists of a sequence of expressions, definitions,
+and syntax definitions.
+Expressions are described in chapter <a href="r5rs-7.html#Expressions" class="inbound">Expressions</a>;
+definitions and syntax definitions are the subject of the rest of the
+present chapter.<br/><br/>Programs are typically stored in files or entered interactively to a
+running Scheme system, although other paradigms are possible;
+questions of user interface lie outside the scope of this report.
+(Indeed, Scheme would still be useful as a notation for expressing
+computational methods even in the absence of a mechanical
+implementation.)<br/><br/>Definitions and syntax definitions occurring at the top level of a program
+can be interpreted
+declaratively.
+They cause bindings to be created in the top level
+environment or modify the value of existing top-level bindings.
+Expressions occurring at the top level of a program are
+interpreted imperatively; they are executed in order when the program is
+invoked or loaded, and typically perform some kind of initialization.<br/><br/>At the top level of a program <tt id='tt2534'
+>(begin &lt;form1&gt; ...,)</tt> is
+equivalent to the sequence of expressions, definitions, and syntax definitions
+that form the body of the <code id='code2535'
+>begin</code>.
+<a name="g2537" class="mark"></a>
+
+</div><br>
+<!-- Definitions -->
+<a name="Definitions"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">5.2 Definitions</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Definitions" class="mark"></a>
+
+Definitions are valid in some, but not all, contexts where expressions
+are allowed.  They are valid only at the top level of a &lt;program&gt;
+and at the beginning of a &lt;body&gt;.<br/><br/><a name="g2541" class="mark"></a>
+A definition should have one of the following forms:
+<a name="g2544" class="mark"></a>
+<ul class="itemize" id='itemize2559'
+><li><tt id='tt2546'
+>(define &lt;variable&gt; &lt;expression&gt;)</tt>
+</li>
+<li><tt id='tt2548'
+>(define (&lt;variable&gt; &lt;formals&gt;) &lt;body&gt;)</tt>
+&lt;Formals&gt; should be either a
+sequence of zero or more variables, or a sequence of one or more
+variables followed by a space-delimited period and another variable (as
+in a lambda expression).  This form is equivalent to
+<center id='center2551'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2549'
+>(define &lt;variable&gt;
+  (lambda (&lt;formals&gt;) &lt;body&gt;)).
+</pre>
+</td></tr>
+</tbody></table></center>
+
+</li>
+<li><tt id='tt2553'
+>(define (&lt;variable&gt; .: &lt;formal&gt;) &lt;body&gt;)</tt>
+
+&lt;Formal&gt; should be a single
+variable.  This form is equivalent to<br/><br/><center id='center2557'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2555'
+>(define &lt;variable&gt;
+  (lambda &lt;formal&gt; &lt;body&gt;)).
+</pre>
+</td></tr>
+</tbody></table></center>
+</li>
+</ul>
+<!-- Top level definitions -->
+<a name="Top-level-definitions"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">5.2.1 Top level definitions</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Top-level-definitions" class="mark"></a>
+At the top level of a program, a definition<br/><br/><center id='center2563'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2561'
+>(define &lt;variable&gt; &lt;expression&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+has essentially the same effect as the assignment expression<br/><br/><center id='center2567'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ccccff"><pre class="prog" id='prog2565'
+>(set! &lt;variable&gt; &lt;expression&gt;)
+</pre>
+</td></tr>
+</tbody></table></center>
+
+if &lt;variable&gt; is bound.  If &lt;variable&gt; is not bound,
+however, then the definition will bind &lt;variable&gt; to a new
+location before performing the assignment, whereas it would be an error
+to perform a <samp id='samp2568'
+>set!</samp> on an unbound variable.
+<a name="g2570" class="mark"></a>
+<center id='center2577'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2575'
+>(<font color="#6959cf"><strong id='bold7837'
+>define</strong></font> <font color="#6959cf"><strong id='bold7839'
+>add3</strong></font>
+  (<strong id='bold7841'
+>lambda</strong> (x) (+ x 3)))
+(add3 3)                               =&gt;  6
+(<font color="#6959cf"><strong id='bold7842'
+>define</strong></font> <font color="#6959cf"><strong id='bold7844'
+>first</strong></font> car)
+(first '(1 2))                         =&gt;  1
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Some implementations of Scheme use an initial environment in
+which all possible variables are bound to locations, most of
+which contain undefined values.  Top level definitions in
+such an implementation are truly equivalent to assignments.<br/><br/>
+</div>
+<!-- Internal definitions -->
+<a name="Internal-definitions"></a>
+<div class="subsection-atitle"><table width="100%"><tr><td bgcolor="#ffffff"><h3><font color="#8381de">5.2.2 Internal definitions</font>
+</h3></td></tr></table>
+</div><div class="subsection">
+<a name="Internal-definitions" class="mark"></a>
+Definitions may occur at the
+beginning of a &lt;body&gt; (that is, the body of a <code id='code2579'
+>lambda</code>,
+<a name="g2581" class="mark"></a><code id='code2583'
+>let</code>, <code id='code2584'
+>let*</code>, <code id='code2585'
+>letrec</code>, <code id='code2586'
+>let-syntax</code>, or <code id='code2587'
+>letrec-syntax</code>
+<a name="g2589" class="mark"></a><a name="g2592" class="mark"></a><a name="g2595" class="mark"></a><a name="g2598" class="mark"></a><a name="g2601" class="mark"></a>expression or that of a definition of an appropriate form).
+Such definitions are known as <em id='emph2603'
+>internal definitions</em>  as opposed to the top level definitions described above.
+<a name="g2605" class="mark"></a>The variable defined by an internal definition is local to the
+&lt;body&gt;.  That is, &lt;variable&gt; is bound rather than assigned,
+and the region of the binding is the entire &lt;body&gt;.  For example,<br/><br/><center id='center2615'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2613'
+>(<strong id='bold7846'
+>let</strong> ((x 5))
+  (<font color="#6959cf"><strong id='bold7847'
+>define</strong></font> <font color="#6959cf"><strong id='bold7849'
+>foo</strong></font> (<strong id='bold7851'
+>lambda</strong> (y) (bar x y)))
+  (<font color="#6959cf"><strong id='bold7852'
+>define</strong></font> <font color="#6959cf"><strong id='bold7854'
+>bar</strong></font> (<strong id='bold7856'
+>lambda</strong> (a b) (+ (* a b) a)))
+  (foo (+ x 3)))                       =&gt;  45
+</pre>
+</td></tr>
+</tbody></table></center>
+
+A &lt;body&gt; containing internal definitions can always be converted
+into a completely equivalent <samp id='samp2616'
+>letrec</samp> expression.  For example, the
+<samp id='samp2617'
+>let</samp> expression in the above example is equivalent to<br/><br/><center id='center2625'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2623'
+>(<strong id='bold7857'
+>let</strong> ((x 5))
+  (<strong id='bold7858'
+>letrec</strong> ((foo (<strong id='bold7859'
+>lambda</strong> (y) (bar x y)))
+           (bar (<strong id='bold7860'
+>lambda</strong> (a b) (+ (* a b) a))))
+    (foo (+ x 3))))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+Just as for the equivalent <samp id='samp2626'
+>letrec</samp> expression, it must be
+possible to evaluate each &lt;expression&gt; of every internal
+definition in a &lt;body&gt; without assigning or referring to
+the value of any &lt;variable&gt; being defined.<br/><br/>Wherever an internal definition may occur
+<tt id='tt2628'
+>(begin &lt;definition1&gt; ...,)</tt>
+is equivalent to the sequence of definitions
+that form the body of the <code id='code2629'
+>begin</code>.
+<a name="g2631" class="mark"></a>
+</div>
+</div><br>
+<!-- Syntax definitions -->
+<a name="Syntax-definitions"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">5.3 Syntax definitions</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Syntax-definitions" class="mark"></a><br/><br/>Syntax definitions are valid only at the top level of a &lt;program&gt;.<br/><br/><a name="g2636" class="mark"></a>They have the following form:
+<a name="g2639" class="mark"></a>
+<tt id='tt2641'
+>(define-syntax &lt;keyword&gt; &lt;transformer spec&gt;)</tt><br/><br/>&lt;Keyword&gt; is an identifier, and
+the &lt;transformer spec&gt; should be an instance of <code id='code2643'
+>syntax-rules</code>.
+<a name="g2645" class="mark"></a>The top-level syntactic environment is extended by binding the
+&lt;keyword&gt; to the specified transformer.<br/><br/>There is no <samp id='samp2648'
+>define-syntax</samp> analogue of internal definitions.<br/><br/>
+
+
+Although macros may expand into definitions and syntax definitions in
+any context that permits them, it is an error for a definition or syntax
+definition to shadow a syntactic keyword whose meaning is needed to
+determine whether some form in the group of forms that contains the
+shadowing definition is in fact a definition, or, for internal definitions,
+is needed to determine the boundary between the group and the expressions
+that follow the group.  For example, the following are errors:<br/><br/><center id='center2663'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog2661'
+>(<font color="#6959cf"><strong id='bold7861'
+>define</strong></font> <font color="#6959cf"><strong id='bold7863'
+>define</strong></font> 3)<br/><br/>(<strong id='bold7865'
+>begin</strong> (<font color="#6959cf"><strong id='bold7866'
+>define</strong></font> <font color="#6959cf"><strong id='bold7868'
+>begin</strong></font> list))<br/><br/>(let-syntax
+  ((foo (<strong id='bold7870'
+>syntax-rules</strong> ()
+          ((foo (proc args ...) body ...)
+           (<font color="#6959cf"><strong id='bold7871'
+>define</strong></font> <font color="#6959cf"><strong id='bold7873'
+>proc</strong></font>
+             (<strong id='bold7875'
+>lambda</strong> (args ...)
+               body ...))))))
+  (<strong id='bold7876'
+>let</strong> ((x 3))
+    (foo (plus x y) (+ x y))
+    (<font color="#6959cf"><strong id='bold7877'
+>define</strong></font> <font color="#6959cf"><strong id='bold7879'
+>foo</strong></font> x)
+    (plus foo x)))
+</pre>
+</td></tr>
+</tbody></table></center>
+       
+
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph7886'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it7884'
+>Mon Jan 24 14:32:19 2011</em>.</font></p></div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/database.scm,590
+(module __pkglib_database15,963
+(define (make-db-package-key74,2512
+(define (initialize-repo-db!80,2813
+(define (reset-repo-db!162,6975
+(define (make-repo-db182,7775
+(define (db-inc-counter!192,8241
+(define (db-add-port!207,8783
+(define (db-report-failure!217,9239
+(define (db-add-package!228,9736
+(define (db-add-tuning!373,14873
+(define (db-package-release391,15564
+(define (db-remove-package-version!399,15946
+(define (db-remove-package-version-sans-tuning!409,16494
+(define (db-remove-tuning!424,17437
+(define (db-remove-package!436,18038
+(define (db-sync-list446,18468
+
+Llib/param.scm,705
+(module __pkglib_param15,963
+(define-parameter pkglib-version-set!38,1610
+(define-parameter pkglib-version38,1610
+(define-parameter pkglib-interface-suffix-set!44,1878
+(define-parameter pkglib-interface-suffix44,1878
+(define-parameter pkglib-package-suffix-set!50,2153
+(define-parameter pkglib-package-suffix50,2153
+(define-parameter pkglib-package-tuning-mark-set!56,2429
+(define-parameter pkglib-package-tuning-mark56,2429
+(define-parameter pkglib-meta-filename-set!62,2705
+(define-parameter pkglib-meta-filename62,2705
+(define-parameter pkglib-verbose-set!68,3001
+(define-parameter pkglib-verbose68,3001
+(define-parameter pkglib-colors-set!74,3263
+(define-parameter pkglib-colors74,3263
+
+Llib/package.scm,363
+(module __pkglib_package15,963
+(define (package-filename?34,1698
+(define (package-tuning?40,2007
+(define (package-version?55,2512
+(define (package-sans-suffix65,2869
+(define (package-name-parse81,3762
+(define (make-package-name126,5399
+(define (package-extract-interface143,6155
+(define (package-extract-meta180,7506
+(define (package-companions214,8772
+
+Llib/interface.scm,321
+(module __pkglib_interface15,963
+(define (interface-read-interface33,1721
+(define (interface-name-version54,2471
+(define (interface-language68,3092
+(define (interface-export80,3610
+(define (interface-import98,4215
+(define (interface-from110,4714
+(define (interface-source126,5174
+(define (interface-meta142,5839
+
+Llib/misc.scm,345
+(module __pkglib_misc15,963
+(define (&pkglib-error?19,1014
+(define (make-&pkglib-error19,1014
+(define (fill-&pkglib-error!19,1014
+   (export (class &pkglib-error19,1014
+(define (pkglib-error29,1512
+(define *verb-mutex*38,1862
+(define (pkglib-verb43,2126
+(define (pkglib-color53,2546
+(define (assq/default63,2947
+(define (assq*74,3324
+
+Llib/repo.scm,576
+(module __pkglib_repo15,963
+(define (repo-create-database42,2062
+(define (repo-populate-database!54,2663
+(define (populate-package-directory!71,3462
+(define (populate-package-version-directory!81,3931
+(define (populate-tuning!92,4418
+(define (populate-package!109,5162
+(define (repo-add-package!156,6987
+(define (repo-add-tuning!162,7304
+(define (repo-remove-tuning!168,7619
+(define (repo-remove-package-version!179,8192
+(define (repo-remove-package!188,8638
+(define (rm-rf197,9044
+(define (make-repo-package-path208,9510
+(define (make-repo-tuning-path215,9894

@@ -1,0 +1,10 @@
+;; /tmp/bigloo/api/calendar/src
+;; Mon Jan 24 14:32:21 2011
+
+(
+  (__calendar_utils "bigloo.calendar.utils")
+  (__calendar_ical "bigloo.calendar.icalendar")
+  (__calendar_types "bigloo.calendar.types")
+  (__calendar_makelib "bigloo.calendar.make_lib")
+)
+

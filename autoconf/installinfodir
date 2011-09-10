@@ -1,0 +1,43 @@
+#!/bin/sh
+#*=====================================================================*/
+#*    serrano/prgm/project/bigloo/autoconf/installinfodir              */
+#*    -------------------------------------------------------------    */
+#*    Author      :  Manuel Serrano                                    */
+#*    Creation    :  Thu Jan 14 15:12:37 1999                          */
+#*    Last change :  Mon Sep  7 08:58:34 2009 (serrano)                */
+#*    -------------------------------------------------------------    */
+#*    Check if info is an old version                                  */
+#*=====================================================================*/
+
+installinfo=install-info
+path=
+
+#*---------------------------------------------------------------------*/
+#*    We parse the arguments                                           */
+#*---------------------------------------------------------------------*/
+while : ; do
+  case $1 in
+    "")
+      break;;
+
+    --installinfo=*|-installinfo=*)
+      installinfo="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --exe=*)
+      exe="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    -*)
+      echo "Unknown option \"$1\", ignored" >&2;;
+  esac
+  shift
+done
+
+if [ "`$installinfo --help 2>&1 | grep 'dir-file=DIR'`" != "" ]; then
+    echo "--dir-file"
+else 
+  if [ "`$installinfo --help 2>&1 | grep 'dirfile=xxx'`" != "" ]; then
+    echo "--dirfile"
+  else
+     echo ""
+  fi
+fi

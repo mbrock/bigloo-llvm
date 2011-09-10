@@ -1,0 +1,38 @@
+
+-,0
+(meta-define define define0,0
+(meta-define define define-struct0,0
+(meta-define define define-parameter0,0
+(meta-define define define0,0
+(meta-define define define-inline0,0
+(meta-define define define-generic0,0
+(meta-define define define-macro0,0
+(meta-define define define-expander0,0
+(meta-define define module0,0
+
+Llib/ssl.scm,953
+(module __ssl_ssl15,963
+(define (certificate?102,4343
+(define (make-certificate102,4343
+(define (fill-certificate!102,4343
+   (export (class certificate102,4343
+(define (certificate-$native::$certificate103,4373
+(define (private-key?105,4420
+(define (make-private-key105,4420
+(define (fill-private-key!105,4420
+	   (class private-key105,4420
+(define (private-key-$native::$private-key106,4443
+(define (sanity-args-checks143,5673
+(define (make-ssl-client-socket163,6638
+(define (client-socket-use-ssl!186,7549
+(define (make-ssl-server-socket200,8188
+(define (ssl-protocols->integer214,8882
+(define (read-private-key226,9462
+(define (read-certificate232,9768
+(define (read-pem-file238,10074
+(define-inline (certificate-subject244,10378
+(define-inline (certificate-issuer250,10697
+(define (%make-certificate256,11014
+(define (%make-private-key262,11298
+(define (%certificate-$native268,11582
+(define (%private-key-$native274,11872

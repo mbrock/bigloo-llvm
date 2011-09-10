@@ -1,0 +1,345 @@
+<!-- 95% W3C COMPLIANT, 95% CSS FREE, RAW HTML -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<title>Bigloo</title>
+ <style type="text/css">
+  <!--
+  pre { font-family: monospace }
+  tt { font-family: monospace }
+  code { font-family: monospace }
+  p.flushright { text-align: right }
+  p.flushleft { text-align: left }
+  span.sc { font-variant: small-caps }
+  span.sf { font-family: sans-serif }
+  span.skribetitle { font-family: sans-serif; font-weight: bolder; font-size: x-large; }
+  span.refscreen { }
+  span.refprint { display: none; }
+  -->
+ </style>
+</head>
+
+<body class="chapter" bgcolor="#ffffff">
+<table width="100%" class="skribetitle" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center" bgcolor="#8381de"><div class="skribetitle"><strong><big><big><big>21. Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011 -- Text</big></big></big></strong></div><center>
+</center>
+</td></tr></tbody></table>
+<table cellpadding="3" cellspacing="0" width="100%" class="skribe-margins"><tr>
+<td align="left" valign="top" class="skribe-left-margin" width="20%" bgcolor="#dedeff"><div class="skribe-left-margin">
+<br/><center id='center33587'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33577" align="center" colspan="1"><font color="#ffffff"><strong id='bold33575'
+>main page</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33584" align="center" colspan="1"><table width="100%" border="0" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc33580" align="left" valign="top" colspan="1"><strong id='bold33579'
+>top:</strong></td><td id="tc33581" align="right" valign="top" colspan="1"><a href="bigloo.html#Bigloo-A-practical-Scheme-compiler-User-manual-for-version-3.6a-January-2011" class="inbound">Bigloo<br/>A practical Scheme compiler<br/>User manual for version 3.6a<br/>January 2011</a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33597'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33591" align="center" colspan="1"><font color="#ffffff"><strong id='bold33589'
+>Text</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33594" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left">21.1</td><td colspan="4" width="100%"><a href="bigloo-22.html#BibTeX">BibTeX</a></td></tr>
+ <tr><td valign="top" align="left">21.2</td><td colspan="4" width="100%"><a href="bigloo-22.html#Character-strings">Character strings</a></td></tr>
+ <tr><td valign="top" align="left">21.3</td><td colspan="4" width="100%"><a href="bigloo-22.html#Character-encodings">Character encodings</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+<br/><br/><center id='center33607'
+><table width="97%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" frame="box" rules="none"><tbody>
+<tr bgcolor="#8381de"><th id="tc33601" align="center" colspan="1"><font color="#ffffff"><strong id='bold33599'
+>Chapters</strong></font></th></tr>
+<tr bgcolor="#ffffff"><td id="tc33604" align="center" colspan="1"><table cellspacing="1" cellpadding="1" width="100%" class="toc">
+<tbody>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-1.html#Acknowledgements">Acknowledgements</a></td></tr>
+ <tr><td valign="top" align="left">1</td><td colspan="4" width="100%"><a href="bigloo-2.html#Table-of-contents">Table of contents</a></td></tr>
+ <tr><td valign="top" align="left">2</td><td colspan="4" width="100%"><a href="bigloo-3.html#Overview-of-Bigloo">Overview of Bigloo</a></td></tr>
+ <tr><td valign="top" align="left">3</td><td colspan="4" width="100%"><a href="bigloo-4.html#Modules">Modules</a></td></tr>
+ <tr><td valign="top" align="left">4</td><td colspan="4" width="100%"><a href="bigloo-5.html#Core-Language">Core Language</a></td></tr>
+ <tr><td valign="top" align="left">5</td><td colspan="4" width="100%"><a href="bigloo-6.html#DSSSL-support">DSSSL support</a></td></tr>
+ <tr><td valign="top" align="left">6</td><td colspan="4" width="100%"><a href="bigloo-7.html#Standard-Library">Standard Library</a></td></tr>
+ <tr><td valign="top" align="left">7</td><td colspan="4" width="100%"><a href="bigloo-8.html#Pattern-Matching">Pattern Matching</a></td></tr>
+ <tr><td valign="top" align="left">8</td><td colspan="4" width="100%"><a href="bigloo-9.html#Fast-search">Fast search</a></td></tr>
+ <tr><td valign="top" align="left">9</td><td colspan="4" width="100%"><a href="bigloo-10.html#Structures-and-Records">Structures and Records</a></td></tr>
+ <tr><td valign="top" align="left">10</td><td colspan="4" width="100%"><a href="bigloo-11.html#Object-System">Object System</a></td></tr>
+ <tr><td valign="top" align="left">11</td><td colspan="4" width="100%"><a href="bigloo-12.html#Regular-parsing">Regular parsing</a></td></tr>
+ <tr><td valign="top" align="left">12</td><td colspan="4" width="100%"><a href="bigloo-13.html#Lalr(1)-parsing">Lalr(1) parsing</a></td></tr>
+ <tr><td valign="top" align="left">13</td><td colspan="4" width="100%"><a href="bigloo-14.html#Posix-Regular-Expressions">Posix Regular Expressions</a></td></tr>
+ <tr><td valign="top" align="left">14</td><td colspan="4" width="100%"><a href="bigloo-15.html#Command-Line-Parsing">Command Line Parsing</a></td></tr>
+ <tr><td valign="top" align="left">15</td><td colspan="4" width="100%"><a href="bigloo-16.html#Cryptography">Cryptography</a></td></tr>
+ <tr><td valign="top" align="left">16</td><td colspan="4" width="100%"><a href="bigloo-17.html#Errors-Assertions-and-Traces">Errors, Assertions, and Traces</a></td></tr>
+ <tr><td valign="top" align="left">17</td><td colspan="4" width="100%"><a href="bigloo-18.html#Threads">Threads</a></td></tr>
+ <tr><td valign="top" align="left">18</td><td colspan="4" width="100%"><a href="bigloo-19.html#Database">Database</a></td></tr>
+ <tr><td valign="top" align="left">19</td><td colspan="4" width="100%"><a href="bigloo-20.html#Multimedia">Multimedia</a></td></tr>
+ <tr><td valign="top" align="left">20</td><td colspan="4" width="100%"><a href="bigloo-21.html#Mail">Mail</a></td></tr>
+ <tr><td valign="top" align="left">21</td><td colspan="4" width="100%"><a href="bigloo-22.html#Text">Text</a></td></tr>
+ <tr><td valign="top" align="left">22</td><td colspan="4" width="100%"><a href="bigloo-23.html#Eval-and-code-interpretation">Eval and code interpretation</a></td></tr>
+ <tr><td valign="top" align="left">23</td><td colspan="4" width="100%"><a href="bigloo-24.html#Macro-expansion">Macro expansion</a></td></tr>
+ <tr><td valign="top" align="left">24</td><td colspan="4" width="100%"><a href="bigloo-25.html#Parameters">Parameters</a></td></tr>
+ <tr><td valign="top" align="left">25</td><td colspan="4" width="100%"><a href="bigloo-26.html#Explicit-typing">Explicit typing</a></td></tr>
+ <tr><td valign="top" align="left">26</td><td colspan="4" width="100%"><a href="bigloo-27.html#The-C-interface">The C interface</a></td></tr>
+ <tr><td valign="top" align="left">27</td><td colspan="4" width="100%"><a href="bigloo-28.html#The-Java-interface">The Java interface</a></td></tr>
+ <tr><td valign="top" align="left">28</td><td colspan="4" width="100%"><a href="bigloo-29.html#Bigloo-Libraries">Bigloo Libraries</a></td></tr>
+ <tr><td valign="top" align="left">29</td><td colspan="4" width="100%"><a href="bigloo-30.html#Extending-the-Runtime-System">Extending the Runtime System</a></td></tr>
+ <tr><td valign="top" align="left">30</td><td colspan="4" width="100%"><a href="bigloo-31.html#SRFIs">SRFIs</a></td></tr>
+ <tr><td valign="top" align="left">31</td><td colspan="4" width="100%"><a href="bigloo-32.html#Compiler-description">Compiler description</a></td></tr>
+ <tr><td valign="top" align="left">32</td><td colspan="4" width="100%"><a href="bigloo-33.html#Cross-Compilation">Cross Compilation</a></td></tr>
+ <tr><td valign="top" align="left">33</td><td colspan="4" width="100%"><a href="bigloo-34.html#User-Extensions">User Extensions</a></td></tr>
+ <tr><td valign="top" align="left">34</td><td colspan="4" width="100%"><a href="bigloo-35.html#Bigloo-Development-Environment">Bigloo Development Environment</a></td></tr>
+ <tr><td valign="top" align="left">35</td><td colspan="4" width="100%"><a href="bigloo-36.html#Global-Index">Global Index</a></td></tr>
+ <tr><td valign="top" align="left">36</td><td colspan="4" width="100%"><a href="bigloo-37.html#Library-Index">Library Index</a></td></tr>
+ <tr><td valign="top" align="left"></td><td colspan="4" width="100%"><a href="bigloo-38.html#Bibliography">Bibliography</a></td></tr>
+</tbody>
+</table>
+</td></tr>
+</tbody></table>
+</center>
+</div></td>
+<td align="left" valign="top" class="skribe-body"><div class="skribe-body">
+<a name="Text" class="mark"></a><a name="g24842" class="mark"></a>
+This chapter describes the Bigloo API for processing texts.<br/><br/>
+<!-- BibTeX -->
+<a name="BibTeX"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">21.1 BibTeX</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="BibTeX" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24846" class="mark"></a><a name="bibtex" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24850" align="left" colspan="1"><strong id='bold24848'
+>bibtex</strong><em id='it24849'
+> obj</em></td><td id="tc24851" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+<a name="g24855" class="mark"></a><a name="bibtex-port" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24859" align="left" colspan="1"><strong id='bold24857'
+>bibtex-port</strong><em id='it24858'
+> input-port</em></td><td id="tc24860" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+<a name="g24864" class="mark"></a><a name="bibtex-file" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24868" align="left" colspan="1"><strong id='bold24866'
+>bibtex-file</strong><em id='it24867'
+> file-name</em></td><td id="tc24869" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+<a name="g24873" class="mark"></a><a name="bibtex-string" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24877" align="left" colspan="1"><strong id='bold24875'
+>bibtex-string</strong><em id='it24876'
+> string</em></td><td id="tc24878" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+These function parse BibTeX sources. The variable <code id='code24882'
+><em id='it24881'
+>obj</em></code> can either
+be an input-port or a string which denotes a file name. It returns a
+list of BibTeX entries.<br/><br/>The functions <code id='code24884'
+>bibtex-port</code>, <code id='code24885'
+>bibtex-file</code>, and
+<code id='code24886'
+>bibtex-string</code> are mere wrappers that invoke <code id='code24887'
+>bibtex</code>.<br/><br/>Example:
+<center id='center24901'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24899'
+>(bibtex (open-input-string &quot;&#x40;book{ as<strong id='bold33608'
+>:sicp,</strong>
+  author 	= {Abelson, H. and Sussman, G.},
+  title 	= {Structure and Interpretation of Computer Programs},
+  year 		= 1985,
+  publisher 	= {MIT Press},
+  address 	= {Cambridge, Mass., USA},
+}&quot;)) =&gt; ((<font color="red">&quot;as:sicp&quot;</font> BOOK 
+                  (author (<font color="red">&quot;Abelson&quot;</font> <font color="red">&quot;H.&quot;</font>) (<font color="red">&quot;Sussman&quot;</font> <font color="red">&quot;G.&quot;</font>))
+                  (title . <font color="red">&quot;Structure and Interpretation of Computer Programs&quot;</font>)
+                  (year . <font color="red">&quot;1985&quot;</font>)
+                  (publisher . <font color="red">&quot;MIT Press&quot;</font>)
+                  (address . <font color="red">&quot;Cambridge, Mass., USA&quot;</font>)))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24905" class="mark"></a><a name="bibtex-parse-authors" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24909" align="left" colspan="1"><strong id='bold24907'
+>bibtex-parse-authors</strong><em id='it24908'
+> string</em></td><td id="tc24910" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+This function parses the author field of a bibtex entry.<br/><br/>Example:
+<center id='center24921'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24919'
+>(bibtex-parse-authors <font color="red">&quot;Abelson, H. and Sussman, G.&quot;</font>)
+=&gt; ((<font color="red">&quot;Abelson&quot;</font> <font color="red">&quot;H.&quot;</font>) (<font color="red">&quot;Sussman&quot;</font> <font color="red">&quot;G.&quot;</font>))
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- Character strings -->
+<a name="Character-strings"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">21.2 Character strings</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Character-strings" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24925" class="mark"></a><a name="hyphenate" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24929" align="left" colspan="1"><strong id='bold24927'
+>hyphenate</strong><em id='it24928'
+> word hyphens</em></td><td id="tc24930" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+The function <code id='code24933'
+>hyphenate</code> accepts as input a single word and
+returns as output a list of subwords. The argument <code id='code24935'
+><em id='it24934'
+>hyphens</em></code> is
+an opaque data structure obtained by calling the function <code id='code24936'
+>load-hyphens</code>
+or <code id='code24937'
+>make-hyphens</code>.<br/><br/>Example:
+<center id='center24944'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24942'
+>(hyphenate <font color="red">&quot;software&quot;</font> (load-hyphens 'en)) =&gt; (<font color="red">&quot;soft&quot;</font> <font color="red">&quot;ware&quot;</font>)
+</pre>
+</td></tr>
+</tbody></table></center>
+</td></tr>
+</tbody></table><br/>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24948" class="mark"></a><a name="load-hyphens" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24952" align="left" colspan="1"><strong id='bold24950'
+>load-hyphens</strong><em id='it24951'
+> obj</em></td><td id="tc24953" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+Loads an hyphens table and returns a data structure suitable for
+<code id='code24956'
+>hyphenate</code>. The variable <code id='code24958'
+><em id='it24957'
+>obj</em></code> can either be a file name
+containing an hyphens table or a symbol denoting a pre-defined hyphens
+table. Currently, Bigloo supports two tables: <code id='code24959'
+>en</code> for an English
+table and <code id='code24960'
+>fr</code> for a French table. The procedure <code id='code24961'
+>load-hyphens</code>
+invokes <code id='code24962'
+>make-hyphens</code> to build the hyphens table. 
+</td></tr>
+</tbody></table><br/>
+Example:
+<center id='center24975'
+><table cellspacing="0" class="color" cellpadding="0" width="95%"><tbody>
+<tr><td bgcolor="#ffffcc"><pre class="prog" id='prog24973'
+>(<font color="#6959cf"><strong id='bold33627'
+>define</strong></font> (<font color="#6959cf"><strong id='bold33629'
+>hyphenate-text</strong></font> text lang)
+   (<strong id='bold33631'
+>let</strong> ((table (<font color="red"><strong id='bold33632'
+>with-handler</strong></font> 
+                   (<strong id='bold33634'
+>lambda</strong> (e)               
+                      (unless (&amp;io-file-not-found-error? e)
+                         (<font color="red"><strong id='bold33635'
+>raise</strong></font> e)))
+                   (load-hyphens lang)))
+         (words (string-split text <font color="red">&quot; &quot;</font>)))
+      (<strong id='bold33638'
+>if</strong> table 
+          (append-map (<strong id='bold33639'
+>lambda</strong> (w) (hyphenate w table)) words)
+           words)))
+</pre>
+</td></tr>
+</tbody></table></center>
+
+The procedure <code id='code24976'
+>hyphenate-text</code> hyphenates the words of the
+<code id='code24977'
+>text</code> according to the rules for the language denoted by
+its code <code id='code24978'
+>lang</code> if there is a file <code id='code24980'
+><em id='it24979'
+>lang</em></code><code id='code24981'
+>-hyphens.sch</code>.
+If there is no such file, the text remains un-hyphenated.<br/><br/><table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g24984" class="mark"></a><a name="make-hyphens" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc24988" align="left" colspan="1"><strong id='bold24986'
+>make-hyphens</strong><em id='it24987'
+> [:language] [:exceptions] [:patterns]</em></td><td id="tc24989" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+Creates an hyphens table out of the arguments <code id='code24993'
+><em id='it24992'
+>exceptions</em></code> and 
+<code id='code24995'
+><em id='it24994'
+>patterns</em></code>.<br/><br/>The implementation of the table of hyphens created by <code id='code24997'
+>make-hyphens</code>
+follows closely Frank Liang's algorithm as published in his doctoral
+dissertation <em id='emph24998'
+>Word Hy-phen-a-tion By Com-pu-ter</em>
+available on the TeX Users Group site here:
+<a href="http://www.tug.org/docs/liang/">http://www.tug.org/docs/liang/</a>. This table is a
+<em id='emph24999'
+>trie</em> (see <a href="http://en.wikipedia.org/wiki/Trie">http://en.wikipedia.org/wiki/Trie</a> for
+a definition and an explanation).<br/><br/>Most of this implementation is borrowed from Phil Bewig's work available
+here: <a href="http://sites.google.com/site/schemephil/">http://sites.google.com/site/schemephil/</a>, along with
+his paper describing the program from which the Bigloo implementation is
+largely borrowed.<br/><br/><code id='code25003'
+><em id='it25002'
+>exceptions</em></code> must be a non-empty list of explicitly hyphenated
+words.<br/><br/>Explicitly hyphenated words are like the following:
+<code id='code25005'
+>&quot;as-so-ciate&quot;</code>, <code id='code25006'
+>&quot;as-so-ciates&quot;</code>, <code id='code25007'
+>&quot;dec-li-na-tion&quot;</code>,
+where the hyphens indicate the places where hyphenation is allowed.  The
+words in <code id='code25009'
+><em id='it25008'
+>exceptions</em></code> are used to generate hyphenation patterns,
+which are added to <code id='code25011'
+><em id='it25010'
+>patterns</em></code> (see next paragraph).<br/><br/><code id='code25014'
+><em id='it25013'
+>patterns</em></code> must be a non-empty list of hyphenation patterns.<br/><br/>Hyphenation patterns are strings of the form <code id='code25016'
+>&quot;.anti5s&quot;</code>, where a
+period denotes the beginning or the end of a word, an odd number denotes
+a place where hyphenation is allowed, and an even number a place where
+hyphenation is forbidden. This notation is part of Frank Liang's
+algorithm created for Donald Knuth's TeX typographic system.<br/><br/></td></tr>
+</tbody></table><br/>
+</div><br>
+<!-- Character encodings -->
+<a name="Character-encodings"></a>
+<div class="section-atitle"><table width="100%"><tr><td bgcolor="#dedeff"><h3><font color="black">21.3 Character encodings</font>
+</h3></td></tr></table>
+</div><div class="section">
+<a name="Character-encodings" class="mark"></a>
+<table cellspacing="0" class="frame" cellpadding="10" border="1" width="100%"><tbody>
+<tr><td><a name="g25021" class="mark"></a><a name="gb2312->ucs2" class="mark"></a><table width="100%" style="border-collapse: collapse;" frame="void" rules="none"><tbody>
+<tr><td id="tc25025" align="left" colspan="1"><strong id='bold25023'
+>gb2312-&gt;ucs2</strong><em id='it25024'
+> string</em></td><td id="tc25026" align="right" colspan="1">Bigloo Text function</td></tr>
+</tbody></table>
+Converts a GB2312 (aka cp936) encoded 8bits string into an UCS2 string.
+</td></tr>
+</tbody></table><br/> 
+
+</div><br>
+</div></td>
+</tr></table><div class="skribe-ending">
+<hr> 
+<p class="ending" id='paragraph33645'
+><font size="-1">
+This <span class="sc">Html</span> page has been produced by 
+<a href="http://www-sop.inria.fr/indes/fp/Skribe" class="http">Skribe</a>.
+<br/>
+Last update <em id='it33643'
+>Mon Jan 24 14:32:20 2011</em>.</font></p></div>
+</body>
+</html>
