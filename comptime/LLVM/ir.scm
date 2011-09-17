@@ -57,6 +57,17 @@
     (class ir-instr-indirectbr::ir-instruction
       address::ir-value
       (labels::pair (default '())))
+
+    ;; TODO: invoke, unwind, resume, unreachable
+
+    (class ir-instr-binary::ir-instruction
+      operand-1::ir-value
+      operand-2::ir-value)
+    
+    (class ir-instr-add::ir-instr-binary)
+    (class ir-instr-sub::ir-instr-binary)
+    (class ir-instr-mul::ir-instr-binary)
+    
     ))
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
@@ -67,18 +78,19 @@
 
 (define-syntax define-instruction-syntax
   (syntax-rules ()
-    ((define-instruction-syntax arg . args)
+    ((define-instruction-syntax var arg . args)
      (define (ir-instruction->string x::ir-instruction)
-       (make-instruction-syntax-cond x arg . args)))))
+       (make-instruction-syntax-cond var x arg . args)))))
 
 (define-syntax make-instruction-syntax-cond
   (syntax-rules ()
-    ((_ instr) (raise "no such instruction"))
-    ((_ instr (type (accessors ...) body ...) . rest)
-     (if (is-a? instr type)
-         (my-with-access type instr (accessors ...)
-           (begin body ...))
-         (make-instruction-syntax-cond instr . rest)))))
+    ((_ var instr) (raise "no such instruction"))
+    ((_ var instr (type (accessors ...) body ...) . rest)
+     (let ((var instr))
+       (if (is-a? var type)
+           (my-with-access type var (accessors ...)
+                           (begin body ...))
+           (make-instruction-syntax-cond var instr . rest))))))
 
 (define-syntax my-with-access
   (syntax-rules ()
@@ -88,7 +100,7 @@
                     (find-class-field klass (quote field))) x)))
        (my-with-access klass x rest body ...)))))
 
-(define-instruction-syntax
+(define-instruction-syntax instr
   (ir-instr-ret
    (type value)
    (build-ir-string "ret" type value))
@@ -104,7 +116,16 @@
   (ir-instr-indirectbr
    (address labels)
    (build-ir-string "indirectbr" (ir-value-type address) address
-                    "," "[" (render-list labels) "]")))
+                    "," "[" (render-list labels) "]"))
+  (ir-instr-binary
+   (type operand-1 operand-2)
+   (build-ir-string (ir-instr-name instr) type operand-1 "," operand-2)))
+
+(define (ir-instr-name instr::ir-instruction)
+  (cond ((is-a? instr ir-instr-add) "add")
+        ((is-a? instr ir-instr-sub) "sub")
+        ((is-a? instr ir-instr-mul) "mul")
+        (#f (raise "ir-instr-name"))))
 
 (define (render-switch-table table)
   (string-join ", " (map (lambda (entry)
@@ -193,6 +214,10 @@
                       (address (make-ir-lit-int i32 123))
                       (labels (list (make-ir-label "foo")
                                     (make-ir-label "bar"))))
+                     (instantiate::ir-instr-add
+                      (type i32)
+                      (operand-1 (make-ir-lit-int i32 10))
+                      (operand-2 (make-ir-lit-int i32 20)))
 
                      ))))
             0))))
