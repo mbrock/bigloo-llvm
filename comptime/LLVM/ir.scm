@@ -52,7 +52,11 @@
     (class ir-instr-switch::ir-instruction
       value::ir-value
       default-label::ir-label
-      (table (default '())))
+      (table::pair-nil (default '())))
+
+    (class ir-instr-indirectbr::ir-instruction
+      address::ir-value
+      (labels::pair (default '())))
     ))
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
@@ -85,15 +89,22 @@
        (my-with-access klass x rest body ...)))))
 
 (define-instruction-syntax
-  (ir-instr-ret (type value)
-                (build-ir-string "ret" type value))
-  (ir-instr-br (condition true-label false-label)
-               (build-ir-string "br" "i1" condition
-                                true-label "," false-label))
-  (ir-instr-switch (value default-label table)
-                   (build-ir-string "switch" (ir-value-type value) value
-                                    "," default-label
-                                    "[" (render-switch-table table) "]")))
+  (ir-instr-ret
+   (type value)
+   (build-ir-string "ret" type value))
+  (ir-instr-br
+   (condition true-label false-label)
+   (build-ir-string "br" "i1" condition
+                    true-label "," false-label))
+  (ir-instr-switch
+   (value default-label table)
+   (build-ir-string "switch" (ir-value-type value) value
+                    "," default-label
+                    "[" (render-switch-table table) "]"))
+  (ir-instr-indirectbr
+   (address labels)
+   (build-ir-string "indirectbr" (ir-value-type address) address
+                    "," "[" (render-list labels) "]")))
 
 (define (render-switch-table table)
   (string-join ", " (map (lambda (entry)
@@ -103,11 +114,15 @@
                          table)))
 
 (define (build-ir-string . args)
-  (string-join " " (map (lambda (x)
-                          (if (string? x)
-                              x
-                              (ir-node->inline-string x)))
-                        args)))
+  (string-join " " (map stringify-node args)))
+
+(define (render-list list)
+  (string-join ", " (map stringify-node list)))
+
+(define (stringify-node node)
+  (if (string? node)
+      node
+      (ir-node->inline-string node)))
 
 (define (string-join separator strings)
   (let loop ((xs strings)
@@ -173,5 +188,11 @@
                       (table `((,(make-ir-lit-int i32 0)
                                 ,(make-ir-label "zero"))
                                (,(make-ir-lit-int i32 5)
-                                ,(make-ir-label "five")))))))))
+                                ,(make-ir-label "five")))))
+                     (instantiate::ir-instr-indirectbr
+                      (address (make-ir-lit-int i32 123))
+                      (labels (list (make-ir-label "foo")
+                                    (make-ir-label "bar"))))
+
+                     ))))
             0))))
