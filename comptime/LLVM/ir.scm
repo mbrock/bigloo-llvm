@@ -3,6 +3,9 @@
   (export
     (class ir-node::object)
 
+    (class ir-node-seq::ir-node
+      (nodes::pair-nil (default '())))
+
     (class ir-type::ir-node)
 
     (class ir-label::ir-node
@@ -12,7 +15,7 @@
       name::bstring)
 
     (class ir-value::ir-node
-      type::ir-type)
+      (type::ir-type (default *ir-type-void*)))
 
     (class ir-instruction::ir-value)
 
@@ -45,7 +48,14 @@
 
     (class ir-instr-br-unconditional::ir-instruction
       label::ir-label)
+
+    (class ir-instr-switch::ir-instruction
+      value::ir-value
+      default-label::ir-label
+      (table (default '())))
     ))
+
+(define *ir-type-void* (make-ir-primitive-type "void"))
 
 (define-generic (ir-node->line-tree node::ir-node))
 
@@ -60,10 +70,10 @@
 (define-syntax make-instruction-syntax-cond
   (syntax-rules ()
     ((_ instr) (raise "no such instruction"))
-    ((_ instr (type (accessors ...) args ...) . rest)
+    ((_ instr (type (accessors ...) body ...) . rest)
      (if (is-a? instr type)
          (my-with-access type instr (accessors ...)
-           (build-ir-string args ...))
+           (begin body ...))
          (make-instruction-syntax-cond instr . rest)))))
 
 (define-syntax my-with-access
@@ -75,9 +85,22 @@
        (my-with-access klass x rest body ...)))))
 
 (define-instruction-syntax
-  (ir-instr-ret (type value) "ret" type value)
+  (ir-instr-ret (type value)
+                (build-ir-string "ret" type value))
   (ir-instr-br (condition true-label false-label)
-               "br" "i1" condition true-label "," false-label))
+               (build-ir-string "br" "i1" condition
+                                true-label "," false-label))
+  (ir-instr-switch (value default-label table)
+                   (build-ir-string "switch" (ir-value-type value) value
+                                    "," default-label
+                                    "[" (render-switch-table table) "]")))
+
+(define (render-switch-table table)
+  (string-join ", " (map (lambda (entry)
+                           (build-ir-string (ir-value-type (car entry))
+                                            (car entry)
+                                            "," (cadr entry)))
+                         table)))
 
 (define (build-ir-string . args)
   (string-join " " (map (lambda (x)
@@ -113,16 +136,42 @@
 (define-method (ir-node->line-tree type::ir-primitive-type)
   (ir-primitive-type-name type))
 
+(define-method (ir-node->line-tree label::ir-label)
+  (string-append "label %" (ir-label-name label)))
+
 (define-method (ir-node->line-tree int::ir-lit-int)
   (number->string (ir-lit-int-value int)))
 
-;(define-method (ir-node->line-tree assgn
+(define-method (ir-node->line-tree seq::ir-node-seq)
+  (append-line-trees (map ir-node->line-tree (ir-node-seq-nodes seq))))
+
+(define (append-line-trees trees)
+  (if (null? trees)
+      '()
+      ((if (pair? (car trees))
+          append
+          cons)
+       (car trees) (append-line-trees (cdr trees)))))
 
 (define (main argv)
-  (let ((i32 (make-ir-primitive-type "i32")))
+  (let ((i32 (make-ir-primitive-type "i32"))
+        (i1 (make-ir-primitive-type "i1")))
     (print (line-tree->string
             (ir-node->line-tree
-             (instantiate::ir-instr-ret
-              (type i32)
-              (value (make-ir-lit-int i32 0))))
+             (instantiate::ir-node-seq
+              (nodes
+               (list (instantiate::ir-instr-ret
+                      (type i32)
+                      (value (make-ir-lit-int i32 0)))
+                     (instantiate::ir-instr-br
+                      (condition (make-ir-lit-int i1 1))
+                      (true-label (make-ir-label "true"))
+                      (false-label (make-ir-label "false")))
+                     (instantiate::ir-instr-switch
+                      (value (make-ir-lit-int i32 5))
+                      (default-label (make-ir-label "default"))
+                      (table `((,(make-ir-lit-int i32 0)
+                                ,(make-ir-label "zero"))
+                               (,(make-ir-lit-int i32 5)
+                                ,(make-ir-label "five")))))))))
             0))))
