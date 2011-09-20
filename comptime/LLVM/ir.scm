@@ -74,8 +74,6 @@
 
 (define-generic (ir-node->line-tree node::ir-node))
 
-(define-generic (ir-instruction-opcode instr::ir-instruction))
-
 (define-syntax define-instruction-syntax
   (syntax-rules ()
     ((define-instruction-syntax var arg . args)
