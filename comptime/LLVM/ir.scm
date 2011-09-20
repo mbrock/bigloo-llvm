@@ -73,6 +73,14 @@
     (class ir-instr-phi::ir-instruction
       table::pair)
     
+    (class ir-instr-call::ir-instruction
+      (tail?::bool (default #f))
+      (cconv (default #f))
+      (ret-attrs::pair-nil (default '()))
+      (function-type (default #f))
+      function::ir-value
+      (args::pair-nil (default '()))
+      (fn-attrs::pair-nil (default '())))
     ))
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
@@ -128,6 +136,13 @@
    (type table)
    (build-ir-string "phi" type (render-phi-table table)))
 
+  (ir-instr-call
+   (type tail? cconv ret-attrs function-type function args fn-attrs)
+   (build-ir-string
+    (if tail? "tail" #f)
+    "call" cconv ret-attrs type function-type function
+    "(" (render-args args) ")"
+    (render-list fn-attrs)))
   )
 
 (define (ir-instr-name instr::ir-instruction)
@@ -155,10 +170,18 @@
 (define (render-list list)
   (string-join ", " (map stringify-node list)))
 
+(define (render-args args)
+  (render-list (map (lambda (arg)
+                      (build-ir-string (ir-value-type arg) arg)) args)))
+
 (define (stringify-node node)
-  (if (string? node)
-      node
-      (ir-node->inline-string node)))
+  (if (eq? node #f)
+      ""
+      (if (string? node)
+          node
+          (if (pair? node)
+              (string-join " " (map stringify-node node))
+              (ir-node->inline-string node)))))
 
 (define (string-join separator strings)
   (let loop ((xs strings)
@@ -239,6 +262,15 @@
                       (type i32)
                       (operand-1 (make-ir-lit-int i32 10))
                       (operand-2 (make-ir-lit-int i32 20)))
+
+                     (instantiate::ir-instr-call
+                      (tail? #t)
+                      (cconv "fastcc")
+                      (ret-attrs '("zeroext" "inreg"))
+                      (function (make-ir-lit-int i32 0))
+                      (args `(,(make-ir-lit-int i32 1)
+                              ,(make-ir-lit-int i32 2)))
+                      (fn-attrs '("nounwind" "readonly")))
 
                      ))))
             0))))
