@@ -283,6 +283,8 @@
           (list (append-line-trees (map ir-node->line-tree blocks)))
           "}")))
            
+(define-method (ir-node->line-tree assg::ir-assignment)
+  (build-ir-string (ir-assignment-name assg) "=" (ir-assignment-node assg)))
 
 (define (append-line-trees trees)
   (if (null? trees)
@@ -310,12 +312,15 @@
                            ,(make-ir-label "zero"))
                           (,(make-ir-lit-int i32 5)
                            ,(make-ir-label "five")))))
-                (instantiate::ir-instr-phi
-                 (type i32)
-                 (table `((,(make-ir-lit-int i32 0)
-                           ,(make-ir-label "zero"))
-                          (,(make-ir-lit-int i32 5)
-                           ,(make-ir-label "five")))))
+                (instantiate::ir-assignment
+                 (name "%foo")
+                 (node
+                  (instantiate::ir-instr-phi
+                   (type i32)
+                   (table `((,(make-ir-lit-int i32 0)
+                             ,(make-ir-label "zero"))
+                            (,(make-ir-lit-int i32 5)
+                             ,(make-ir-label "five")))))))
                 (instantiate::ir-instr-indirectbr
                  (address (make-ir-lit-int i32 123))
                  (labels (list (make-ir-label "foo")
