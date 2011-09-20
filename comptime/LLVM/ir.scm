@@ -204,19 +204,32 @@
          (ir-node->inline-string node))))
 
 (define (string-join separator strings)
-  (let loop ((xs strings)
-             (aux '()))
-    (cond ((null? xs) (apply string-append (reverse aux)))
-          ((null? (cdr xs)) (loop '() (cons (car xs) aux)))
-          (#t (loop (cdr xs) (cons separator (cons (car xs) aux)))))))
+  (if (null? strings) ""
+      (let loop ((xs strings)
+                 (aux '()))
+        (cond ((null? xs) (apply string-append (reverse aux)))
+              ((null? (cdr xs)) (loop '() (cons (car xs) aux)))
+              (#t (loop (cdr xs) (cons separator (cons (car xs) aux))))))))
+
+(define (line-tree->list node indent::int)
+  (if (string? node)
+      (add-indentation indent node)
+      (flatten
+       (map (lambda (x)
+              (line-tree->list x (+ 1 indent)))
+            node))))
+
+(define (flatten xs)
+  (if (pair? xs)
+      (if (pair? (car xs))
+          (append (flatten (car xs)) (flatten (cdr xs)))
+          (cons (car xs) (flatten (cdr xs))))
+      xs))
 
 (define (line-tree->string node indent::int)
   (if (string? node)
-      (add-indentation indent node)
-      (apply string-append
-             (map (lambda (x)
-                    (string-append (line-tree->string x (+ 1 indent))
-                                   "\n")) node))))
+      node
+      (string-join "\n" (line-tree->list node indent))))
       
 (define (add-indentation level::int string::bstring)
   (string-append (list->string (make-list (* 2 level) #\space)) string))
@@ -339,4 +352,4 @@
                (list
                 (instantiate::ir-node-seq
                  (nodes nodes))))))
-             -1))))
+            -1))))
