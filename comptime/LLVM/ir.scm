@@ -8,10 +8,29 @@
 
     (class ir-type::ir-node)
 
-    (class ir-label::ir-node
+    (class ir-primitive-type::ir-type
       name::bstring)
 
-    (class ir-primitive-type::ir-type
+    (class ir-pointer-type::ir-type
+      value-type::ir-type)
+
+    (class ir-array-type::ir-type
+      element-count::int
+      element-type::ir-type)
+
+    (class ir-vector-type::ir-type
+      element-count::int
+      element-type::ir-type)
+
+    (class ir-function-type::ir-type
+      return-type::ir-type
+      parameter-types::pair-nil)
+
+    (class ir-structure-type::ir-type
+      element-types::pair-nil
+      (packed?::bbool (default #f)))
+
+    (class ir-label::ir-node
       name::bstring)
 
     (class ir-value::ir-node
@@ -175,13 +194,14 @@
                       (build-ir-string (ir-value-type arg) arg)) args)))
 
 (define (stringify-node node)
-  (if (eq? node #f)
-      ""
-      (if (string? node)
-          node
-          (if (pair? node)
-              (string-join " " (map stringify-node node))
-              (ir-node->inline-string node)))))
+  (cond ((eq? node #f) "")
+        ((string? node) node)
+        ((pair? node)
+         (string-join " " (map stringify-node node)))
+        ((number? node)
+         (number->string node))
+        (#t
+         (ir-node->inline-string node))))
 
 (define (string-join separator strings)
   (let loop ((xs strings)
@@ -209,6 +229,29 @@
 
 (define-method (ir-node->line-tree type::ir-primitive-type)
   (ir-primitive-type-name type))
+
+;; TODO: Add parentheses when ambiguous!
+(define-method (ir-node->line-tree type::ir-pointer-type)
+  (string-append (ir-node->line-tree
+                  (ir-pointer-type-value-type type)) "*"))
+
+(define-method (ir-node->line-tree type::ir-array-type)
+  (with-access::ir-array-type type (element-count element-type)
+    (build-ir-string "[" element-count "x" element-type "]")))
+
+(define-method (ir-node->line-tree type::ir-vector-type)
+  (with-access::ir-vector-type type (element-count element-type)
+    (build-ir-string "<" element-count "x" element-type ">")))
+
+(define-method (ir-node->line-tree type::ir-structure-type)
+  (with-access::ir-structure-type type (element-types packed?)
+    (let ((open (if packed? "<{" "{"))
+          (close (if packed? "}>" "}")))
+      (build-ir-string open (render-list element-types) close))))
+
+(define-method (ir-node->line-tree type::ir-function-type)
+  (with-access::ir-function-type type (return-type parameter-types)
+    (build-ir-string return-type "(" (render-list parameter-types) ")")))
 
 (define-method (ir-node->line-tree label::ir-label)
   (string-append "label %" (ir-label-name label)))
@@ -264,6 +307,15 @@
                       (operand-2 (make-ir-lit-int i32 20)))
 
                      (instantiate::ir-instr-call
+                      (type (instantiate::ir-structure-type
+                             (packed? #t)
+                             (element-types
+                              (list (instantiate::ir-vector-type
+                                     (element-count 4)
+                                     (element-type i32))
+                                    i32 i32
+                                    (instantiate::ir-pointer-type
+                                     (value-type i32))))))
                       (tail? #t)
                       (cconv "fastcc")
                       (ret-attrs '("zeroext" "inreg"))
