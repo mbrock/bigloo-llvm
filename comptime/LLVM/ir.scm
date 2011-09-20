@@ -262,6 +262,15 @@
 (define-method (ir-node->line-tree seq::ir-node-seq)
   (append-line-trees (map ir-node->line-tree (ir-node-seq-nodes seq))))
 
+(define-method (ir-node->line-tree defn::ir-function-defn)
+  (with-access::ir-function-defn defn (return-type name arguments blocks)
+    (list (build-ir-string
+           "define" return-type name "(" (render-list arguments) ")"
+           "{")
+          (list (append-line-trees (map ir-node->line-tree blocks)))
+          "}")))
+           
+
 (define (append-line-trees trees)
   (if (null? trees)
       '()
@@ -271,58 +280,63 @@
        (car trees) (append-line-trees (cdr trees)))))
 
 (define (main argv)
-  (let ((i32 (make-ir-primitive-type "i32"))
-        (i1 (make-ir-primitive-type "i1")))
+  (let* ((i32 (make-ir-primitive-type "i32"))
+         (i1 (make-ir-primitive-type "i1"))
+         (nodes
+          (list (instantiate::ir-instr-ret
+                 (type i32)
+                 (value (make-ir-lit-int i32 0)))
+                (instantiate::ir-instr-br
+                 (condition (make-ir-lit-int i1 1))
+                 (true-label (make-ir-label "true"))
+                 (false-label (make-ir-label "false")))
+                (instantiate::ir-instr-switch
+                 (value (make-ir-lit-int i32 5))
+                 (default-label (make-ir-label "default"))
+                 (table `((,(make-ir-lit-int i32 0)
+                           ,(make-ir-label "zero"))
+                          (,(make-ir-lit-int i32 5)
+                           ,(make-ir-label "five")))))
+                (instantiate::ir-instr-phi
+                 (type i32)
+                 (table `((,(make-ir-lit-int i32 0)
+                           ,(make-ir-label "zero"))
+                          (,(make-ir-lit-int i32 5)
+                           ,(make-ir-label "five")))))
+                (instantiate::ir-instr-indirectbr
+                 (address (make-ir-lit-int i32 123))
+                 (labels (list (make-ir-label "foo")
+                               (make-ir-label "bar"))))
+                (instantiate::ir-instr-add
+                 (type i32)
+                 (operand-1 (make-ir-lit-int i32 10))
+                 (operand-2 (make-ir-lit-int i32 20)))
+                
+                (instantiate::ir-instr-call
+                 (type (instantiate::ir-structure-type
+                        (packed? #t)
+                        (element-types
+                         (list (instantiate::ir-vector-type
+                                (element-count 4)
+                                (element-type i32))
+                               i32 i32
+                               (instantiate::ir-pointer-type
+                                (value-type i32))))))
+                 (tail? #t)
+                 (cconv "fastcc")
+                 (ret-attrs '("zeroext" "inreg"))
+                 (function (make-ir-lit-int i32 0))
+                 (args `(,(make-ir-lit-int i32 1)
+                         ,(make-ir-lit-int i32 2)))
+                 (fn-attrs '("nounwind" "readonly"))))))
     (print (line-tree->string
             (ir-node->line-tree
-             (instantiate::ir-node-seq
-              (nodes
-               (list (instantiate::ir-instr-ret
-                      (type i32)
-                      (value (make-ir-lit-int i32 0)))
-                     (instantiate::ir-instr-br
-                      (condition (make-ir-lit-int i1 1))
-                      (true-label (make-ir-label "true"))
-                      (false-label (make-ir-label "false")))
-                     (instantiate::ir-instr-switch
-                      (value (make-ir-lit-int i32 5))
-                      (default-label (make-ir-label "default"))
-                      (table `((,(make-ir-lit-int i32 0)
-                                ,(make-ir-label "zero"))
-                               (,(make-ir-lit-int i32 5)
-                                ,(make-ir-label "five")))))
-                     (instantiate::ir-instr-phi
-                      (type i32)
-                      (table `((,(make-ir-lit-int i32 0)
-                                ,(make-ir-label "zero"))
-                               (,(make-ir-lit-int i32 5)
-                                ,(make-ir-label "five")))))
-                     (instantiate::ir-instr-indirectbr
-                      (address (make-ir-lit-int i32 123))
-                      (labels (list (make-ir-label "foo")
-                                    (make-ir-label "bar"))))
-                     (instantiate::ir-instr-add
-                      (type i32)
-                      (operand-1 (make-ir-lit-int i32 10))
-                      (operand-2 (make-ir-lit-int i32 20)))
-
-                     (instantiate::ir-instr-call
-                      (type (instantiate::ir-structure-type
-                             (packed? #t)
-                             (element-types
-                              (list (instantiate::ir-vector-type
-                                     (element-count 4)
-                                     (element-type i32))
-                                    i32 i32
-                                    (instantiate::ir-pointer-type
-                                     (value-type i32))))))
-                      (tail? #t)
-                      (cconv "fastcc")
-                      (ret-attrs '("zeroext" "inreg"))
-                      (function (make-ir-lit-int i32 0))
-                      (args `(,(make-ir-lit-int i32 1)
-                              ,(make-ir-lit-int i32 2)))
-                      (fn-attrs '("nounwind" "readonly")))
-
-                     ))))
-            0))))
+             (instantiate::ir-function-defn
+              (return-type *ir-type-void*)
+              (name "@foo")
+              (arguments '())
+              (blocks
+               (list
+                (instantiate::ir-node-seq
+                 (nodes nodes))))))
+             -1))))
