@@ -63,10 +63,15 @@
     (class ir-instr-binary::ir-instruction
       operand-1::ir-value
       operand-2::ir-value)
+
+    ;; TODO: add the remaining binary instructions
     
     (class ir-instr-add::ir-instr-binary)
     (class ir-instr-sub::ir-instr-binary)
     (class ir-instr-mul::ir-instr-binary)
+
+    (class ir-instr-phi::ir-instruction
+      table::pair)
     
     ))
 
@@ -117,7 +122,13 @@
                     "," "[" (render-list labels) "]"))
   (ir-instr-binary
    (type operand-1 operand-2)
-   (build-ir-string (ir-instr-name instr) type operand-1 "," operand-2)))
+   (build-ir-string (ir-instr-name instr) type operand-1 "," operand-2))
+
+  (ir-instr-phi
+   (type table)
+   (build-ir-string "phi" type (render-phi-table table)))
+
+  )
 
 (define (ir-instr-name instr::ir-instruction)
   (cond ((is-a? instr ir-instr-add) "add")
@@ -131,6 +142,12 @@
                                             (car entry)
                                             "," (cadr entry)))
                          table)))
+
+(define (render-phi-table table)
+  (string-join ", " (map (lambda (entry)
+                           (build-ir-string
+                            "[" (car entry) ","
+                            (ir-label-name (cadr entry)) "]")) table)))
 
 (define (build-ir-string . args)
   (string-join " " (map stringify-node args)))
@@ -204,6 +221,12 @@
                      (instantiate::ir-instr-switch
                       (value (make-ir-lit-int i32 5))
                       (default-label (make-ir-label "default"))
+                      (table `((,(make-ir-lit-int i32 0)
+                                ,(make-ir-label "zero"))
+                               (,(make-ir-lit-int i32 5)
+                                ,(make-ir-label "five")))))
+                     (instantiate::ir-instr-phi
+                      (type i32)
                       (table `((,(make-ir-lit-int i32 0)
                                 ,(make-ir-label "zero"))
                                (,(make-ir-lit-int i32 5)
