@@ -7,9 +7,10 @@
     (class ir-node::object)
 
     ;; A node sequence: a list of top-level definitions or instructions in a
-    ;; block.
+    ;; block, optionally labelled.
     (class ir-node-seq::ir-node
-      (nodes::pair-nil (default '())))
+      (nodes::pair-nil (default '()))
+      (label (default #f)))
 
     ;; A label name like @foo.
     (class ir-label::ir-node
@@ -322,7 +323,13 @@
   (number->string (ir-lit-int-value int)))
 
 (define-method (ir-node->line-tree seq::ir-node-seq)
-  (append-line-trees (map ir-node->line-tree (ir-node-seq-nodes seq))))
+  (let ((lines (append-line-trees (map ir-node->line-tree
+                                       (ir-node-seq-nodes seq))))
+        (label (ir-node-seq-label seq)))
+    (if label
+        (list (string-append label ":") lines)
+        lines)))
+
 
 (define-method (ir-node->line-tree defn::ir-function-defn)
   (with-access::ir-function-defn defn
@@ -336,7 +343,7 @@
            (if align (list "align" align))
            gc
            "{")
-          (list (append-line-trees (map ir-node->line-tree blocks)))
+          (append-line-trees (map ir-node->line-tree blocks))
           "}")))
            
 (define-method (ir-node->line-tree assg::ir-assignment)
@@ -432,5 +439,6 @@
               (blocks
                (list
                 (instantiate::ir-node-seq
+                 (label "entry")
                  (nodes nodes))))))
             -1))))
