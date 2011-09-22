@@ -1,10 +1,22 @@
 (module llvm_ir
   (main main)
   (export
+    ;; An ir-node is basically an LLVM IR syntax tree, though this class
+    ;; hierarchy does not really correspond to any formal definition of the IR
+    ;; syntax; it's an ad hoc representation suitable for our needs.
     (class ir-node::object)
 
+    ;; A node sequence: a list of top-level definitions or instructions in a
+    ;; block.
     (class ir-node-seq::ir-node
       (nodes::pair-nil (default '())))
+
+    ;; A label name like @foo.
+    (class ir-label::ir-node
+      name::bstring)
+
+
+    ;;; These classes represent types in the LLVM type system.
 
     (class ir-type::ir-node)
 
@@ -30,24 +42,30 @@
       element-types::pair-nil
       (packed?::bbool (default #f)))
 
-    (class ir-label::ir-node
-      name::bstring)
 
+    ;;; Other IR nodes.
+
+    ;; An IR value: an expression node with an associated type.
     (class ir-value::ir-node
       (type::ir-type (default *ir-type-void*)))
 
+    ;; IR instructions are value expressions (some with void type).
     (class ir-instruction::ir-value)
 
+    ;; Register names like %foo are value expressions.
     (class ir-register::ir-value
       name::bstring)
 
+    ;; Literals are value expressions, too.
     (class ir-lit-int::ir-value
       value::int)
 
+    ;; An assignment statement like %foo = i32 0.
     (class ir-assignment::ir-node
       name::bstring
       node::ir-value)
 
+    ;; A top-level function definition.
     (class ir-function-defn::ir-node
       (linkage (default #f))
       (visibility (default #f))
@@ -62,7 +80,8 @@
       (blocks (default '()))
       (gc (default #f)))
 
-    ;;; Instructions.
+
+    ;;; All the instructions.
 
     (class ir-instr-ret::ir-instruction
       (value::ir-value (default #f)))
@@ -109,9 +128,14 @@
       (fn-attrs::pair-nil (default '())))
     ))
 
+
+;;; Built-in types.
+
 (define *ir-type-void* (make-ir-primitive-type "void"))
 
-(define-generic (ir-node->line-tree node::ir-node))
+
+;;; Some syntax for more concisely implementing the `ir-instruction->string'
+;;; function.
 
 (define-syntax define-instruction-syntax
   (syntax-rules ()
@@ -129,6 +153,7 @@
                            (begin body ...))
            (make-instruction-syntax-cond var instr . rest))))))
 
+;; Kludge needed because x::y forms are impervious to macro expansion.
 (define-syntax my-with-access
   (syntax-rules ()
     ((my-with-access klass x () body ...) (begin body ...))
@@ -137,6 +162,14 @@
                     (find-class-field klass (quote field))) x)))
        (my-with-access klass x rest body ...)))))
 
+;; Get the syntax name of an IR instruction.
+(define (ir-instr-name instr::ir-instruction)
+  (cond ((is-a? instr ir-instr-add) "add")
+        ((is-a? instr ir-instr-sub) "sub")
+        ((is-a? instr ir-instr-mul) "mul")
+        (#f (raise "ir-instr-name"))))
+
+;; This defines the `ir-instruction->string' function.
 (define-instruction-syntax instr
   (ir-instr-ret
    (type value)
@@ -168,14 +201,7 @@
     (if tail? "tail" #f)
     "call" cconv ret-attrs type function-type function
     "(" (render-args args) ")"
-    (render-list fn-attrs)))
-  )
-
-(define (ir-instr-name instr::ir-instruction)
-  (cond ((is-a? instr ir-instr-add) "add")
-        ((is-a? instr ir-instr-sub) "sub")
-        ((is-a? instr ir-instr-mul) "mul")
-        (#f (raise "ir-instr-name"))))
+    (render-list fn-attrs))))
 
 (define (render-switch-table table)
   (string-join ", " (map (lambda (entry)
@@ -190,41 +216,22 @@
                             "[" (car entry) ","
                             (ir-label-name (cadr entry)) "]")) table)))
 
-(define (build-ir-string . args)
-  (stringify-nodes " " args))
 
-(define (render-list list)
-  (stringify-nodes ", " list))
+;;; Convenience stuff for constructing IR strings.
 
-(define (render-args args)
-  (render-list (map (lambda (arg)
-                      (build-ir-string (ir-value-type arg) arg)) args)))
+;;; A line tree is a nested list of strings.  The deeper the nesting, the
+;;; deeper the indentation when printed.
 
-(define (stringify-node node)
-  (cond ((eq? node #f) "")
-        ((string? node) node)
-        ((list? node)
-         (stringify-nodes " " node))
-        ((number? node)
-         (number->string node))
-        (#t
-         (ir-node->inline-string node))))
+;; Translate an IR node to a line tree.
+(define-generic (ir-node->line-tree node::ir-node))
 
-(define (stringify-nodes separator nodes)
-  (string-join separator (filter string-nonempty?
-                                 (map stringify-node nodes))))
+;; Render a line tree to a string starting on the given indentation level.
+(define (line-tree->string node indent::int)
+  (if (string? node)
+      node
+      (string-join "\n" (line-tree->list node indent))))
 
-(define (string-nonempty? string)
-  (> (string-length string) 0))
-
-(define (string-join separator strings)
-  (if (null? strings) ""
-      (let loop ((xs strings)
-                 (aux '()))
-        (cond ((null? xs) (apply string-append (reverse aux)))
-              ((null? (cdr xs)) (loop '() (cons (car xs) aux)))
-              (#t (loop (cdr xs) (cons separator (cons (car xs) aux))))))))
-
+;; Convert a line tree to a flat list of indented strings.
 (define (line-tree->list node indent::int)
   (if (string? node)
       (add-indentation indent node)
@@ -233,23 +240,51 @@
               (line-tree->list x (+ 1 indent)))
             node))))
 
-(define (flatten xs)
-  (if (pair? xs)
-      (if (pair? (car xs))
-          (append (flatten (car xs)) (flatten (cdr xs)))
-          (cons (car xs) (flatten (cdr xs))))
-      xs))
+(define (append-line-trees trees)
+  (if (null? trees)
+      '()
+      ((if (pair? (car trees))
+          append
+          cons)
+       (car trees) (append-line-trees (cdr trees)))))
 
-(define (line-tree->string node indent::int)
-  (if (string? node)
-      node
-      (string-join "\n" (line-tree->list node indent))))
-      
 (define (add-indentation level::int string::bstring)
   (string-append (list->string (make-list (* 2 level) #\space)) string))
 
 (define (ir-node->inline-string node::ir-node)
   (line-tree->string (ir-node->line-tree node) 0))
+
+(define (build-ir-string . args)
+  (stringify-things " " args))
+
+(define (render-list list)
+  (stringify-things ", " list))
+
+(define (render-args args)
+  (render-list (map (lambda (arg)
+                      (build-ir-string (ir-value-type arg) arg)) args)))
+
+;; Render a list of things to a string.  This is written to simplify building
+;; IR lines, and so has some assumptions.
+(define (stringify-things separator things)
+  (string-join separator (filter string-nonempty?
+                                 (map stringify-thing things))))
+
+;; A thing is anything you could reasonably want to stringify, especially IR
+;; nodes.  #f becomes the empty string, strings pass through unchanged,
+;; numbers are rendered in decimal, lists are joined by spaces, etc.
+(define (stringify-thing thing)
+  (cond ((eq? thing #f) "")
+        ((string? thing) thing)
+        ((list? thing)
+         (stringify-things " " thing))
+        ((number? thing)
+         (number->string thing))
+        ((ir-node? thing)
+         (ir-node->inline-string thing))))
+
+
+;;; Now we define the methods for rendering IR nodes.
 
 (define-method (ir-node->line-tree instr::ir-instruction)
   (ir-instruction->string instr))
@@ -307,13 +342,29 @@
 (define-method (ir-node->line-tree assg::ir-assignment)
   (build-ir-string (ir-assignment-name assg) "=" (ir-assignment-node assg)))
 
-(define (append-line-trees trees)
-  (if (null? trees)
-      '()
-      ((if (pair? (car trees))
-          append
-          cons)
-       (car trees) (append-line-trees (cdr trees)))))
+
+;;; Utilities.
+
+(define (string-nonempty? string)
+  (> (string-length string) 0))
+
+(define (string-join separator strings)
+  (if (null? strings) ""
+      (let loop ((xs strings)
+                 (aux '()))
+        (cond ((null? xs) (apply string-append (reverse aux)))
+              ((null? (cdr xs)) (loop '() (cons (car xs) aux)))
+              (#t (loop (cdr xs) (cons separator (cons (car xs) aux))))))))
+
+(define (flatten xs)
+  (if (pair? xs)
+      (if (pair? (car xs))
+          (append (flatten (car xs)) (flatten (cdr xs)))
+          (cons (car xs) (flatten (cdr xs))))
+      xs))
+
+
+;;; Test.
 
 (define (main argv)
   (let* ((i32 (make-ir-primitive-type "i32"))
