@@ -64,7 +64,7 @@
     ;; An assignment statement like %foo = i32 0.
     (class ir-assignment::ir-node
       name::bstring
-      node::ir-value)
+      node::ir-node)
 
     ;; A top-level function definition.
     (class ir-function-defn::ir-node
@@ -173,24 +173,26 @@
 ;; This defines the `ir-instruction->string' function.
 (define-instruction-syntax instr
   (ir-instr-ret
-   (type value)
-   (build-ir-string "ret" type value))
+   (value)
+   (build-ir-string "ret" value))
   (ir-instr-br
    (condition true-label false-label)
    (build-ir-string "br" "i1" condition
                     true-label "," false-label))
   (ir-instr-switch
    (value default-label table)
-   (build-ir-string "switch" (ir-value-type value) value
+   (build-ir-string "switch" value
                     "," default-label
                     "[" (render-switch-table table) "]"))
   (ir-instr-indirectbr
    (address labels)
-   (build-ir-string "indirectbr" (ir-value-type address) address
+   (build-ir-string "indirectbr" address
                     "," "[" (render-list labels) "]"))
   (ir-instr-binary
    (type operand-1 operand-2)
-   (build-ir-string (ir-instr-name instr) type operand-1 "," operand-2))
+   (build-ir-string (ir-instr-name instr) type
+                    (render-value-sans-type operand-1) ","
+                    (render-value-sans-type operand-2)))
 
   (ir-instr-phi
    (type table)
@@ -206,8 +208,7 @@
 
 (define (render-switch-table table)
   (string-join ", " (map (lambda (entry)
-                           (build-ir-string (ir-value-type (car entry))
-                                            (car entry)
+                           (build-ir-string (car entry)
                                             "," (cadr entry)))
                          table)))
 
@@ -262,8 +263,7 @@
   (stringify-things ", " list))
 
 (define (render-args args)
-  (render-list (map (lambda (arg)
-                      (build-ir-string (ir-value-type arg) arg)) args)))
+  (render-list args))
 
 ;; Render a list of things to a string.  This is written to simplify building
 ;; IR lines, and so has some assumptions.
@@ -286,9 +286,6 @@
 
 
 ;;; Now we define the methods for rendering IR nodes.
-
-(define-method (ir-node->line-tree instr::ir-instruction)
-  (ir-instruction->string instr))
 
 (define-method (ir-node->line-tree type::ir-primitive-type)
   (ir-primitive-type-name type))
@@ -317,10 +314,19 @@
     (build-ir-string return-type "(" (render-list parameter-types) ")")))
 
 (define-method (ir-node->line-tree label::ir-label)
-  (string-append "label %" (ir-label-name label)))
+  (string-append "label " (ir-label-name label)))
 
-(define-method (ir-node->line-tree int::ir-lit-int)
+(define-method (ir-node->line-tree value::ir-value)
+  (build-ir-string (ir-value-type value)
+                   (render-value-sans-type value)))
+
+(define-generic (render-value-sans-type value::ir-value))
+
+(define-method (render-value-sans-type int::ir-lit-int)
   (number->string (ir-lit-int-value int)))
+
+(define-method (ir-node->line-tree instr::ir-instruction)
+  (ir-instruction->string instr))
 
 (define-method (ir-node->line-tree seq::ir-node-seq)
   (let ((lines (append-line-trees (map ir-node->line-tree
@@ -382,28 +388,28 @@
                  (value (make-ir-lit-int i32 0)))
                 (instantiate::ir-instr-br
                  (condition (make-ir-lit-int i1 1))
-                 (true-label (make-ir-label "true"))
-                 (false-label (make-ir-label "false")))
+                 (true-label (make-ir-label "%true"))
+                 (false-label (make-ir-label "%false")))
                 (instantiate::ir-instr-switch
                  (value (make-ir-lit-int i32 5))
-                 (default-label (make-ir-label "default"))
+                 (default-label (make-ir-label "%default"))
                  (table `((,(make-ir-lit-int i32 0)
-                           ,(make-ir-label "zero"))
+                           ,(make-ir-label "%zero"))
                           (,(make-ir-lit-int i32 5)
-                           ,(make-ir-label "five")))))
+                           ,(make-ir-label "%five")))))
                 (instantiate::ir-assignment
                  (name "%foo")
                  (node
                   (instantiate::ir-instr-phi
                    (type i32)
                    (table `((,(make-ir-lit-int i32 0)
-                             ,(make-ir-label "zero"))
+                             ,(make-ir-label "%zero"))
                             (,(make-ir-lit-int i32 5)
-                             ,(make-ir-label "five")))))))
+                             ,(make-ir-label "%five")))))))
                 (instantiate::ir-instr-indirectbr
                  (address (make-ir-lit-int i32 123))
-                 (labels (list (make-ir-label "foo")
-                               (make-ir-label "bar"))))
+                 (labels (list (make-ir-label "%foo")
+                               (make-ir-label "%bar"))))
                 (instantiate::ir-instr-add
                  (type i32)
                  (operand-1 (make-ir-lit-int i32 10))
