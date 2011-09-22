@@ -50,6 +50,10 @@
     (class ir-value::ir-node
       (type::ir-type (default *ir-type-void*)))
 
+    ;; A variable like %foo.
+    (class ir-variable::ir-value
+      name::bstring)
+
     ;; IR instructions are value expressions (some with void type).
     (class ir-instruction::ir-value)
 
@@ -65,6 +69,12 @@
     (class ir-assignment::ir-node
       name::bstring
       node::ir-node)
+
+    (class ir-alias::ir-node
+      (linkage (default #f))
+      (visibility (default #f))
+      type::ir-type
+      aliasee::ir-value)
 
     ;; A top-level function definition.
     (class ir-function-defn::ir-node
@@ -325,8 +335,14 @@
 (define-method (render-value-sans-type int::ir-lit-int)
   (number->string (ir-lit-int-value int)))
 
+(define-method (render-value-sans-type var::ir-variable)
+  (ir-variable-name var))
+
 (define-method (ir-node->line-tree instr::ir-instruction)
   (ir-instruction->string instr))
+
+(define-method (ir-node->line-tree var::ir-variable)
+  (render-value-sans-type var))
 
 (define-method (ir-node->line-tree seq::ir-node-seq)
   (let ((lines (append-line-trees (map ir-node->line-tree
@@ -354,6 +370,11 @@
            
 (define-method (ir-node->line-tree assg::ir-assignment)
   (build-ir-string (ir-assignment-name assg) "=" (ir-assignment-node assg)))
+
+(define-method (ir-node->line-tree alias::ir-alias)
+  (with-access::ir-alias alias
+    (linkage visibility type aliasee)
+    (build-ir-string "alias" linkage visibility type aliasee)))
 
 
 ;;; Utilities.
@@ -434,17 +455,28 @@
                  (fn-attrs '("nounwind" "readonly"))))))
     (print (line-tree->string
             (ir-node->line-tree
-             (instantiate::ir-function-defn
-              (linkage "internal")
-              (visibility "protected")
-              (cconv "fastcc")
-              (return-type *ir-type-void*)
-              (name "@foo")
-              (section "baz")
-              (arguments '())
-              (blocks
+             (instantiate::ir-node-seq
+              (nodes
                (list
-                (instantiate::ir-node-seq
-                 (label "entry")
-                 (nodes nodes))))))
+                (instantiate::ir-assignment
+                 (name "@thing")
+                 (node
+                  (instantiate::ir-alias
+                   (linkage "private")
+                   (type i32)
+                   (aliasee (instantiate::ir-variable
+                             (name "@other"))))))
+                (instantiate::ir-function-defn
+                 (linkage "internal")
+                 (visibility "protected")
+                 (cconv "fastcc")
+                 (return-type *ir-type-void*)
+                 (name "@foo")
+                 (section "baz")
+                 (arguments '())
+                 (blocks
+                  (list
+                   (instantiate::ir-node-seq
+                    (label "entry")
+                    (nodes nodes)))))))))
             -1))))
