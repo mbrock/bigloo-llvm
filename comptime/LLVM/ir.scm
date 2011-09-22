@@ -49,11 +49,18 @@
       node::ir-value)
 
     (class ir-function-defn::ir-node
+      (linkage (default #f))
+      (visibility (default #f))
+      (cconv (default #f))
+      (ret-attrs::pair-nil (default '()))
       return-type::ir-type
       name::bstring
       (arguments (default '()))
-      ;; TODO: Add the optional components (linkage, visibility, etc.).
-      (blocks (default '())))
+      (fn-attrs::pair-nil (default '()))
+      (section (default #f))
+      (align (default #f))
+      (blocks (default '()))
+      (gc (default #f)))
 
     ;;; Instructions.
 
@@ -184,10 +191,10 @@
                             (ir-label-name (cadr entry)) "]")) table)))
 
 (define (build-ir-string . args)
-  (string-join " " (map stringify-node args)))
+  (stringify-nodes " " args))
 
 (define (render-list list)
-  (string-join ", " (map stringify-node list)))
+  (stringify-nodes ", " list))
 
 (define (render-args args)
   (render-list (map (lambda (arg)
@@ -196,12 +203,19 @@
 (define (stringify-node node)
   (cond ((eq? node #f) "")
         ((string? node) node)
-        ((pair? node)
-         (string-join " " (map stringify-node node)))
+        ((list? node)
+         (stringify-nodes " " node))
         ((number? node)
          (number->string node))
         (#t
          (ir-node->inline-string node))))
+
+(define (stringify-nodes separator nodes)
+  (string-join separator (filter string-nonempty?
+                                 (map stringify-node nodes))))
+
+(define (string-nonempty? string)
+  (> (string-length string) 0))
 
 (define (string-join separator strings)
   (if (null? strings) ""
@@ -276,9 +290,16 @@
   (append-line-trees (map ir-node->line-tree (ir-node-seq-nodes seq))))
 
 (define-method (ir-node->line-tree defn::ir-function-defn)
-  (with-access::ir-function-defn defn (return-type name arguments blocks)
+  (with-access::ir-function-defn defn
+    (linkage visibility cconv ret-attrs return-type name arguments
+     fn-attrs section align blocks gc)
     (list (build-ir-string
-           "define" return-type name "(" (render-list arguments) ")"
+           "define" linkage visibility cconv ret-attrs
+           return-type name "(" (render-list arguments) ")"
+           fn-attrs
+           (if section (list "section" (format "~s" section)))
+           (if align (list "align" align))
+           gc
            "{")
           (list (append-line-trees (map ir-node->line-tree blocks)))
           "}")))
@@ -350,8 +371,12 @@
     (print (line-tree->string
             (ir-node->line-tree
              (instantiate::ir-function-defn
+              (linkage "internal")
+              (visibility "protected")
+              (cconv "fastcc")
               (return-type *ir-type-void*)
               (name "@foo")
+              (section "baz")
               (arguments '())
               (blocks
                (list
