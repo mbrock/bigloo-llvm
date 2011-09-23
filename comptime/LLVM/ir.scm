@@ -94,6 +94,14 @@
       (blocks (default '()))
       (gc (default #f)))
 
+    ;; A global variable.
+    (class ir-global-variable::ir-node
+      (constant? (default #f))
+      type::ir-type
+      (initial-value (default #f))
+      (section (default #f))
+      (align (default #f)))
+
 
     ;;; All the instructions.
 
@@ -373,6 +381,18 @@
            "{")
           (append-line-trees (map ir-node->line-tree blocks))
           "}")))
+
+(define-method (ir-node->line-tree gvar::ir-global-variable)
+  (with-access::ir-global-variable gvar
+    (constant? type initial-value section align)
+    (build-ir-string
+     (if constant? "constant")
+     type
+     (render-list
+      (list
+       (if initial-value (render-value-sans-type initial-value))
+       (if section (list "section" (format "~s," section)))
+       (if align (list "align" align)))))))
            
 (define-method (ir-node->line-tree assg::ir-assignment)
   (build-ir-string (ir-assignment-name assg) "=" (ir-assignment-node assg)))
