@@ -21,6 +21,9 @@
 
     (class ir-type::ir-node)
 
+    (class ir-type-alias::ir-node
+      type::ir-type)
+
     (class ir-primitive-type::ir-type
       name::bstring)
 
@@ -299,6 +302,9 @@
 
 (define-method (ir-node->line-tree type::ir-primitive-type)
   (ir-primitive-type-name type))
+
+(define-method (ir-node->line-tree type-alias::ir-type-alias)
+  (build-ir-string "type" (ir-type-alias-type type-alias)))
 
 ;; TODO: Add parentheses when ambiguous!
 (define-method (ir-node->line-tree type::ir-pointer-type)
