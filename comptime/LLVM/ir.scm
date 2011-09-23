@@ -96,6 +96,8 @@
 
     ;; A global variable.
     (class ir-global-variable::ir-node
+      (linkage (default #f))
+      (global? (default #f))
       (constant? (default #f))
       type::ir-type
       (initial-value (default #f))
@@ -384,8 +386,10 @@
 
 (define-method (ir-node->line-tree gvar::ir-global-variable)
   (with-access::ir-global-variable gvar
-    (constant? type initial-value section align)
+    (linkage global? constant? type initial-value section align)
     (build-ir-string
+     linkage
+     (if global? "global")
      (if constant? "constant")
      type
      (render-list
