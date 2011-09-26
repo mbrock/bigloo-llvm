@@ -149,7 +149,12 @@
       (function-type (default #f))
       function::ir-value
       (args::pair-nil (default '()))
-      (fn-attrs::pair-nil (default '())))
+      (fn-attrs::pair-nil (default '()))
+      (type read-only
+            (get (lambda (i)            ; TODO: consider function-type
+                   (ir-function-type-return-type
+                    (ir-value-type
+                     (ir-instr-call-function i)))))))
 
     ;;; Memory instructions.
 
@@ -173,6 +178,10 @@
     (class ir-instr-store::ir-instruction
       value::ir-value
       pointer::ir-value)
+
+    (class ir-instr-getelementptr::ir-instruction
+      pointer::ir-value
+      indices::pair)
 
     ))
 
@@ -267,6 +276,11 @@
    (value pointer)
    (build-ir-string "store" (render-args (list value pointer))))
 
+  (ir-instr-getelementptr
+   (pointer indices)
+   (build-ir-string
+    "getelementptr"
+    (render-args (cons pointer indices))))
   )
 
 (define (render-switch-table table)
