@@ -94,6 +94,17 @@
       (blocks (default '()))
       (gc (default #f)))
 
+    ;; A top-level function declaration.
+    (class ir-function-decl::ir-node
+      (linkage (default #f))
+      (visibility (default #f))
+      (cconv (default #f))
+      return-type::ir-type
+      name::bstring
+      (arguments (default '()))
+      (align (default #f))
+      (gc (default #f)))
+
     ;; A global variable.
     (class ir-global-variable::ir-node
       (linkage (default #f))
@@ -437,6 +448,15 @@
            "{")
           (append-line-trees (map ir-node->line-tree blocks))
           "}")))
+
+(define-method (ir-node->line-tree decl::ir-function-decl)
+  (with-access::ir-function-decl decl
+    (linkage visibility cconv return-type name arguments align gc)
+    (build-ir-string
+     "declare" linkage visibility cconv
+     return-type name "(" (render-list arguments) ")"
+     (if align (list "align" align))
+     gc)))
 
 (define-method (ir-node->line-tree gvar::ir-global-variable)
   (with-access::ir-global-variable gvar
