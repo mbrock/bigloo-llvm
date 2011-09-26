@@ -161,6 +161,19 @@
                     (value-type (ir-instr-alloca-element-type i))))))
       (n (default #f))
       (align (default #f)))
+
+    (class ir-instr-load::ir-instruction
+      pointer::ir-value
+      (type read-only
+            (get (lambda (i)
+                   (ir-pointer-type-value-type
+                    (ir-value-type
+                     (ir-instr-load-pointer i)))))))
+
+    (class ir-instr-store::ir-instruction
+      value::ir-value
+      pointer::ir-value)
+
     ))
 
 
@@ -244,7 +257,17 @@
    (element-type n align)
    (build-ir-string
     "alloca"
-    (render-args (list element-type n (if align (list "align" align)))))))
+    (render-args (list element-type n (if align (list "align" align))))))
+
+  (ir-instr-load
+   (pointer)
+   (build-ir-string "load" pointer))
+
+  (ir-instr-store
+   (value pointer)
+   (build-ir-string "store" (render-args (list value pointer))))
+
+  )
 
 (define (render-switch-table table)
   (string-join ", " (map (lambda (entry)
