@@ -51,7 +51,7 @@
 
     ;; An IR value: an expression node with an associated type.
     (class ir-value::ir-node
-      (type::ir-type (default *ir-type-void*)))
+      (type::ir-type read-only (default *ir-type-void*)))
 
     ;; A variable like %foo.
     (class ir-variable::ir-value
@@ -150,6 +150,17 @@
       function::ir-value
       (args::pair-nil (default '()))
       (fn-attrs::pair-nil (default '())))
+
+    ;;; Memory instructions.
+
+    (class ir-instr-alloca::ir-instruction
+      element-type::ir-type
+      (type read-only
+            (get (lambda (i)
+                   (instantiate::ir-pointer-type
+                    (value-type (ir-instr-alloca-element-type i))))))
+      (n (default #f))
+      (align (default #f)))
     ))
 
 
@@ -227,7 +238,13 @@
     (if tail? "tail" #f)
     "call" cconv ret-attrs type function-type function
     "(" (render-args args) ")"
-    (render-list fn-attrs))))
+    (render-list fn-attrs)))
+
+  (ir-instr-alloca
+   (element-type n align)
+   (build-ir-string
+    "alloca"
+    (render-args (list element-type n (if align (list "align" align)))))))
 
 (define (render-switch-table table)
   (string-join ", " (map (lambda (entry)
@@ -465,6 +482,11 @@
                  (type i32)
                  (operand-1 (make-ir-lit-int i32 10))
                  (operand-2 (make-ir-lit-int i32 20)))
+
+                (instantiate::ir-instr-alloca
+                 (element-type i32)
+                 (n (make-ir-lit-int i32 100))
+                 (align 1024))
                 
                 (instantiate::ir-instr-call
                  (type (instantiate::ir-structure-type
