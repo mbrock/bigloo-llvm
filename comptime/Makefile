@@ -228,11 +228,16 @@ JVM_FILE	= extern env instr inline peephole lisp prelude compress \
 
 JVM_OBJ		= $(JVM_FILE:%=Jvm/%.o)
 
+#*--- LLVM ------------------------------------------------------------*/
+LLVM_FILE	= ir
+LLVM_OBJ	= $(LLVM_FILE:%=LLVM/%.o)
+
 #*--- BackEnd ---------------------------------------------------------*/
 BACKEND_FILE    = backend walk init lib cplib cvm bvm \
                   c c_main c_proto c_emit  \
                   jvm jvm_class \
-                  dotnet dotnet_class
+                  dotnet dotnet_class \
+                  llvm
 
 BACKEND_OBJ	= $(BACKEND_FILE:%=BackEnd/%.o)
 
@@ -333,7 +338,8 @@ O_OBJECTS_NOIJ  = $(ENGINE_OBJ) $(WRITE_OBJ) \
                   $(EVAL_OBJ) $(LIFEXT_OBJ) $(FAIL_OBJ) $(REDUCE_OBJ) \
                   $(EFFECT_OBJ) $(OBJECT_OBJ) $(TOOLS_OBJ) $(BDB_OBJ) \
                   $(PROF_OBJ) $(ABOUND_OBJ) $(JAS_OBJ) $(BACKEND_OBJ) \
-                  $(SAW_OBJ) $(SAW_C_OBJ) $(SAW_JVM_OBJ) $(SAW_MSIL_OBJ)
+                  $(SAW_OBJ) $(SAW_C_OBJ) $(SAW_JVM_OBJ) $(SAW_MSIL_OBJ) \
+                  $(LLVM_OBJ)
 
 O_OBJECTS_NOINIT=$(O_OBJECTS_NOIJ)
 

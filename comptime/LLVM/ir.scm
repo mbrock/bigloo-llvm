@@ -1,5 +1,4 @@
 (module llvm_ir
-  (main main)
   (export
     ;; An ir-node is basically an LLVM IR syntax tree, though this class
     ;; hierarchy does not really correspond to any formal definition of the IR
@@ -504,7 +503,7 @@
 
 ;;; Test.
 
-(define (main argv)
+(define (ir-test argv)
   (let* ((i32 (make-ir-primitive-type "i32"))
          (i1 (make-ir-primitive-type "i1"))
          (nodes

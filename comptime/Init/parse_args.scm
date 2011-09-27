@@ -330,6 +330,10 @@
        (set! *heap-name* *heap-jvm-name*)
        (set! *obj-suffix* '("obj"))
        (set! *target-language* '.net))
+      ;; LLVM code generation
+      (("-llvm" (help "Compile module to native object file via LLVM"))
+       (set! *obj-suffix* '("o"))
+       (set! *target-language* 'llvm))
       ;; Bigloo Assembly code generation
       (("-saw" (help "Cut the AST in the saw-mill"))
        (set! *force-saw* #t))

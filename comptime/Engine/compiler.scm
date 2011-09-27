@@ -78,7 +78,8 @@
 
    (with    backend_c
 	    backend_jvm
-	    backend_dotnet)
+	    backend_dotnet
+            backend_llvm)
    
    (export  (compiler)))
 
