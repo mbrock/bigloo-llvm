@@ -318,6 +318,10 @@ dobigboot:
 	@ echo "Big boot done..."
 	@ echo "-------------------------------"
 
+recomptime:
+	@ (cd comptime && $(MAKE) bigboot BBFLAGS="-w -unsafeh")
+	@ (cd comptime && $(MAKE) BIGLOO=$(BOOTDIR)/bin/bigloo)
+
 #*---------------------------------------------------------------------*/
 #*    compile-bee                                                      */
 #*    -------------------------------------------------------------    */
