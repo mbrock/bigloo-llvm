@@ -383,7 +383,7 @@
 ;;; Now we define the methods for rendering IR nodes.
 
 (define-method (ir-node->line-tree type::ir-named-type)
-  (ir-named-type-name type))
+  (string-append "%" (ir-named-type-name type)))
 
 (define-method (ir-node->line-tree type::ir-primitive-type)
   (ir-primitive-type-name type))
@@ -450,7 +450,8 @@
      fn-attrs section align blocks gc)
     (list (build-ir-string
            "define" linkage visibility cconv ret-attrs
-           return-type name "(" (render-list arguments) ")"
+           return-type (string-append "@" name)
+           "(" (render-list arguments) ")"
            fn-attrs
            (if section (list "section" (format "~s" section)))
            (if align (list "align" align))
@@ -464,7 +465,7 @@
     (linkage visibility cconv return-type name arguments align gc)
     (build-ir-string
      "declare" linkage visibility cconv
-     return-type name "(" (render-list arguments) ")"
+     return-type (string-append "@" name) "(" (render-list arguments) ")"
      (if align (list "align" align))
      gc)))
 

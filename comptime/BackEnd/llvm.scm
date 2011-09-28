@@ -9,7 +9,9 @@
            type_type
            tools_error
            tools_speek
+           object_slots
            backend_backend
+           backend_cplib
            backend_bvm
 
            ast_var
@@ -44,7 +46,7 @@
     (exec cmd #t "llc")))
 
 (define (assemble prefix)
-  (let ((cmd (string-append *assembler* " " prefix ".s")))
+  (let ((cmd (string-append *assembler* " -c " prefix ".s")))
     (exec cmd #t "as")))
 
 (define (emit-comment . args)
@@ -85,21 +87,54 @@
 
 (define-method (emit-prototype value::cfun variable)
   (verbose 3 "       emit-prototype ::cfun " (variable-id variable) "\n")
-  (with-access::global variable (id type name library)
-     (let* ((arity (cfun-arity value))
-            (targs (cfun-args-type value)))
-       (if (<fx arity 0)
-           (verbose 1 "       skipping varargs fun\n")
-           (begin
-             (verbose 3 "        args: " (map type->ir-type targs) "\n")
-             (emit-ir
-              (instantiate::ir-function-decl
-               (return-type (type->ir-type type))
-               (name name)
-               (arguments (map type->ir-type targs)))))))))
+  (if (not (cfun-macro? value))         ; don't prototype "==" etc
+      (with-access::global variable (id type name library)
+        (let* ((arity (cfun-arity value))
+               (targs (cfun-args-type value)))
+          (if (<fx arity 0)
+              (verbose 1 "       skipping varargs fun\n")
+              (begin
+                (verbose 3 "        args: " (map type->ir-type targs) "\n")
+                (emit-ir
+                 (instantiate::ir-function-decl
+                  (return-type (type->ir-type type))
+                  (name name)
+                  (arguments (map type->ir-type targs))))))))))
+  
+(define-method (emit-prototype value::sfun variable)
+  (verbose 3 "       emit-prototype ::sfun " (variable-id variable) "\n")
+  (with-access::variable variable (id type name)
+     (set-variable-name! variable)
+     (let ((types (map (lambda (a)
+                           (let ((t (if (type? a)
+                                        a
+                                        (local-type a))))
+                             (type->ir-type t)))
+                       (sfun-args value))))
+       (verbose 3 "        args: " types "\n")
+       (emit-ir
+        (instantiate::ir-function-decl
+         (return-type (type->ir-type type))
+         (name name)
+         (arguments types))))))
+
+(define *llvm-object-type* (make-ir-primitive-type "i8*"))
+(define *llvm-string-type* (make-ir-primitive-type "i8*"))
+(define *llvm-int-type* (make-ir-primitive-type "i32"))
+(define *llvm-bool-type* (make-ir-primitive-type "i1"))
+(define *llvm-long-type* (make-ir-primitive-type "i32"))
 
 (define (type->ir-type type)
-  (instantiate::ir-named-type (name (symbol->string (type-id type)))))
+  (if (bigloo-type? type)
+      *llvm-object-type*
+      (case (type-id type)
+        ((string) *llvm-string-type*)
+        ((long) *llvm-long-type*)
+        ((int) *llvm-int-type*)
+        ((bool) *llvm-bool-type*)
+        (else
+         (internal-error 'type->ir-type "unhandled type"
+                         (type-id type))))))
 
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
