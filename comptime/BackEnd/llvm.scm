@@ -10,7 +10,16 @@
            tools_error
            tools_speek
            backend_backend
-           backend_bvm)
+           backend_bvm
+
+           ast_var
+           ast_env
+           object_class
+           module_module
+           type_env
+
+           llvm_ir
+           )
 
    (export (class llvm::bvm)))
 
@@ -51,6 +60,8 @@
 
   (emit-header)
 
+  (emit-prototypes)
+
   (stop-emission!))
 
 (define (emit-header)
@@ -58,6 +69,50 @@
   (emit-comment *bigloo-name*)
   (emit-comment (string-append *bigloo-author* " (c) " *bigloo-date*))
   (newline *ir-port*))
+
+(define (emit-prototypes)
+  (verbose 3 "      All types:\n")
+  (for-each-global!
+   (lambda (global)
+     (if (require-prototype? global)
+         (emit-prototype (global-value global) global)))))
+
+(define (emit-ir node::ir-node)
+  (display (line-tree->string (ir-node->line-tree node) -1) *ir-port*)
+  (newline *ir-port*))
+
+(define-generic (emit-prototype value::value variable::variable))
+
+(define-method (emit-prototype value::cfun variable)
+  (verbose 3 "       emit-prototype ::cfun " (variable-id variable) "\n")
+  (with-access::global variable (id type name library)
+     (let* ((arity (cfun-arity value))
+            (targs (cfun-args-type value)))
+       (if (<fx arity 0)
+           (verbose 1 "       skipping varargs fun\n")
+           (begin
+             (verbose 3 "        args: " (map type->ir-type targs) "\n")
+             (emit-ir
+              (instantiate::ir-function-decl
+               (return-type (type->ir-type type))
+               (name name)
+               (arguments (map type->ir-type targs)))))))))
+
+(define (type->ir-type type)
+  (instantiate::ir-named-type (name (symbol->string (type-id type)))))
+
+(define-method (emit-prototype value::value variable)
+  (verbose 3 "       emit-prototype dummy " (variable-id variable)
+           " " value "\n"))
+
+;; from c_proto
+(define (require-prototype? global)
+   (and (or (eq? (global-module global) *module*)
+	    (not (eq? (global-import global) 'static)))
+	(or (and (eq? (global-module global) *module*)
+		 (eq? (global-import global) 'export))
+	    (>fx (global-occurrence global) 0)
+	    (eq? (global-removable global) 'never))))
 
 
 (define-method (backend-link-objects me::llvm sources)

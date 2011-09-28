@@ -1,5 +1,10 @@
 (module llvm_ir
   (export
+    (line-tree->string::bstring ::obj ::int)
+    (generic ir-node->line-tree::obj ::ir-node)
+
+    *ir-type-void*
+
     ;; An ir-node is basically an LLVM IR syntax tree, though this class
     ;; hierarchy does not really correspond to any formal definition of the IR
     ;; syntax; it's an ad hoc representation suitable for our needs.
@@ -19,6 +24,9 @@
     ;;; These classes represent types in the LLVM type system.
 
     (class ir-type::ir-node)
+
+    (class ir-named-type::ir-type
+      name::bstring)
 
     (class ir-type-alias::ir-node
       type::ir-type)
@@ -373,6 +381,9 @@
 
 
 ;;; Now we define the methods for rendering IR nodes.
+
+(define-method (ir-node->line-tree type::ir-named-type)
+  (ir-named-type-name type))
 
 (define-method (ir-node->line-tree type::ir-primitive-type)
   (ir-primitive-type-name type))
