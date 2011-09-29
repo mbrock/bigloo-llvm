@@ -60,6 +60,11 @@
     (class ir-value::ir-node
       (type::ir-type read-only (default *ir-type-void*)))
 
+    ;; Zero initialization value.
+    (class ir-zero-initializer::ir-value)
+
+    *ir-zero-initializer*
+
     ;; A variable like %foo.
     (class ir-variable::ir-value
       name::bstring)
@@ -115,10 +120,8 @@
     ;; A global variable.
     (class ir-global-variable::ir-node
       (linkage (default #f))
-      (global? (default #f))
       (constant? (default #f))
-      type::ir-type
-      (initial-value (default #f))
+      (initial-value (default *ir-zero-initializer*))
       (section (default #f))
       (align (default #f)))
 
@@ -203,10 +206,10 @@
 
     ))
 
-
-;;; Built-in types.
+;;; Global stuff.
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
+(define *ir-zero-initializer* (instantiate::ir-zero-initializer))
 
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
@@ -423,6 +426,9 @@
 
 (define-generic (render-value-sans-type value::ir-value))
 
+(define-method (render-value-sans-type x::ir-zero-initializer)
+  "zeroinitializer")
+
 (define-method (render-value-sans-type int::ir-lit-int)
   (number->string (ir-lit-int-value int)))
 
@@ -471,16 +477,14 @@
 
 (define-method (ir-node->line-tree gvar::ir-global-variable)
   (with-access::ir-global-variable gvar
-    (linkage global? constant? type initial-value section align)
+    (linkage constant? section initial-value align)
     (build-ir-string
      linkage
-     (if global? "global")
-     (if constant? "constant")
-     type
+     (if constant? "constant" "global")
+     initial-value
      (render-list
       (list
-       (if initial-value (render-value-sans-type initial-value))
-       (if section (list "section" (format "~s," section)))
+       (if section (list "section" (format "~s" section)))
        (if align (list "align" align)))))))
            
 (define-method (ir-node->line-tree assg::ir-assignment)

@@ -118,6 +118,17 @@
          (name name)
          (arguments types))))))
 
+(define-method (emit-prototype value::svar variable)
+  (verbose 3 "       emit-prototype ::svar " (variable-id variable) "\n")
+  (with-access::variable variable (id type name)
+     (set-variable-name! variable)
+     (emit-ir
+      (instantiate::ir-assignment
+       (name (string-append "@" name))
+       (node (instantiate::ir-global-variable
+              (initial-value (instantiate::ir-zero-initializer
+                              (type (type->ir-type type))))))))))
+
 (define *llvm-object-type* (make-ir-primitive-type "i8*"))
 (define *llvm-string-type* (make-ir-primitive-type "i8*"))
 (define *llvm-int-type* (make-ir-primitive-type "i32"))
