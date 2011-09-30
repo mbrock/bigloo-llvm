@@ -23,3 +23,5 @@ TAGS
 Frameworks
 Makefile.config
 *.init
+/comptime/LLVM/ir.ast
+/comptime/LLVM/ir.escm

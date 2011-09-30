@@ -48,7 +48,6 @@ LIBDIRFLAGS	= -lib-dir $(BOOTLIBDIR)
 COMMONFLAGS	= -q \
                   -afile $(AFILE) \
                   -fsharing \
-                  -fno-reflection \
                   -cc $(CC) \
                   $(LIBDIRFLAGS) \
                   -unsafev \

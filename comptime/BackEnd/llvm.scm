@@ -61,8 +61,8 @@
                 (lambda () (start-emission!)))
 
   (emit-header)
-
   (emit-prototypes)
+  (emit-function-definitions me)
 
   (stop-emission!))
 
@@ -186,3 +186,23 @@
   (close-output-port *ir-port*)
   (set! *ir-port* #f)
   *dest-prefix*)
+
+(define (emit-function-definitions llvm::llvm)
+  (for-each emit-function-definition (llvm-functions llvm)))
+
+(define (emit-function-definition global::global)
+  (with-access::global global (type id name import value)
+     (emit-ir
+      (instantiate::ir-function-defn
+       (return-type (type->ir-type type))
+       (name name)
+       (arguments
+        (map (lambda (local)
+               (with-access::local local (name id type)
+                  (list (type->ir-type type)
+                        (string-append "%" name))))
+             (sfun-args value)))
+       (blocks
+        (list (instantiate::ir-instr-ret
+               (value (make-ir-zero-initializer
+                       (type->ir-type type))))))))))
