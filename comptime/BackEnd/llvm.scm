@@ -269,6 +269,7 @@
         (make-node-seq
          (reverse! assignments)
          (kont (instantiate::ir-instr-call
+                (type (type->ir-type (variable-type var)))
                 (function-type (var->ir-type var))
                 (function (var->ir-node var))
                 (args (map (lambda (aux)
