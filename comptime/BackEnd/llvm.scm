@@ -16,6 +16,9 @@
 
            ast_var
            ast_env
+	   ast_node
+           ast_local
+
            object_class
            module_module
            type_env
@@ -203,6 +206,86 @@
                         (string-append "%" name))))
              (sfun-args value)))
        (blocks
-        (list (instantiate::ir-instr-ret
-               (value (make-ir-zero-initializer
-                       (type->ir-type type))))))))))
+        (list (node->ir-node (sfun-body value)
+                             (lambda (x)
+                               (instantiate::ir-instr-ret
+                                (value x))))))))))
+
+(define-generic (node->ir-node::ir-node node::node kont::procedure))
+
+(define-method (node->ir-node node::let-var kont)
+  (with-access::let-var node (body bindings)
+     (let ((assignments
+            (map (lambda (x)
+                   (set-variable-name! (car x))
+                   (node->ir-node
+                    (cdr x)
+                    (lambda (v)
+                      (instantiate::ir-assignment
+                       (name (string-append "%" (variable-name (car x))))
+                       (node v)))))
+                 bindings)))
+       (make-node-seq assignments (node->ir-node body kont)))))
+
+(define (make-node-seq . stuff)
+  (instantiate::ir-node-seq
+   (nodes (apply append (map (lambda (x)
+                               (if (list? x)
+                                   x
+                                   (list x))) stuff)))))
+
+(define-method (node->ir-node node::app kont)
+  (with-access::app node (fun)
+     (let* ((var (var-variable fun))
+            (val (variable-value var)))
+       (if (sfun? val)
+           (sfun-app->ir-node node var val kont)
+           (kont (instantiate::ir-zero-initializer))))))
+;;           (raise "sfun please")))))
+
+(define (arg-type arg)
+  (if (local? arg) (local-type arg) arg))
+
+(define (var->ir-type var)
+  (let ((x (variable-value var)))
+    (if (sfun? x)
+        (instantiate::ir-function-type
+         (return-type (type->ir-type (variable-type var)))
+         (parameter-types (map (lambda (a)
+                                 (type->ir-type (arg-type a)))
+                               (sfun-args x))))
+        (raise "make-ir-function-type sez sfun plz"))))
+
+(define (var->ir-node var)
+  (instantiate::ir-variable
+   (name (variable-name var))))
+
+(define (sfun-app->ir-node node var sfun kont)
+  (let loop ((arg-types (map arg-type (sfun-args sfun)))
+             (args (app-args node))
+             (assignments '())
+             (auxs '()))
+    (if (null? args)
+        (make-node-seq
+         (reverse! assignments)
+         (kont (instantiate::ir-instr-call
+                (function-type (var->ir-type var))
+                (function (var->ir-node var))
+                (args (map (lambda (aux)
+                             (instantiate::ir-variable
+                              (name (variable-name aux))))
+                           auxs)))))
+        (let* ((aux (make-local-svar 'aux (car arg-types)))
+               (setter (node->ir-node
+                        (car args)
+                        (lambda (x)
+                          (instantiate::ir-assignment
+                           (name (string-append "%" (variable-name aux)))
+                           (node x))))))
+          (verbose 3 "        setter " setter #\Newline)
+          (loop (cdr arg-types) (cdr args)
+                (cons setter assignments)
+                (cons aux auxs))))))
+
+(define-method (node->ir-node dummy::node kont)
+  (kont *ir-zero-initializer*))
