@@ -150,6 +150,14 @@
          (internal-error 'type->ir-type "unhandled type"
                          (type-id type))))))
 
+(define (pointerify type)
+  (instantiate::ir-pointer-type
+   (value-type type)))
+
+(define (type->ir-type/ptr type)
+  (instantiate::ir-pointer-type
+   (value-type (type->ir-type type))))
+
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
            " " value "\n"))
@@ -218,12 +226,22 @@
      (let ((assignments
             (map (lambda (x)
                    (set-variable-name! (car x))
-                   (node->ir-node
-                    (cdr x)
-                    (lambda (v)
-                      (instantiate::ir-assignment
-                       (name (string-append "%" (variable-name (car x))))
-                       (node v)))))
+                   (let ((name (string-append "%" (variable-name (car x))))
+                         (type (type->ir-type (variable-type (car x)))))
+                      (node->ir-node
+                       (cdr x)
+                       (lambda (v)
+                         (make-node-seq
+                          (instantiate::ir-assignment
+                           (name name)
+                           (node
+                            (instantiate::ir-instr-alloca
+                             (element-type type))))
+                          (instantiate::ir-instr-store
+                           (pointer (instantiate::ir-variable
+                                     (type (pointerify type))
+                                     (name name)))
+                           (value v)))))))
                  bindings)))
        (make-node-seq assignments (node->ir-node body kont)))))
 
@@ -240,7 +258,9 @@
             (val (variable-value var)))
        (if (sfun? val)
            (sfun-app->ir-node node var val kont)
-           (kont (instantiate::ir-zero-initializer))))))
+           (kont (instantiate::ir-undef
+                  (type (instantiate::ir-primitive-type
+                         (name "i8*")))))))))
 ;;           (raise "sfun please")))))
 
 (define (arg-type arg)
@@ -258,6 +278,7 @@
 
 (define (var->ir-node var)
   (instantiate::ir-variable
+   (type (type->ir-type (variable-type var)))
    (name (variable-name var))))
 
 (define (sfun-app->ir-node node var sfun kont)
@@ -266,27 +287,49 @@
              (assignments '())
              (auxs '()))
     (if (null? args)
-        (make-node-seq
-         (reverse! assignments)
-         (kont (instantiate::ir-instr-call
-                (type (type->ir-type (variable-type var)))
-                (function-type (var->ir-type var))
-                (function (var->ir-node var))
-                (args (map (lambda (aux)
-                             (instantiate::ir-variable
-                              (name (variable-name aux))))
-                           auxs)))))
+        (let* ((result-type (type->ir-type (variable-type var)))
+               (result (make-local-svar 'result (variable-type var)))
+               (result-name (string-append "%" (variable-name result))))
+          (make-node-seq
+           (reverse! assignments)
+           (instantiate::ir-assignment
+            (name result-name)
+            (node (instantiate::ir-instr-call
+                   (type result-type)
+                   (function-type (var->ir-type var))
+                   (function (var->ir-node var))
+                   (args (map var->ir-node auxs)))))
+           (kont (var->ir-node result))))
         (let* ((aux (make-local-svar 'aux (car arg-types)))
+               (name (string-append "%" (variable-name aux)))
+               (type (type->ir-type (car arg-types)))
                (setter (node->ir-node
                         (car args)
                         (lambda (x)
-                          (instantiate::ir-assignment
-                           (name (string-append "%" (variable-name aux)))
-                           (node x))))))
-          (verbose 3 "        setter " setter #\Newline)
+                          (make-node-seq
+                           (instantiate::ir-assignment
+                            (name name)
+                            (node
+                             (instantiate::ir-instr-alloca
+                              (element-type type))))
+                           (instantiate::ir-instr-store
+                            (pointer (instantiate::ir-variable
+                                      (type (pointerify type))
+                                      (name name)))
+                            (value x)))))))
           (loop (cdr arg-types) (cdr args)
                 (cons setter assignments)
                 (cons aux auxs))))))
 
+(define-method (node->ir-node node::var kont)
+  (with-access::variable (var-variable node) (type name)
+     (kont (instantiate::ir-instr-load
+            (pointer (instantiate::ir-variable
+                      (type (type->ir-type type))
+                      (name (string-append "%" name))))))))
+
 (define-method (node->ir-node dummy::node kont)
-  (kont *ir-zero-initializer*))
+  (verbose 3 "       node->ir-node unhandled " dummy #\Newline)
+  (kont (instantiate::ir-undef
+         (type (instantiate::ir-primitive-type
+                (name "i8*"))))))

@@ -65,6 +65,11 @@
 
     *ir-zero-initializer*
 
+    ;; The undefined value.
+    (class ir-undef::ir-value)
+
+    *ir-undef*
+
     ;; A variable like %foo.
     (class ir-variable::ir-value
       name::bstring)
@@ -210,6 +215,7 @@
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
 (define *ir-zero-initializer* (instantiate::ir-zero-initializer))
+(define *ir-undef* (instantiate::ir-undef))
 
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
@@ -429,6 +435,8 @@
 (define-method (render-value-sans-type x::ir-zero-initializer)
   "zeroinitializer")
 
+(define-method (render-value-sans-type x::ir-undef) "undef")
+
 (define-method (render-value-sans-type int::ir-lit-int)
   (number->string (ir-lit-int-value int)))
 
@@ -438,8 +446,8 @@
 (define-method (ir-node->line-tree instr::ir-instruction)
   (ir-instruction->string instr))
 
-(define-method (ir-node->line-tree var::ir-variable)
-  (render-value-sans-type var))
+;; (define-method (ir-node->line-tree var::ir-variable)
+;;   (render-value-sans-type var))
 
 (define-method (ir-node->line-tree seq::ir-node-seq)
   (let ((lines (append-line-trees (map ir-node->line-tree
