@@ -260,8 +260,11 @@
    (build-ir-string "ret" value))
   (ir-instr-br
    (condition true-label false-label)
-   (build-ir-string "br" "i1" condition
+   (build-ir-string "br" condition ","
                     true-label "," false-label))
+  (ir-instr-br-unconditional
+   (label)
+   (build-ir-string "br" label))
   (ir-instr-switch
    (value default-label table)
    (build-ir-string "switch" value
@@ -333,9 +336,11 @@
 
 ;; Render a line tree to a string starting on the given indentation level.
 (define (line-tree->string node indent::int)
-  (if (string? node)
-      node
-      (string-join "\n" (line-tree->list node indent))))
+  (if (null? node)
+      ""
+      (if (string? node)
+          node
+          (string-join "\n" (line-tree->list node indent)))))
 
 ;; Convert a line tree to a flat list of indented strings.
 (define (line-tree->list node indent::int)
@@ -454,7 +459,7 @@
                                        (ir-node-seq-nodes seq))))
         (label (ir-node-seq-label seq)))
     (if label
-        (list (string-append label ":") lines)
+        (cons (string-append label ":") lines)
         lines)))
 
 

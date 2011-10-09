@@ -22,6 +22,7 @@
            object_class
            module_module
            type_env
+           type_cache
 
            llvm_ir
            )
@@ -327,6 +328,63 @@
             (pointer (instantiate::ir-variable
                       (type (type->ir-type type))
                       (name (string-append "%" name))))))))
+
+;; TODO: don't do it this stupid way
+(define (make-label symbol)
+  (string-append "%" (variable-name (make-local-svar symbol *_*))))
+
+(define-method (node->ir-node node::conditional kont)
+  (with-access::conditional node (test true false)
+     (let* ((test-var (make-local-svar 'test *bool*))
+            (test-var-name (string-append "%" (variable-name test-var)))
+            (result-var (make-local-svar 'result *_*))
+            (result-var-name (string-append "%" (variable-name result-var)))
+            (true-label (make-label 'true))
+            (false-label (make-label 'false))
+            (done-label (make-label 'done)))
+       (instantiate::ir-node-seq
+        (nodes
+         (list
+          (node->ir-node test
+                         (lambda (x)
+                           (instantiate::ir-assignment
+                            (name test-var-name)
+                            (node x))))
+          (instantiate::ir-instr-br
+           (condition (instantiate::ir-variable
+                       (type (instantiate::ir-primitive-type
+                              (name "i1")))
+                       (name test-var-name)))
+           (true-label (instantiate::ir-label
+                        (name true-label)))
+           (false-label (instantiate::ir-label
+                         (name false-label))))
+          (instantiate::ir-node-seq
+           (label true-label)
+           (nodes
+            (list
+             (node->ir-node true (lambda (x)
+                                   (instantiate::ir-assignment
+                                    (name result-var-name)
+                                    (node x))))
+             (instantiate::ir-instr-br-unconditional
+              (label (instantiate::ir-label
+                      (name done-label)))))))
+          (instantiate::ir-node-seq
+           (label false-label)
+           (nodes
+            (list
+             (node->ir-node false (lambda (x)
+                                    (instantiate::ir-assignment
+                                     (name result-var-name)
+                                     (node x))))
+             (instantiate::ir-instr-br-unconditional
+              (label (instantiate::ir-label
+                      (name done-label)))))))
+          (instantiate::ir-node-seq
+           (label done-label)
+           (nodes '()))))))))
+          
 
 (define-method (node->ir-node dummy::node kont)
   (verbose 3 "       node->ir-node unhandled " dummy #\Newline)
