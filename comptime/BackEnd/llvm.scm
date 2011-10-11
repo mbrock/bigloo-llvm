@@ -140,16 +140,18 @@
 (define *llvm-long-type* (make-ir-primitive-type "i32"))
 
 (define (type->ir-type type)
-  (if (bigloo-type? type)
-      *llvm-object-type*
-      (case (type-id type)
-        ((string) *llvm-string-type*)
-        ((long) *llvm-long-type*)
-        ((int) *llvm-int-type*)
-        ((bool) *llvm-bool-type*)
-        (else
-         (internal-error 'type->ir-type "unhandled type"
-                         (type-id type))))))
+  (if (ir-type? type)
+      type
+      (if (bigloo-type? type)
+          *llvm-object-type*
+          (case (type-id type)
+            ((string) *llvm-string-type*)
+            ((long) *llvm-long-type*)
+            ((int) *llvm-int-type*)
+            ((bool) *llvm-bool-type*)
+            (else
+             (internal-error 'type->ir-type "unhandled type"
+                             (type-id type)))))))
 
 (define (pointerify type)
   (instantiate::ir-pointer-type
@@ -282,6 +284,12 @@
    (type (type->ir-type (variable-type var)))
    (name (variable-name var))))
 
+(define (fresh-ir-variable symbol type)
+  ;; Maybe should do this without messing with the variable tables.
+  (instantiate::ir-variable
+   (type (type->ir-type type))
+   (name (string-append "%" (variable-name (make-local-svar symbol *_*))))))
+
 (define (sfun-app->ir-node node var sfun kont)
   (let loop ((arg-types (map arg-type (sfun-args sfun)))
              (args (app-args node))
@@ -289,20 +297,19 @@
              (auxs '()))
     (if (null? args)
         (let* ((result-type (type->ir-type (variable-type var)))
-               (result (make-local-svar 'result (variable-type var)))
-               (result-name (string-append "%" (variable-name result))))
+               (result (fresh-ir-variable 'result result-type)))
           (make-node-seq
            (reverse! assignments)
            (instantiate::ir-assignment
-            (name result-name)
+            (name (ir-variable-name result))
             (node (instantiate::ir-instr-call
                    (type result-type)
                    (function-type (var->ir-type var))
                    (function (var->ir-node var))
-                   (args (map var->ir-node auxs)))))
-           (kont (var->ir-node result))))
-        (let* ((aux (make-local-svar 'aux (car arg-types)))
-               (name (string-append "%" (variable-name aux)))
+                   (args auxs))))
+           (kont result)))
+        (let* ((aux (fresh-ir-variable 'aux (car arg-types)))
+               (name (ir-variable-name aux))
                (type (type->ir-type (car arg-types)))
                (setter (node->ir-node
                         (car args)
@@ -324,66 +331,63 @@
 
 (define-method (node->ir-node node::var kont)
   (with-access::variable (var-variable node) (type name)
-     (kont (instantiate::ir-instr-load
-            (pointer (instantiate::ir-variable
-                      (type (type->ir-type type))
-                      (name (string-append "%" name))))))))
+     (let ((aux (fresh-ir-variable 'var type)))
+       (make-node-seq
+        (instantiate::ir-assignment
+         (name (ir-variable-name aux))
+         (node
+          (instantiate::ir-instr-load
+           (pointer (var->ir-node (var-variable node))))))
+        (kont aux)))))
 
 ;; TODO: don't do it this stupid way
 (define (make-label symbol)
   (string-append "%" (variable-name (make-local-svar symbol *_*))))
 
+(define (make-assignment-kont var)
+  (lambda (x)
+    (instantiate::ir-assignment
+     (name (ir-variable-name var))
+     (node x))))
+
 (define-method (node->ir-node node::conditional kont)
   (with-access::conditional node (test true false)
-     (let* ((test-var (make-local-svar 'test *bool*))
-            (test-var-name (string-append "%" (variable-name test-var)))
-            (result-var (make-local-svar 'result *_*))
-            (result-var-name (string-append "%" (variable-name result-var)))
+     (let* ((test-var (fresh-ir-variable 'test *bool*))
+            (result-var (fresh-ir-variable 'result *_*))
+            (result-kont (make-assignment-kont result-var))
             (true-label (make-label 'true))
             (false-label (make-label 'false))
             (done-label (make-label 'done)))
        (instantiate::ir-node-seq
         (nodes
          (list
-          (node->ir-node test
-                         (lambda (x)
-                           (instantiate::ir-assignment
-                            (name test-var-name)
-                            (node x))))
+          ;; Compute test result into test-var.
+          (node->ir-node test (make-assignment-kont test-var))
+          ;; Branch to `true' or `false' blocks.
           (instantiate::ir-instr-br
-           (condition (instantiate::ir-variable
-                       (type (instantiate::ir-primitive-type
-                              (name "i1")))
-                       (name test-var-name)))
-           (true-label (instantiate::ir-label
-                        (name true-label)))
-           (false-label (instantiate::ir-label
-                         (name false-label))))
+           (condition test-var)
+           (true-label (instantiate::ir-label (name true-label)))
+           (false-label (instantiate::ir-label (name false-label))))
+          ;; The `true' block.
           (instantiate::ir-node-seq
            (label true-label)
            (nodes
             (list
-             (node->ir-node true (lambda (x)
-                                   (instantiate::ir-assignment
-                                    (name result-var-name)
-                                    (node x))))
+             (node->ir-node true result-kont)
              (instantiate::ir-instr-br-unconditional
-              (label (instantiate::ir-label
-                      (name done-label)))))))
+              (label (instantiate::ir-label (name done-label)))))))
+          ;; The `false' block.
           (instantiate::ir-node-seq
            (label false-label)
            (nodes
             (list
-             (node->ir-node false (lambda (x)
-                                    (instantiate::ir-assignment
-                                     (name result-var-name)
-                                     (node x))))
+             (node->ir-node false result-kont)
              (instantiate::ir-instr-br-unconditional
-              (label (instantiate::ir-label
-                      (name done-label)))))))
+              (label (instantiate::ir-label (name done-label)))))))
+          ;; Done: return the result.
           (instantiate::ir-node-seq
            (label done-label)
-           (nodes '()))))))))
+           (nodes (list (kont result-var))))))))))
           
 
 (define-method (node->ir-node dummy::node kont)
