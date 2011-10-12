@@ -130,6 +130,9 @@
       (section (default #f))
       (align (default #f)))
 
+    ;; Empty node, can be useful when generating code.
+    (class ir-null-node::ir-node)
+
 
     ;;; All the instructions.
 
@@ -288,7 +291,8 @@
    (type tail? cconv ret-attrs function-type function args fn-attrs)
    (build-ir-string
     (if tail? "tail" #f)
-    "call" cconv ret-attrs type function-type function
+    ;; TODO: check this
+    "call" cconv ret-attrs function
     "(" (render-args args) ")"
     (render-list fn-attrs)))
 
@@ -434,6 +438,9 @@
 (define-method (ir-node->line-tree value::ir-value)
   (build-ir-string (ir-value-type value)
                    (render-value-sans-type value)))
+
+(define-method (ir-node->line-tree node::ir-null-node)
+  "")
 
 (define-generic (render-value-sans-type value::ir-value))
 
