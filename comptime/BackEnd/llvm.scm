@@ -237,7 +237,9 @@
      (let ((assignments
             (map (lambda (x)
                    (set-variable-name! (car x))
-                   (let ((var (var->ir-node/ptr (car x))))
+                   (let* ((var (var->ir-node/ptr (car x)))
+                          (name (ir-variable-name var))
+                          (type (ir-variable-type var)))
                      (node->ir-node
                       (cdr x)
                       (lambda (v)
@@ -265,7 +267,8 @@
              (auxs '()))
 
     (define (compile-more-arguments)
-      (let* ((aux (fresh-ir-variable 'aux (pointerify (car arg-types))))
+      (let* ((aux (fresh-ir-variable
+                   'aux (pointerify (type->ir-type (car arg-types)))))
              (name (ir-variable-name aux))
              (type (ir-variable-type aux))
              (setter (node->ir-node
@@ -375,12 +378,12 @@
 (define (var->ir-node var)
   (instantiate::ir-variable
    (type (type->ir-type (variable-type var)))
-   (name (variable-name var))))
+   (name (string-append "%" (variable-name var)))))
 
 (define (var->ir-node/ptr var)
   (instantiate::ir-variable
-   (type (type->ir-type (pointerify (variable-type var))))
-   (name (variable-name var))))
+   (type (pointerify (type->ir-type (variable-type var))))
+   (name (string-append "%" (variable-name var)))))
 
 (define (fresh-ir-variable symbol type)
   ;; Maybe should do this without messing with the variable tables.
@@ -392,7 +395,7 @@
   (instantiate::ir-assignment
    (name name)
    (node (instantiate::ir-instr-alloca
-          (unpointerify (element-type type))))))
+          (element-type (unpointerify type))))))
 
 (define (compile-store var value)
   (instantiate::ir-instr-store (pointer var) (value value)))
