@@ -58,31 +58,27 @@
 
     ;; An IR value: an expression node with an associated type.
     (class ir-value::ir-node
-      (type::ir-type read-only (default *ir-type-void*)))
+      (type::ir-type read-only (get calculate-type)))
+
+    ;; An IR value with an explicitly stored type.
+    (class ir-value/value-type::ir-value
+      value-type::ir-type)
 
     ;; Zero initialization value.
-    (class ir-zero-initializer::ir-value)
+    (class ir-zero-initializer::ir-value/value-type)
 
-    *ir-zero-initializer*
-
-    ;; The undefined value.
-    (class ir-undef::ir-value)
-
-    *ir-undef*
+    ;; An undefined value.
+    (class ir-undef::ir-value/value-type)
 
     ;; A variable like %foo.
-    (class ir-variable::ir-value
+    (class ir-variable::ir-value/value-type
       name::bstring)
 
     ;; IR instructions are value expressions (some with void type).
     (class ir-instruction::ir-value)
 
-    ;; Register names like %foo are value expressions.
-    (class ir-register::ir-value
-      name::bstring)
-
     ;; Literals are value expressions, too.
-    (class ir-lit-int::ir-value
+    (class ir-lit-int::ir-value/value-type
       value::int)
 
     ;; An assignment statement like %foo = i32 0.
@@ -126,7 +122,7 @@
     (class ir-global-variable::ir-node
       (linkage (default #f))
       (constant? (default #f))
-      (initial-value (default *ir-zero-initializer*))
+      (initial-value (default #f))
       (section (default #f))
       (align (default #f)))
 
@@ -137,7 +133,7 @@
     ;;; All the instructions.
 
     (class ir-instr-ret::ir-instruction
-      (value::ir-value (default #f)))
+      value::ir-value)
 
     (class ir-instr-br::ir-instruction
       condition::ir-value
@@ -163,7 +159,7 @@
       operand-2::ir-value)
 
     ;; TODO: add the remaining binary instructions
-    
+
     (class ir-instr-add::ir-instr-binary)
     (class ir-instr-sub::ir-instr-binary)
     (class ir-instr-mul::ir-instr-binary)
@@ -178,31 +174,17 @@
       (function-type (default #f))
       function::ir-value
       (args::pair-nil (default '()))
-      (fn-attrs::pair-nil (default '()))
-      (type read-only
-            (get (lambda (i)            ; TODO: consider function-type
-                   (ir-function-type-return-type
-                    (ir-value-type
-                     (ir-instr-call-function i)))))))
+      (fn-attrs::pair-nil (default '())))
 
     ;;; Memory instructions.
 
     (class ir-instr-alloca::ir-instruction
       element-type::ir-type
-      (type read-only
-            (get (lambda (i)
-                   (instantiate::ir-pointer-type
-                    (value-type (ir-instr-alloca-element-type i))))))
       (n (default #f))
       (align (default #f)))
 
     (class ir-instr-load::ir-instruction
-      pointer::ir-value
-      (type read-only
-            (get (lambda (i)
-                   (ir-pointer-type-value-type
-                    (ir-value-type
-                     (ir-instr-load-pointer i)))))))
+      pointer::ir-value)
 
     (class ir-instr-store::ir-instruction
       value::ir-value
@@ -217,8 +199,32 @@
 ;;; Global stuff.
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
-(define *ir-zero-initializer* (instantiate::ir-zero-initializer))
-(define *ir-undef* (instantiate::ir-undef))
+
+
+;;; Some type inference.
+
+(define-generic (calculate-type value::ir-value))
+
+(define-method (calculate-type value::ir-value/value-type)
+  (ir-value/value-type-value-type value))
+
+(define-method (calculate-type value::ir-instr-load)
+  (ir-pointer-type-value-type
+   (ir-value-type
+    (ir-instr-load-pointer value))))
+
+(define-method (calculate-type value::ir-instr-alloca)
+  (instantiate::ir-pointer-type
+   (value-type (ir-instr-alloca-element-type value))))
+
+(define-method (calculate-type value::ir-instr-call)
+  ;; TODO: consider function-type
+  (ir-value-type
+   (ir-instr-call-function value)))
+
+(define-method (calculate-type value::ir-instr-binary)
+  (ir-value-type
+   (ir-instr-binary-operand-1 value)))
 
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
@@ -327,7 +333,8 @@
   (string-join ", " (map (lambda (entry)
                            (build-ir-string
                             "[" (car entry) ","
-                            (ir-label-name (cadr entry)) "]")) table)))
+                            (string-append "%" (ir-label-name (cadr entry)))
+                            "]")) table)))
 
 
 ;;; Convenience stuff for constructing IR strings.
@@ -433,7 +440,7 @@
     (build-ir-string return-type "(" (render-list parameter-types) ")")))
 
 (define-method (ir-node->line-tree label::ir-label)
-  (string-append "label " (ir-label-name label)))
+  (string-append "label %" (ir-label-name label)))
 
 (define-method (ir-node->line-tree value::ir-value)
   (build-ir-string (ir-value-type value)
@@ -544,34 +551,31 @@
          (i1 (make-ir-primitive-type "i1"))
          (nodes
           (list (instantiate::ir-instr-ret
-                 (type i32)
                  (value (make-ir-lit-int i32 0)))
                 (instantiate::ir-instr-br
                  (condition (make-ir-lit-int i1 1))
-                 (true-label (make-ir-label "%true"))
-                 (false-label (make-ir-label "%false")))
+                 (true-label (make-ir-label "true"))
+                 (false-label (make-ir-label "false")))
                 (instantiate::ir-instr-switch
                  (value (make-ir-lit-int i32 5))
-                 (default-label (make-ir-label "%default"))
+                 (default-label (make-ir-label "default"))
                  (table `((,(make-ir-lit-int i32 0)
-                           ,(make-ir-label "%zero"))
+                           ,(make-ir-label "zero"))
                           (,(make-ir-lit-int i32 5)
-                           ,(make-ir-label "%five")))))
+                           ,(make-ir-label "five")))))
                 (instantiate::ir-assignment
-                 (name "%foo")
+                 (name "foo")
                  (node
                   (instantiate::ir-instr-phi
-                   (type i32)
                    (table `((,(make-ir-lit-int i32 0)
-                             ,(make-ir-label "%zero"))
+                             ,(make-ir-label "zero"))
                             (,(make-ir-lit-int i32 5)
-                             ,(make-ir-label "%five")))))))
+                             ,(make-ir-label "five")))))))
                 (instantiate::ir-instr-indirectbr
                  (address (make-ir-lit-int i32 123))
-                 (labels (list (make-ir-label "%foo")
+                 (labels (list (make-ir-label "foo")
                                (make-ir-label "%bar"))))
                 (instantiate::ir-instr-add
-                 (type i32)
                  (operand-1 (make-ir-lit-int i32 10))
                  (operand-2 (make-ir-lit-int i32 20)))
 
@@ -581,15 +585,6 @@
                  (align 1024))
                 
                 (instantiate::ir-instr-call
-                 (type (instantiate::ir-structure-type
-                        (packed? #t)
-                        (element-types
-                         (list (instantiate::ir-vector-type
-                                (element-count 4)
-                                (element-type i32))
-                               i32 i32
-                               (instantiate::ir-pointer-type
-                                (value-type i32))))))
                  (tail? #t)
                  (cconv "fastcc")
                  (ret-attrs '("zeroext" "inreg"))
@@ -609,6 +604,7 @@
                    (linkage "private")
                    (type i32)
                    (aliasee (instantiate::ir-variable
+                             (value-type i32)
                              (name "@other"))))))
                 (instantiate::ir-function-defn
                  (linkage "internal")

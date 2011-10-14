@@ -9,6 +9,7 @@
            type_type
            tools_error
            tools_speek
+           tools_shape
            object_slots
            backend_backend
            backend_cplib
@@ -132,7 +133,7 @@
        (name (string-append "@" name))
        (node (instantiate::ir-global-variable
               (initial-value (instantiate::ir-zero-initializer
-                              (type (type->ir-type type))))))))))
+                              (value-type (type->ir-type type))))))))))
 
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
@@ -201,15 +202,12 @@
                               (type (type->ir-type/ptr (local-type arg)))
                               (var (instantiate::ir-variable
                                     (name name)
-                                    (type type))))
+                                    (value-type type))))
                          (make-node-seq
-                          (compile-local-allocation name type)
+                          (compile-local-allocation var)
                           (compile-store var (cadr (assoc arg arg-assoc))))))
                      (sfun-args value)))
-         (node->ir-node (sfun-body value)
-                        (lambda (x)
-                          (instantiate::ir-instr-ret
-                           (value x)))))))))))
+         (node->ir-node (sfun-body value) ret-kont))))))))
 
 
 ;;; LLVM versions of Bigloo types.
@@ -236,7 +234,7 @@
 
 (define (pointerify type)
   (instantiate::ir-pointer-type
-   (value-type type)))
+   (value-type (type->ir-type type))))
 
 (define unpointerify ir-pointer-type-value-type)
 
@@ -262,8 +260,8 @@
                       (cdr x)
                       (lambda (v)
                         (make-node-seq
-                         (compile-local-allocation name type)
-                         (compile-store var v))))))
+                         (compile-local-allocation var)
+                         (compile-store/aux var v))))))
                  bindings)))
        (make-node-seq assignments (node->ir-node body kont)))))
 
@@ -275,8 +273,7 @@
        (if (sfun? val)
            (sfun-app->ir-node node var val kont)
            ;; TODO: Support non-sfuns.
-           (kont (instantiate::ir-undef
-                  (type (type->ir-type (variable-type var)))))))))
+           (compile-undef (type->ir-type (variable-type var)) kont)))))
 
 (define (sfun-app->ir-node node var sfun kont)
   (let loop ((arg-types (map arg-type (sfun-args sfun)))
@@ -294,7 +291,7 @@
                       (make-assignment-kont aux))))
                       ;; (lambda (x)
                       ;;   (make-node-seq
-                      ;;    (compile-local-allocation name type)
+                      ;;    (compile-local-allocation aux)
                       ;;    (compile-store aux x))))))
         (loop (cdr arg-types) (cdr args)
               (cons setter arg-code)
@@ -303,19 +300,13 @@
     (define (compile-call)
       ;; The `assignments' list is now IR that puts the argument values in
       ;; the `auxs' variables.
-      (let* ((result-type (type->ir-type (variable-type var)))
-             (result (fresh-ir-variable 'result result-type)))
-        (make-node-seq
-         (reverse! arg-code)
-         ;; Call the function in `var' and give back its result.
-         (instantiate::ir-assignment
-          (name (ir-variable-name result))
-          (node (instantiate::ir-instr-call
-                 (type result-type)
-                 (function-type (var->ir-type var))
-                 (function (var->ir-node var))
-                 (args auxs))))
-         (kont result))))
+      (make-node-seq
+       (reverse! arg-code)
+       ;; Call the function in `var' and give back its result.
+       (kont (instantiate::ir-instr-call
+              (function-type (var->ir-type var))
+              (function (var->ir-node var))
+              (args auxs)))))
     
     (if (null? args)
         (compile-call)
@@ -324,23 +315,17 @@
 (define-method (node->ir-node node::var kont)
   (verbose 3 "       node->ir-node ::var\n")
   (set-variable-name! (var-variable node))
-  (with-access::variable (var-variable node) (type name)
-     (let ((aux (fresh-ir-variable 'var type)))
-       (make-node-seq
-        (instantiate::ir-assignment
-         (name (ir-variable-name aux))
-         (node
-          (instantiate::ir-instr-load
-           (pointer (var->ir-node/ptr (var-variable node))))))
-        (kont aux)))))
+  (kont (instantiate::ir-instr-load
+;         (type (ir-value-type (var->ir-node/ptr (var-variable node))))
+         (pointer (var->ir-node/ptr (var-variable node))))))
 
 (define-method (node->ir-node node::conditional kont)
   (verbose 3 "       node->ir-node ::conditional\n")
   (with-access::conditional node (test true false)
      (let* ((test-var (fresh-ir-variable 'test *bool*))
-            ;; TODO: Is it always valid to use the default type here?
-            (result-var (fresh-ir-variable 'result *_*))
-            (result-kont (make-assignment-kont result-var))
+            (result-var
+             (fresh-ir-variable 'result (pointerify (get-type node))))
+            (result-kont (make-store-kont result-var))
             (true-label (make-label 'true))
             (false-label (make-label 'false))
             (done-label (make-label 'done)))
@@ -360,11 +345,15 @@
                (true-label (instantiate::ir-label (name true-label)))
                (false-label (instantiate::ir-label (name false-label)))))
              (done-code
-              (make-labeled-node-seq done-label (kont result-var))))
-         (make-node-seq branch-code
-                        (compile-branch true-label true)
-                        (compile-branch false-label false)
-                        done-code)))))
+              (make-labeled-node-seq done-label
+                                     (kont (compile-load result-var)))))
+         (make-node-seq
+          test-code
+          (compile-local-allocation result-var)
+          branch-code
+          (compile-branch true-label true)
+          (compile-branch false-label false)
+          done-code)))))
 
 (define-method (node->ir-node node::sequence kont)
   (verbose 3 "       node->ir-node ::sequence\n")
@@ -387,22 +376,63 @@
                      (compile-store var x)
                      (kont x)))))
 
+(define-method (node->ir-node node::atom kont)
+  (verbose 3 "       node->ir-node ::atom: " (atom-value node) #\Newline)
+  (let ((value (atom-value node))
+        (type (type->ir-type (get-type node))))
+    (cond 
+     ((fixnum? value)
+      (compile-lit (instantiate::ir-lit-int
+                    (value-type type)
+                    (value value)) kont))
+     (else
+      (verbose 3 "        unhandled type of atom\n")
+      (compile-undef type kont)))))
+            
+
 (define-method (node->ir-node dummy::node kont)
   (verbose 3 "       node->ir-node unhandled " dummy #\Newline)
-  (kont (instantiate::ir-undef
-         (type (type->ir-type (get-type dummy))))))
+  (compile-undef (type->ir-type (get-type dummy)) kont))
+
 
 ;;; IR generation helpers.
 
+(define (compile-undef type kont)
+  (let ((ptr-var (fresh-ir-variable 'undef (pointerify type))))
+    (make-node-seq
+     (compile-local-allocation ptr-var)
+     (kont (instantiate::ir-instr-load
+            (pointer ptr-var))))))
+
+(define (compile-lit value kont)
+  (let* ((type (ir-value-type value))
+         (ptr-var (fresh-ir-variable 'literal (pointerify type))))
+    (make-node-seq
+     (compile-local-allocation ptr-var)
+     (compile-store ptr-var value)
+     (kont (compile-load ptr-var)))))
+
 ;; TODO: don't do it this stupid way
 (define (make-label symbol)
-  (string-append "%" (variable-name (make-local-svar symbol *_*))))
+  (variable-name (make-local-svar symbol *_*)))
 
 (define (make-assignment-kont var)
   (lambda (x)
     (instantiate::ir-assignment
      (name (ir-variable-name var))
      (node x))))
+
+(define (make-store-kont var)
+  (lambda (x)
+    (compile-store/aux var x)))
+
+(define (ret-kont x)
+  (let ((aux (fresh-ir-variable 'aux (ir-value-type x))))
+    (verbose 3 "        ret-kont " (ir-value-type x) #\Newline)
+    (make-node-seq
+     (compile-assignment aux x)
+     (instantiate::ir-instr-ret
+      (value aux)))))
 
 (define (arg-type arg)
   (if (local? arg) (local-type arg) arg))
@@ -419,12 +449,12 @@
 
 (define (var->ir-node var)
   (instantiate::ir-variable
-   (type (type->ir-type (variable-type var)))
+   (value-type (type->ir-type (variable-type var)))
    (name (var->ir-name var))))
 
 (define (var->ir-node/ptr var)
   (instantiate::ir-variable
-   (type (pointerify (type->ir-type (variable-type var))))
+   (value-type (pointerify (type->ir-type (variable-type var))))
    (name (var->ir-name var))))
 
 (define (var->ir-name var)
@@ -433,17 +463,31 @@
 (define (fresh-ir-variable symbol type)
   ;; Maybe should do this without messing with the variable tables.
   (instantiate::ir-variable
-   (type (type->ir-type type))
+   (value-type (type->ir-type type))
    (name (string-append "%" (variable-name (make-local-svar symbol *_*))))))
 
-(define (compile-local-allocation name type)
+(define (compile-local-allocation var)
+  (compile-assignment
+   var (instantiate::ir-instr-alloca
+        (element-type (unpointerify (ir-variable-type var))))))
+
+(define (compile-assignment var value)
   (instantiate::ir-assignment
-   (name name)
-   (node (instantiate::ir-instr-alloca
-          (element-type (unpointerify type))))))
+   (name (ir-variable-name var))
+   (node value)))
 
 (define (compile-store var value)
   (instantiate::ir-instr-store (pointer var) (value value)))
+
+(define (compile-store/aux var value)
+  (let ((aux (fresh-ir-variable 'aux (unpointerify
+                                      (ir-variable-type var)))))
+    (make-node-seq
+     (compile-assignment aux value)
+     (compile-store var aux))))
+
+(define (compile-load var)
+  (instantiate::ir-instr-load (pointer var)))
 
 (define (make-node-seq . stuff)
   (if (null? stuff)
