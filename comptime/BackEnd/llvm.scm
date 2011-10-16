@@ -48,7 +48,7 @@
   (assemble prefix))
 
 (define (llc prefix)
-  (let ((cmd (string-append *llc* " " prefix ".ll")))
+  (let ((cmd (string-append *llc* " " "-disable-cfi " prefix ".ll")))
     (exec cmd #t "llc")))
 
 (define (assemble prefix)
@@ -82,8 +82,9 @@
   (verbose 3 "      All types:\n")
   (for-each-global!
    (lambda (global)
-     (if (require-prototype? global)
-         (emit-prototype (global-value global) global)))))
+     (set-variable-name! global)
+       (if (require-prototype? global)
+           (emit-prototype (global-value global) global)))))
 
 (define (emit-ir node::ir-node)
   (display (line-tree->string (ir-node->line-tree node) -1) *ir-port*)
@@ -108,9 +109,9 @@
                   (arguments (map type->ir-type targs))))))))))
   
 (define-method (emit-prototype value::sfun variable)
-  (verbose 3 "       emit-prototype ::sfun " (variable-id variable) "\n")
+  (verbose 3 "       emit-prototype ::sfun " (variable-id variable)
+           " " (variable-name variable) "\n")
   (with-access::variable variable (id type name)
-     (set-variable-name! variable)
      (let ((types (map (lambda (a)
                            (let ((t (if (type? a)
                                         a
@@ -127,7 +128,6 @@
 (define-method (emit-prototype value::svar variable)
   (verbose 3 "       emit-prototype ::svar " (variable-id variable) "\n")
   (with-access::variable variable (id type name)
-     (set-variable-name! variable)
      (emit-ir
       (instantiate::ir-assignment
        (name (string-append "@" name))
@@ -135,19 +135,28 @@
               (initial-value (instantiate::ir-zero-initializer
                               (value-type (type->ir-type type))))))))))
 
+(define-method (emit-prototype value::scnst variable)
+  (verbose 3 "       emit-prototype ::scnst " (variable-id variable) "\n")
+  (with-access::variable variable (id type name)
+     ;; TODO: do something!!
+     (emit-ir
+      (instantiate::ir-assignment
+       (name (string-append "@" name))
+       (node (instantiate::ir-global-variable
+              (initial-value (instantiate::ir-zero-initializer
+                              (value-type (type->ir-type type))))))))
+     (verbose 3 "        class " (scnst-class value) "\n")))
+
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
            " " value "\n"))
 
-;; from c_proto
+;; from c_proto, but changed
 (define (require-prototype? global)
-   (and (or (eq? (global-module global) *module*)
-	    (not (eq? (global-import global) 'static)))
-	(or (and (eq? (global-module global) *module*)
-		 (eq? (global-import global) 'export))
-	    (>fx (global-occurrence global) 0)
-	    (eq? (global-removable global) 'never))))
-
+  (and (or (not (eq? (global-module global) *module*))
+           (not (sfun? (global-value global))))
+       (or (>fx (global-occurrence global) 0)
+           (eq? (global-removable global) 'never))))
 
 (define-method (backend-link-objects me::llvm sources)
   (verbose 1 "      backend-link-objects llvm" sources #\Newline))
@@ -270,6 +279,7 @@
   (with-access::app node (fun)
      (let* ((var (var-variable fun))
             (val (variable-value var)))
+       (set-variable-name! var)
        (if (sfun? val)
            (sfun-app->ir-node node var val kont)
            ;; TODO: Support non-sfuns.
