@@ -29,7 +29,11 @@
            llvm_ir
            )
 
-   (export (class llvm::bvm)))
+   (export (class llvm::bvm)
+
+           (wide-class sfun/integrated::sfun
+              (label::bstring read-only)
+              integrated::bool)))
 
 (register-backend! 'llvm build-llvm-backend)
 
@@ -207,17 +211,24 @@
         (list
          (apply make-node-seq
                 (map (lambda (arg)
-                       (let* ((name (string-append "%" (local-name arg)))
-                              (type (type->ir-type/ptr (local-type arg)))
-                              (var (instantiate::ir-variable
-                                    (name name)
-                                    (value-type type))))
-                         (make-node-seq
-                          (compile-local-allocation var)
-                          (compile-store var (cadr (assoc arg arg-assoc))))))
+                       (compile-allocate-formal
+                        arg (cadr (assoc arg arg-assoc))))
                      (sfun-args value)))
          (node->ir-node (sfun-body value) ret-kont))))))))
 
+(define (compile-allocate-formal local #!optional initial-value)
+  (set-variable-name! local)
+  (let* ((name (string-append "%" (local-name local)))
+         (type (type->ir-type/ptr (local-type local)))
+         (var (instantiate::ir-variable
+               (name name) (value-type type)))
+         (allocation (compile-local-allocation var)))
+    (if initial-value
+        (make-node-seq
+         allocation
+         (compile-store var initial-value))
+        allocation)))
+     
 
 ;;; LLVM versions of Bigloo types.
 
@@ -274,6 +285,26 @@
                  bindings)))
        (make-node-seq assignments (node->ir-node body kont)))))
 
+(define-method (node->ir-node node::let-fun kont)
+  ;; Thankfully, the compiler has already made sure that local `labels'
+  ;; functions are only called in tail position!  We compile these like the C
+  ;; backend does: the first encountered application is inlined, and other
+  ;; applications jump to that inlined code.
+  (verbose 3 "       node->ir-node ::let-fun\n")
+  (with-access::let-fun node (body locals)
+    ;; Allocate the locals' parameters.
+    (let loop ((locals locals)
+               (formals-code '()))
+      (if (null? locals)
+          (make-node-seq formals-code (node->ir-node body kont))
+          (let ((local (car locals)))
+            (set-variable-name! local)
+            (let* ((fun (widen!::sfun/integrated (local-value local)
+                           (label (local-name local))
+                           (integrated #f)))
+                   (allocs (map compile-allocate-formal (sfun-args fun))))
+              (loop (cdr locals) (append allocs formals-code))))))))
+
 (define-method (node->ir-node node::app kont)
   (verbose 3 "       node->ir-node ::app\n")
   (with-access::app node (fun)
@@ -281,9 +312,13 @@
             (val (variable-value var)))
        (set-variable-name! var)
        (if (sfun? val)
-           (sfun-app->ir-node node var val kont)
+           (if (global? var)
+               (sfun-app->ir-node node var val kont)
+               (sfun-local-app->ir-node node var val kont))
            ;; TODO: Support non-sfuns.
-           (compile-undef (type->ir-type (variable-type var)) kont)))))
+           (begin
+             (verbose 3 "        skipping " (variable-id var) "\n")
+             (compile-undef (type->ir-type (variable-type var)) kont))))))
 
 (define (sfun-app->ir-node node var sfun kont)
   (let loop ((arg-types (map arg-type (sfun-args sfun)))
@@ -320,6 +355,47 @@
     
     (if (null? args)
         (compile-call)
+        (compile-more-arguments))))
+
+(define (sfun-local-app->ir-node node var sfun kont)
+  (let loop ((args (app-args node))
+             (formals (sfun-args sfun))
+             (arg-code '()))
+
+    (define (compile-more-arguments)
+      (let* ((formal (car formals))
+             (name (local-name formal))
+             (type (local-type formal))
+             (aux (fresh-ir-variable (variable-id formal) type))
+             (setter (node->ir-node
+                      (car args)
+                      (lambda (x)
+                        (make-node-seq
+                         (instantiate::ir-assignment
+                          (name (ir-variable-name aux))
+                          (node x))
+                         (compile-store (var->ir-node/ptr formal) aux))))))
+        (loop (cdr args) (cdr formals) (cons setter arg-code))))
+
+    (define (compile-call)
+      (let* ((label (sfun/integrated-label sfun))
+             (branch (instantiate::ir-instr-br-unconditional
+                      (label (instantiate::ir-label
+                              (name label))))))
+        (if (sfun/integrated-integrated sfun)
+            branch
+            (begin
+              (sfun/integrated-integrated-set! sfun #t)
+              (make-node-seq
+               branch
+               (make-labeled-node-seq
+                label
+                (node->ir-node (sfun-body sfun) kont)))))))
+    
+    (if (null? args)
+        (make-node-seq
+         (reverse! arg-code)
+         (compile-call))
         (compile-more-arguments))))
 
 (define-method (node->ir-node node::var kont)
