@@ -20,6 +20,13 @@
     (class ir-label::ir-node
       name::bstring)
 
+    ;; Dummy node displayed as empty line.
+    (class ir-newline::ir-node)
+
+    ;; A comment line.
+    (class ir-comment::ir-node
+      text::bstring)
+
 
     ;;; These classes represent types in the LLVM type system.
 
@@ -356,18 +363,21 @@
 ;; Convert a line tree to a flat list of indented strings.
 (define (line-tree->list node indent::int)
   (if (string? node)
-      (add-indentation indent node)
-      (flatten
-       (map (lambda (x)
-              (line-tree->list x (+ 1 indent)))
-            node))))
+      (if (string-nonempty? node)
+          (add-indentation indent node)
+          "")
+      (filter string-nonempty?
+              (flatten
+               (map (lambda (x)
+                      (line-tree->list x (+ 1 indent)))
+                    node)))))
 
 (define (append-line-trees trees)
   (if (null? trees)
       '()
       ((if (pair? (car trees))
-          append
-          cons)
+           append
+           cons)
        (car trees) (append-line-trees (cdr trees)))))
 
 (define (add-indentation level::int string::bstring)
@@ -406,6 +416,12 @@
 
 
 ;;; Now we define the methods for rendering IR nodes.
+
+(define-method (ir-node->line-tree node::ir-newline)
+  "\n")
+
+(define-method (ir-node->line-tree node::ir-comment)
+  (string-append ";; " (ir-comment-text node)))
 
 (define-method (ir-node->line-tree type::ir-named-type)
   (string-append "%" (ir-named-type-name type)))
@@ -469,8 +485,9 @@
 ;;   (render-value-sans-type var))
 
 (define-method (ir-node->line-tree seq::ir-node-seq)
-  (let ((lines (append-line-trees (map ir-node->line-tree
-                                       (ir-node-seq-nodes seq))))
+  (let ((lines ;(append-line-trees
+         (map ir-node->line-tree
+              (ir-node-seq-nodes seq)))
         (label (ir-node-seq-label seq)))
     (if label
         (cons (string-append label ":") lines)

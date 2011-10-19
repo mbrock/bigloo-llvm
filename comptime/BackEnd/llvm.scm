@@ -71,16 +71,20 @@
                 (lambda () (start-emission!)))
 
   (emit-header)
+  (emit-newline)
   (emit-prototypes)
+  (emit-newline)
   (emit-function-definitions me)
 
   (stop-emission!))
 
+(define (emit-newline)
+  (newline *ir-port*))
+
 (define (emit-header)
   (emit-comment "From " *src-files*)
   (emit-comment *bigloo-name*)
-  (emit-comment (string-append *bigloo-author* " (c) " *bigloo-date*))
-  (newline *ir-port*))
+  (emit-comment (string-append *bigloo-author* " (c) " *bigloo-date*)))
 
 (define (emit-prototypes)
   (verbose 3 "      All types:\n")
@@ -88,17 +92,23 @@
    (lambda (global)
      (set-variable-name! global)
        (if (require-prototype? global)
-           (emit-prototype (global-value global) global)))))
+           (begin
+             (emit-prototype (global-value global) global)
+             (emit-newline))))))
 
-(define (emit-ir node::ir-node)
-  (display (line-tree->string (ir-node->line-tree node) -1) *ir-port*)
-  (newline *ir-port*))
+(define (emit-ir . nodes)
+  (display (line-tree->string
+            (ir-node->line-tree (apply make-node-seq nodes)) -1)
+           *ir-port*)
+  (emit-newline))
 
 (define-generic (emit-prototype value::value variable::variable))
 
 (define-method (emit-prototype value::cfun variable)
   (verbose 3 "       emit-prototype ::cfun " (variable-id variable) "\n")
-  (if (not (cfun-macro? value))         ; don't prototype "==" etc
+  (if (cfun-macro? value)         ; don't prototype "==" etc for now
+      (emit-ir
+       (comment "Missing prototype for macro `~s'" (variable-id variable)))
       (with-access::global variable (id type name library)
         (let* ((arity (cfun-arity value))
                (targs (cfun-args-type value)))
@@ -107,6 +117,7 @@
               (begin
                 (verbose 3 "        args: " (map type->ir-type targs) "\n")
                 (emit-ir
+                 (comment "C function `~s'" id)
                  (instantiate::ir-function-decl
                   (return-type (type->ir-type type))
                   (name name)
@@ -115,7 +126,7 @@
 (define-method (emit-prototype value::sfun variable)
   (verbose 3 "       emit-prototype ::sfun " (variable-id variable)
            " " (variable-name variable) "\n")
-  (with-access::variable variable (id type name)
+  (with-access::global variable (id type name import)
      (let ((types (map (lambda (a)
                            (let ((t (if (type? a)
                                         a
@@ -124,6 +135,7 @@
                        (sfun-args value))))
        (verbose 3 "        args: " types "\n")
        (emit-ir
+        (comment "Scheme function `~s' (~s)" id import)
         (instantiate::ir-function-decl
          (return-type (type->ir-type type))
          (name name)
@@ -131,8 +143,9 @@
 
 (define-method (emit-prototype value::svar variable)
   (verbose 3 "       emit-prototype ::svar " (variable-id variable) "\n")
-  (with-access::variable variable (id type name)
+  (with-access::global variable (id type name import)
      (emit-ir
+      (comment "Scheme variable `~s' (~s)" id import)
       (instantiate::ir-assignment
        (name (string-append "@" name))
        (node (instantiate::ir-global-variable
@@ -141,9 +154,10 @@
 
 (define-method (emit-prototype value::scnst variable)
   (verbose 3 "       emit-prototype ::scnst " (variable-id variable) "\n")
-  (with-access::variable variable (id type name)
+  (with-access::global variable (id type name import)
      ;; TODO: do something!!
      (emit-ir
+      (comment "Scheme constant `~s' (~s)" id import)
       (instantiate::ir-assignment
        (name (string-append "@" name))
        (node (instantiate::ir-global-variable
@@ -199,6 +213,7 @@
                         (fresh-ir-variable
                          'arg (type->ir-type (local-type local)))))
                 (sfun-args value))))
+     (emit-comment id "(" import ")")
      (emit-ir
       (instantiate::ir-function-defn
        (return-type (type->ir-type type))
@@ -223,11 +238,13 @@
          (var (instantiate::ir-variable
                (name name) (value-type type)))
          (allocation (compile-local-allocation var)))
-    (if initial-value
-        (make-node-seq
-         allocation
-         (compile-store var initial-value))
-        allocation)))
+    (make-node-seq
+     (comment "Parameter `~s'" (local-id local))
+     (if initial-value
+         (make-node-seq
+          allocation
+          (compile-store var initial-value))
+         allocation))))
      
 
 ;;; LLVM versions of Bigloo types.
@@ -280,6 +297,7 @@
                       (cdr x)
                       (lambda (v)
                         (make-node-seq
+                         (comment "Local variable ~s" (variable-id (car x)))
                          (compile-local-allocation var)
                          (compile-store/aux var v))))))
                  bindings)))
@@ -292,18 +310,31 @@
   ;; applications jump to that inlined code.
   (verbose 3 "       node->ir-node ::let-fun\n")
   (with-access::let-fun node (body locals)
-    ;; Allocate the locals' parameters.
     (let loop ((locals locals)
                (formals-code '()))
+
+      (define (compile-more-functions)
+        (let ((local (car locals)))
+          (set-variable-name! local)
+          ;; Widen the function value to store a label and a flag for whether
+          ;; it has been inlined yet.  Then compile storage for its
+          ;; parameters, to be reused by all invocations.
+          (let* ((fun (widen!::sfun/integrated (local-value local)
+                                               (label (local-name local))
+                                               (integrated #f)))
+                 (allocs
+                  (cons
+                   (comment "Parameters for local function ~s"
+                            (local-id local))
+                   (map compile-allocate-formal (sfun-args fun)))))
+            (loop (cdr locals) (append allocs formals-code)))))
+
+      (define (compile-body)
+        (make-node-seq formals-code (node->ir-node body kont)))
+
       (if (null? locals)
-          (make-node-seq formals-code (node->ir-node body kont))
-          (let ((local (car locals)))
-            (set-variable-name! local)
-            (let* ((fun (widen!::sfun/integrated (local-value local)
-                           (label (local-name local))
-                           (integrated #f)))
-                   (allocs (map compile-allocate-formal (sfun-args fun))))
-              (loop (cdr locals) (append allocs formals-code))))))))
+          (compile-body)
+          (compile-more-functions)))))
 
 (define-method (node->ir-node node::app kont)
   (verbose 3 "       node->ir-node ::app\n")
@@ -311,15 +342,29 @@
      (let* ((var (var-variable fun))
             (val (variable-value var)))
        (set-variable-name! var)
-       (if (sfun? val)
-           (if (global? var)
-               (sfun-app->ir-node node var val kont)
-               (sfun-local-app->ir-node node var val kont))
-           ;; TODO: Support non-sfuns.
-           (begin
-             (verbose 3 "        skipping " (variable-id var) "\n")
-             (compile-undef (type->ir-type (variable-type var)) kont))))))
 
+       ;; Dispatch on the function kind.
+       (cond ((sfun? val)
+              (if (global? var)
+                  (sfun-app->ir-node node var val kont)
+                  (sfun-local-app->ir-node node var val kont)))
+             ((and (cfun? val)
+                   (not (or (cfun-macro? val)
+                            (cfun-infix? val))))
+              (cfun-app->ir-node node var val kont))
+             (else
+              ;; TODO: Handle all kinds.
+              (begin
+                (verbose 3 "        skipping " (variable-id var) "\n")
+                (make-node-seq
+                 (comment "Skipped call to `~s'" (variable-id var))
+                 (compile-undef
+                  (type->ir-type (variable-type var)) kont))))))))
+
+;; TODO: Anything special here?
+(define cfun-app->ir-node sfun-app->ir-node)
+
+;; Compile an application of a global Scheme function.
 (define (sfun-app->ir-node node var sfun kont)
   (let loop ((arg-types (map arg-type (sfun-args sfun)))
              (args (app-args node))
@@ -327,42 +372,40 @@
              (auxs '()))
 
     (define (compile-more-arguments)
-      (let* ((aux (fresh-ir-variable
-                   'aux (type->ir-type (car arg-types))))
+      ;; Compile each argument expression naming each result instruction.
+      (let* ((aux (fresh-ir-variable 'aux (type->ir-type (car arg-types))))
              (name (ir-variable-name aux))
              (type (ir-variable-type aux))
-             (setter (node->ir-node
-                      (car args)
-                      (make-assignment-kont aux))))
-                      ;; (lambda (x)
-                      ;;   (make-node-seq
-                      ;;    (compile-local-allocation aux)
-                      ;;    (compile-store aux x))))))
+             (setter (node->ir-node (car args) (make-assignment-kont aux))))
         (loop (cdr arg-types) (cdr args)
               (cons setter arg-code)
               (cons aux auxs))))
     
     (define (compile-call)
-      ;; The `assignments' list is now IR that puts the argument values in
-      ;; the `auxs' variables.
       (make-node-seq
+       (comment "Arguments to `~s'" (variable-id var))
        (reverse! arg-code)
+       (comment "Call to `~s'" (variable-id var))
        ;; Call the function in `var' and give back its result.
        (kont (instantiate::ir-instr-call
               (function-type (var->ir-type var))
               (function (var->ir-node var))
-              (args auxs)))))
+              (args (reverse auxs))))))
     
     (if (null? args)
         (compile-call)
         (compile-more-arguments))))
 
+;; Compile an application of a local Scheme function.  This is guaranteed to
+;; be a tail call.  See the code for node->ir-node ::let-fun.
 (define (sfun-local-app->ir-node node var sfun kont)
   (let loop ((args (app-args node))
              (formals (sfun-args sfun))
              (arg-code '()))
 
     (define (compile-more-arguments)
+      ;; Variables for each formal have already been allocated by
+      ;; node->ir-node ::let-fun, so just store to them.
       (let* ((formal (car formals))
              (name (local-name formal))
              (type (local-type formal))
@@ -383,26 +426,30 @@
                       (label (instantiate::ir-label
                               (name label))))))
         (if (sfun/integrated-integrated sfun)
-            branch
+            ;; Local function has already been inlined somewhere in the
+            ;; surrounding global function.
+            (make-node-seq
+             (comment "Local tail call to `~s'" (variable-id var))
+             branch)
             (begin
+              ;; Not inlined yet; compile the function body here.
               (sfun/integrated-integrated-set! sfun #t)
               (make-node-seq
+               (comment "Inlined local function `~s'" (variable-id var))
+               ;; Need a branch here to terminate the basic block.
                branch
                (make-labeled-node-seq
                 label
                 (node->ir-node (sfun-body sfun) kont)))))))
     
     (if (null? args)
-        (make-node-seq
-         (reverse! arg-code)
-         (compile-call))
+        (make-node-seq (reverse! arg-code) (compile-call))
         (compile-more-arguments))))
 
 (define-method (node->ir-node node::var kont)
   (verbose 3 "       node->ir-node ::var\n")
   (set-variable-name! (var-variable node))
   (kont (instantiate::ir-instr-load
-;         (type (ir-value-type (var->ir-node/ptr (var-variable node))))
          (pointer (var->ir-node/ptr (var-variable node))))))
 
 (define-method (node->ir-node node::conditional kont)
@@ -434,17 +481,25 @@
               (make-labeled-node-seq done-label
                                      (kont (compile-load result-var)))))
          (make-node-seq
+          (comment "Test expression for `if' form")
           test-code
           (compile-local-allocation result-var)
           branch-code
+          (comment "Positive arm of `if' form")
           (compile-branch true-label true)
+          (comment "Negative arm of `if' form")
           (compile-branch false-label false)
           done-code)))))
 
 (define-method (node->ir-node node::sequence kont)
   (verbose 3 "       node->ir-node ::sequence\n")
-  (let ((throw-away-kont (lambda (x)
-                           (instantiate::ir-null-node))))
+  (let ((throw-away-kont
+         (lambda (x)
+           (let ((var (fresh-ir-variable 'null
+                                         (ir-value-type x))))
+             (instantiate::ir-assignment
+              (name (ir-variable-name var))
+              (node x))))))
     (let loop ((nodes (sequence-nodes node))
                (code '()))
       (if (null? (cdr nodes))
@@ -454,31 +509,40 @@
                 (cons (node->ir-node (car nodes) throw-away-kont) code))))))
 
 (define-method (node->ir-node node::setq kont)
-  (verbose 3 "       node->ir-node ::setq "
-           (variable-name (var-variable (setq-var node))) #\Newline)
-  (let ((var (var->ir-node (var-variable (setq-var node)))))
-    (node->ir-node (setq-value node)
-                   (lambda (x)
-                     (compile-store var x)
-                     (kont x)))))
+  (let* ((variable (var-variable (setq-var node)))
+         (var (var->ir-node variable)))
+    (verbose 3 "       node->ir-node ::setq "
+             (variable-name variable) #\Newline)
+    (make-node-seq
+     (comment "Assignment to variable `~s'" (variable-id variable))
+     (node->ir-node (setq-value node)
+                    (lambda (x)
+                      (compile-store var x)
+                      (kont x))))))
 
 (define-method (node->ir-node node::atom kont)
   (verbose 3 "       node->ir-node ::atom: " (atom-value node) #\Newline)
   (let ((value (atom-value node))
         (type (type->ir-type (get-type node))))
-    (cond 
-     ((fixnum? value)
-      (compile-lit (instantiate::ir-lit-int
-                    (value-type type)
-                    (value value)) kont))
-     (else
-      (verbose 3 "        unhandled type of atom\n")
-      (compile-undef type kont)))))
+    (make-node-seq
+     (comment "Atom `~s'" value)
+     (cond 
+      ((fixnum? value)
+       (compile-lit (instantiate::ir-lit-int
+                     (value-type type)
+                     (value value)) kont))
+      (else
+       (verbose 3 "        unhandled type of atom\n")
+       (make-node-seq
+        (comment "(Unhandled atom type)" value)
+        (compile-undef type kont)))))))
             
 
 (define-method (node->ir-node dummy::node kont)
   (verbose 3 "       node->ir-node unhandled " dummy #\Newline)
-  (compile-undef (type->ir-type (get-type dummy)) kont))
+  (make-node-seq
+   (comment "Unhandled node type `~s'" dummy)
+   (compile-undef (type->ir-type (get-type dummy)) kont)))
 
 
 ;;; IR generation helpers.
@@ -578,11 +642,13 @@
 (define (make-node-seq . stuff)
   (if (null? stuff)
       (instantiate::ir-null-node)
-      (instantiate::ir-node-seq
-       (nodes (apply append (map (lambda (x)
-                                   (if (list? x)
-                                       x
-                                       (list x))) stuff))))))
+      (if (null? (cdr stuff))
+          (car stuff)
+          (instantiate::ir-node-seq
+           (nodes (apply append (map (lambda (x)
+                                       (if (list? x)
+                                           x
+                                           (list x))) stuff)))))))
 
 (define (make-labeled-node-seq label . stuff)
   (instantiate::ir-node-seq
@@ -591,3 +657,8 @@
                                (if (list? x)
                                    x
                                    (list x))) stuff)))))
+
+(define (comment . stuff)
+  (instantiate::ir-comment (text (apply format stuff))))
+
+(define *newline* (instantiate::ir-newline))
