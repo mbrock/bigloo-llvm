@@ -33,14 +33,17 @@
 
            (wide-class sfun/integrated::sfun
               (label::bstring read-only)
-              integrated::bool)))
+              integrated::bool)
 
-(register-backend! 'llvm build-llvm-backend)
+           (wide-class cfun/renamed-macro::cfun
+              (new-name::bstring read-only))))
 
-(define (build-llvm-backend)
-  (instantiate::llvm
-     (language 'llvm)
-     (heap-compatible 'c)))
+(register-backend! 'llvm
+                   (lambda ()
+                     (instantiate::llvm
+                      (language 'llvm)
+                      (foreign-clause-support '())
+                      (heap-compatible 'c))))
 
 (define *llc* "llc")
 (define *assembler* "gcc")
@@ -52,7 +55,9 @@
   (assemble prefix))
 
 (define (llc prefix)
-  (let ((cmd (string-append *llc* " " "-disable-cfi " prefix ".ll")))
+  (let ((cmd (string-append *llc* " "
+                            ; "-disable-cfi " ; needed with HEAD LLVM
+                            prefix ".ll")))
     (exec cmd #t "llc")))
 
 (define (assemble prefix)
@@ -67,10 +72,19 @@
              (close-output-port p)) *ir-port*))
 
 (define-method (backend-compile me::llvm)
+  (if #t
+      (begin
+        (let ((port (open-output-file "macrogen-defs.c")))
+          (emit-macrogen-functions port)
+          (flush-output-port port)
+          (close-output-port port))))
+
   (pass-prelude "LLVM IR generation"
                 (lambda () (start-emission!)))
 
   (emit-header)
+  (emit-newline)
+  (emit-prelude)
   (emit-newline)
   (emit-prototypes)
   (emit-newline)
@@ -85,6 +99,13 @@
   (emit-comment "From " *src-files*)
   (emit-comment *bigloo-name*)
   (emit-comment (string-append *bigloo-author* " (c) " *bigloo-date*)))
+
+(define (emit-prelude)
+  ;; TODO: Make this portable?
+  (send-chars
+   (open-input-file
+    (string-append (bigloo-config 'library-directory) "/bigloo.ll"))
+   *ir-port*))
 
 (define (emit-prototypes)
   (verbose 3 "      All types:\n")
@@ -106,22 +127,21 @@
 
 (define-method (emit-prototype value::cfun variable)
   (verbose 3 "       emit-prototype ::cfun " (variable-id variable) "\n")
-  (if (cfun-macro? value)         ; don't prototype "==" etc for now
-      (emit-ir
-       (comment "Missing prototype for macro `~s'" (variable-id variable)))
-      (with-access::global variable (id type name library)
-        (let* ((arity (cfun-arity value))
-               (targs (cfun-args-type value)))
-          (if (<fx arity 0)
-              (verbose 1 "       skipping varargs fun\n")
-              (begin
-                (verbose 3 "        args: " (map type->ir-type targs) "\n")
-                (emit-ir
-                 (comment "C function `~s'" id)
-                 (instantiate::ir-function-decl
-                  (return-type (type->ir-type type))
-                  (name name)
-                  (arguments (map type->ir-type targs))))))))))
+  (with-access::global variable (id type name library)
+     (let* ((arity (cfun-arity value))
+            (targs (cfun-args-type value)))
+       (if (<fx arity 0)
+           (verbose 1 "       skipping varargs fun\n")
+           (begin
+             (verbose 3 "        args: " (map type->ir-type targs) "\n")
+             (emit-ir
+              (comment "C function `~s'" id)
+              (instantiate::ir-function-decl
+               (return-type (type->ir-type type))
+               (name (if (cfun/renamed-macro? value)
+                         (cfun/renamed-macro-new-name value)
+                         name))
+               (arguments (map type->ir-type targs)))))))))
   
 (define-method (emit-prototype value::sfun variable)
   (verbose 3 "       emit-prototype ::sfun " (variable-id variable)
@@ -249,8 +269,8 @@
 
 ;;; LLVM versions of Bigloo types.
 
-(define *llvm-object-type* (make-ir-primitive-type "i8*"))
-(define *llvm-string-type* (make-ir-primitive-type "i8*"))
+(define *llvm-object-type* (make-ir-named-type "obj_t"))
+(define *llvm-string-type* *llvm-object-type*)
 (define *llvm-int-type* (make-ir-primitive-type "i32"))
 (define *llvm-bool-type* (make-ir-primitive-type "i1"))
 (define *llvm-long-type* (make-ir-primitive-type "i32"))
@@ -348,9 +368,7 @@
               (if (global? var)
                   (sfun-app->ir-node node var val kont)
                   (sfun-local-app->ir-node node var val kont)))
-             ((and (cfun? val)
-                   (not (or (cfun-macro? val)
-                            (cfun-infix? val))))
+             ((cfun? val)
               (cfun-app->ir-node node var val kont))
              (else
               ;; TODO: Handle all kinds.
@@ -361,40 +379,46 @@
                  (compile-undef
                   (type->ir-type (variable-type var)) kont))))))))
 
-;; TODO: Anything special here?
-(define cfun-app->ir-node sfun-app->ir-node)
-
+(define (cfun-app->ir-node node var cfun kont)
+  (if (cfun/renamed-macro? cfun)
+      (with-access::variable var (name)
+        (set! name (cfun/renamed-macro-new-name cfun))))
+  (sfun-app->ir-node node var cfun kont))
+  
 ;; Compile an application of a global Scheme function.
 (define (sfun-app->ir-node node var sfun kont)
-  (let loop ((arg-types (map arg-type (sfun-args sfun)))
-             (args (app-args node))
-             (arg-code '())
-             (auxs '()))
-
-    (define (compile-more-arguments)
-      ;; Compile each argument expression naming each result instruction.
-      (let* ((aux (fresh-ir-variable 'aux (type->ir-type (car arg-types))))
-             (name (ir-variable-name aux))
-             (type (ir-variable-type aux))
-             (setter (node->ir-node (car args) (make-assignment-kont aux))))
-        (loop (cdr arg-types) (cdr args)
-              (cons setter arg-code)
-              (cons aux auxs))))
-    
-    (define (compile-call)
-      (make-node-seq
-       (comment "Arguments to `~s'" (variable-id var))
-       (reverse! arg-code)
-       (comment "Call to `~s'" (variable-id var))
-       ;; Call the function in `var' and give back its result.
-       (kont (instantiate::ir-instr-call
-              (function-type (var->ir-type var))
-              (function (var->ir-node var))
-              (args (reverse auxs))))))
-    
-    (if (null? args)
-        (compile-call)
-        (compile-more-arguments))))
+  (let ((args (if (cfun? sfun)
+                  (cfun-args-type sfun)
+                  (sfun-args sfun))))
+    (let loop ((arg-types (map arg-type args))
+               (args (app-args node))
+               (arg-code '())
+               (auxs '()))
+      
+      (define (compile-more-arguments)
+        ;; Compile each argument expression naming each result instruction.
+        (let* ((aux (fresh-ir-variable 'aux (type->ir-type (car arg-types))))
+               (name (ir-variable-name aux))
+               (type (ir-variable-type aux))
+               (setter (node->ir-node (car args) (make-assignment-kont aux))))
+          (loop (cdr arg-types) (cdr args)
+                (cons setter arg-code)
+                (cons aux auxs))))
+      
+      (define (compile-call)
+        (make-node-seq
+         (comment "Arguments to `~s'" (variable-id var))
+         (reverse! arg-code)
+         (comment "Call to `~s'" (variable-id var))
+         ;; Call the function in `var' and give back its result.
+         (kont (instantiate::ir-instr-call
+                (function-type (var->ir-type var))
+                (function (var->ir-node var))
+                (args (reverse auxs))))))
+      
+      (if (null? args)
+          (compile-call)
+          (compile-more-arguments)))))
 
 ;; Compile an application of a local Scheme function.  This is guaranteed to
 ;; be a tail call.  See the code for node->ir-node ::let-fun.
@@ -589,13 +613,16 @@
 
 (define (var->ir-type var)
   (let ((x (variable-value var)))
-    (if (sfun? x)
-        (instantiate::ir-function-type
-         (return-type (type->ir-type (variable-type var)))
-         (parameter-types (map (lambda (a)
-                                 (type->ir-type (arg-type a)))
-                               (sfun-args x))))
-        (raise "make-ir-function-type sez sfun plz"))))
+    (if (fun? x)
+        (let ((args (if (cfun? x)
+                        (cfun-args-type x)
+                        (sfun-args x))))
+          (instantiate::ir-function-type
+           (return-type (type->ir-type (variable-type var)))
+           (parameter-types (map (lambda (a)
+                                   (type->ir-type (arg-type a)))
+                                 args))))
+        (raise "var->ir-type sez sfun plz"))))
 
 (define (var->ir-node var)
   (instantiate::ir-variable
@@ -662,3 +689,55 @@
   (instantiate::ir-comment (text (apply format stuff))))
 
 (define *newline* (instantiate::ir-newline))
+
+
+;;; Macro generation stuff.
+
+(define (emit-macrogen-functions port)
+  (fprintf port "#include <bigloo.h>\n\n")
+  (for-each-global!
+   (lambda (global)
+     (let ((value (global-value global)))
+       (if (and (cfun? value)
+                (cfun-macro? value)
+                (require-prototype? global))
+           (emit-macrogen-function global value port))))))
+
+(define (emit-macrogen-function global cfun port)
+  (let* ((type (type-name (global-type global)))
+         (new-name (bigloo-mangle
+                    (symbol->string (new-name (global-id global)))))
+         (args (let loop ((arg-names (reverse *arg-names*))
+                          (arg-types (reverse (cfun-args-type cfun)))
+                          (aux '()))
+                 (if (null? arg-types)
+                     aux
+                     (loop (cdr arg-names) (cdr arg-types)
+                           (cons (list (car arg-types)
+                                       (symbol->string (car arg-names)))
+                                 aux)))))
+         (param-list (string-join ", "
+                                  (map (lambda (x)
+                                         (string-append (type-name (car x)) " "
+                                                        (cadr x)))
+                                       args))))
+    (widen!::cfun/renamed-macro cfun (new-name new-name))
+    (fprintf port "~a ~a (~a)" type new-name param-list)
+    (if (cfun-infix? cfun)
+        (case (length args)
+          ((0) (fprintf port "{ return ~a; }~%" (variable-name global)))
+          ((1) (fprintf port "{ return ~a ~a; }~%" (variable-name global)
+                        (cadr (car args))))
+          ((2) (fprintf port "{ return ~a ~a ~a; }~%"
+                        (cadr (car args))
+                        (variable-name global)
+                        (cadr (cadr args)))))
+        (fprintf port "{ return ~a (~a); }~%" 
+                 (variable-name global)
+                 (string-join ", " (map cadr args))))))
+             
+
+(define (new-name symbol)
+  (string->symbol (string-append "llvm-" (symbol->string symbol))))
+
+(define *arg-names* '(a b c d e f g))

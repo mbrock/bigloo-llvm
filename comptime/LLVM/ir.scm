@@ -3,6 +3,8 @@
     (line-tree->string::bstring ::obj ::int)
     (generic ir-node->line-tree::obj ::ir-node)
 
+    string-join
+
     *ir-type-void*
 
     ;; An ir-node is basically an LLVM IR syntax tree, though this class
