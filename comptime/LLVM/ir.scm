@@ -4,6 +4,7 @@
     (generic ir-node->line-tree::obj ::ir-node)
 
     string-join
+    build-ir-expr
 
     *ir-type-void*
 
@@ -69,6 +70,11 @@
     (class ir-value::ir-node
       (type::ir-type read-only (get calculate-type)))
 
+    ;; Inline value.
+    (class ir-expr::ir-value/value-type
+      operation::symbol
+      operands::pair-nil)
+
     ;; An IR value with an explicitly stored type.
     (class ir-value/value-type::ir-value
       value-type::ir-type)
@@ -88,7 +94,11 @@
 
     ;; Literals are value expressions, too.
     (class ir-lit-int::ir-value/value-type
-      value::int)
+      value)
+
+    ;; Literal struct like { a, b, c }.
+    (class ir-lit-struct::ir-value
+      values::pair-nil)
 
     ;; An assignment statement like %foo = i32 0.
     (class ir-assignment::ir-node
@@ -214,6 +224,9 @@
 
 (define-generic (calculate-type value::ir-value))
 
+(define-method (calculate-type value::ir-value)
+  (raise (class-name (object-class value))))
+
 (define-method (calculate-type value::ir-value/value-type)
   (ir-value/value-type-value-type value))
 
@@ -228,12 +241,17 @@
 
 (define-method (calculate-type value::ir-instr-call)
   ;; TODO: consider function-type
-  (ir-value-type
-   (ir-instr-call-function value)))
+  (ir-function-type-return-type
+   (ir-instr-call-function-type value)))
 
 (define-method (calculate-type value::ir-instr-binary)
   (ir-value-type
    (ir-instr-binary-operand-1 value)))
+
+(define-method (calculate-type value::ir-lit-struct)
+  (instantiate::ir-structure-type
+   (element-types (map ir-value-type (ir-lit-struct-values value)))))
+   
 
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
@@ -307,7 +325,9 @@
    (build-ir-string
     (if tail? "tail" #f)
     ;; TODO: check this
-    "call" cconv ret-attrs function
+    "call" cconv ret-attrs
+    (ir-function-type-return-type function-type)
+    (render-value-sans-type function)
     "(" (render-args args) ")"
     (render-list fn-attrs)))
 
@@ -407,14 +427,19 @@
 ;; nodes.  #f becomes the empty string, strings pass through unchanged,
 ;; numbers are rendered in decimal, lists are joined by spaces, etc.
 (define (stringify-thing thing)
-  (cond ((eq? thing #f) "")
-        ((string? thing) thing)
-        ((list? thing)
-         (stringify-things " " thing))
-        ((number? thing)
-         (number->string thing))
-        ((ir-node? thing)
-         (ir-node->inline-string thing))))
+  (let ((result
+         (cond ((eq? thing #f) "")
+               ((string? thing) thing)
+               ((symbol? thing) (symbol->string thing))
+               ((list? thing)
+                (stringify-things " " thing))
+               ((number? thing)
+                (number->string thing))
+               ((ir-node? thing)
+                (ir-node->inline-string thing)))))
+    (if result
+        result
+        (raise thing))))
 
 
 ;;; Now we define the methods for rendering IR nodes.
@@ -474,8 +499,30 @@
 
 (define-method (render-value-sans-type x::ir-undef) "undef")
 
+(define-method (render-value-sans-type x::ir-expr)
+  (with-access::ir-expr x (value-type operation operands)
+    (case operation
+      ((trunc zext sext fptrunc fpext fptoui fptosi uitofp sitofp
+              ptrtoint inttoptr bitcast)
+       (build-ir-string (symbol->string operation)
+                        "(" (ir-node->inline-string (car operands))
+                        "to"
+                        (ir-node->inline-string (cadr operands)) ")"))
+      (else
+       (build-ir-string (symbol->string operation)
+                        "(" (render-list operands) ")")))))
+
 (define-method (render-value-sans-type int::ir-lit-int)
   (number->string (ir-lit-int-value int)))
+
+;; (define-method (ir-node->line-tree node::ir-lit-struct)
+;;  (render-value-sans-type node))
+
+;; (define-method (ir-node->line-tree node::ir-expr)
+;;   (render-value-sans-type node))
+
+(define-method (render-value-sans-type x::ir-lit-struct)
+  (build-ir-string "{" (render-list (ir-lit-struct-values x)) "}"))
 
 (define-method (render-value-sans-type var::ir-variable)
   (ir-variable-name var))
@@ -540,6 +587,15 @@
   (with-access::ir-alias alias
     (linkage visibility type aliasee)
     (build-ir-string "alias" linkage visibility type aliasee)))
+
+
+;;; Help with building inline expressions.
+
+(define (build-ir-expr type op . args)
+  (instantiate::ir-expr
+   (value-type type)
+   (operation op)
+   (operands args)))
 
 
 ;;; Utilities.

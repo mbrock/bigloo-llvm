@@ -19,6 +19,9 @@
            ast_env
 	   ast_node
            ast_local
+           ast_ident
+
+           cnst_node
 
            object_class
            module_module
@@ -175,15 +178,44 @@
 (define-method (emit-prototype value::scnst variable)
   (verbose 3 "       emit-prototype ::scnst " (variable-id variable) "\n")
   (with-access::global variable (id type name import)
-     ;; TODO: do something!!
-     (emit-ir
-      (comment "Scheme constant `~s' (~s)" id import)
-      (instantiate::ir-assignment
-       (name (string-append "@" name))
-       (node (instantiate::ir-global-variable
-              (initial-value (instantiate::ir-zero-initializer
-                              (value-type (type->ir-type type))))))))
-     (verbose 3 "        class " (scnst-class value) "\n")))
+    (case (scnst-class value)
+      ((sfun)
+       (emit-scnst-sfun (scnst-node value) variable))
+      (else
+       ;; TODO: do something!!
+       (emit-ir
+        (comment "Scheme constant `~s' (~s)" id import)
+        (instantiate::ir-assignment
+         (name (string-append "@" name))
+         (node (instantiate::ir-global-variable
+                (initial-value (instantiate::ir-zero-initializer
+                                (value-type (type->ir-type type))))))))
+       (verbose 3 "        class " (scnst-class value) "\n")))))
+
+(define (emit-scnst-sfun value variable)
+  (let* ((actuals (app-args value))
+         (entry   (car actuals))
+         (arity   (get-node-atom-value (cadr actuals)))
+         (vname   (string-append "@" (set-variable-name! variable)))
+         (name    (string-append "@" (set-variable-name!
+                                      (var-variable entry)))))
+    (if (< arity 0)
+        (raise "emit-scnst-sfun no varargs")
+        (emit-ir
+         (macro-define-static-procedure
+          vname
+          (string-append "@" (id->name (gensym name)))
+          (var->ir-node/ptr (var-variable entry))
+          (instantiate::ir-lit-int
+           (value-type *llvm-long-type*)
+           (value 0))
+          (macro-tag
+           (instantiate::ir-lit-int
+            (value-type *llvm-long-type*)
+            (value 3))
+           *bgl-tag-shift*
+           *bgl-tag-cnst*)
+          arity)))))
 
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
@@ -274,6 +306,7 @@
 (define *llvm-int-type* (make-ir-primitive-type "i32"))
 (define *llvm-bool-type* (make-ir-primitive-type "i1"))
 (define *llvm-long-type* (make-ir-primitive-type "i32"))
+(define *llvm-double-type* (make-ir-primitive-type "double"))
 
 (define (type->ir-type type)
   (if (ir-type? type)
@@ -622,16 +655,16 @@
            (parameter-types (map (lambda (a)
                                    (type->ir-type (arg-type a)))
                                  args))))
-        (raise "var->ir-type sez sfun plz"))))
+        (type->ir-type (variable-type var)))))
 
 (define (var->ir-node var)
   (instantiate::ir-variable
-   (value-type (type->ir-type (variable-type var)))
+   (value-type (var->ir-type var))
    (name (var->ir-name var))))
 
 (define (var->ir-node/ptr var)
   (instantiate::ir-variable
-   (value-type (pointerify (type->ir-type (variable-type var))))
+   (value-type (pointerify (var->ir-type var)))
    (name (var->ir-name var))))
 
 (define (var->ir-name var)
@@ -690,6 +723,10 @@
 
 (define *newline* (instantiate::ir-newline))
 
+(define (ir-long x)
+  (instantiate::ir-lit-int
+   (value-type *llvm-long-type*)
+   (value x)))
 
 ;;; Macro generation stuff.
 
@@ -741,3 +778,73 @@
   (string->symbol (string-append "llvm-" (symbol->string symbol))))
 
 (define *arg-names* '(a b c d e f g))
+
+
+;;; Macro stuff.
+
+(define (macro-tag val shift tag)
+  (build-ir-expr
+   *llvm-long-type*
+   'or
+   (build-ir-expr *llvm-long-type* 'shl val shift)
+   tag))
+
+(define *bgl-header-shift* (ir-long 32))
+(define *bgl-header-size-bit-size* (ir-long 16))
+(define *bgl-type-shift*
+  (build-ir-expr
+   *llvm-long-type*
+   'add *bgl-header-shift* *bgl-header-size-bit-size*))
+
+(define *bgl-tag-shift* (ir-long 4))
+
+(define *bgl-tag-cnst* (ir-long 2))
+
+(define (macro-make-header i sz)
+  (let ((tag (build-ir-expr *llvm-long-type* 'shl
+                            sz *bgl-header-shift*)))
+    (macro-tag i *bgl-type-shift* tag)))
+             
+
+(define (macro-define-static-procedure n na p vp at nb-args)
+  (let ((struct
+         (instantiate::ir-lit-struct
+          (values
+           (list
+            (instantiate::ir-lit-int
+             (value-type *llvm-double-type*)
+             (value 0.0))
+            (macro-make-header (ir-long 3) (ir-long 0))
+            p vp
+            at
+            (ir-long nb-args))))))
+    (instantiate::ir-node-seq
+     (nodes
+      (list 
+       (instantiate::ir-assignment
+        (name na)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value struct))))
+       (instantiate::ir-assignment
+        (name n)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value
+           (build-ir-expr
+            *llvm-object-type*
+            'bitcast
+            (build-ir-expr
+             (pointerify *llvm-long-type*)
+             'getelementptr
+             (instantiate::ir-variable
+              (name na)
+              (value-type (pointerify (ir-value-type struct))))
+             (ir-long 0)
+             (ir-long 1))
+            *llvm-object-type*))))))))))
+         
