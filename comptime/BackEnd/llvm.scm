@@ -588,6 +588,14 @@
        (compile-lit (instantiate::ir-lit-int
                      (value-type type)
                      (value value)) kont))
+      ((null? value)
+       (compile-lit *bgl-nil* kont))
+      ((eq? value #f)
+       (compile-lit (ir-bool 0) kont))
+      ((eq? value #t)
+       (compile-lit (ir-bool 1) kont))
+      ((eq? value #unspecified)
+       (compile-lit *bgl-unspec* kont))
       (else
        (verbose 3 "        unhandled type of atom\n")
        (make-node-seq
@@ -728,6 +736,11 @@
    (value-type *llvm-long-type*)
    (value x)))
 
+(define (ir-bool x)
+  (instantiate::ir-lit-int
+   (value-type *llvm-bool-type*)
+   (value x)))
+
 ;;; Macro generation stuff.
 
 (define (emit-macrogen-functions port)
@@ -789,7 +802,7 @@
    (build-ir-expr *llvm-long-type* 'shl val shift)
    tag))
 
-(define *bgl-header-shift* (ir-long 32))
+(define *bgl-header-shift* (ir-long 3))
 (define *bgl-header-size-bit-size* (ir-long 16))
 (define *bgl-type-shift*
   (build-ir-expr
@@ -804,7 +817,6 @@
   (let ((tag (build-ir-expr *llvm-long-type* 'shl
                             sz *bgl-header-shift*)))
     (macro-tag i *bgl-type-shift* tag)))
-             
 
 (define (macro-define-static-procedure n na p vp at nb-args)
   (let ((struct
@@ -847,4 +859,15 @@
              (ir-long 0)
              (ir-long 1))
             *llvm-object-type*))))))))))
-         
+
+(define (bgl-make-cnst tag)
+  (build-ir-expr
+   *llvm-object-type*
+   'inttoptr
+   (macro-tag (ir-long tag) *bgl-tag-shift* *bgl-tag-cnst*)
+   *llvm-object-type*))
+
+(define *bgl-nil* (bgl-make-cnst 0))
+(define *bgl-false* (bgl-make-cnst 1))
+(define *bgl-true* (bgl-make-cnst 2))
+(define *bgl-unspec* (bgl-make-cnst 3))
