@@ -181,6 +181,8 @@
     (case (scnst-class value)
       ((sfun)
        (emit-scnst-sfun (scnst-node value) variable))
+      ((sstring)
+       (emit-scnst-sstring (scnst-node value) variable))
       (else
        ;; TODO: do something!!
        (emit-ir
@@ -202,6 +204,7 @@
     (if (< arity 0)
         (raise "emit-scnst-sfun no varargs")
         (emit-ir
+         (comment "Scheme procedure `~s'" (variable-id variable))
          (macro-define-static-procedure
           vname
           (string-append "@" (id->name (gensym name)))
@@ -217,6 +220,17 @@
            *bgl-tag-cnst*)
           arity)))))
 
+(define (emit-scnst-sstring value variable)
+  (set-variable-name! variable)
+  (emit-ir
+   (comment "Constant string `~s' (~s)"
+            (variable-id variable) value)
+   (macro-define-string
+    (string-append "@" (global-name variable))
+    (string-append "@" (id->name (gensym (global-name variable))))
+    value
+    (string-length value))))
+  
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
            " " value "\n"))
@@ -567,15 +581,16 @@
 
 (define-method (node->ir-node node::setq kont)
   (let* ((variable (var-variable (setq-var node)))
-         (var (var->ir-node variable)))
+         (var (var->ir-node/ptr variable)))
     (verbose 3 "       node->ir-node ::setq "
              (variable-name variable) #\Newline)
     (make-node-seq
      (comment "Assignment to variable `~s'" (variable-id variable))
      (node->ir-node (setq-value node)
                     (lambda (x)
-                      (compile-store var x)
-                      (kont x))))))
+                      (make-node-seq
+                       (compile-store/aux var x)
+                       (kont x)))))))
 
 (define-method (node->ir-node node::atom kont)
   (verbose 3 "       node->ir-node ::atom: " (atom-value node) #\Newline)
@@ -745,6 +760,7 @@
 
 (define (emit-macrogen-functions port)
   (fprintf port "#include <bigloo.h>\n\n")
+  (fprintf port "extern obj_t *__cnst;\n\n" )
   (for-each-global!
    (lambda (global)
      (let ((value (global-value global)))
@@ -809,7 +825,8 @@
    *llvm-long-type*
    'add *bgl-header-shift* *bgl-header-size-bit-size*))
 
-(define *bgl-tag-shift* (ir-long 4))
+;; TODO: 64-bit support
+(define *bgl-tag-shift* (ir-long 2))
 
 (define *bgl-tag-cnst* (ir-long 2))
 
@@ -871,3 +888,45 @@
 (define *bgl-false* (bgl-make-cnst 1))
 (define *bgl-true* (bgl-make-cnst 2))
 (define *bgl-unspec* (bgl-make-cnst 3))
+
+(define (macro-define-string global-name local-name s n)
+  (let ((struct
+         (instantiate::ir-lit-struct
+          (values
+           (list
+            (instantiate::ir-lit-int
+             (value-type *llvm-double-type*)
+             (value 0.0))
+            (macro-make-header (ir-long 1) (ir-long 0))
+            (ir-long n)
+            (instantiate::ir-lit-string
+             (text s)))))))
+    (instantiate::ir-node-seq
+     (nodes
+      (list 
+       (instantiate::ir-assignment
+        (name local-name)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value struct))))
+       (instantiate::ir-assignment
+        (name global-name)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value
+           (build-ir-expr
+            *llvm-object-type*
+            'bitcast
+            (build-ir-expr
+             (pointerify *llvm-long-type*)
+             'getelementptr
+             (instantiate::ir-variable
+              (name local-name)
+              (value-type (pointerify (ir-value-type struct))))
+             (ir-long 0)
+             (ir-long 1))
+            *llvm-object-type*))))))))))

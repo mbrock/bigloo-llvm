@@ -100,6 +100,10 @@
     (class ir-lit-struct::ir-value
       values::pair-nil)
 
+    ;; Literal character array.
+    (class ir-lit-string::ir-value
+      text::bstring)
+
     ;; An assignment statement like %foo = i32 0.
     (class ir-assignment::ir-node
       name::bstring
@@ -218,6 +222,7 @@
 ;;; Global stuff.
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
+(define *ir-type-i8* (make-ir-primitive-type "i8"))
 
 
 ;;; Some type inference.
@@ -252,7 +257,10 @@
   (instantiate::ir-structure-type
    (element-types (map ir-value-type (ir-lit-struct-values value)))))
    
-
+(define-method (calculate-type value::ir-lit-string)
+  (instantiate::ir-array-type
+   (element-count (string-length (ir-lit-string-text value)))
+   (element-type *ir-type-i8*)))
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
 ;;; function.
@@ -523,6 +531,14 @@
 
 (define-method (render-value-sans-type x::ir-lit-struct)
   (build-ir-string "{" (render-list (ir-lit-struct-values x)) "}"))
+
+(define-method (render-value-sans-type x::ir-lit-string)
+  (build-ir-string
+   "["
+   (render-list (map (lambda (c)
+                       (format "i8 ~a" (char->integer c)))
+                     (string->list (ir-lit-string-text x))))
+   "]"))
 
 (define-method (render-value-sans-type var::ir-variable)
   (ir-variable-name var))
