@@ -4,6 +4,9 @@
 	    "Tools/trace.sch")
    
    (import cc_exec
+           cc_cc
+           cc_ld
+
            engine_param
            engine_configure
            type_type
@@ -55,7 +58,13 @@
   (verbose 1 "      Translating IR " prefix #\Newline)
   (llc prefix)
   (verbose 1 "      Assembling " prefix ".s" #\Newline)
-  (assemble prefix))
+  (assemble prefix)
+  (verbose 1 "      Compiling macro C code" #\Newline)
+  (set-backend! 'c)
+  (cc "macrogen-defs" #f #t)
+  (verbose 1 "      Linking" #\Newline)
+  (set! *o-files* (cons "macrogen-defs.o" *o-files*))
+  (ld prefix #f))
 
 (define (llc prefix)
   (let ((cmd (string-append *llc* " "
@@ -760,7 +769,7 @@
 
 (define (emit-macrogen-functions port)
   (fprintf port "#include <bigloo.h>\n\n")
-  (fprintf port "extern obj_t *__cnst;\n\n" )
+  (fprintf port "extern obj_t __cnst[];\n\n" )
   (for-each-global!
    (lambda (global)
      (let ((value (global-value global)))
