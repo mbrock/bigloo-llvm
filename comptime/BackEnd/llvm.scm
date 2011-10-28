@@ -42,6 +42,9 @@
               integrated::bool)
 
            (wide-class cfun/renamed-macro::cfun
+              (new-name::bstring read-only))
+
+           (wide-class cvar/renamed-macro::cvar
               (new-name::bstring read-only))))
 
 (register-backend! 'llvm
@@ -239,6 +242,16 @@
     (string-append "@" (id->name (gensym (global-name variable))))
     value
     (string-length value))))
+
+(define-method (emit-prototype value::cvar variable)
+  (verbose 3 "       emit-prototype ::cvar " (variable-id variable) "\n")
+  (emit-ir
+   (comment "C variable `~s'" (variable-id variable) )
+   (instantiate::ir-assignment
+    (name (var->ir-name variable))
+    (node (instantiate::ir-global-variable
+           (linkage 'external)
+           (type (var->ir-type variable #t)))))))
   
 (define-method (emit-prototype value::value variable)
   (verbose 3 "       emit-prototype dummy " (variable-id variable)
@@ -247,7 +260,8 @@
 ;; from c_proto, but changed
 (define (require-prototype? global)
   (and (or (not (eq? (global-module global) *module*))
-           (not (sfun? (global-value global))))
+           (not (sfun? (global-value global)))
+           (sfun? (global-value global))) ;; hey now
        (or (>fx (global-occurrence global) 0)
            (eq? (global-removable global) 'never))))
 
@@ -325,9 +339,11 @@
 ;;; LLVM versions of Bigloo types.
 
 (define *llvm-object-type* (make-ir-named-type "obj_t"))
+(define *llvm-object-ptr-type* (pointerify *llvm-object-type*))
 (define *llvm-string-type* *llvm-object-type*)
-(define *llvm-int-type* (make-ir-primitive-type "i32"))
 (define *llvm-bool-type* (make-ir-primitive-type "i1"))
+(define *llvm-char-type* (make-ir-primitive-type "i8"))
+(define *llvm-int-type* (make-ir-primitive-type "i32"))
 (define *llvm-long-type* (make-ir-primitive-type "i32"))
 (define *llvm-double-type* (make-ir-primitive-type "double"))
 
@@ -341,6 +357,7 @@
             ((long) *llvm-long-type*)
             ((int) *llvm-int-type*)
             ((bool) *llvm-bool-type*)
+            ((char uchar) *llvm-char-type*)
             (else
              (internal-error 'type->ir-type "unhandled type"
                              (type-id type)))))))
@@ -446,35 +463,42 @@
   (let ((args (if (cfun? sfun)
                   (cfun-args-type sfun)
                   (sfun-args sfun))))
-    (let loop ((arg-types (map arg-type args))
-               (args (app-args node))
-               (arg-code '())
-               (auxs '()))
-      
-      (define (compile-more-arguments)
-        ;; Compile each argument expression naming each result instruction.
-        (let* ((aux (fresh-ir-variable 'aux (type->ir-type (car arg-types))))
-               (name (ir-variable-name aux))
-               (type (ir-variable-type aux))
-               (setter (node->ir-node (car args) (make-assignment-kont aux))))
-          (loop (cdr arg-types) (cdr args)
-                (cons setter arg-code)
-                (cons aux auxs))))
-      
-      (define (compile-call)
-        (make-node-seq
-         (comment "Arguments to `~s'" (variable-id var))
-         (reverse! arg-code)
-         (comment "Call to `~s'" (variable-id var))
-         ;; Call the function in `var' and give back its result.
-         (kont (instantiate::ir-instr-call
-                (function-type (var->ir-type var))
-                (function (var->ir-node var))
-                (args (reverse auxs))))))
-      
-      (if (null? args)
-          (compile-call)
-          (compile-more-arguments)))))
+    (compile-function-call (var->ir-node var #t) (app-args node)
+                           (symbol->string (variable-id var))
+                           kont)))
+
+(define (compile-function-call var args name kont)
+  (let loop ((arg-types (ir-function-type-parameter-types
+                         (ir-variable-type var)))
+             (args args)
+             (arg-code '())
+             (auxs '()))
+    
+    (define (compile-more-arguments)
+      ;; Compile each argument expression naming each result instruction.
+      (let* ((aux (fresh-ir-variable 'aux (type->ir-type (car arg-types))))
+             (name (ir-variable-name aux))
+             (type (ir-variable-type aux))
+             (setter (node->ir-node (car args) (make-assignment-kont aux))))
+        (loop (cdr arg-types) (cdr args)
+              (cons setter arg-code)
+              (cons aux auxs))))
+    
+    (define (compile-call)
+      (make-node-seq
+       (comment "Arguments to ~s" name)
+       (reverse! arg-code)
+       (comment "Call to ~s" name)
+       ;; Call the function in `var' and give back its result.
+       (kont (instantiate::ir-instr-call
+              (function-type (ir-variable-type var))
+              (function var)
+              (args (reverse auxs))))))
+    
+    (if (null? args)
+        (compile-call)
+        (compile-more-arguments))))
+
 
 ;; Compile an application of a local Scheme function.  This is guaranteed to
 ;; be a tail call.  See the code for node->ir-node ::let-fun.
@@ -625,7 +649,28 @@
        (make-node-seq
         (comment "(Unhandled atom type)" value)
         (compile-undef type kont)))))))
-            
+
+(define *the-failure-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *llvm-object-type*
+                          *llvm-object-type*
+                          *llvm-object-type*))))
+
+(define *the-failure-var*
+  (instantiate::ir-variable
+   (name "@the_failure")
+   (value-type *the-failure-type*)))
+
+(define-method (node->ir-node fail::fail kont)
+  (verbose 3 "       node->ir-node ::fail " fail #\Newline)
+  (make-node-seq
+   (comment "Failure")
+   (compile-function-call
+    *the-failure-var*
+    (list (fail-proc fail) (fail-msg fail) (fail-obj fail))
+    "the_failure"
+    *fail-kont*)))
 
 (define-method (node->ir-node dummy::node kont)
   (verbose 3 "       node->ir-node unhandled " dummy #\Newline)
@@ -673,12 +718,15 @@
      (instantiate::ir-instr-ret
       (value aux)))))
 
+(define *fail-kont*
+  (lambda (x) x))
+
 (define (arg-type arg)
   (if (local? arg) (local-type arg) arg))
 
-(define (var->ir-type var)
+(define (var->ir-type var #!optional function-types)
   (let ((x (variable-value var)))
-    (if (fun? x)
+    (if (and (fun? x) function-types)
         (let ((args (if (cfun? x)
                         (cfun-args-type x)
                         (sfun-args x))))
@@ -689,18 +737,26 @@
                                  args))))
         (type->ir-type (variable-type var)))))
 
-(define (var->ir-node var)
+(define (var->ir-node var #!optional function-types)
   (instantiate::ir-variable
-   (value-type (var->ir-type var))
+   (value-type (var->ir-type var function-types))
    (name (var->ir-name var))))
 
-(define (var->ir-node/ptr var)
-  (instantiate::ir-variable
-   (value-type (pointerify (var->ir-type var)))
-   (name (var->ir-name var))))
+(define (var->ir-node/ptr var #!optional function-types)
+  (let ((variable
+         (instantiate::ir-variable
+          (value-type (pointerify (var->ir-type var #t)))
+          (name (var->ir-name var)))))
+    (if (or (not (fun? (variable-value var))) function-types)
+        variable
+        (build-ir-expr
+         *llvm-object-ptr-type* 'bitcast variable *llvm-object-ptr-type*))))
 
 (define (var->ir-name var)
-  (string-append (if (global? var) "@" "%") (variable-name var)))
+  (string-append (if (global? var) "@" "%")
+                 (if (and (cvar? var) (cvar-macro? var))
+                     (cvar/renamed-macro-new-name var)
+                     (variable-name var))))
 
 (define (fresh-ir-variable symbol type)
   ;; Maybe should do this without messing with the variable tables.
@@ -773,10 +829,22 @@
   (for-each-global!
    (lambda (global)
      (let ((value (global-value global)))
-       (if (and (cfun? value)
-                (cfun-macro? value)
-                (require-prototype? global))
-           (emit-macrogen-function global value port))))))
+       (cond ((and (cfun? value)
+                   (cfun-macro? value)
+                   (require-prototype? global))
+              (emit-macrogen-function global value port))
+             ((and (cvar? value)
+                   (cvar-macro? value)
+                   (require-prototype? global))
+              (emit-macrogen-variable global value port)))))))
+
+(define (emit-macrogen-variable global cvar port)
+  (let* ((type (type-name (global-type global)))
+         (code (variable-name global))
+         (new-name (bigloo-mangle
+                    (symbol->string (new-name (global-id global))))))
+    (widen!::cvar/renamed-macro cvar (new-name new-name))
+    (fprintf port "~a ~a = ~a;" type new-name code)))
 
 (define (emit-macrogen-function global cfun port)
   (let* ((type (type-name (global-type global)))

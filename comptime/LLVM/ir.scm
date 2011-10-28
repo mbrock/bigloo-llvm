@@ -145,6 +145,7 @@
     (class ir-global-variable::ir-node
       (linkage (default #f))
       (constant? (default #f))
+      (type (default #f))
       (initial-value (default #f))
       (section (default #f))
       (align (default #f)))
@@ -586,11 +587,11 @@
 
 (define-method (ir-node->line-tree gvar::ir-global-variable)
   (with-access::ir-global-variable gvar
-    (linkage constant? section initial-value align)
+    (linkage constant? section type initial-value align)
     (build-ir-string
      linkage
      (if constant? "constant" "global")
-     initial-value
+     (if initial-value initial-value type)
      (render-list
       (list
        (if section (list "section" (format "~s" section)))
