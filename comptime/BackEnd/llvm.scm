@@ -384,9 +384,13 @@
 (define-method (node->ir-node node::let-var kont)
   (verbose 3 "       node->ir-node ::let-var\n")
   (with-access::let-var node (body bindings)
-     (let ((assignments
+     (let ((allocations
             (map (lambda (x)
                    (set-variable-name! (car x))
+                   (compile-local-allocation (var->ir-node/ptr (car x))))
+                 bindings))
+           (assignments
+            (map (lambda (x)
                    (let* ((var (var->ir-node/ptr (car x)))
                           (name (ir-variable-name var))
                           (type (ir-variable-type var)))
@@ -395,10 +399,11 @@
                       (lambda (v)
                         (make-node-seq
                          (comment "Local variable ~s" (variable-id (car x)))
-                         (compile-local-allocation var)
                          (compile-store/aux var v))))))
                  bindings)))
-       (make-node-seq assignments (node->ir-node body kont)))))
+       (make-node-seq allocations
+                      assignments
+                      (node->ir-node body kont)))))
 
 (define-method (node->ir-node node::let-fun kont)
   ;; Thankfully, the compiler has already made sure that local `labels'
@@ -445,7 +450,6 @@
               (if (global? var)
                   (sfun-app->ir-node node var val kont)
                   (sfun-local-app->ir-node node var val kont)))
-;                                           (lambda (x) x))))
              ((cfun? val)
               (cfun-app->ir-node node var val kont))
              (else
@@ -481,10 +485,15 @@
     
     (define (compile-more-arguments)
       ;; Compile each argument expression naming each result instruction.
-      (let* ((aux (fresh-ir-variable 'aux (type->ir-type (car arg-types))))
+      (let* ((type (type->ir-type (car arg-types)))
+             (aux (fresh-ir-variable 'aux type))
              (name (ir-variable-name aux))
-             (type (ir-variable-type aux))
-             (setter (node->ir-node (car args) (make-assignment-kont aux))))
+             (setter
+              (let ((ptr (fresh-ir-variable 'ptr (pointerify type))))
+                (make-node-seq
+                 (compile-local-allocation ptr)
+                 (node->ir-node (car args) (make-store-kont ptr))
+                 (compile-assignment aux (compile-load ptr))))))
         (loop (cdr arg-types) (cdr args)
               (cons setter arg-code)
               (cons aux auxs))))
@@ -518,15 +527,11 @@
       (let* ((formal (car formals))
              (name (local-name formal))
              (type (local-type formal))
-             (aux (fresh-ir-variable (variable-id formal) type))
              (setter (node->ir-node
                       (car args)
                       (lambda (x)
                         (make-node-seq
-                         (instantiate::ir-assignment
-                          (name (ir-variable-name aux))
-                          (node x))
-                         (compile-store (var->ir-node/ptr formal) aux))))))
+                         (compile-store/aux (var->ir-node/ptr formal) x))))))
         (loop (cdr args) (cdr formals) (cons setter arg-code))))
 
     (define (compile-call)
@@ -540,9 +545,6 @@
             (make-node-seq
              (comment "Local tail call to `~s'" (variable-id var))
              branch)
-             ;; ;; Generate unreachable code; maybe the kont needs to assign some
-             ;; ;; variable, for example, because a phi instruction uses it.
-             ;; (compile-undef (var->ir-type var) kont))
             (begin
               ;; Not inlined yet; compile the function body here.
               (sfun/integrated-integrated-set! sfun #t)
@@ -567,10 +569,11 @@
 (define-method (node->ir-node node::conditional kont)
   (verbose 3 "       node->ir-node ::conditional\n")
   (with-access::conditional node (test true false)
-     (let* ((test-var (fresh-ir-variable 'test *bool*))
-            (result-var
-             (fresh-ir-variable 'result (pointerify (get-type node))))
-            (result-kont (make-store-kont result-var))
+     (let* ((test-ptr (fresh-ir-variable 'test (pointerify *bool*)))
+            (test-var (fresh-ir-variable 'test *bool*))
+            ;; (result-var
+            ;;  (fresh-ir-variable 'result (pointerify (get-type node))))
+            ;; (result-kont (make-store-kont result-var))
             (true-label (make-label 'true))
             (false-label (make-label 'false))
             (done-label (make-label 'done)))
@@ -579,39 +582,39 @@
          (instantiate::ir-node-seq
           (label label)
           (nodes
-           (list (node->ir-node branch result-kont)
-                 (instantiate::ir-instr-br-unconditional
-                  (label (instantiate::ir-label (name done-label))))))))
+           (list (node->ir-node branch kont)
+                 (instantiate::ir-instr-unreachable)))))
+                 ;; (instantiate::ir-instr-br-unconditional
+                 ;;  (label (instantiate::ir-label (name done-label))))))))
 
-       (let ((test-code (node->ir-node test (make-assignment-kont test-var)))
+       (let ((test-code (node->ir-node test (make-store-kont test-ptr)))
              (branch-code 
               (instantiate::ir-instr-br
                (condition test-var)
                (true-label (instantiate::ir-label (name true-label)))
-               (false-label (instantiate::ir-label (name false-label)))))
-             (done-code
-              (make-labeled-node-seq done-label
-                                     (kont (compile-load result-var)))))
+               (false-label (instantiate::ir-label (name false-label))))))
+              ;; (make-labeled-node-seq done-label
+              ;;                        (kont (compile-load result-var)))))
          (make-node-seq
           (comment "Test expression for `if' form")
+          (compile-local-allocation test-ptr)
           test-code
-          (compile-local-allocation result-var)
+          (compile-assignment test-var (compile-load test-ptr))
+          ;; (compile-local-allocation result-var)
           branch-code
           (comment "Positive arm of `if' form")
           (compile-branch true-label true)
           (comment "Negative arm of `if' form")
-          (compile-branch false-label false)
-          done-code)))))
+          (compile-branch false-label false))))))
 
 (define-method (node->ir-node node::sequence kont)
   (verbose 3 "       node->ir-node ::sequence\n")
   (let ((throw-away-kont
-         (lambda (x)
-           (let ((var (fresh-ir-variable 'null
-                                         (ir-value-type x))))
-             (instantiate::ir-assignment
-              (name (ir-variable-name var))
-              (node x))))))
+         (lambda (x) x)))
+           ;; (let ((var (fresh-ir-variable 'null (ir-value-type x))))
+           ;;   (instantiate::ir-assignment
+           ;;    (name (ir-variable-name var))
+              ;; (node x))))))
     (let loop ((nodes (sequence-nodes node))
                (code '()))
       (if (null? (cdr nodes))
@@ -712,13 +715,13 @@
 (define *bgl-make-box-function*
   (instantiate::ir-variable
    (value-type *bgl-make-box-type*)
-   (name "@make_box")))
+   (name "@make_cell")))
 
 (define-syntax with-result-in-aux-variable
   (syntax-rules ()
     ((with-result-in-aux-variable node (aux name type) body ...)
-     (let ((aux (fresh-ir-variable name type)))
-       (node->ir-node node (lambda (x)
+     (node->ir-node node (lambda (x)
+                           (let ((aux (fresh-ir-variable name type)))
                              (make-node-seq
                               (compile-assignment aux x)
                               body ...)))))))
