@@ -176,6 +176,8 @@
       address::ir-value
       (labels::pair (default '())))
 
+    (class ir-instr-unreachable::ir-instruction)
+
     ;; TODO: invoke, unwind, resume, unreachable
 
     (class ir-instr-binary::ir-instruction
@@ -217,6 +219,14 @@
     (class ir-instr-getelementptr::ir-instruction
       pointer::ir-value
       indices::pair)
+
+    (class ir-instr-inttoptr::ir-instruction
+      value::ir-value
+      to-type::ir-type)
+
+    (class ir-instr-bitcast::ir-instruction
+      value::ir-value
+      to-type::ir-type)
 
     ))
 
@@ -262,6 +272,10 @@
   (instantiate::ir-array-type
    (element-count (string-length (ir-lit-string-text value)))
    (element-type *ir-type-i8*)))
+
+(define-method (calculate-type value::ir-instr-phi)
+  (calculate-type (caar (ir-instr-phi-table value))))
+
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
 ;;; function.
@@ -319,6 +333,9 @@
    (address labels)
    (build-ir-string "indirectbr" address
                     "," "[" (render-list labels) "]"))
+  (ir-instr-unreachable
+   ()
+   (build-ir-string "unreachable"))
   (ir-instr-binary
    (type operand-1 operand-2)
    (build-ir-string (ir-instr-name instr) type
@@ -359,6 +376,17 @@
    (build-ir-string
     "getelementptr"
     (render-args (cons pointer indices))))
+
+  (ir-instr-bitcast
+   (value to-type)
+   (build-ir-string
+    "bitcast" value "to" to-type))
+
+  (ir-instr-inttoptr
+   (value to-type)
+   (build-ir-string
+    "inttoptr" value "to" to-type))
+
   )
 
 (define (render-switch-table table)
@@ -370,7 +398,7 @@
 (define (render-phi-table table)
   (string-join ", " (map (lambda (entry)
                            (build-ir-string
-                            "[" (car entry) ","
+                            "[" (render-value-sans-type (car entry)) ","
                             (string-append "%" (ir-label-name (cadr entry)))
                             "]")) table)))
 

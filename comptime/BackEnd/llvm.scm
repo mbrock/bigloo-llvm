@@ -76,7 +76,8 @@
     (exec cmd #t "llc")))
 
 (define (assemble prefix)
-  (let ((cmd (string-append *assembler* " -c " prefix ".s")))
+  (let ((cmd (string-append *assembler* " -c " prefix ".s"
+                            " -o " prefix ".o")))
     (exec cmd #t "as")))
 
 (define (emit-comment . args)
@@ -254,7 +255,7 @@
            (type (var->ir-type variable #t)))))))
   
 (define-method (emit-prototype value::value variable)
-  (verbose 3 "       emit-prototype dummy " (variable-id variable)
+  (verbose 1 "       emit-prototype dummy " (variable-id variable)
            " " value "\n"))
 
 ;; from c_proto, but changed
@@ -342,7 +343,10 @@
 (define *llvm-object-ptr-type* (pointerify *llvm-object-type*))
 (define *llvm-string-type* *llvm-object-type*)
 (define *llvm-bool-type* (make-ir-primitive-type "i1"))
-(define *llvm-char-type* (make-ir-primitive-type "i8"))
+(define *llvm-char-type* ;(make-ir-primitive-type "i8"))
+  *llvm-object-type*)
+(define *llvm-cstring-type* ; (pointerify *llvm-char-type*))
+  *llvm-object-type*) ;; TODO: fix
 (define *llvm-int-type* (make-ir-primitive-type "i32"))
 (define *llvm-long-type* (make-ir-primitive-type "i32"))
 (define *llvm-double-type* (make-ir-primitive-type "double"))
@@ -353,7 +357,7 @@
       (if (bigloo-type? type)
           *llvm-object-type*
           (case (type-id type)
-            ((string) *llvm-string-type*)
+            ((string) *llvm-cstring-type*)
             ((long) *llvm-long-type*)
             ((int) *llvm-int-type*)
             ((bool) *llvm-bool-type*)
@@ -441,12 +445,13 @@
               (if (global? var)
                   (sfun-app->ir-node node var val kont)
                   (sfun-local-app->ir-node node var val kont)))
+;                                           (lambda (x) x))))
              ((cfun? val)
               (cfun-app->ir-node node var val kont))
              (else
               ;; TODO: Handle all kinds.
               (begin
-                (verbose 3 "        skipping " (variable-id var) "\n")
+                (verbose 1 "        skipping app " (variable-id var) "\n")
                 (make-node-seq
                  (comment "Skipped call to `~s'" (variable-id var))
                  (compile-undef
@@ -535,6 +540,9 @@
             (make-node-seq
              (comment "Local tail call to `~s'" (variable-id var))
              branch)
+             ;; ;; Generate unreachable code; maybe the kont needs to assign some
+             ;; ;; variable, for example, because a phi instruction uses it.
+             ;; (compile-undef (var->ir-type var) kont))
             (begin
               ;; Not inlined yet; compile the function body here.
               (sfun/integrated-integrated-set! sfun #t)
@@ -644,11 +652,33 @@
        (compile-lit (ir-bool 1) kont))
       ((eq? value #unspecified)
        (compile-lit *bgl-unspec* kont))
+      ((cnst? value)
+       (compile-cnst value kont))
+      ;; strings are broken, blame bigloo!!
+      ;; ((string? value)
+      ;;  (compile-lit-string value kont))
       (else
-       (verbose 3 "        unhandled type of atom\n")
+       (verbose 1 "        unhandled type of atom: " value "\n")
        (make-node-seq
-        (comment "(Unhandled atom type)" value)
+        (comment "(Unhandled atom type ~a ~a)" (type-name (get-type node))
+                 value)
         (compile-undef type kont)))))))
+
+(define (compile-cnst cnst kont)
+  (kont (bgl-make-cnst (cnst->integer cnst) #t)))
+
+(define (compile-lit-string s kont)
+  (let* ((array (instantiate::ir-lit-string
+                 (text s)))
+         (aux (fresh-ir-variable 'string
+                                 (pointerify
+                                  (ir-value-type array)))))
+    (make-node-seq
+     (compile-local-allocation aux)
+     (compile-store aux array)
+     (kont (instantiate::ir-instr-getelementptr
+            (pointer aux)
+            (indices (list (ir-long 0) (ir-long 0))))))))
 
 (define *the-failure-type*
   (instantiate::ir-function-type
@@ -670,10 +700,66 @@
     *the-failure-var*
     (list (fail-proc fail) (fail-msg fail) (fail-obj fail))
     "the_failure"
-    *fail-kont*)))
+    *fail-kont*)
+   (instantiate::ir-instr-unreachable)
+   (compile-undef (type->ir-type (get-type fail)) kont)))
+
+(define *bgl-make-box-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *llvm-object-type*))))
+
+(define *bgl-make-box-function*
+  (instantiate::ir-variable
+   (value-type *bgl-make-box-type*)
+   (name "@make_box")))
+
+(define-syntax with-result-in-aux-variable
+  (syntax-rules ()
+    ((with-result-in-aux-variable node (aux name type) body ...)
+     (let ((aux (fresh-ir-variable name type)))
+       (node->ir-node node (lambda (x)
+                             (make-node-seq
+                              (compile-assignment aux x)
+                              body ...)))))))
+
+(define-method (node->ir-node node::make-box kont)
+  (verbose 3 "       node->ir-node ::make-box " make-box #\Newline)
+  (with-result-in-aux-variable (make-box-value node)
+                               (aux 'box *llvm-object-type*)
+    (kont (instantiate::ir-instr-call
+           (function-type *bgl-make-box-type*)
+           (function *bgl-make-box-function*)
+           (args (list aux))))))
+
+(define *bgl-cell-type* (make-ir-named-type "struct.cell"))
+(define *bgl-cell-ptr-type* (pointerify *bgl-cell-type*))
+
+(define-method (node->ir-node node::box-ref kont)
+  (verbose 3 "       node->ir-node ::box-ref " box-ref #\Newline)
+  (let* ((obj-var (fresh-ir-variable 'obj *llvm-object-type*))
+         (cell-ptr-var (fresh-ir-variable 'cell-ptr *bgl-cell-ptr-type*))
+         (cell-var (fresh-ir-variable 'cell *bgl-cell-type*))
+         (ptr-var (fresh-ir-variable 'ptr *llvm-object-ptr-type*)))
+    (make-node-seq
+     (comment "Cell dereferencing")
+     (compile-assignment
+      obj-var
+      (compile-load (var->ir-node/ptr (var-variable (box-ref-var node)))))
+     (compile-assignment
+      cell-ptr-var
+      (instantiate::ir-instr-bitcast
+       (value obj-var)
+       (to-type *bgl-cell-ptr-type*)))
+     (compile-assignment
+      ptr-var
+      (instantiate::ir-instr-getelementptr
+       (pointer cell-ptr-var)
+       (indices (list (ir-long 0) (ir-long 1)))))
+     (kont (compile-load ptr-var)))))
 
 (define-method (node->ir-node dummy::node kont)
-  (verbose 3 "       node->ir-node unhandled " dummy #\Newline)
+  (verbose 1 "       node->ir-node unhandled " dummy #\Newline)
   (make-node-seq
    (comment "Unhandled node type `~s'" dummy)
    (compile-undef (type->ir-type (get-type dummy)) kont)))
@@ -750,13 +836,15 @@
     (if (or (not (fun? (variable-value var))) function-types)
         variable
         (build-ir-expr
-         *llvm-object-ptr-type* 'bitcast variable *llvm-object-ptr-type*))))
+         *llvm-object-ptr-type* 'bitcast variable
+         *llvm-object-ptr-type*))))
 
 (define (var->ir-name var)
-  (string-append (if (global? var) "@" "%")
-                 (if (and (cvar? var) (cvar-macro? var))
-                     (cvar/renamed-macro-new-name var)
-                     (variable-name var))))
+  (let ((value (variable-value var)))
+    (string-append (if (global? var) "@" "%")
+                   (if (and (cvar? value) (cvar-macro? value))
+                       (cvar/renamed-macro-new-name value)
+                       (variable-name var)))))
 
 (define (fresh-ir-variable symbol type)
   ;; Maybe should do this without messing with the variable tables.
@@ -834,8 +922,8 @@
                    (require-prototype? global))
               (emit-macrogen-function global value port))
              ((and (cvar? value)
-                   (cvar-macro? value)
-                   (require-prototype? global))
+                   (cvar-macro? value))
+;                   (require-prototype? global))
               (emit-macrogen-variable global value port)))))))
 
 (define (emit-macrogen-variable global cvar port)
@@ -844,7 +932,8 @@
          (new-name (bigloo-mangle
                     (symbol->string (new-name (global-id global))))))
     (widen!::cvar/renamed-macro cvar (new-name new-name))
-    (fprintf port "~a ~a = ~a;" type new-name code)))
+    (verbose 3 "       macrogen variable " (global-id global) "\n")
+    (fprintf port "~a ~a = ~a;~%" type new-name code)))
 
 (define (emit-macrogen-function global cfun port)
   (let* ((type (type-name (global-type global)))
@@ -954,12 +1043,17 @@
              (ir-long 1))
             *llvm-object-type*))))))))))
 
-(define (bgl-make-cnst tag)
-  (build-ir-expr
-   *llvm-object-type*
-   'inttoptr
-   (macro-tag (ir-long tag) *bgl-tag-shift* *bgl-tag-cnst*)
-   *llvm-object-type*))
+(define (bgl-make-cnst tag #!optional instruction)
+  (let ((x (macro-tag (ir-long tag) *bgl-tag-shift* *bgl-tag-cnst*)))
+    (if instruction
+        (instantiate::ir-instr-inttoptr
+         (value x)
+         (to-type *llvm-object-type*))
+        (build-ir-expr
+         *llvm-object-type*
+         'inttoptr
+         x
+         *llvm-object-type*))))
 
 (define *bgl-nil* (bgl-make-cnst 0))
 (define *bgl-false* (bgl-make-cnst 1))
