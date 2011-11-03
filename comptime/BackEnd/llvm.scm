@@ -320,8 +320,7 @@
                         arg (cadr (assoc arg arg-assoc))))
                      (sfun-args value)))
          (node->ir-node (sfun-body value) ret-kont)
-         (instantiate::ir-instr-unreachable)
-         )))))))
+         (instantiate::ir-instr-unreachable))))))))
 
 (define (compile-allocate-formal local #!optional initial-value)
   (set-variable-name! local)
