@@ -229,6 +229,10 @@
       value::ir-value
       to-type::ir-type)
 
+    (class ir-instr-ptrtoint::ir-instruction
+      value::ir-value
+      to-type::ir-type)
+
     (class ir-instr-bitcast::ir-instruction
       value::ir-value
       to-type::ir-type)
@@ -392,6 +396,10 @@
    (build-ir-string
     "inttoptr" value "to" to-type))
 
+  (ir-instr-ptrtoint
+   (value to-type)
+   (build-ir-string
+    "ptrtoint" value "to" to-type))
   )
 
 (define (render-switch-table table)

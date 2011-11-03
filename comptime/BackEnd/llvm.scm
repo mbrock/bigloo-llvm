@@ -340,7 +340,7 @@
 
 ;;; LLVM versions of Bigloo types.
 
-(define *llvm-object-type* (make-ir-named-type "obj_t"))
+(define *llvm-object-type* (pointerify (make-ir-named-type "obj_t")))
 (define *llvm-object-ptr-type* (pointerify *llvm-object-type*))
 (define *llvm-string-type* *llvm-object-type*)
 (define *llvm-bool-type* (make-ir-primitive-type "i1"))
@@ -376,6 +376,12 @@
 (define (type->ir-type/ptr type)
   (instantiate::ir-pointer-type
    (value-type (type->ir-type type))))
+
+(define (type->ir-type/integral type)
+  (let ((x (type->ir-type type)))
+    (if (ir-pointer-type? x)
+        *llvm-long-type*
+        x)))
 
 
 ;;; Compiling AST nodes to LLVM IR nodes.
@@ -609,11 +615,26 @@
           (make-labeled-node-seq done-label)
        )))))
 
+(define (node->ir-node/integral node::node kont)
+  (let ((type (type->ir-type (get-type node))))
+    (node->ir-node node
+                   (if (ir-pointer-type? type)
+                       (lambda (x)
+                         (let ((aux (fresh-ir-variable 'address type)))
+                           (make-node-seq
+                            (compile-assignment aux x)
+                            (kont
+                             (instantiate::ir-instr-ptrtoint
+                              (value aux)
+                              (to-type *llvm-long-type*))))))
+                       kont))))
+
 (define-method (node->ir-node node::select kont)
   (verbose 3 "       node->ir-node ::select\n")
   (let* ((result-type (type->ir-type (get-type node)))
          (value (select-test node))
-         (test-type (type->ir-type (get-type value))))
+         (real-test-type (type->ir-type (get-type value)))
+         (test-type (type->ir-type/integral (get-type value))))
 
     (define (compile-cases cases bodies default)
       (let* ((done-label (make-label 'done))
@@ -622,7 +643,7 @@
         (make-node-seq
          (comment "Select")
          (compile-local-allocation test-ptr)
-         (node->ir-node value (make-store-kont test-ptr))
+         (node->ir-node/integral value (make-store-kont test-ptr))
          (compile-assignment test-var (compile-load test-ptr))
          (instantiate::ir-instr-switch
           (value test-var)
@@ -663,7 +684,9 @@
                 (transform-clauses
                  (cdr clauses)
                  (append (map (lambda (atom)
-                                (list (value->ir-expr atom test-type) label))
+                                (list (value->ir-expr/integral
+                                       atom real-test-type)
+                                      label))
                               atoms)
                          cases)
                  (cons (cons label body) bodies)
@@ -707,8 +730,14 @@
    ((eq? value #f) (ir-bool 0))
    ((eq? value #t) (ir-bool 1))
    ((eq? value #unspecified) *bgl-unspec*)
-   ((cnst? value) (bgl-make-cnst (cnst->integer value) #t))
+   ((cnst? value) (bgl-make-cnst (cnst->integer value) #f))
    (else (raise "unhandled value type"))))
+
+(define (value->ir-expr/integral value type)
+  (let ((expr (value->ir-expr value type)))
+    (if (ir-pointer-type? type)
+        (build-ir-expr *llvm-long-type* 'ptrtoint expr *llvm-long-type*)
+        expr)))
 
 (define-method (node->ir-node node::atom kont)
   (verbose 3 "       node->ir-node ::atom: " (atom-value node) #\Newline)
