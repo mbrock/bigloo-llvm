@@ -38,7 +38,7 @@
    (export (class llvm::bvm)
 
            (wide-class sfun/integrated::sfun
-              (label::bstring read-only)
+              (label::ir-label read-only)
               integrated::bool)
 
            (wide-class cfun/renamed-macro::cfun
@@ -319,7 +319,9 @@
                        (compile-allocate-formal
                         arg (cadr (assoc arg arg-assoc))))
                      (sfun-args value)))
-         (node->ir-node (sfun-body value) ret-kont))))))))
+         (node->ir-node (sfun-body value) ret-kont)
+         (instantiate::ir-instr-unreachable)
+         )))))))
 
 (define (compile-allocate-formal local #!optional initial-value)
   (set-variable-name! local)
@@ -421,9 +423,11 @@
           ;; Widen the function value to store a label and a flag for whether
           ;; it has been inlined yet.  Then compile storage for its
           ;; parameters, to be reused by all invocations.
-          (let* ((fun (widen!::sfun/integrated (local-value local)
-                                               (label (local-name local))
-                                               (integrated #f)))
+          (let* ((fun (widen!::sfun/integrated
+                       (local-value local)
+                       (label (instantiate::ir-label
+                               (name (local-name local))))
+                       (integrated #f)))
                  (allocs
                   (cons
                    (comment "Parameters for local function ~s"
@@ -537,8 +541,7 @@
     (define (compile-call)
       (let* ((label (sfun/integrated-label sfun))
              (branch (instantiate::ir-instr-br-unconditional
-                      (label (instantiate::ir-label
-                              (name label))))))
+                      (label label))))
         (if (sfun/integrated-integrated sfun)
             ;; Local function has already been inlined somewhere in the
             ;; surrounding global function.
@@ -583,18 +586,15 @@
           (label label)
           (nodes
            (list (node->ir-node branch kont)
-                 (instantiate::ir-instr-unreachable)))))
-                 ;; (instantiate::ir-instr-br-unconditional
-                 ;;  (label (instantiate::ir-label (name done-label))))))))
+                 (instantiate::ir-instr-br-unconditional
+                  (label done-label))))))
 
        (let ((test-code (node->ir-node test (make-store-kont test-ptr)))
              (branch-code 
               (instantiate::ir-instr-br
                (condition test-var)
-               (true-label (instantiate::ir-label (name true-label)))
-               (false-label (instantiate::ir-label (name false-label))))))
-              ;; (make-labeled-node-seq done-label
-              ;;                        (kont (compile-load result-var)))))
+               (true-label true-label)
+               (false-label false-label))))
          (make-node-seq
           (comment "Test expression for `if' form")
           (compile-local-allocation test-ptr)
@@ -605,7 +605,71 @@
           (comment "Positive arm of `if' form")
           (compile-branch true-label true)
           (comment "Negative arm of `if' form")
-          (compile-branch false-label false))))))
+          (compile-branch false-label false)
+          (comment "End of `if' form")
+          (make-labeled-node-seq done-label)
+       )))))
+
+(define-method (node->ir-node node::select kont)
+  (verbose 3 "       node->ir-node ::select\n")
+  (let* ((result-type (type->ir-type (get-type node)))
+         (value (select-test node))
+         (test-type (type->ir-type (get-type value))))
+
+    (define (compile-cases cases bodies default)
+      (let* ((done-label (make-label 'done))
+             (test-ptr (fresh-ir-variable 'select (pointerify test-type)))
+             (test-var (fresh-ir-variable 'select test-type)))
+        (make-node-seq
+         (comment "Select")
+         (compile-local-allocation test-ptr)
+         (node->ir-node value (make-store-kont test-ptr))
+         (compile-assignment test-var (compile-load test-ptr))
+         (instantiate::ir-instr-switch
+          (value test-var)
+          (default-label (car default))
+          (table cases))
+         (map (lambda (x)
+                (make-labeled-node-seq
+                 (car x)
+                 (cdr x)
+                 (instantiate::ir-instr-br-unconditional
+                  (label done-label))))
+              bodies)
+         (make-labeled-node-seq
+          (car default)
+          (cdr default)
+          (instantiate::ir-instr-br-unconditional
+           (label done-label)))
+         (make-labeled-node-seq done-label))))
+    
+    (let transform-clauses ((clauses (select-clauses node))
+                            (cases '())
+                            (bodies '())
+                            (default #f))
+      (if (null? clauses)
+          (compile-cases cases bodies
+                         (or default
+                             (cons (make-label 'default)
+                                   (compile-undef result-type kont))))
+          (let* ((c (car clauses))
+                 (atoms (car c))
+                 (body (node->ir-node (cdr c) kont))
+                 (label (make-label 'clause)))
+            (if (eq? atoms 'else)
+                (transform-clauses (cdr clauses)
+                                   cases
+                                   bodies
+                                   (cons label body))
+                (transform-clauses
+                 (cdr clauses)
+                 (append (map (lambda (atom)
+                                (list (value->ir-expr atom test-type) label))
+                              atoms)
+                         cases)
+                 (cons (cons label body) bodies)
+                 default)))))))
+             
 
 (define-method (node->ir-node node::sequence kont)
   (verbose 3 "       node->ir-node ::sequence\n")
@@ -624,6 +688,7 @@
                 (cons (node->ir-node (car nodes) throw-away-kont) code))))))
 
 (define-method (node->ir-node node::setq kont)
+  (verbose 3 "       node->ir-node ::setq\n")
   (let* ((variable (var-variable (setq-var node)))
          (var (var->ir-node/ptr variable)))
     (verbose 3 "       node->ir-node ::setq "
@@ -635,6 +700,16 @@
                       (make-node-seq
                        (compile-store/aux var x)
                        (kont x)))))))
+
+(define (value->ir-expr value type)
+  (cond
+   ((fixnum? value)
+    (instantiate::ir-lit-int (value-type type) (value value)))
+   ((eq? value #f) (ir-bool 0))
+   ((eq? value #t) (ir-bool 1))
+   ((eq? value #unspecified) *bgl-unspec*)
+   ((cnst? value) (bgl-make-cnst (cnst->integer value) #t))
+   (else (raise "unhandled value type"))))
 
 (define-method (node->ir-node node::atom kont)
   (verbose 3 "       node->ir-node ::atom: " (atom-value node) #\Newline)
@@ -787,7 +862,8 @@
 
 ;; TODO: don't do it this stupid way
 (define (make-label symbol)
-  (variable-name (make-local-svar symbol *_*)))
+  (instantiate::ir-label
+   (name (variable-name (make-local-svar symbol *_*)))))
 
 (define (make-assignment-kont var)
   (lambda (x)

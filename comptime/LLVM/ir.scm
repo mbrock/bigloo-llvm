@@ -172,6 +172,11 @@
       default-label::ir-label
       (table::pair-nil (default '())))
 
+    (class ir-instr-select::ir-instruction
+      value::ir-value
+      default::ir-label
+      cases::pair-nil)
+
     (class ir-instr-indirectbr::ir-instruction
       address::ir-value
       (labels::pair (default '())))
@@ -390,10 +395,10 @@
   )
 
 (define (render-switch-table table)
-  (string-join ", " (map (lambda (entry)
-                           (build-ir-string (car entry)
-                                            "," (cadr entry)))
-                         table)))
+  (string-join " " (map (lambda (entry)
+                          (build-ir-string (car entry)
+                                           "," (cadr entry)))
+                        table)))
 
 (define (render-phi-table table)
   (string-join ", " (map (lambda (entry)
@@ -584,7 +589,7 @@
               (ir-node-seq-nodes seq)))
         (label (ir-node-seq-label seq)))
     (if label
-        (cons (string-append label ":") lines)
+        (cons (string-append (ir-label-name label) ":") lines)
         lines)))
 
 
