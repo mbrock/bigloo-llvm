@@ -71,6 +71,7 @@
 
 (define (llc prefix)
   (let ((cmd (string-append *llc* " "
+                            "-O0 "
                             ; "-disable-cfi " ; needed with HEAD LLVM
                             prefix ".ll")))
     (exec cmd #t "llc")))
@@ -153,6 +154,7 @@
              (emit-ir
               (comment "C function `~s'" id)
               (instantiate::ir-function-decl
+               (fn-attrs '("alignstack(16)"))
                (return-type (type->ir-type type))
                (name (if (cfun/renamed-macro? value)
                          (cfun/renamed-macro-new-name value)
@@ -173,6 +175,7 @@
        (emit-ir
         (comment "Scheme function `~s' (~s)" id import)
         (instantiate::ir-function-decl
+         (fn-attrs '("alignstack(16)"))
          (return-type (type->ir-type type))
          (name name)
          (arguments types))))))
@@ -308,6 +311,7 @@
       (instantiate::ir-function-defn
        (return-type (type->ir-type type))
        (name name)
+       (fn-attrs '("alignstack(16)"))
        (arguments (map (lambda (v)
                          (list (ir-variable-type (cadr v))
                                (ir-variable-name (cadr v))))
@@ -359,7 +363,7 @@
           *llvm-object-type*
           (case (type-id type)
             ((string) *llvm-cstring-type*)
-            ((long) *llvm-long-type*)
+            ((elong long) *llvm-long-type*)
             ((int) *llvm-int-type*)
             ((bool) *llvm-bool-type*)
             ((char uchar) *llvm-char-type*)
@@ -569,10 +573,17 @@
         (compile-more-arguments))))
 
 (define-method (node->ir-node node::var kont)
-  (verbose 3 "       node->ir-node ::var\n")
+  (verbose 3 "       node->ir-node ::var " (shape node) "\n")
   (set-variable-name! (var-variable node))
-  (kont (instantiate::ir-instr-load
-         (pointer (var->ir-node/ptr (var-variable node))))))
+  (let ((variable (var-variable node)))
+    (kont (if (fun? (variable-value variable))
+              ;; Unlike global & local variables, functions shouldn't be
+              ;; dereferenced.
+              (instantiate::ir-instr-bitcast
+               (value (var->ir-node/ptr variable))
+               (to-type *llvm-object-type*))
+              (instantiate::ir-instr-load
+               (pointer (var->ir-node/ptr variable)))))))
 
 (define-method (node->ir-node node::conditional kont)
   (verbose 3 "       node->ir-node ::conditional\n")
@@ -761,8 +772,12 @@
       ((cnst? value)
        (compile-cnst value kont))
       ;; strings are broken, blame bigloo!!
-      ;; ((string? value)
-      ;;  (compile-lit-string value kont))
+      ((string? value)
+       (if (bigloo-type? (get-type node))
+           (make-node-seq
+            (comment "Ahh, inline bstring!")
+            (compile-lit *bgl-unspec* kont))
+           (compile-lit-string value kont)))
       (else
        (verbose 1 "        unhandled type of atom: " value "\n")
        (make-node-seq
@@ -807,8 +822,8 @@
     (list (fail-proc fail) (fail-msg fail) (fail-obj fail))
     "the_failure"
     *fail-kont*)
-   (instantiate::ir-instr-unreachable)
-   (compile-undef (type->ir-type (get-type fail)) kont)))
+   (instantiate::ir-instr-unreachable)))
+   ;; (compile-undef (type->ir-type (get-type fail)) kont)))
 
 (define *bgl-make-box-type*
   (instantiate::ir-function-type
@@ -819,6 +834,37 @@
   (instantiate::ir-variable
    (value-type *bgl-make-box-type*)
    (name "@make_cell")))
+
+(define *bgl-vector-ref-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *llvm-object-type* *llvm-long-type*))))
+
+(define *bgl-vector-ref-function*
+  (instantiate::ir-variable
+   (value-type *bgl-vector-ref-type*)
+   (name "@_bgl_llvm_vector_ref")))
+
+(define *bgl-vector-set!-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *llvm-object-type* *llvm-long-type*
+                          *llvm-object-type*))))
+
+(define *bgl-vector-set!-function*
+  (instantiate::ir-variable
+   (value-type *bgl-vector-set!-type*)
+   (name "@_bgl_llvm_vector_set")))
+
+(define *bgl-vector-length-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-long-type*)
+   (parameter-types (list *llvm-object-type*))))
+
+(define *bgl-vector-length-function*
+  (instantiate::ir-variable
+   (value-type *bgl-vector-length-type*)
+   (name "@_bgl_llvm_vector_length")))
 
 (define-syntax with-result-in-aux-variable
   (syntax-rules ()
@@ -863,6 +909,49 @@
        (pointer cell-ptr-var)
        (indices (list (ir-long 0) (ir-long 1)))))
      (kont (compile-load ptr-var)))))
+
+(define-method (node->ir-node node::box-set! kont)
+  (verbose 3 "       node->ir-node ::box-set! " node #\Newline)
+  (let* ((obj-var (fresh-ir-variable 'obj *llvm-object-type*))
+         (cell-ptr-var (fresh-ir-variable 'cell-ptr *bgl-cell-ptr-type*))
+         (cell-var (fresh-ir-variable 'cell *bgl-cell-type*))
+         (ptr-var (fresh-ir-variable 'ptr *llvm-object-ptr-type*)))
+    (make-node-seq
+     (comment "Cell updating")
+     (compile-assignment
+      obj-var
+      (compile-load (var->ir-node/ptr (var-variable (box-set!-var node)))))
+     (compile-assignment
+      cell-ptr-var
+      (instantiate::ir-instr-bitcast
+       (value obj-var)
+       (to-type *bgl-cell-ptr-type*)))
+     (compile-assignment
+      ptr-var
+      (instantiate::ir-instr-getelementptr
+       (pointer cell-ptr-var)
+       (indices (list (ir-long 0) (ir-long 1)))))
+     (node->ir-node (box-set!-value node)
+                    (lambda (x)
+                      (compile-store/aux ptr-var x)))
+     (kont (compile-load ptr-var)))))
+
+(define-method (node->ir-node node::vref kont)
+  (verbose 3 "       node->ir-node ::vref " (shape node) #\Newline)
+  (compile-function-call *bgl-vector-ref-function* (vref-expr* node)
+                         "$vector-ref" kont))
+
+(define-method (node->ir-node node::vset! kont)
+  (verbose 3 "       node->ir-node ::vset! " (shape node) #\Newline)
+  (compile-function-call *bgl-vector-set!-function*
+                         (vset!-expr* node)
+                         "$vector-set!" kont))
+
+(define-method (node->ir-node node::vlength kont)
+  (verbose 3 "       node->ir-node ::vref " (shape node) #\Newline)
+  (compile-function-call *bgl-vector-length-function*
+                         (vlength-expr* node)
+                         "$vector-length" kont))
 
 (define-method (node->ir-node dummy::node kont)
   (verbose 1 "       node->ir-node unhandled " dummy #\Newline)
@@ -943,8 +1032,8 @@
     (if (or (not (fun? (variable-value var))) function-types)
         variable
         (build-ir-expr
-         *llvm-object-ptr-type* 'bitcast variable
-         *llvm-object-ptr-type*))))
+         *llvm-object-type* 'bitcast variable
+         *llvm-object-type*))))
 
 (define (var->ir-name var)
   (let ((value (variable-value var)))
@@ -1064,14 +1153,14 @@
     (fprintf port "~a ~a (~a)" type new-name param-list)
     (if (cfun-infix? cfun)
         (case (length args)
-          ((0) (fprintf port "{ return ~a; }~%" (variable-name global)))
+          ((0) (fprintf port "{ return ({ ~a }); }~%" (variable-name global)))
           ((1) (fprintf port "{ return ~a ~a; }~%" (variable-name global)
                         (cadr (car args))))
           ((2) (fprintf port "{ return ~a ~a ~a; }~%"
                         (cadr (car args))
                         (variable-name global)
                         (cadr (cadr args)))))
-        (fprintf port "{ return ~a (~a); }~%" 
+        (fprintf port "{ return ({ ~a (~a); }); }~%" 
                  (variable-name global)
                  (string-join ", " (map cadr args))))))
              

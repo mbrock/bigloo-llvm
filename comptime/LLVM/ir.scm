@@ -135,6 +135,7 @@
       (linkage (default #f))
       (visibility (default #f))
       (cconv (default #f))
+      (fn-attrs::pair-nil (default '()))
       return-type::ir-type
       name::bstring
       (arguments (default '()))
@@ -285,6 +286,8 @@
 (define-method (calculate-type value::ir-instr-phi)
   (calculate-type (caar (ir-instr-phi-table value))))
 
+(define-method (calculate-type value::ir-instr-inttoptr)
+  (ir-instr-inttoptr-to-type value))
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
 ;;; function.
@@ -619,10 +622,11 @@
 
 (define-method (ir-node->line-tree decl::ir-function-decl)
   (with-access::ir-function-decl decl
-    (linkage visibility cconv return-type name arguments align gc)
+    (linkage visibility cconv return-type name arguments align gc fn-attrs)
     (build-ir-string
      "declare" linkage visibility cconv
      return-type (string-append "@" name) "(" (render-list arguments) ")"
+     fn-attrs
      (if align (list "align" align))
      gc)))
 
