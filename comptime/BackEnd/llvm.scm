@@ -71,7 +71,7 @@
 
 (define (llc prefix)
   (let ((cmd (string-append *llc* " "
-                            "-O0 "
+                            "-O3 "
                             ; "-disable-cfi " ; needed with HEAD LLVM
                             prefix ".ll")))
     (exec cmd #t "llc")))
@@ -348,8 +348,8 @@
 (define *llvm-object-ptr-type* (pointerify *llvm-object-type*))
 (define *llvm-string-type* *llvm-object-type*)
 (define *llvm-bool-type* (make-ir-primitive-type "i1"))
-(define *llvm-char-type* ;(make-ir-primitive-type "i8"))
-  *llvm-object-type*)
+(define *llvm-char-type* (make-ir-primitive-type "i8"))
+;  *llvm-object-type*)
 (define *llvm-cstring-type* ; (pointerify *llvm-char-type*))
   *llvm-object-type*) ;; TODO: fix
 (define *llvm-int-type* (make-ir-primitive-type "i32"))
@@ -740,6 +740,8 @@
     (instantiate::ir-lit-int (value-type type) (value value)))
    ((eq? value #f) (ir-bool 0))
    ((eq? value #t) (ir-bool 1))
+   ((char? value)
+    (instantiate::ir-lit-int (value-type *llvm-char-type*) (value (char->integer value))))
    ((eq? value #unspecified) *bgl-unspec*)
    ((cnst? value) (bgl-make-cnst (cnst->integer value) #f))
    (else (raise "unhandled value type"))))
@@ -769,6 +771,10 @@
        (compile-lit (ir-bool 1) kont))
       ((eq? value #unspecified)
        (compile-lit *bgl-unspec* kont))
+      ((char? value)
+       (compile-lit (instantiate::ir-lit-int
+                     (value-type *llvm-char-type*)
+                     (value (char->integer value))) kont))
       ((cnst? value)
        (compile-cnst value kont))
       ;; strings are broken, blame bigloo!!
