@@ -199,16 +199,19 @@
        (emit-scnst-sfun (scnst-node value) variable))
       ((sstring)
        (emit-scnst-sstring (scnst-node value) variable))
+      ((sreal)
+       (emit-scnst-sreal (scnst-node value) variable))
       (else
-       ;; TODO: do something!!
-       (emit-ir
-        (comment "Scheme constant `~s' (~s)" id import)
-        (instantiate::ir-assignment
-         (name (string-append "@" name))
-         (node (instantiate::ir-global-variable
-                (initial-value (instantiate::ir-zero-initializer
-                                (value-type (type->ir-type type))))))))
-       (verbose 3 "        class " (scnst-class value) "\n")))))
+       (raise "unhandled scnst type")))))
+       ;; ;; TODO: do something!!
+       ;; (emit-ir
+       ;;  (comment "Scheme constant `~s' (~s)" id import)
+       ;;  (instantiate::ir-assignment
+       ;;   (name (string-append "@" name))
+       ;;   (node (instantiate::ir-global-variable
+       ;;          (initial-value (value->ir-expr (scnst-node value)
+       ;;                                         (type->ir-type type)))))))
+       ;; (verbose 3 "        class " (scnst-class value) "\n")))))
 
 (define (emit-scnst-sfun value variable)
   (let* ((actuals (app-args value))
@@ -246,6 +249,16 @@
     (string-append "@" (id->name (gensym (global-name variable))))
     value
     (string-length value))))
+
+(define (emit-scnst-sreal value variable)
+  (set-variable-name! variable)
+  (emit-ir
+   (comment "Constant real `~s' (~s)"
+            (variable-id variable) value)
+   (macro-define-real
+    (string-append "@" (global-name variable))
+    (string-append "@" (id->name (gensym (global-name variable))))
+    value)))
 
 (define-method (emit-prototype value::cvar variable)
   (verbose 3 "       emit-prototype ::cvar " (variable-id variable) "\n")
@@ -364,6 +377,7 @@
           (case (type-id type)
             ((string) *llvm-cstring-type*)
             ((elong long) *llvm-long-type*)
+            ((double) *llvm-double-type*)
             ((int) *llvm-int-type*)
             ((bool) *llvm-bool-type*)
             ((char uchar) *llvm-char-type*)
@@ -736,12 +750,13 @@
 
 (define (value->ir-expr value type)
   (cond
-   ((fixnum? value)
+   ((number? value)
     (instantiate::ir-lit-int (value-type type) (value value)))
    ((eq? value #f) (ir-bool 0))
    ((eq? value #t) (ir-bool 1))
    ((char? value)
-    (instantiate::ir-lit-int (value-type *llvm-char-type*) (value (char->integer value))))
+    (instantiate::ir-lit-int (value-type *llvm-char-type*)
+                             (value (char->integer value))))
    ((eq? value #unspecified) *bgl-unspec*)
    ((cnst? value) (bgl-make-cnst (cnst->integer value) #f))
    (else (raise "unhandled value type"))))
@@ -759,7 +774,7 @@
     (make-node-seq
      (comment "Atom `~s'" value)
      (cond 
-      ((fixnum? value)
+      ((number? value)
        (compile-lit (instantiate::ir-lit-int
                      (value-type type)
                      (value value)) kont))
@@ -785,11 +800,7 @@
             (compile-lit *bgl-unspec* kont))
            (compile-lit-string value kont)))
       (else
-       (verbose 1 "        unhandled type of atom: " value "\n")
-       (make-node-seq
-        (comment "(Unhandled atom type ~a ~a)" (type-name (get-type node))
-                 value)
-        (compile-undef type kont)))))))
+       (raise "unhandled atom type"))))))
 
 (define (compile-cnst cnst kont)
   (kont (bgl-make-cnst (cnst->integer cnst) #t)))
@@ -960,10 +971,11 @@
                          "$vector-length" kont))
 
 (define-method (node->ir-node dummy::node kont)
-  (verbose 1 "       node->ir-node unhandled " dummy #\Newline)
-  (make-node-seq
-   (comment "Unhandled node type `~s'" dummy)
-   (compile-undef (type->ir-type (get-type dummy)) kont)))
+  (raise "unhandled node"))
+  ;; (verbose 1 "       node->ir-node unhandled " dummy #\Newline)
+  ;; (make-node-seq
+  ;;  (comment "Unhandled node type `~s'" dummy)
+  ;;  (compile-undef (type->ir-type (get-type dummy)) kont)))
 
 
 ;;; IR generation helpers.
@@ -1104,6 +1116,11 @@
 (define (ir-long x)
   (instantiate::ir-lit-int
    (value-type *llvm-long-type*)
+   (value x)))
+
+(define (ir-double x)
+  (instantiate::ir-lit-int
+   (value-type *llvm-double-type*)
    (value x)))
 
 (define (ir-bool x)
@@ -1303,3 +1320,44 @@
              (ir-long 0)
              (ir-long 1))
             *llvm-object-type*))))))))))
+
+(define (macro-define-real global-name local-name value)
+  (let ((struct
+         (instantiate::ir-lit-struct
+          (values
+           (list
+            (instantiate::ir-lit-int
+             (value-type *llvm-double-type*)
+             (value 0.0))
+            (macro-make-header (ir-long 16) (ir-long 0))
+            (ir-double value))))))
+    (instantiate::ir-node-seq
+     (nodes
+      (list 
+       (instantiate::ir-assignment
+        (name local-name)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value struct))))
+       (instantiate::ir-assignment
+        (name global-name)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value
+           (build-ir-expr
+            *llvm-object-type*
+            'bitcast
+            (build-ir-expr
+             (pointerify *llvm-long-type*)
+             'getelementptr
+             (instantiate::ir-variable
+              (name local-name)
+              (value-type (pointerify (ir-value-type struct))))
+             (ir-long 0)
+             (ir-long 1))
+            *llvm-object-type*))))))))))
+  
