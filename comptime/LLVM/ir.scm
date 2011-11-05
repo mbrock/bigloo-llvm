@@ -226,6 +226,11 @@
       pointer::ir-value
       indices::pair)
 
+    (class ir-instr-extractvalue::ir-instruction
+      value::ir-value
+      indices::pair
+      result-type::ir-type)
+
     (class ir-instr-inttoptr::ir-instruction
       value::ir-value
       to-type::ir-type)
@@ -288,6 +293,9 @@
 
 (define-method (calculate-type value::ir-instr-inttoptr)
   (ir-instr-inttoptr-to-type value))
+
+(define-method (calculate-type value::ir-instr-extractvalue)
+  (ir-instr-extractvalue-result-type value))
 
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
 ;;; function.
@@ -364,7 +372,9 @@
     (if tail? "tail" #f)
     ;; TODO: check this
     "call" cconv ret-attrs
-    (ir-function-type-return-type function-type)
+;    (ir-function-type-return-type function-type)
+    (instantiate::ir-pointer-type
+     (value-type function-type))
     (render-value-sans-type function)
     "(" (render-args args) ")"
     (render-list fn-attrs)))
@@ -388,6 +398,12 @@
    (build-ir-string
     "getelementptr"
     (render-args (cons pointer indices))))
+
+  (ir-instr-extractvalue
+   (value indices)
+   (build-ir-string
+    "extractvalue"
+    (render-args (cons value indices))))
 
   (ir-instr-bitcast
    (value to-type)

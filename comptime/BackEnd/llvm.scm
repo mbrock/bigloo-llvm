@@ -435,7 +435,7 @@
   ;; functions are only called in tail position!  We compile these like the C
   ;; backend does: the first encountered application is inlined, and other
   ;; applications jump to that inlined code.
-  (verbose 3 "       node->ir-node ::let-fun\n")
+  (verbose 3 "       node->ir-node ::let-fun " (shape node) "\n")
   (with-access::let-fun node (body locals)
     (let loop ((locals locals)
                (formals-code '()))
@@ -466,7 +466,7 @@
           (compile-more-functions)))))
 
 (define-method (node->ir-node node::app kont)
-  (verbose 3 "       node->ir-node ::app\n")
+  (verbose 3 "       node->ir-node ::app " (shape app) "\n")
   (with-access::app node (fun)
      (let* ((var (var-variable fun))
             (val (variable-value var)))
@@ -600,7 +600,7 @@
                (pointer (var->ir-node/ptr variable)))))))
 
 (define-method (node->ir-node node::conditional kont)
-  (verbose 3 "       node->ir-node ::conditional\n")
+  (verbose 3 "       node->ir-node ::conditional " (shape conditional) "\n")
   (with-access::conditional node (test true false)
      (let* ((test-ptr (fresh-ir-variable 'test (pointerify *bool*)))
             (test-var (fresh-ir-variable 'test *bool*))
@@ -655,7 +655,7 @@
                        kont))))
 
 (define-method (node->ir-node node::select kont)
-  (verbose 3 "       node->ir-node ::select\n")
+  (verbose 3 "       node->ir-node ::select " (shape select) "\n")
   (let* ((result-type (type->ir-type (get-type node)))
          (value (select-test node))
          (real-test-type (type->ir-type (get-type value)))
@@ -719,7 +719,7 @@
              
 
 (define-method (node->ir-node node::sequence kont)
-  (verbose 3 "       node->ir-node ::sequence\n")
+  (verbose 3 "       node->ir-node ::sequence " (shape sequence) "\n")
   (let ((throw-away-kont
          (lambda (x) x)))
            ;; (let ((var (fresh-ir-variable 'null (ir-value-type x))))
@@ -735,7 +735,7 @@
                 (cons (node->ir-node (car nodes) throw-away-kont) code))))))
 
 (define-method (node->ir-node node::setq kont)
-  (verbose 3 "       node->ir-node ::setq\n")
+  (verbose 3 "       node->ir-node ::setq " (shape node) "\n")
   (let* ((variable (var-variable (setq-var node)))
          (var (var->ir-node/ptr variable)))
     (verbose 3 "       node->ir-node ::setq "
@@ -768,7 +768,7 @@
         expr)))
 
 (define-method (node->ir-node node::atom kont)
-  (verbose 3 "       node->ir-node ::atom: " (atom-value node) #\Newline)
+  (verbose 3 "       node->ir-node ::atom: " (shape node) #\Newline)
   (let ((value (atom-value node))
         (type (type->ir-type (get-type node))))
     (make-node-seq
@@ -831,7 +831,7 @@
    (value-type *the-failure-type*)))
 
 (define-method (node->ir-node fail::fail kont)
-  (verbose 3 "       node->ir-node ::fail " fail #\Newline)
+  (verbose 3 "       node->ir-node ::fail " (shape fail) #\Newline)
   (make-node-seq
    (comment "Failure")
    (compile-function-call
@@ -893,7 +893,7 @@
                               body ...)))))))
 
 (define-method (node->ir-node node::make-box kont)
-  (verbose 3 "       node->ir-node ::make-box " make-box #\Newline)
+  (verbose 3 "       node->ir-node ::make-box " (shape make-box) #\Newline)
   (with-result-in-aux-variable (make-box-value node)
                                (aux 'box *llvm-object-type*)
     (kont (instantiate::ir-instr-call
@@ -904,8 +904,27 @@
 (define *bgl-cell-type* (make-ir-named-type "struct.cell"))
 (define *bgl-cell-ptr-type* (pointerify *bgl-cell-type*))
 
+(define *bgl-procedure-light-type*
+  (make-ir-named-type "struct.procedure_light"))
+(define *bgl-procedure-light-ptr-type*
+  (pointerify *bgl-procedure-light-type*))
+
+(define *bgl-procedure-type*
+  (make-ir-named-type "struct.procedure"))
+(define *bgl-procedure-ptr-type*
+  (pointerify *bgl-procedure-type*))
+
+(define *ir-varargs-type* (make-ir-primitive-type "..."))
+
+(define *bgl-function-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *ir-varargs-type*))))
+(define *bgl-function-ptr-type*
+  (pointerify *bgl-function-type*))
+
 (define-method (node->ir-node node::box-ref kont)
-  (verbose 3 "       node->ir-node ::box-ref " box-ref #\Newline)
+  (verbose 3 "       node->ir-node ::box-ref " (shape box-ref) #\Newline)
   (let* ((obj-var (fresh-ir-variable 'obj *llvm-object-type*))
          (cell-ptr-var (fresh-ir-variable 'cell-ptr *bgl-cell-ptr-type*))
          (cell-var (fresh-ir-variable 'cell *bgl-cell-type*))
@@ -928,7 +947,7 @@
      (kont (compile-load ptr-var)))))
 
 (define-method (node->ir-node node::box-set! kont)
-  (verbose 3 "       node->ir-node ::box-set! " node #\Newline)
+  (verbose 3 "       node->ir-node ::box-set! " (shape node) #\Newline)
   (let* ((obj-var (fresh-ir-variable 'obj *llvm-object-type*))
          (cell-ptr-var (fresh-ir-variable 'cell-ptr *bgl-cell-ptr-type*))
          (cell-var (fresh-ir-variable 'cell *bgl-cell-type*))
@@ -970,7 +989,85 @@
                          (vlength-expr* node)
                          "$vector-length" kont))
 
+(define (node->ir-value node::node code-receiver)
+  (let ((var (fresh-ir-variable 'aux (type->ir-type (get-type node)))))
+    (code-receiver
+     (make-node-seq
+      (node->ir-node node (make-assignment-kont var))))
+    var))
+
+(define-method (node->ir-node node::funcall kont)
+  (verbose 3 "       node->ir-node ::funcall " (shape node) #\Newline)
+  (with-access::funcall node (fun args strength)
+    (let* ((code '())
+           (code-receiver (lambda (x)
+                            (set! code (cons x code))))
+           (fun-value (node->ir-value fun code-receiver))
+           (fun-type (instantiate::ir-function-type
+                      (return-type (type->ir-type (get-type node)))
+                      (parameter-types (map (lambda (x)
+                                              (type->ir-type (get-type x)))
+                                            args))))
+           (arg-values (map (lambda (x)
+                              (node->ir-value x code-receiver)) args)))
+      (make-node-seq
+       (append! (reverse! code))
+       (case strength
+         ((elight)
+          (kont (instantiate::ir-instr-call
+                 (function fun-value)
+                 (function-type fun-type)
+                 (args arg-values))))
+         ((light)
+          (let ((ptr (fresh-ir-variable
+                      'lproc-ptr *bgl-procedure-light-ptr-type*))
+                (aux (fresh-ir-variable 'lproc *bgl-procedure-light-type*))
+                (entry (fresh-ir-variable 'entry *bgl-function-ptr-type*)))
+            (make-node-seq
+             (compile-assignment
+              ptr
+              (instantiate::ir-instr-bitcast
+               (value fun-value)
+               (to-type *bgl-procedure-light-ptr-type*)))
+             (compile-assignment aux (compile-load ptr))
+             (compile-assignment
+              entry
+              (instantiate::ir-instr-extractvalue
+               (value aux)
+               (result-type *bgl-function-ptr-type*)
+               (indices '(0))))
+             (kont (instantiate::ir-instr-call
+                    (function entry)
+                    (function-type *bgl-function-type*)
+                    (args arg-values))))))
+         (else
+          (let ((ptr (fresh-ir-variable 'proc-ptr *bgl-procedure-ptr-type*))
+                (aux (fresh-ir-variable 'proc *bgl-procedure-type*))
+                (entry (fresh-ir-variable 'entry *bgl-function-ptr-type*)))
+            (make-node-seq
+             (compile-assignment
+              ptr
+              (instantiate::ir-instr-bitcast
+               (value fun-value)
+               (to-type *bgl-procedure-ptr-type*)))
+             (compile-assignment aux (compile-load ptr))
+             (compile-assignment
+              entry
+              (instantiate::ir-instr-extractvalue
+               (value aux)
+               (result-type *bgl-function-ptr-type*)
+               (indices '(1))))
+             (kont (instantiate::ir-instr-call
+                    (function entry)
+                    (function-type *bgl-function-type*)
+                    (args arg-values)))))))))))
+          
+;; (define-method (node->ir-node node::set-exit kont)
+;;   (verbose 3 "       node->ir-node ::set-exit " (shape node) "\n")
+  
+
 (define-method (node->ir-node dummy::node kont)
+  (verbose 3 "       node->ir-node " (shape dummy) #\Newline)
   (raise "unhandled node"))
   ;; (verbose 1 "       node->ir-node unhandled " dummy #\Newline)
   ;; (make-node-seq
