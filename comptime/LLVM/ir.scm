@@ -196,6 +196,11 @@
     (class ir-instr-sub::ir-instr-binary)
     (class ir-instr-mul::ir-instr-binary)
 
+    (class ir-instr-icmp::ir-instruction
+      comparison::symbol
+      operand-1::ir-value
+      operand-2::ir-value)
+
     (class ir-instr-phi::ir-instruction
       table::pair)
     
@@ -249,6 +254,7 @@
 
 (define *ir-type-void* (make-ir-primitive-type "void"))
 (define *ir-type-i8* (make-ir-primitive-type "i8"))
+(define *ir-type-i1* (make-ir-primitive-type "i1"))
 
 
 ;;; Some type inference.
@@ -287,6 +293,9 @@
   (instantiate::ir-array-type
    (element-count (string-length (ir-lit-string-text value)))
    (element-type *ir-type-i8*)))
+
+(define-method (calculate-type value::ir-instr-icmp)
+  *ir-type-i1*)
 
 (define-method (calculate-type value::ir-instr-phi)
   (calculate-type (caar (ir-instr-phi-table value))))
@@ -360,6 +369,12 @@
    (type operand-1 operand-2)
    (build-ir-string (ir-instr-name instr) type
                     (render-value-sans-type operand-1) ","
+                    (render-value-sans-type operand-2)))
+
+  (ir-instr-icmp
+   (comparison operand-1 operand-2)
+   (build-ir-string "icmp" comparison
+                    operand-1 ","
                     (render-value-sans-type operand-2)))
 
   (ir-instr-phi

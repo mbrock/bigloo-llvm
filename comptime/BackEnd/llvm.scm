@@ -357,6 +357,7 @@
 
 ;;; LLVM versions of Bigloo types.
 
+(define *llvm-void-type* (make-ir-primitive-type "void"))
 (define *llvm-object-type* (pointerify (make-ir-named-type "obj_t")))
 (define *llvm-object-ptr-type* (pointerify *llvm-object-type*))
 (define *llvm-string-type* *llvm-object-type*)
@@ -381,6 +382,7 @@
             ((int) *llvm-int-type*)
             ((bool) *llvm-bool-type*)
             ((char uchar) *llvm-char-type*)
+            ((void) *llvm-void-type*)
             (else
              (internal-error 'type->ir-type "unhandled type"
                              (type-id type)))))))
@@ -491,9 +493,47 @@
 (define (cfun-app->ir-node node var cfun kont)
   (if (cfun/renamed-macro? cfun)
       (with-access::variable var (name)
-        (set! name (cfun/renamed-macro-new-name cfun))))
-  (sfun-app->ir-node node var cfun kont))
+         (set! name (cfun/renamed-macro-new-name cfun))))
+  (case (variable-id var)
+    ((push-exit!)                   ; TODO: accurate check
+     (compile-push-exit (app-args node) kont))
+    (else
+     (sfun-app->ir-node node var cfun kont))))
+
+(define *bgl-exitd-type* (make-ir-named-type "struct.exitd"))
+
+(define *bgl-push-exit-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *llvm-object-type* *llvm-long-type*
+                          (pointerify *bgl-exitd-type*)))))
+
+(define *bgl-push-exit-function*
+  (instantiate::ir-variable
+   (name "@_bgl_push_exit")
+   (value-type *bgl-push-exit-type*)))
   
+(define (compile-push-exit args kont)
+  (let* ((exit-node (car args))
+         (value-node (cadr args))
+         (exit-var
+          (fresh-ir-variable 'exit
+                             (type->ir-type (get-type exit-node))))
+         (value-var
+          (fresh-ir-variable 'value
+                             (type->ir-type (get-type value-node))))
+         (exitd-var
+          (fresh-ir-variable 'exitd (pointerify *bgl-exitd-type*))))
+    (make-node-seq
+     (comment "Push exit")
+     (node->ir-node exit-node (make-assignment-kont exit-var))
+     (node->ir-node value-node (make-assignment-kont value-var))
+     (compile-local-allocation exitd-var)
+     (kont (instantiate::ir-instr-call
+            (function *bgl-push-exit-function*)
+            (function-type *bgl-push-exit-type*)
+            (args (list exit-var value-var exitd-var)))))))
+
 ;; Compile an application of a global Scheme function.
 (define (sfun-app->ir-node node var sfun kont)
   (let ((args (if (cfun? sfun)
@@ -923,6 +963,18 @@
 (define *bgl-function-ptr-type*
   (pointerify *bgl-function-type*))
 
+;; (define *bgl-exitd-type* (make-ir-named-type "struct.exitd"))
+
+;; (define *bgl-push-exit-type*
+;;   (instantiate::ir-function-type
+;;    (return-type *llvm-void-type*)
+;;    (parameter-types (list (pointerify *llvm-char-type*)
+;;                           (pointerify *bgl-exitd-type*)))))
+;; (define *bgl-push-exit-function*
+;;   (instantiate::ir-variable
+;;    (name "@_bgl_push_exit")
+;;    (value-type *bgl-push-exit-type*)))
+
 (define-method (node->ir-node node::box-ref kont)
   (verbose 3 "       node->ir-node ::box-ref " (shape box-ref) #\Newline)
   (let* ((obj-var (fresh-ir-variable 'obj *llvm-object-type*))
@@ -1061,10 +1113,89 @@
                     (function entry)
                     (function-type *bgl-function-type*)
                     (args arg-values)))))))))))
-          
-;; (define-method (node->ir-node node::set-exit kont)
-;;   (verbose 3 "       node->ir-node ::set-exit " (shape node) "\n")
   
+(define *bgl-jmpbuf-array-type*
+  (instantiate::ir-array-type
+   (element-type *llvm-long-type*)
+   (element-count 19))) ;; TODO: 64-bit
+
+(define *bgl-jmpbuf-type* (pointerify *llvm-long-type*))
+
+(define *bgl-setjmp-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-long-type*)
+   (parameter-types (list *bgl-jmpbuf-type*)))) ;*llvm-long-type*))))
+
+(define *bgl-setjmp-function*
+  (instantiate::ir-variable
+;   (name "@llvm.eh.sjlj.setjmp")
+   (name "@setjmp")
+   (value-type *bgl-setjmp-type*)))
+
+(define *bgl-exit-value-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types '())))
+
+(define *bgl-exit-value-function*
+  (instantiate::ir-variable
+   (name "@_bgl_exit_value")
+   (value-type *bgl-exit-value-type*)))
+        
+(define-method (node->ir-node node::set-ex-it kont)
+  (verbose 3 "       node->ir-node ::set-exit " (shape node) "\n")
+  (let* ((jmpbuf (fresh-ir-variable 'jmpbuf *bgl-jmpbuf-type*))
+         (setjmp-result (fresh-ir-variable 'setjmp *llvm-long-type*))
+         (jumped? (fresh-ir-variable 'jumped *llvm-bool-type*))
+         (exit-type (var->ir-type (var-variable (set-ex-it-var node))))
+         (exit (var->ir-node/ptr (var-variable (set-ex-it-var node))))
+         (jmpbuf-obj (fresh-ir-variable 'jmpbuf-obj *llvm-object-type*))
+         (jump-label (make-label 'jump))
+         (body-label (make-label 'body))
+         (done-label (make-label 'done)))
+  (make-node-seq
+   (comment "Set exit")
+   (compile-assignment jmpbuf
+                       (instantiate::ir-instr-alloca
+                        (element-type *llvm-long-type*)
+                        (n (ir-long 30))))
+   (compile-assignment
+    setjmp-result
+    (instantiate::ir-instr-call
+     (function *bgl-setjmp-function*)
+     (function-type *bgl-setjmp-type*)
+     (args (list jmpbuf)))) ;(ir-long 0)))))
+   (compile-assignment
+    jumped?
+    (instantiate::ir-instr-icmp
+     (comparison 'ne)
+     (operand-1 setjmp-result)
+     (operand-2 (ir-long 0))))
+   (instantiate::ir-instr-br
+    (condition jumped?)
+    (true-label jump-label)
+    (false-label body-label))
+   (make-labeled-node-seq
+    jump-label
+    (kont (instantiate::ir-instr-call
+           (function *bgl-exit-value-function*)
+           (function-type *bgl-exit-value-type*)
+           (args '())))
+    (instantiate::ir-instr-br-unconditional
+     (label done-label)))
+   (make-labeled-node-seq
+    body-label
+    (compile-local-allocation exit)
+    (compile-assignment
+     jmpbuf-obj
+     (instantiate::ir-instr-bitcast
+      (value jmpbuf)
+      (to-type exit-type)))
+    (compile-store exit jmpbuf-obj)
+    (node->ir-node (set-ex-it-body node) kont)
+    (instantiate::ir-instr-br-unconditional
+     (label done-label)))
+   (make-labeled-node-seq done-label))))
 
 (define-method (node->ir-node dummy::node kont)
   (verbose 3 "       node->ir-node " (shape dummy) #\Newline)
