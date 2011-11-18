@@ -71,7 +71,7 @@
 
 (define (llc prefix)
   (let ((cmd (string-append *llc* " "
-                            "-O3 "
+ ;                           "-O3 "
                             ; "-disable-cfi " ; needed with HEAD LLVM
                             prefix ".ll")))
     (exec cmd #t "llc")))
@@ -125,7 +125,7 @@
    *ir-port*))
 
 (define (emit-prototypes)
-  (verbose 3 "      All types:\n")
+  (verbose 3 "      All prototypes:\n")
   (for-each-global!
    (lambda (global)
      (set-variable-name! global)
@@ -160,7 +160,7 @@
                          (cfun/renamed-macro-new-name value)
                          name))
                (arguments (map type->ir-type targs)))))))))
-  
+
 (define-method (emit-prototype value::sfun variable)
   (verbose 3 "       emit-prototype ::sfun " (variable-id variable)
            " " (variable-name variable) "\n")
@@ -203,15 +203,6 @@
        (emit-scnst-sreal (scnst-node value) variable))
       (else
        (raise "unhandled scnst type")))))
-       ;; ;; TODO: do something!!
-       ;; (emit-ir
-       ;;  (comment "Scheme constant `~s' (~s)" id import)
-       ;;  (instantiate::ir-assignment
-       ;;   (name (string-append "@" name))
-       ;;   (node (instantiate::ir-global-variable
-       ;;          (initial-value (value->ir-expr (scnst-node value)
-       ;;                                         (type->ir-type type)))))))
-       ;; (verbose 3 "        class " (scnst-class value) "\n")))))
 
 (define (emit-scnst-sfun value variable)
   (let* ((actuals (app-args value))
@@ -220,24 +211,21 @@
          (vname   (string-append "@" (set-variable-name! variable)))
          (name    (string-append "@" (set-variable-name!
                                       (var-variable entry)))))
-    (if (< arity 0)
-        (raise "emit-scnst-sfun no varargs")
-        (emit-ir
-         (comment "Scheme procedure `~s'" (variable-id variable))
-         (macro-define-static-procedure
-          vname
-          (string-append "@" (id->name (gensym name)))
+    (emit-ir
+     (comment "Scheme procedure `~s'" (variable-id variable))
+     (macro-define-static-procedure
+      vname
+      (string-append "@" (id->name (gensym name)))
+      (if (< arity 0)
+          *bgl-va-generic-entry-function*
+          (var->ir-node/ptr (var-variable entry)))
+      (if (< arity 0)
           (var->ir-node/ptr (var-variable entry))
           (instantiate::ir-lit-int
            (value-type *llvm-long-type*)
-           (value 0))
-          (macro-tag
-           (instantiate::ir-lit-int
-            (value-type *llvm-long-type*)
-            (value 3))
-           *bgl-tag-shift*
-           *bgl-tag-cnst*)
-          arity)))))
+           (value 0)))
+      *bgl-unspec*
+      arity))))
 
 (define (emit-scnst-sstring value variable)
   (set-variable-name! variable)
@@ -962,6 +950,15 @@
    (parameter-types (list *ir-varargs-type*))))
 (define *bgl-function-ptr-type*
   (pointerify *bgl-function-type*))
+
+(define *bgl-va-generic-entry-function*
+  (instantiate::ir-variable
+   (name "@va_generic_entry")
+   (value-type (pointerify
+                (instantiate::ir-function-type
+                 (return-type *llvm-object-type*)
+                 (parameter-types (list *llvm-object-type*
+                                        *ir-varargs-type*)))))))
 
 ;; (define *bgl-exitd-type* (make-ir-named-type "struct.exitd"))
 
