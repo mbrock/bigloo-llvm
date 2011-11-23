@@ -23,10 +23,14 @@
 	   ast_node
            ast_local
            ast_ident
+           ast_occur
+           ast_type-occur
 
            cnst_node
 
            object_class
+           object_slots
+
            module_module
            type_env
            type_cache
@@ -103,7 +107,11 @@
   (emit-newline)
   (emit-prelude)
   (emit-newline)
+  (emit-class-types)
+  (emit-newline)
   (emit-prototypes)
+  (emit-newline)
+  (emit-cnsts)
   (emit-newline)
   (emit-function-definitions me)
 
@@ -129,10 +137,64 @@
   (for-each-global!
    (lambda (global)
      (set-variable-name! global)
-       (if (require-prototype? global)
+       (if (and (require-prototype? global)
+                (not (scnst? (global-value global))))
            (begin
              (emit-prototype (global-value global) global)
              (emit-newline))))))
+
+(define (emit-cnsts)
+  (for-each-global!
+   (lambda (global)
+     (if (and (require-prototype? global)
+              (scnst? (global-value global)))
+         (emit-scnst (global-value global) global))))
+  (emit-newline))
+
+(define (emit-class-types)
+  (define (emit-class-type klass)
+    (let* ((slots (filter (lambda (slot)
+                            (< (slot-virtual-num slot) 0))
+                          (tclass-slots klass)))
+           (slot-types (map (lambda (slot)
+                              (let ((type (type->ir-type (slot-type slot))))
+                                (if (slot-indexed slot)
+                                    (pointerify type)
+                                    type)))
+                            slots)))
+      (emit-ir
+       (instantiate::ir-assignment
+        (name (string-append "%" (type-class-name klass)))
+        (node
+         (instantiate::ir-type-alias
+          (type
+           (instantiate::ir-structure-type
+            (element-types (if (not (tclass-widening klass))
+                               (append (list *llvm-long-type* ; header
+                                             *llvm-object-type*)
+                                       slot-types)
+                               slot-types))))))))))
+  (for-each-global!
+   (lambda (global)
+     (cond
+      ((and (eq? (global-module global) *module*)
+            (>fx (global-occurrence global) 0))
+       (type-increment-global! global))
+      ((require-prototype? global)
+       (type-occurrence-increment! (global-type global))
+       (when (sfun? (global-value global))
+             (for-each (lambda (a)
+                         (cond
+                          ((type? a)
+                           (type-occurrence-increment! a))
+                          ((local? a)
+                           (type-occurrence-increment! (local-type a)))))
+                       (sfun-args (global-value global))))))))
+  (for-each (lambda (klass)
+              (if (not (or (eq? klass (get-object-type))
+                           (<fx (type-occurrence klass) 1)))
+                  (emit-class-type klass)))
+            (get-class-list)))
 
 (define (emit-ir . nodes)
   (display (line-tree->string
@@ -188,15 +250,47 @@
       (instantiate::ir-assignment
        (name (string-append "@" name))
        (node (instantiate::ir-global-variable
-              (initial-value (instantiate::ir-zero-initializer
-                              (value-type (type->ir-type type))))))))))
+              (linkage (case (global-import variable)
+                         ((static) 'internal)
+                         ((import) 'external)
+                         (else #f)))
+              (type (type->ir-type type))
+              (initial-value
+               (if (not (eq? (global-import variable)
+                             'import))
+                   *bgl-unspec*))))))))
 
 (define-method (emit-prototype value::scnst variable)
-  (verbose 3 "       emit-prototype ::scnst " (variable-id variable) "\n")
+  (with-access::variable variable (type id name)
+    (let ((ir-type (type->ir-type type)))
+      (set-variable-name! variable)
+      (verbose 3 "       emit-prototype scnst " (variable-id variable)
+               " " (global-import variable) "\n")
+      (emit-ir
+       (instantiate::ir-assignment
+        (name (string-append "@" name))
+        (node (instantiate::ir-global-variable
+               (type ir-type)
+               (initial-value (if (and (sub-type? type *obj*)
+                                       (not (eq? (global-import variable)
+                                                 'import)))
+                                  *bgl-unspec*
+                                  #f))
+               (linkage (case (global-import variable)
+                          ((static) 'internal)
+                          ((import) 'external)
+                          (else #f))))))))))
+
+(define (emit-scnst value::scnst variable)
+  (verbose 3 "       emit-scnst " (variable-id variable) "\n")
   (with-access::global variable (id type name import)
     (case (scnst-class value)
       ((sfun)
-       (emit-scnst-sfun (scnst-node value) variable))
+       (emit-scnst-sfun macro-define-static-procedure
+                        (scnst-node value) variable))
+      ((sgfun)
+       (emit-scnst-sfun macro-define-static-generic
+                        (scnst-node value) variable))
       ((sstring)
        (emit-scnst-sstring (scnst-node value) variable))
       ((sreal)
@@ -204,28 +298,30 @@
       (else
        (raise "unhandled scnst type")))))
 
-(define (emit-scnst-sfun value variable)
-  (let* ((actuals (app-args value))
-         (entry   (car actuals))
-         (arity   (get-node-atom-value (cadr actuals)))
-         (vname   (string-append "@" (set-variable-name! variable)))
-         (name    (string-append "@" (set-variable-name!
-                                      (var-variable entry)))))
-    (emit-ir
-     (comment "Scheme procedure `~s'" (variable-id variable))
-     (macro-define-static-procedure
-      vname
-      (string-append "@" (id->name (gensym name)))
-      (if (< arity 0)
-          *bgl-va-generic-entry-function*
-          (var->ir-node/ptr (var-variable entry)))
-      (if (< arity 0)
-          (var->ir-node/ptr (var-variable entry))
-          (instantiate::ir-lit-int
-           (value-type *llvm-long-type*)
-           (value 0)))
-      *bgl-unspec*
-      arity))))
+(define (emit-scnst-sfun generator value variable)
+  (if (eq? (global-import variable) 'import)
+      (emit-prototype (global-value variable) variable)
+      (let* ((actuals (app-args value))
+             (entry   (car actuals))
+             (arity   (get-node-atom-value (cadr actuals)))
+             (vname   (string-append "@" (set-variable-name! variable)))
+             (name    (string-append "@" (set-variable-name!
+                                          (var-variable entry)))))
+        (emit-ir
+         (comment "Scheme procedure `~s'" (variable-id variable))
+         (generator
+          vname
+          (string-append "@" (id->name (gensym name)))
+          (if (< arity 0)
+              *bgl-va-generic-entry-function*
+              (var->ir-node/ptr (var-variable entry)))
+          (if (< arity 0)
+              (var->ir-node/ptr (var-variable entry))
+              (instantiate::ir-lit-int
+               (value-type *llvm-long-type*)
+               (value 0)))
+          *bgl-unspec*
+          arity)))))
 
 (define (emit-scnst-sstring value variable)
   (set-variable-name! variable)
@@ -362,7 +458,10 @@
   (if (ir-type? type)
       type
       (if (bigloo-type? type)
-          *llvm-object-type*
+          (if (and (tclass? type)
+                   (not (eq? (get-object-type) type)))
+              (pointerify (make-ir-named-type (type-class-name type)))
+              *llvm-object-type*)
           (case (type-id type)
             ((string) *llvm-cstring-type*)
             ((elong long) *llvm-long-type*)
@@ -1138,6 +1237,16 @@
   (instantiate::ir-variable
    (name "@_bgl_exit_value")
    (value-type *bgl-exit-value-type*)))
+
+(define *bgl-malloc-type*
+  (instantiate::ir-function-type
+   (return-type *llvm-object-type*)
+   (parameter-types (list *llvm-long-type*))))
+
+(define *bgl-malloc-function*
+  (instantiate::ir-variable
+   (name "@GC_malloc")
+   (value-type *bgl-malloc-type*)))
         
 (define-method (node->ir-node node::set-ex-it kont)
   (verbose 3 "       node->ir-node ::set-exit " (shape node) "\n")
@@ -1156,51 +1265,126 @@
                        (instantiate::ir-instr-alloca
                         (element-type *llvm-long-type*)
                         (n (ir-long 30))))
-   (compile-assignment
-    setjmp-result
-    (instantiate::ir-instr-call
-     (function *bgl-setjmp-function*)
-     (function-type *bgl-setjmp-type*)
-     (args (list jmpbuf)))) ;(ir-long 0)))))
-   (compile-assignment
-    jumped?
-    (instantiate::ir-instr-icmp
-     (comparison 'ne)
-     (operand-1 setjmp-result)
-     (operand-2 (ir-long 0))))
-   (instantiate::ir-instr-br
-    (condition jumped?)
-    (true-label jump-label)
-    (false-label body-label))
-   (make-labeled-node-seq
-    jump-label
-    (kont (instantiate::ir-instr-call
-           (function *bgl-exit-value-function*)
-           (function-type *bgl-exit-value-type*)
-           (args '())))
-    (instantiate::ir-instr-br-unconditional
-     (label done-label)))
-   (make-labeled-node-seq
-    body-label
-    (compile-local-allocation exit)
-    (compile-assignment
-     jmpbuf-obj
-     (instantiate::ir-instr-bitcast
-      (value jmpbuf)
-      (to-type exit-type)))
-    (compile-store exit jmpbuf-obj)
-    (node->ir-node (set-ex-it-body node) kont)
-    (instantiate::ir-instr-br-unconditional
-     (label done-label)))
+   (compile-assignment setjmp-result
+                       (instantiate::ir-instr-call
+                        (function *bgl-setjmp-function*)
+                        (function-type *bgl-setjmp-type*)
+                        (args (list jmpbuf))))
+   (compile-assignment jumped?
+                       (instantiate::ir-instr-icmp
+                        (comparison 'ne)
+                        (operand-1 setjmp-result)
+                        (operand-2 (ir-long 0))))
+   (instantiate::ir-instr-br (condition jumped?)
+                             (true-label jump-label)
+                             (false-label body-label))
+   (make-labeled-node-seq jump-label
+                          (kont (instantiate::ir-instr-call
+                                 (function *bgl-exit-value-function*)
+                                 (function-type *bgl-exit-value-type*)
+                                 (args '())))
+                          (instantiate::ir-instr-br-unconditional
+                           (label done-label)))
+   (make-labeled-node-seq body-label
+                          (compile-local-allocation exit)
+                          (compile-assignment jmpbuf-obj
+                                              (instantiate::ir-instr-bitcast
+                                               (value jmpbuf)
+                                               (to-type exit-type)))
+                          (compile-store exit jmpbuf-obj)
+                          (node->ir-node (set-ex-it-body node) kont)
+                          (instantiate::ir-instr-br-unconditional
+                           (label done-label)))
    (make-labeled-node-seq done-label))))
+
+(define-method (node->ir-node node::new kont)
+  (verbose 3 "       node->ir-node " (shape node) #\Newline)
+  (let ((aux (fresh-ir-variable 'new *llvm-object-type*)))
+    (make-node-seq
+     (compile-assignment aux 
+                         (instantiate::ir-instr-call
+                          (function *bgl-malloc-function*)
+                          (function-type *bgl-malloc-type*)
+                          (args (list (ir-long 128))))) ; TODO: fix
+     (kont (instantiate::ir-instr-bitcast
+            (value aux)
+            (to-type (type->ir-type (get-type node))))))))
+    
+(define-method (node->ir-node node::cast kont)
+  (verbose 3 "       node->ir-node " (shape node) #\Newline)
+  (let ((cast-node (cast-arg node)))
+    (with-result-in-aux-variable cast-node
+                                 (aux 'cast (get-type cast-node))
+      (kont (instantiate::ir-instr-bitcast
+             (value aux)
+             (to-type (type->ir-type (get-type node))))))))
+
+(define (find-slot-index klass fname)
+  (let ((slots
+         (filter (lambda (slot)
+                   (< (slot-virtual-num slot) 0))
+                 (tclass-slots klass))))
+    (let loop ((i 0) (slots slots))
+      (if (null? slots)
+          (raise "no such slot")
+          (if (equal? fname (slot-name (car slots)))
+              (if (not (tclass-widening klass))
+                  (+ 2 i)
+                  i)
+              (loop (+ i 1) (cdr slots)))))))
+
+(define-method (node->ir-node node::setfield kont)
+  (verbose 3 "       node->ir-node " (shape node) #\Newline)
+  (with-access::setfield node (fname ftype otype expr*)
+    (let* ((slot-index (find-slot-index otype fname))
+           (obj-node (car expr*))
+           (val-node (cadr expr*))
+           (obj-type (type->ir-type otype))
+           (obj-var (fresh-ir-variable 'object (get-type obj-node)))
+           (cast-var (fresh-ir-variable 'castobj obj-type))
+           (val-var (fresh-ir-variable 'value (type->ir-type
+                                               (get-type val-node))))
+           (ptr-var (fresh-ir-variable 'field (type->ir-type/ptr ftype))))
+      (make-node-seq
+       (node->ir-node obj-node (make-assignment-kont obj-var))
+       (node->ir-node val-node (make-assignment-kont val-var))
+       (compile-assignment cast-var
+                           (instantiate::ir-instr-bitcast
+                            (value obj-var)
+                            (to-type obj-type)))
+       (compile-assignment ptr-var
+                           (instantiate::ir-instr-getelementptr
+                            (pointer cast-var)
+                            (indices (list (ir-long 0)
+                                           (ir-long slot-index)))))
+       (compile-store ptr-var val-var)
+       (compile-lit *bgl-unspec* kont)))))
+
+(define-method (node->ir-node node::getfield kont)
+  (verbose 3 "       node->ir-node " (shape node) #\Newline)
+  (with-access::getfield node (fname ftype otype expr*)
+    (let* ((slot-index (find-slot-index otype fname))
+           (obj-node (car expr*))
+           (obj-type (type->ir-type otype))
+           (obj-var (fresh-ir-variable 'object (get-type obj-node)))
+           (cast-var (fresh-ir-variable 'castobj obj-type))
+           (ptr-var (fresh-ir-variable 'field (type->ir-type/ptr ftype))))
+      (make-node-seq
+       (node->ir-node obj-node (make-assignment-kont obj-var))
+       (compile-assignment cast-var
+                           (instantiate::ir-instr-bitcast
+                            (value obj-var)
+                            (to-type obj-type)))
+       (compile-assignment ptr-var
+                           (instantiate::ir-instr-getelementptr
+                            (pointer cast-var)
+                            (indices (list (ir-long 0)
+                                           (ir-long slot-index)))))
+       (kont (compile-load ptr-var))))))
 
 (define-method (node->ir-node dummy::node kont)
   (verbose 3 "       node->ir-node " (shape dummy) #\Newline)
   (raise "unhandled node"))
-  ;; (verbose 1 "       node->ir-node unhandled " dummy #\Newline)
-  ;; (make-node-seq
-  ;;  (comment "Unhandled node type `~s'" dummy)
-  ;;  (compile-undef (type->ir-type (get-type dummy)) kont)))
 
 
 ;;; IR generation helpers.
@@ -1444,6 +1628,51 @@
   (let ((tag (build-ir-expr *llvm-long-type* 'shl
                             sz *bgl-header-shift*)))
     (macro-tag i *bgl-type-shift* tag)))
+
+(define (macro-define-static-generic n na p vp at nb-args)
+  (let ((struct
+         (instantiate::ir-lit-struct
+          (values
+           (list
+            (instantiate::ir-lit-int
+             (value-type *llvm-double-type*)
+             (value 0.0))
+            (macro-make-header (ir-long 3) (ir-long 0))
+            p vp
+            at
+            (ir-long nb-args)
+            *bgl-false*
+            *bgl-false*
+            *bgl-unspec*)))))
+    (instantiate::ir-node-seq
+     (nodes
+      (list 
+       (instantiate::ir-assignment
+        (name na)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value struct))))
+       (instantiate::ir-assignment
+        (name n)
+        (node
+         (instantiate::ir-global-variable
+          (linkage 'private)
+          (constant? #t)
+          (initial-value
+           (build-ir-expr
+            *llvm-object-type*
+            'bitcast
+            (build-ir-expr
+             (pointerify *llvm-long-type*)
+             'getelementptr
+             (instantiate::ir-variable
+              (name na)
+              (value-type (pointerify (ir-value-type struct))))
+             (ir-long 0)
+             (ir-long 1))
+            *llvm-object-type*))))))))))
 
 (define (macro-define-static-procedure n na p vp at nb-args)
   (let ((struct

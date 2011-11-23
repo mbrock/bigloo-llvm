@@ -306,6 +306,9 @@
 (define-method (calculate-type value::ir-instr-extractvalue)
   (ir-instr-extractvalue-result-type value))
 
+(define-method (calculate-type value::ir-instr-bitcast)
+  (ir-instr-bitcast-to-type value))
+
 ;;; Some syntax for more concisely implementing the `ir-instruction->string'
 ;;; function.
 
