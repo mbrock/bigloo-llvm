@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Presentation</title>
+
+    <meta charset="utf-8">
+    <script src="./slides_files/slides.js"></script>
+    <link rel="stylesheet" type="text/css" href="./slides_files/css"><link rel="stylesheet" type="text/css" href="./slides_files/styles.css"><script type="text/javascript" src="./slides_files/prettify.js"></script>
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+    
+    
+  </style><meta name="viewport" content="width=1100,height=750"><meta name="apple-mobile-web-app-capable" content="yes"></head>  
+
+  <body style="display: none" class="loaded">
+
+    <section class="slides layout-regular template-default">
+      
+      <article>
+        <h1>
+          An LLVM Backend
+          <br>
+          For Bigloo Scheme
+        </h1>
+        <p>
+          Mikael Brockman
+          <br>
+          Fall 2011
+        </p>
+      </article>
+      
+      <article class="far-next fill"
+               style="background: url(ruins2.jpg)">
+        <h1 class="white">What is this &ldquo;Lisp&rdquo; thing?</h1>
+        <p class="white"
+           style="font-size: 80%">
+          <i>
+          For God wrote in Lisp code<br>
+          When he filled the leaves with green.<br>
+          The fractal flowers and recursive roots:<br>
+          The most lovely hack I've seen.</i>
+        </p>
+      </article>
+
+      <article>
+        <h3>Three important ideas</h3>
+        <ol>
+          <li>Artificial intelligence</li>
+          <li>Code as data</li>
+          <li>Machine interaction</li>
+        </ol>
+      </article>
+
+      <!-- <article class="fill" -->
+      <!--          style="background: url(hobbes.jpg)"> -->
+      <!--   <h3>Thomas Hobbes (1588–1679)</h3> -->
+      <!--   <q class="white">For ‘reason’ in this sense is nothing but -->
+      <!--   ‘reckoning,’ that is adding and subtracting, of the consequences of -->
+      <!--   general names ...</q> -->
+      <!--   <div class="source white"><i>Of Reason and Science</i>, -->
+      <!--   from <i>Leviathan</i>, 1651</div> -->
+      <!-- </article> -->
+
+      <article>
+        <h3>Gottfried Leibniz (1646–1716)</h3>
+        <ul>
+          <li>Philosopher and constructor</li>
+          <li>Algebra of thought</li>
+          <li>Machine intelligence</li>
+        </ul>
+        <img src="stepped-reckoner.jpg" class="centered"
+             style="padding-top: 2ex">
+      </article>
+
+      <article>
+        <h3>Mathematical logic</h3>
+        <ul>
+          <li>Boolean algebra, Frege's logic</li>
+          <li><i>Principia Mathematica</i></li>
+          <li>Algorithm for deciding truth?</li>
+        </ul>
+        <img src="principa.png" class="centered">
+      </article>
+
+      <article>
+        <h3>Universal computation</h3>
+        <p>What is an <i>algorithm</i>?</p>
+        <p>What does <i>computable</i> mean?</p>
+        <p>Universal Turing machine</p>
+        <p>&ldquo;Mental states&rdquo;</p>
+      </article>
+
+      <article class="fill"
+               style="background: url(turing.jpg)">
+        <h3>Alan Turing (<i>1912</i>–1954)</h3>
+        <q class="white" style="margin-top: 1em">
+          I believe that at the end of the century ...  one will be able to
+          speak of machines thinking without expecting to be
+          contradicted.
+        </q>
+        <div class="source white">
+           <i>Computing Machinery and Intelligence</i>, 1950
+        </div>
+      </article>
+
+      <article class="smaller">
+        <h3>Symbolic AI</h3>
+        <p><i>Logic Theorist</i>, 1955</p>
+        <p>Logical search tree</p>
+        <p>38 theorems from <i>Principia Mathematica</i></p>
+        <p>IPL</p>
+        <q>
+          We invented a computer program capable of thinking non-numerically,
+          and thereby solved the venerable mind-body problem, explaining how
+          system composed of a matter can have the properties of mind.
+        </q>
+      </article>
+
+      <article class="fill"
+               style="background-image: url(ibm-coders.jpg)">
+        <h3>
+          United States, 1957
+        </h3>
+        <ul class="white">
+          <li>Cold War</li>
+          <li>IBM 704</li>
+          <li>FORTRAN</li>
+          <li>Numerical computation</li>
+          <li>Batch processing</li>
+        </ul>
+        <div class="source white">
+          Programmers at NASA, 21 March 1957
+        </div>
+      </article>
+
+      <article>
+        <h3>John McCarthy (1927–2011)</h3>
+        <img src="mccarthy-portrait.jpg" class="round centered"
+             style="height:500px">
+      </article>
+
+      <article>
+        <h3>John McCarthy (1927–2011)</h3>
+        <q>
+          My approach is the logical approach—using mathematical logic about
+          what the AI system knows about the world and what it decides to do
+          about its goals.
+        </q>
+      </article>
+
+      <article>
+        <h3>Lisp</h3>
+        <p>Algebraic list language for IBM 704</p>
+        <p>Symbolic calculation</p>
+        <p>Proving, differentiating</p>
+        <p>Recursion, conditionals, expressions</p>
+        <p>Functions as arguments</p>
+      </article>
+
+      <article>
+        <h3>Hand compilation</h3>
+        <p>Compilers were difficult</p>
+        <p>Manual compilation of M-expressions</p>
+        <p><code>car[append[(A B C); (D E F)]]</code>
+        </p>
+      </article>
+
+      <article>
+        <h3>Universal Lisp function</h3>
+        <p>UTM takes action table as string</p>
+        <p><code>eval</code> takes expression as list</p>
+        <p>Mapping between M- and S-expressions</p>
+        <p><i>cons [</i>A<i>; </i>B<i>]</i> =
+          <code>(<b>CONS</b> (<b>QUOTE</b> A) (<b>QUOTE</b> B))</code>
+        </p>
+        <p>Hand-compiled, yields <i>interpreter</i></p>
+      </article>
+
+      <article>
+        <h3>Code as S-expressions</h3>
+        <p>From <i>LISP 1.5 Programmer's Manual</i>:</p>
+        <pre style="font-size: 28px; line-height: 2.5ex">
+(<i>MAPLIST</i> (<b>LAMBDA</b> (L FN) (<b>COND</b>
+  ((NULL L) <b>NIL</b>)
+  (<b>T</b> (<b>CONS</b> (FN L) (MAPLIST (<b>CDR</b> L) FN))))))</pre>
+      </article>
+
+      <article class="smaller">
+        <h3><code>eval</code></h3>
+        <pre class="lang-lisp">
+(defun eval (e a)
+  (cond
+    ((atom e) (assoc e a))
+    ((atom (car e))
+     (cond
+       ((eq (car e) 'quote) (cadr e))
+       ((eq (car e) 'atom)  (atom   (eval (cadr e) a)))
+       ((eq (car e) 'eq)    (eq     (eval (cadr e) a)
+                                    (eval (caddr e) a)))
+       ((eq (car e) 'car)   (car    (eval (cadr e) a)))
+       ((eq (car e) 'cdr)   (cdr    (eval (cadr e) a)))
+       ((eq (car e) 'cons)  (cons   (eval (cadr e) a)
+                                    (eval (caddr e) a)))
+       ((eq (car e) 'cond)  (evcon (cdr e) a))
+       ('t (eval (cons (assoc (car e) a)
+                        (cdr e))
+                  a))))
+    ((eq (caar e) 'label)
+     (eval (cons (caddar e) (cdr e))
+            (cons (list (cadar e) (car e)) a)))
+    ((eq (caar e) 'lambda)
+     (eval (caddar e)
+            (append (pair (cadar e) (evlis (cdr e) a))
+                     a)))))</pre>
+      </article>
+
+      <article>
+        <h3>Consequences</h3>
+        <ul>
+          <li>Compile time is run time</li>
+          <li>Macros</li>
+          <li>Read-Eval-Print Loop</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Subjective environment</h3>
+        <ul>
+          <li>Time-sharing</li>
+          <li>Interactivity</li>
+          <li>&ldquo;Priesthood&rdquo;</li>
+        </ul>
+        <img src="kids.jpeg" class="round centered"
+             style="height: 300px; margin-top: 2ex">
+      </article>
+      <article>
+        <h2>
+          Scheme — a simple Lisp dialect
+        </h2>
+      </article>
+
+      <article>
+        <h3>
+          Scheme's origins
+        </h3>
+        <ul>
+          <li>1970s AI: message-passing actors</li>
+          <li>PLANNER: complicated semantics</li>
+          <li>Sussman & Steele code Lisp prototype</li>
+          <li>Actors = λ functions with lexical scoping</li>
+          <li>Small complete Lisp</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Development</h3>
+        <ul>
+          <li>Popular in academia</li>
+          <ul style="font-size: 80%; line-height: 80%">
+            <li><i>Structure and Interpretation of Computer Programs</i></li>
+            <li><i>The Little Schemer</i></li>
+            <li><i>How to Design Programs</i></li>
+            <li><i>Concrete Abstractions</i></li>
+          </ul>
+          <li>Many implementations</li>
+          <li>Less emphasis on interactivity</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Bigloo Scheme</h3>
+        <ul>
+          <li>Developed at INRIA, France</li>
+          <li>Batch compiler for Scheme</li>
+          <li>Types, objects, modules</li>
+        </ul>
+        <img src="manuel-serrano.png" class="round centered"
+             style="margin-top: 1.5em; height: 250px">
+      </article>
+
+      <article>
+        <h3>Bigloo's Characteristics</h3>
+        <ul>
+          <li>UNIX integration</li>
+          <li>Optimization</li>
+          <li>Compiles to C</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>My project — LLVM instead of C</h2>
+      </article>
+
+      <article>
+        <h3>Problems with C</h3>
+        <ul>
+          <li>No tail call optimization</li>
+          <li>Restrictions on garbage collection</li>
+          <li>Only static compilation</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>LLVM</h3>
+        <ul>
+          <li>Compilation framework</li>
+          <li>Intermediate language</li>
+          <li>Modular design</li>
+          <li>Dynamic compilation</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>LLVM backend</h3>
+        <ul>
+          <li>Library for IR generation</li>
+          <li>Code generation</li>
+          <li>Uses C runtime</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Results</h3>
+        <ul>
+          <li>Almost complete</li>
+          <li>Cheating</li>
+          <li>A good start</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Future work</h3>
+        <ul>
+          <li>Use API</li>
+          <li>Don't cheat</li>
+          <li>Investigate GC</li>
+        </ul>
+      </article>
+
+      <article>
+        <h1>Questions?</h1>
+      </article>
+
+
+      <article>
+        <h3>MIT AI Lab's Lisp machine</h3>
+        <img src="mit-machine.jpg" class="round centered">
+      </article>
+
+      <article>
+        <h3>Commercial Symbolics Lisp machines</h3>
+        <img src="symbolic-machines.gif" class="round centered"
+             style="height:500px">
+      </article>
+
+      <article class="fill" style="background:url(rms-bw.jpeg)">
+        <h3>Richard M. Stallman</h3>
+      </article>
+
+      <article>
+        <h3>GNU</h3>
+        <ul>
+          <li>Lisp hacking at MIT</li>
+          <li>Interactive programming</li>
+          <li>Politics of software</li>
+          <li>GNU and Emacs</li>
+        </ul>
+      </article>
+      
+    <div class="slide-area" id="prev-slide-area"></div><div class="slide-area" id="next-slide-area"></div></section>
+</body></html>
